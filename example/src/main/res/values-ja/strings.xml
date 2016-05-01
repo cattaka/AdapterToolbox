@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ordinal_label_first">ひとつめ</string>
+    <string name="ordinal_label_second">ふたつめ</string>
+    <string name="ordinal_label_third">みっつめ</string>
+    <string name="ordinal_label_fourth">よっつめ</string>
+</resources>
