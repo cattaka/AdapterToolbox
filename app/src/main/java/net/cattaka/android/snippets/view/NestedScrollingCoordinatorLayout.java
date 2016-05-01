@@ -9,23 +9,23 @@ import android.view.View;
 /**
  * Created by cattaka on 2016/04/27.
  */
-public class NestedCoordinatorLayout extends CoordinatorLayout {
+public class NestedScrollingCoordinatorLayout extends CoordinatorLayout {
     private final NestedScrollingChildHelper mScrollingChildHelper;
     private final int[] mParentOffsetInWindow = new int[2];
 
-    public NestedCoordinatorLayout(Context context) {
+    public NestedScrollingCoordinatorLayout(Context context) {
         super(context);
         mScrollingChildHelper = new NestedScrollingChildHelper(this);
         mScrollingChildHelper.setNestedScrollingEnabled(true);
     }
 
-    public NestedCoordinatorLayout(Context context, AttributeSet attrs) {
+    public NestedScrollingCoordinatorLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         mScrollingChildHelper = new NestedScrollingChildHelper(this);
         mScrollingChildHelper.setNestedScrollingEnabled(true);
     }
 
-    public NestedCoordinatorLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public NestedScrollingCoordinatorLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mScrollingChildHelper = new NestedScrollingChildHelper(this);
         mScrollingChildHelper.setNestedScrollingEnabled(true);
