@@ -2,12 +2,15 @@ package net.cattaka.android.snippets.test;
 
 import android.app.Activity;
 import android.os.SystemClock;
+import android.support.annotation.IdRes;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.ViewAction;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.test.InstrumentationTestCase;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Checkable;
 import android.widget.TextView;
@@ -41,6 +44,17 @@ public class TestUtils {
             @Override
             public void run() {
                 view.performClick();
+            }
+        });
+        InstrumentationRegistry.getInstrumentation().waitForIdleSync();
+    }
+
+    public static void performClickMenuItem(final Toolbar.OnMenuItemClickListener listener, final Toolbar toolbar, @IdRes final int menuId) {
+        InstrumentationRegistry.getInstrumentation().runOnMainSync(new Runnable() {
+            @Override
+            public void run() {
+                MenuItem item = toolbar.getMenu().findItem(menuId);
+                listener.onMenuItemClick(item);
             }
         });
         InstrumentationRegistry.getInstrumentation().waitForIdleSync();
@@ -110,6 +124,16 @@ public class TestUtils {
 
     public static ViewAction scrollToEx() {
         return ViewActions.actionWithAssertions(new ScrollToExAction());
+    }
+
+    public static void showOverflowMenu(final Toolbar toolbar) {
+        InstrumentationRegistry.getInstrumentation().runOnMainSync(new Runnable() {
+            @Override
+            public void run() {
+                toolbar.showOverflowMenu();
+            }
+        });
+        InstrumentationRegistry.getInstrumentation().waitForIdleSync();
     }
 
     public interface BooleanFunc {
