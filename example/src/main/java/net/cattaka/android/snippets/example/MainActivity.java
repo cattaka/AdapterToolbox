@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         CodeLabelExample(CodeLabelExampleActivity.class),
         SimpleStringExample(SimpleStringExampleActivity.class),
         RecyclerViewHeaderExample(RecyclerViewHeaderExampleActivity.class),
+        MultiAdapterExample(MultiAdapterExampleActivity.class),
         //
         ;
         public final Class<? extends Activity> clazz;
