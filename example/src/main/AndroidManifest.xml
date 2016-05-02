@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".CodeLabelExampleActivity" />
+        <activity android:name=".SimpleStringExampleActivity" />
     </application>
 
 </manifest>

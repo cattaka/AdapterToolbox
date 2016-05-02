@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public enum Activities implements ICodeLabel {
         CodeLabelExample(CodeLabelExampleActivity.class),
+        SimpleStringExample(SimpleStringExampleActivity.class),
         //
         ;
         public final Class<? extends Activity> clazz;
