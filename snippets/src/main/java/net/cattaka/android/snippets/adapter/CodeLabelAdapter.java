@@ -57,12 +57,10 @@ public class CodeLabelAdapter extends ArrayAdapter<ICodeLabel> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        TextView view;
         if (convertView == null) {
-            view = (TextView) LayoutInflater.from(getContext()).inflate(mResource, null);
-        } else {
-            view = (TextView) convertView;
+            convertView = LayoutInflater.from(getContext()).inflate(mResource, null);
         }
+        TextView view = (TextView) convertView.findViewById(android.R.id.text1);
         ICodeLabel item = getItem(position);
         if (item != null) {
             view.setText(item.getLabel(getContext().getResources()));
@@ -74,12 +72,10 @@ public class CodeLabelAdapter extends ArrayAdapter<ICodeLabel> {
 
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
-        TextView view;
         if (convertView == null) {
-            view = (TextView) LayoutInflater.from(getContext()).inflate(mDropDownResource, parent, false);
-        } else {
-            view = (TextView) convertView;
+            convertView = LayoutInflater.from(getContext()).inflate(mDropDownResource, null);
         }
+        TextView view = (TextView) convertView.findViewById(android.R.id.text1);
         ICodeLabel item = getItem(position);
         if (item != null) {
             view.setText(item.getLabel(getContext().getResources()));
