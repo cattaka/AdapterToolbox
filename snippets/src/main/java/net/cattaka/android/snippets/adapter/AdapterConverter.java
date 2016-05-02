@@ -75,7 +75,7 @@ public class AdapterConverter<S extends AdapterConverter.Adapter<VH, T>, VH exte
         }
     }
 
-    public static abstract class Adapter<VH extends AdapterConverter.ViewHolder, T> extends RecyclerView.Adapter<VH> {
+    public static abstract class Adapter<VH extends AdapterConverter.ViewHolder, T> extends CustomRecyclerAdapter<VH, T> {
         public abstract T getItemAt(int position);
     }
 }
