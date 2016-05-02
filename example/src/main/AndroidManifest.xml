@@ -17,6 +17,7 @@
         </activity>
         <activity android:name=".CodeLabelExampleActivity" />
         <activity android:name=".SimpleStringExampleActivity" />
+        <activity android:name=".RecyclerViewHeaderExampleActivity" />
     </application>
 
 </manifest>
