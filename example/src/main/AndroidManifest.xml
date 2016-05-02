@@ -19,6 +19,7 @@
         <activity android:name=".SimpleStringExampleActivity" />
         <activity android:name=".RecyclerViewHeaderExampleActivity" />
         <activity android:name=".MultiAdapterExampleActivity" />
+        <activity android:name=".ComplexStringExampleActivity" />
     </application>
 
 </manifest>
