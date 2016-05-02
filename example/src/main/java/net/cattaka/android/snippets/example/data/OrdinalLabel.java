@@ -11,9 +11,9 @@ import net.cattaka.android.snippets.example.R;
  */
 public enum OrdinalLabel implements ICodeLabel {
     FIRST("first", R.string.ordinal_label_first),
-    SECOND("first", R.string.ordinal_label_second),
-    THIRD("first", R.string.ordinal_label_third),
-    FOURTH("first", R.string.ordinal_label_fourth),
+    SECOND("second", R.string.ordinal_label_second),
+    THIRD("third", R.string.ordinal_label_third),
+    FOURTH("fourth", R.string.ordinal_label_fourth),
     //
     ;
 
