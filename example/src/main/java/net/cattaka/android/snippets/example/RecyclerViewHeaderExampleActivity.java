@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import net.cattaka.android.snippets.adapter.CustomRecyclerAdapter;
-import net.cattaka.android.snippets.adapter.MergeRecyclerAdapter;
+import net.cattaka.android.snippets.thirdparty.MergeRecyclerAdapter;
 import net.cattaka.android.snippets.adapter.SingleViewAdapter;
 import net.cattaka.android.snippets.example.adapter.SimpleStringAdapter;
 

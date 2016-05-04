@@ -1,4 +1,4 @@
-package net.cattaka.android.snippets.adapter;
+package net.cattaka.android.snippets.thirdparty;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
