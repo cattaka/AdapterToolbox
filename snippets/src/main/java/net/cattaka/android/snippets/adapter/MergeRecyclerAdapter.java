@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * forked from https://gist.github.com/athornz/008edacd1d3b2f1e1836
+ * <p/>
  * The MergeRecyclerAdapter is inspired by the cwac-merge adapter, but for
  * the RecyclerView.
  * <p/>
