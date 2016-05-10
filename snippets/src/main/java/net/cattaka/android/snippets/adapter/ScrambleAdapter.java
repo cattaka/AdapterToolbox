@@ -17,12 +17,14 @@ public class ScrambleAdapter extends AbsScrambleAdapter<RecyclerView.ViewHolder,
     public static int VIEW_HOLDER = R.id.viewholder;
 
     private Context mContext;
+    private List<Object> mItems;
     private OnItemClickListener mListener;
     private OnItemLongClickListener mLongListener;
 
-    public ScrambleAdapter(Class<RecyclerView.ViewHolder> viewHolderClazz, List<Object> items, Context context, IViewHolderFactory<RecyclerView.ViewHolder, ScrambleAdapter.ForwardingListener>... viewHolderFactories) {
-        super(viewHolderClazz, items, viewHolderFactories);
+    public ScrambleAdapter(Context context, List<Object> items, IViewHolderFactory<? extends RecyclerView.ViewHolder, ? extends ForwardingListener>... viewHolderFactories) {
+        super(viewHolderFactories);
         mContext = context;
+        mItems = items;
     }
 
     @Override
@@ -34,7 +36,7 @@ public class ScrambleAdapter extends AbsScrambleAdapter<RecyclerView.ViewHolder,
     }
 
     @Override
-    public ScrambleAdapter.ForwardingListener createForwardingListener(IViewHolderFactory<RecyclerView.ViewHolder, ScrambleAdapter.ForwardingListener> viewHolderFactory) {
+    public ForwardingListener createForwardingListener(IViewHolderFactory<? extends RecyclerView.ViewHolder, ? extends ForwardingListener> viewHolderFactory) {
         return new ForwardingListener(viewHolderFactory);
     }
 
@@ -46,8 +48,18 @@ public class ScrambleAdapter extends AbsScrambleAdapter<RecyclerView.ViewHolder,
         mLongListener = longListener;
     }
 
-    class ForwardingListener extends AbsScrambleAdapter.ForwardingListener<RecyclerView.ViewHolder, ScrambleAdapter.ForwardingListener> implements View.OnClickListener, View.OnLongClickListener {
-        public ForwardingListener(IViewHolderFactory<RecyclerView.ViewHolder, ScrambleAdapter.ForwardingListener> viewHolderFactory) {
+    @Override
+    public Object getItemAt(int position) {
+        return mItems.get(position);
+    }
+
+    @Override
+    public int getItemCount() {
+        return mItems.size();
+    }
+
+    public class ForwardingListener extends AbsScrambleAdapter.ForwardingListener<RecyclerView.ViewHolder, ScrambleAdapter.ForwardingListener> implements View.OnClickListener, View.OnLongClickListener {
+        public ForwardingListener(IViewHolderFactory<? extends RecyclerView.ViewHolder, ? extends ForwardingListener> viewHolderFactory) {
             super(viewHolderFactory);
         }
 
@@ -84,10 +96,10 @@ public class ScrambleAdapter extends AbsScrambleAdapter<RecyclerView.ViewHolder,
     }
 
     public interface OnItemClickListener {
-        void onItemClick(RecyclerView parent, ScrambleAdapter adapter, int position, int id, RecyclerView.ViewHolder vh, IViewHolderFactory<RecyclerView.ViewHolder, ScrambleAdapter.ForwardingListener> viewHolderFactory);
+        void onItemClick(RecyclerView parent, ScrambleAdapter adapter, int position, int id, RecyclerView.ViewHolder vh, IViewHolderFactory<? extends RecyclerView.ViewHolder, ? extends ScrambleAdapter.ForwardingListener> viewHolderFactory);
     }
 
     public interface OnItemLongClickListener {
-        boolean onItemLongClick(RecyclerView parent, ScrambleAdapter adapter, int position, int id, View view, RecyclerView.ViewHolder vh, IViewHolderFactory<RecyclerView.ViewHolder, ScrambleAdapter.ForwardingListener> viewHolderFactory);
+        boolean onItemLongClick(RecyclerView parent, ScrambleAdapter adapter, int position, int id, View view, RecyclerView.ViewHolder vh, IViewHolderFactory<? extends RecyclerView.ViewHolder, ? extends ScrambleAdapter.ForwardingListener> viewHolderFactory);
     }
 }

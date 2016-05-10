@@ -13,38 +13,48 @@ import java.util.List;
 public abstract class AbsScrambleAdapter<VH extends RecyclerView.ViewHolder, FL extends AbsScrambleAdapter.ForwardingListener> extends RecyclerView.Adapter<VH> {
     RecyclerView mRecyclerView;
 
-    List<Object> mItems;
-    List<IViewHolderFactory<VH, FL>> mViewHolderFactory;
+    List<IViewHolderFactory<? extends VH, ? extends FL>> mViewHolderFactory;
     List<FL> mForwardingListeners;
 
-    public AbsScrambleAdapter(Class<VH> viewHolderClazz, List<Object> items, IViewHolderFactory<VH, FL>... viewHolderFactories) {
-        mItems = items;
+    public AbsScrambleAdapter(IViewHolderFactory<? extends VH, ? extends FL>... viewHolderFactories) {
         mViewHolderFactory = new ArrayList<>();
+
         mViewHolderFactory.addAll(Arrays.asList(viewHolderFactories));
         mViewHolderFactory.add(new NullViewHolderFactory<>(this));
         mForwardingListeners = new ArrayList<>();
-        for (IViewHolderFactory<VH, FL> viewHolderFactory : mViewHolderFactory) {
+        for (IViewHolderFactory<? extends VH, ? extends FL> viewHolderFactory : mViewHolderFactory) {
             mForwardingListeners.add(createForwardingListener(viewHolderFactory));
         }
     }
 
     @Override
     public VH onCreateViewHolder(ViewGroup parent, int viewType) {
-        IViewHolderFactory<VH, FL> viewHolderFactory = mViewHolderFactory.get(viewType);
+        IViewHolderFactory<? extends VH, ? extends FL> viewHolderFactory = mViewHolderFactory.get(viewType);
         FL forwardingListener = mForwardingListeners.get(viewType);
-        return viewHolderFactory.onCreateViewHolder(this, parent, viewType, forwardingListener);
+        return onCreateViewHolderInner(parent, viewHolderFactory, forwardingListener);
+    }
+
+    @SuppressWarnings("unchecked")
+    private <EFL extends FL> VH onCreateViewHolderInner(ViewGroup parent, IViewHolderFactory<? extends VH, EFL> viewHolderFactory, FL forwardingListener) {
+        return viewHolderFactory.onCreateViewHolder(this, parent, (EFL) forwardingListener);
     }
 
     @Override
     public void onBindViewHolder(VH holder, int position) {
-        IViewHolderFactory<VH, FL> viewHolderFactory = mViewHolderFactory.get(position);
-        Object object = mItems.get(position);
-        viewHolderFactory.onBindViewHolder(this, holder, position, object);
+        int viewType = getItemViewType(position);
+        IViewHolderFactory<? extends VH, ? extends FL> viewHolderFactory = mViewHolderFactory.get(viewType);
+        onBindViewHolderInner(viewHolderFactory, holder, position);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <EVH extends VH> void onBindViewHolderInner(IViewHolderFactory<EVH, ? extends FL> viewHolderFactory, VH holder, int position) {
+        Object object = getItemAt(position);
+        viewHolderFactory.onBindViewHolder(this, (EVH) holder, position, object);
     }
 
     @Override
     public int getItemViewType(int position) {
-        Object object = mItems.get(position);
+        Object object = getItemAt(position);
         int index = 0;
         for (IViewHolderFactory viewHolderFactory : mViewHolderFactory) {
             if (viewHolderFactory.isAssignable(object)) {
@@ -55,10 +65,7 @@ public abstract class AbsScrambleAdapter<VH extends RecyclerView.ViewHolder, FL 
         return mViewHolderFactory.size() - 1;
     }
 
-    @Override
-    public int getItemCount() {
-        return mItems.size();
-    }
+    public abstract Object getItemAt(int position);
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
@@ -74,22 +81,22 @@ public abstract class AbsScrambleAdapter<VH extends RecyclerView.ViewHolder, FL 
 
     public abstract VH createNullViewHolder();
 
-    public abstract FL createForwardingListener(IViewHolderFactory<VH, FL> viewHolderFactory);
+    public abstract FL createForwardingListener(IViewHolderFactory<? extends VH, ? extends FL> viewHolderFactory);
 
     public static class ForwardingListener<VH extends RecyclerView.ViewHolder, FL extends AbsScrambleAdapter.ForwardingListener> {
-        IViewHolderFactory<VH, FL> mViewHolderFactory;
+        IViewHolderFactory<? extends VH, ? extends FL> mViewHolderFactory;
 
-        public ForwardingListener(IViewHolderFactory<VH, FL> viewHolderFactory) {
+        public ForwardingListener(IViewHolderFactory<? extends VH, ? extends FL> viewHolderFactory) {
             mViewHolderFactory = viewHolderFactory;
         }
 
-        public IViewHolderFactory<VH, FL> getViewHolderFactory() {
+        public IViewHolderFactory<? extends VH, ? extends FL> getViewHolderFactory() {
             return mViewHolderFactory;
         }
     }
 
     public interface IViewHolderFactory<VH extends RecyclerView.ViewHolder, FL extends AbsScrambleAdapter.ForwardingListener> {
-        VH onCreateViewHolder(AbsScrambleAdapter adapter, ViewGroup parent, int viewType, FL forwardingListener);
+        VH onCreateViewHolder(AbsScrambleAdapter adapter, ViewGroup parent, FL forwardingListener);
 
         void onBindViewHolder(AbsScrambleAdapter adapter, VH holder, int position, Object object);
 
@@ -104,7 +111,7 @@ public abstract class AbsScrambleAdapter<VH extends RecyclerView.ViewHolder, FL 
         }
 
         @Override
-        public VH onCreateViewHolder(AbsScrambleAdapter adapter, ViewGroup parent, int viewType, FL forwardingListener) {
+        public VH onCreateViewHolder(AbsScrambleAdapter adapter, ViewGroup parent, FL forwardingListener) {
             return mAdapter.createNullViewHolder();
         }
 
