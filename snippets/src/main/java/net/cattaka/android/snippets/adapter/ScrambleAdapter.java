@@ -18,8 +18,8 @@ public class ScrambleAdapter extends AbsScrambleAdapter<RecyclerView.ViewHolder,
 
     private Context mContext;
     private List<Object> mItems;
-    private OnItemClickListener mListener;
-    private OnItemLongClickListener mLongListener;
+    private net.cattaka.android.snippets.adapter.OnItemClickListener<ScrambleAdapter, RecyclerView.ViewHolder> mListener;
+    private net.cattaka.android.snippets.adapter.OnItemLongClickListener<ScrambleAdapter, RecyclerView.ViewHolder> mLongListener;
 
     public ScrambleAdapter(Context context, List<Object> items, IViewHolderFactory<? extends RecyclerView.ViewHolder, ? extends ForwardingListener>... viewHolderFactories) {
         super(viewHolderFactories);
@@ -40,11 +40,11 @@ public class ScrambleAdapter extends AbsScrambleAdapter<RecyclerView.ViewHolder,
         return new ForwardingListener(viewHolderFactory);
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
+    public void setOnItemClickListener(net.cattaka.android.snippets.adapter.OnItemClickListener<ScrambleAdapter, RecyclerView.ViewHolder> listener) {
         mListener = listener;
     }
 
-    public void setOnItemLongClickListener(OnItemLongClickListener longListener) {
+    public void setOnItemLongClickListener(net.cattaka.android.snippets.adapter.OnItemLongClickListener<ScrambleAdapter, RecyclerView.ViewHolder> longListener) {
         mLongListener = longListener;
     }
 
@@ -69,7 +69,7 @@ public class ScrambleAdapter extends AbsScrambleAdapter<RecyclerView.ViewHolder,
                 RecyclerView.ViewHolder vh = (RecyclerView.ViewHolder) view.getTag(VIEW_HOLDER);
                 int position = (vh != null) ? pickCompatPosition(vh) : RecyclerView.NO_POSITION;
                 if (position != RecyclerView.NO_POSITION) {
-                    mListener.onItemClick(mRecyclerView, ScrambleAdapter.this, position, view.getId(), vh, getViewHolderFactory());
+                    mListener.onItemClick(mRecyclerView, ScrambleAdapter.this, position, view.getId(), vh);
                 }
             }
         }
@@ -80,7 +80,7 @@ public class ScrambleAdapter extends AbsScrambleAdapter<RecyclerView.ViewHolder,
                 RecyclerView.ViewHolder vh = (RecyclerView.ViewHolder) view.getTag(VIEW_HOLDER);
                 int position = (vh != null) ? pickCompatPosition(vh) : RecyclerView.NO_POSITION;
                 if (position != RecyclerView.NO_POSITION) {
-                    mLongListener.onItemLongClick(mRecyclerView, ScrambleAdapter.this, position, view.getId(), view, vh, getViewHolderFactory());
+                    mLongListener.onItemLongClick(mRecyclerView, ScrambleAdapter.this, position, view.getId(), view, vh);
                 }
                 return true;
             }
@@ -95,11 +95,9 @@ public class ScrambleAdapter extends AbsScrambleAdapter<RecyclerView.ViewHolder,
         return vh.getAdapterPosition();
     }
 
-    public interface OnItemClickListener {
-        void onItemClick(RecyclerView parent, ScrambleAdapter adapter, int position, int id, RecyclerView.ViewHolder vh, IViewHolderFactory<? extends RecyclerView.ViewHolder, ? extends ScrambleAdapter.ForwardingListener> viewHolderFactory);
+    public interface OnItemClickListener extends net.cattaka.android.snippets.adapter.OnItemClickListener<ScrambleAdapter, RecyclerView.ViewHolder> {
     }
 
-    public interface OnItemLongClickListener {
-        boolean onItemLongClick(RecyclerView parent, ScrambleAdapter adapter, int position, int id, View view, RecyclerView.ViewHolder vh, IViewHolderFactory<? extends RecyclerView.ViewHolder, ? extends ScrambleAdapter.ForwardingListener> viewHolderFactory);
+    public interface OnItemLongClickListener extends net.cattaka.android.snippets.adapter.OnItemLongClickListener<ScrambleAdapter, RecyclerView.ViewHolder> {
     }
 }
