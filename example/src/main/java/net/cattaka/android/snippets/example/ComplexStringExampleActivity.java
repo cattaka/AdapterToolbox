@@ -16,7 +16,8 @@ import java.util.List;
 /**
  * Created by cattaka on 16/05/02.
  */
-public class ComplexStringExampleActivity extends AppCompatActivity implements CustomRecyclerAdapter.OnItemClickListener, CustomRecyclerAdapter.OnItemLongClickListener {
+public class ComplexStringExampleActivity extends AppCompatActivity
+        implements CustomRecyclerAdapter.OnItemClickListener, CustomRecyclerAdapter.OnItemLongClickListener {
     RecyclerView mRecyclerView;
 
     @Override

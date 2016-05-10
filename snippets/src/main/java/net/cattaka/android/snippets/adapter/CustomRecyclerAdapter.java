@@ -17,8 +17,8 @@ public abstract class CustomRecyclerAdapter<VH extends RecyclerView.ViewHolder, 
 
     protected RecyclerView mRecyclerView;
 
-    private OnItemClickListener mListener;
-    private OnItemLongClickListener mLongListener;
+    private net.cattaka.android.snippets.adapter.OnItemClickListener<CustomRecyclerAdapter<? extends RecyclerView.ViewHolder,?>, RecyclerView.ViewHolder> mListener;
+    private net.cattaka.android.snippets.adapter.OnItemLongClickListener<CustomRecyclerAdapter<? extends RecyclerView.ViewHolder,?>, RecyclerView.ViewHolder> mLongListener;
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
@@ -32,18 +32,19 @@ public abstract class CustomRecyclerAdapter<VH extends RecyclerView.ViewHolder, 
         mRecyclerView = null;
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
+    public void setOnItemClickListener(net.cattaka.android.snippets.adapter.OnItemClickListener<CustomRecyclerAdapter<? extends RecyclerView.ViewHolder,?>, RecyclerView.ViewHolder> listener) {
         mListener = listener;
     }
 
-    public void setOnItemLongClickListener(OnItemLongClickListener longListener) {
+    public void setOnItemLongClickListener(net.cattaka.android.snippets.adapter.OnItemLongClickListener<CustomRecyclerAdapter<? extends RecyclerView.ViewHolder,?>, RecyclerView.ViewHolder> longListener) {
         mLongListener = longListener;
     }
 
     @Override
     public void onClick(View view) {
         if (mListener != null) {
-            RecyclerView.ViewHolder vh = (RecyclerView.ViewHolder) view.getTag(VIEW_HOLDER);
+            @SuppressWarnings("unchecked")
+            VH vh = (VH) view.getTag(VIEW_HOLDER);
             int position = (vh != null) ? pickCompatPosition(vh) : RecyclerView.NO_POSITION;
             if (position != RecyclerView.NO_POSITION) {
                 mListener.onItemClick(mRecyclerView, this, position, view.getId(), vh);
@@ -54,7 +55,8 @@ public abstract class CustomRecyclerAdapter<VH extends RecyclerView.ViewHolder, 
     @Override
     public boolean onLongClick(View view) {
         if (mLongListener != null) {
-            RecyclerView.ViewHolder vh = (RecyclerView.ViewHolder) view.getTag(VIEW_HOLDER);
+            @SuppressWarnings("unchecked")
+            VH vh = (VH) view.getTag(VIEW_HOLDER);
             int position = (vh != null) ? pickCompatPosition(vh) : RecyclerView.NO_POSITION;
             if (position != RecyclerView.NO_POSITION) {
                 mLongListener.onItemLongClick(mRecyclerView, this, position, view.getId(), view, vh);
@@ -71,12 +73,10 @@ public abstract class CustomRecyclerAdapter<VH extends RecyclerView.ViewHolder, 
         return vh.getAdapterPosition();
     }
 
-    public interface OnItemClickListener {
-        void onItemClick(RecyclerView parent, CustomRecyclerAdapter adapter, int position, int id, RecyclerView.ViewHolder vh);
+    public interface OnItemClickListener extends net.cattaka.android.snippets.adapter.OnItemClickListener<CustomRecyclerAdapter<? extends RecyclerView.ViewHolder,?>, RecyclerView.ViewHolder> {
     }
 
-    public interface OnItemLongClickListener {
-        boolean onItemLongClick(RecyclerView parent, CustomRecyclerAdapter adapter, int position, int id, View view, RecyclerView.ViewHolder vh);
+    public interface OnItemLongClickListener extends net.cattaka.android.snippets.adapter.OnItemLongClickListener<CustomRecyclerAdapter<? extends RecyclerView.ViewHolder,?>, RecyclerView.ViewHolder> {
     }
 
     public abstract T getItemAt(int position);
