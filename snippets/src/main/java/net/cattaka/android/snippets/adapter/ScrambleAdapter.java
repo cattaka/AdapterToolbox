@@ -55,7 +55,7 @@ public class ScrambleAdapter extends AbsScrambleAdapter<RecyclerView.ViewHolder,
         public void onClick(View view) {
             if (mListener != null) {
                 RecyclerView.ViewHolder vh = (RecyclerView.ViewHolder) view.getTag(VIEW_HOLDER);
-                int position = (vh != null) ? vh.getAdapterPosition() : RecyclerView.NO_POSITION;
+                int position = (vh != null) ? pickCompatPosition(vh) : RecyclerView.NO_POSITION;
                 if (position != RecyclerView.NO_POSITION) {
                     mListener.onItemClick(mRecyclerView, ScrambleAdapter.this, position, view.getId(), vh, getViewHolderFactory());
                 }
@@ -66,7 +66,7 @@ public class ScrambleAdapter extends AbsScrambleAdapter<RecyclerView.ViewHolder,
         public boolean onLongClick(View view) {
             if (mLongListener != null) {
                 RecyclerView.ViewHolder vh = (RecyclerView.ViewHolder) view.getTag(VIEW_HOLDER);
-                int position = (vh != null) ? vh.getAdapterPosition() : RecyclerView.NO_POSITION;
+                int position = (vh != null) ? pickCompatPosition(vh) : RecyclerView.NO_POSITION;
                 if (position != RecyclerView.NO_POSITION) {
                     mLongListener.onItemLongClick(mRecyclerView, ScrambleAdapter.this, position, view.getId(), view, vh, getViewHolderFactory());
                 }
@@ -74,6 +74,13 @@ public class ScrambleAdapter extends AbsScrambleAdapter<RecyclerView.ViewHolder,
             }
             return false;
         }
+    }
+
+    public static int pickCompatPosition(RecyclerView.ViewHolder vh) {
+        if (vh instanceof AdapterConverter.ViewHolder) {
+            return ((AdapterConverter.ViewHolder) vh).getCompatPosition();
+        }
+        return vh.getAdapterPosition();
     }
 
     public interface OnItemClickListener {
