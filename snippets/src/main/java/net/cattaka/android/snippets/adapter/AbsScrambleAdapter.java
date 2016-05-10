@@ -52,7 +52,7 @@ public abstract class AbsScrambleAdapter<VH extends RecyclerView.ViewHolder, FL 
             }
             index++;
         }
-        return index;
+        return mViewHolderFactory.size() - 1;
     }
 
     @Override
