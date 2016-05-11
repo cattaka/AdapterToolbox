@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by cattaka on 16/05/10.
  */
-public abstract class AbsScrambleAdapter<VH extends RecyclerView.ViewHolder, FL extends AbsScrambleAdapter.ForwardingListener> extends RecyclerView.Adapter<VH> {
+public abstract class AbsScrambleAdapter<VH extends RecyclerView.ViewHolder, FL extends AbsScrambleAdapter.IForwardingListener> extends RecyclerView.Adapter<VH> {
     RecyclerView mRecyclerView;
 
     List<IViewHolderFactory<? extends VH, ? extends FL>> mViewHolderFactory;
@@ -83,19 +83,11 @@ public abstract class AbsScrambleAdapter<VH extends RecyclerView.ViewHolder, FL 
 
     public abstract FL createForwardingListener(IViewHolderFactory<? extends VH, ? extends FL> viewHolderFactory);
 
-    public static class ForwardingListener<VH extends RecyclerView.ViewHolder, FL extends AbsScrambleAdapter.ForwardingListener> {
-        IViewHolderFactory<? extends VH, ? extends FL> mViewHolderFactory;
+    public interface IForwardingListener {
 
-        public ForwardingListener(IViewHolderFactory<? extends VH, ? extends FL> viewHolderFactory) {
-            mViewHolderFactory = viewHolderFactory;
-        }
-
-        public IViewHolderFactory<? extends VH, ? extends FL> getViewHolderFactory() {
-            return mViewHolderFactory;
-        }
     }
 
-    public interface IViewHolderFactory<VH extends RecyclerView.ViewHolder, FL extends AbsScrambleAdapter.ForwardingListener> {
+    public interface IViewHolderFactory<VH extends RecyclerView.ViewHolder, FL extends IForwardingListener> {
         VH onCreateViewHolder(AbsScrambleAdapter adapter, ViewGroup parent, FL forwardingListener);
 
         void onBindViewHolder(AbsScrambleAdapter adapter, VH holder, int position, Object object);
@@ -103,7 +95,7 @@ public abstract class AbsScrambleAdapter<VH extends RecyclerView.ViewHolder, FL 
         boolean isAssignable(Object object);
     }
 
-    public static class NullViewHolderFactory<VH extends RecyclerView.ViewHolder, FL extends AbsScrambleAdapter.ForwardingListener> implements IViewHolderFactory<VH, FL> {
+    public static class NullViewHolderFactory<VH extends RecyclerView.ViewHolder, FL extends IForwardingListener> implements IViewHolderFactory<VH, FL> {
         AbsScrambleAdapter<VH, FL> mAdapter;
 
         public NullViewHolderFactory(AbsScrambleAdapter<VH, FL> adapter) {
