@@ -5,11 +5,9 @@ import android.os.SystemClock;
 import android.support.annotation.IdRes;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.ViewAction;
-import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
-import android.test.InstrumentationTestCase;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Checkable;
@@ -22,6 +20,8 @@ import java.lang.reflect.Field;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.hamcrest.CoreMatchers.allOf;
+
+import android.support.test.espresso.action.ViewActions;
 
 /**
  * Created by takao on 2014/12/12.
@@ -109,7 +109,7 @@ public class TestUtils {
         }, timeout);
     }
 
-    public static boolean waitForCheckable(InstrumentationTestCase testCase, final Checkable view, final boolean checked, int timeout) throws Throwable {
+    public static boolean waitForCheckable(final Checkable view, final boolean checked, int timeout) throws Throwable {
         return TestUtils.waitForTrue(new TestUtils.BooleanFunc() {
             @Override
             public boolean run() {
