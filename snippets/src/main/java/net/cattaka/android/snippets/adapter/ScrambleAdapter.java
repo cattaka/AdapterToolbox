@@ -37,7 +37,7 @@ public class ScrambleAdapter extends AbsScrambleAdapter<RecyclerView.ViewHolder,
 
     @Override
     public ForwardingListener createForwardingListener(IViewHolderFactory<? extends RecyclerView.ViewHolder, ? extends ForwardingListener> viewHolderFactory) {
-        return new ForwardingListener(viewHolderFactory);
+        return new ForwardingListener();
     }
 
     public void setOnItemClickListener(net.cattaka.android.snippets.adapter.OnItemClickListener<ScrambleAdapter, RecyclerView.ViewHolder> listener) {
@@ -58,11 +58,7 @@ public class ScrambleAdapter extends AbsScrambleAdapter<RecyclerView.ViewHolder,
         return mItems.size();
     }
 
-    public class ForwardingListener extends AbsScrambleAdapter.ForwardingListener<RecyclerView.ViewHolder, ScrambleAdapter.ForwardingListener> implements View.OnClickListener, View.OnLongClickListener {
-        public ForwardingListener(IViewHolderFactory<? extends RecyclerView.ViewHolder, ? extends ForwardingListener> viewHolderFactory) {
-            super(viewHolderFactory);
-        }
-
+    public class ForwardingListener implements AbsScrambleAdapter.IForwardingListener, View.OnClickListener, View.OnLongClickListener {
         @Override
         public void onClick(View view) {
             if (mListener != null) {
