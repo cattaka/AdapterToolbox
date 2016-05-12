@@ -16,8 +16,9 @@ import java.util.List;
 /**
  * Created by cattaka on 16/05/02.
  */
-public class ComplexStringExampleActivity extends AppCompatActivity
-        implements CustomRecyclerAdapter.OnItemClickListener, CustomRecyclerAdapter.OnItemLongClickListener {
+public class ComplexStringExampleActivity extends AppCompatActivity implements
+        CustomRecyclerAdapter.OnItemClickListener<ComplexStringAdapter.ViewHolder, String>,
+        CustomRecyclerAdapter.OnItemLongClickListener<ComplexStringAdapter.ViewHolder, String> {
     RecyclerView mRecyclerView;
 
     @Override
@@ -42,9 +43,9 @@ public class ComplexStringExampleActivity extends AppCompatActivity
     }
 
     @Override
-    public void onItemClick(RecyclerView parent, CustomRecyclerAdapter adapter, int position, int id, RecyclerView.ViewHolder vh) {
+    public void onItemClick(RecyclerView parent, CustomRecyclerAdapter<ComplexStringAdapter.ViewHolder, String> adapter, int position, int id, ComplexStringAdapter.ViewHolder viewHolder) {
         if (parent.getId() == R.id.recycler) {
-            String item = (String) adapter.getItemAt(position);
+            String item = adapter.getItemAt(position);
             if (id == R.id.text) {
                 Toast.makeText(this, item + " is clicked.(Text)", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.button_a) {
@@ -56,9 +57,9 @@ public class ComplexStringExampleActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onItemLongClick(RecyclerView parent, CustomRecyclerAdapter adapter, int position, int id, View view, RecyclerView.ViewHolder vh) {
+    public boolean onItemLongClick(RecyclerView parent, CustomRecyclerAdapter<ComplexStringAdapter.ViewHolder, String> adapter, int position, int id, View view, ComplexStringAdapter.ViewHolder viewHolder) {
         if (parent.getId() == R.id.recycler) {
-            String item = (String) adapter.getItemAt(position);
+            String item = adapter.getItemAt(position);
             if (id == R.id.text) {
                 Toast.makeText(this, item + " is long clicked.(Text)", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.button_a) {

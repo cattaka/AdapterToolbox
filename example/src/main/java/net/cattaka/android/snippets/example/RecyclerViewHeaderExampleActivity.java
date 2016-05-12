@@ -8,9 +8,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import net.cattaka.android.snippets.adapter.CustomRecyclerAdapter;
-import net.cattaka.android.snippets.thirdparty.MergeRecyclerAdapter;
 import net.cattaka.android.snippets.adapter.SingleViewAdapter;
 import net.cattaka.android.snippets.example.adapter.SimpleStringAdapter;
+import net.cattaka.android.snippets.thirdparty.MergeRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,9 @@ import java.util.List;
 /**
  * Created by cattaka on 16/05/02.
  */
-public class RecyclerViewHeaderExampleActivity extends AppCompatActivity implements CustomRecyclerAdapter.OnItemClickListener, CustomRecyclerAdapter.OnItemLongClickListener {
+public class RecyclerViewHeaderExampleActivity extends AppCompatActivity implements
+        CustomRecyclerAdapter.OnItemClickListener<RecyclerView.ViewHolder, Object>,
+        CustomRecyclerAdapter.OnItemLongClickListener<RecyclerView.ViewHolder, Object> {
     RecyclerView mRecyclerView;
     MergeRecyclerAdapter<RecyclerView.Adapter> mMergeRecyclerAdapter;
     SingleViewAdapter mHeaderAdapter;
@@ -46,6 +48,7 @@ public class RecyclerViewHeaderExampleActivity extends AppCompatActivity impleme
                 for (int i = 0; i < 100; i++) {
                     items.add("item " + i);
                 }
+
                 mItemsAdapter = new SimpleStringAdapter(this, items);
                 mItemsAdapter.setOnItemClickListener(this);
                 mItemsAdapter.setOnItemLongClickListener(this);

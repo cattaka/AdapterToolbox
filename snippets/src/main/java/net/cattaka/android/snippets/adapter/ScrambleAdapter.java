@@ -1,27 +1,41 @@
 package net.cattaka.android.snippets.adapter;
 
 import android.content.Context;
-import android.support.annotation.IdRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
-import net.cattaka.android.snippets.R;
 
 import java.util.List;
 
 /**
  * Created by takao on 2016/05/10.
  */
-public class ScrambleAdapter extends AbsScrambleAdapter<RecyclerView.ViewHolder, ScrambleAdapter.ForwardingListener> {
-    @IdRes
-    public static int VIEW_HOLDER = R.id.viewholder;
+public class ScrambleAdapter extends AbsScrambleAdapter<ScrambleAdapter, RecyclerView.ViewHolder, ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder>, RecyclerView.ViewHolder, ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder>> {
+    private ForwardingListener.OnItemClickListener<ScrambleAdapter, RecyclerView.ViewHolder> mInnerOnItemClickListener = new ForwardingListener.OnItemClickListener<ScrambleAdapter, RecyclerView.ViewHolder>() {
+        @Override
+        public void onItemClick(RecyclerView parent, ScrambleAdapter adapter, int position, int id, RecyclerView.ViewHolder viewHolder) {
+            if (mOnItemClickListener != null) {
+                mOnItemClickListener.onItemClick(parent, adapter, position, id, viewHolder);
+            }
+        }
+    };
+    private ForwardingListener.OnItemLongClickListener<ScrambleAdapter, RecyclerView.ViewHolder> mInnerOnItemLongClickListener = new ForwardingListener.OnItemLongClickListener<ScrambleAdapter, RecyclerView.ViewHolder>() {
+        @Override
+        public boolean onItemLongClick(RecyclerView parent, ScrambleAdapter adapter, int position, int id, View view, RecyclerView.ViewHolder viewHolder) {
+            if (mOnItemLongClickListener != null) {
+                return mOnItemLongClickListener.onItemLongClick(parent, adapter, position, id, view, viewHolder);
+            }
+            return false;
+        }
+    };
 
     private Context mContext;
     private List<Object> mItems;
-    private net.cattaka.android.snippets.adapter.OnItemClickListener<ScrambleAdapter, RecyclerView.ViewHolder> mListener;
-    private net.cattaka.android.snippets.adapter.OnItemLongClickListener<ScrambleAdapter, RecyclerView.ViewHolder> mLongListener;
 
-    public ScrambleAdapter(Context context, List<Object> items, IViewHolderFactory<? extends RecyclerView.ViewHolder, ? extends ForwardingListener>... viewHolderFactories) {
+    private ForwardingListener.OnItemClickListener<ScrambleAdapter, RecyclerView.ViewHolder> mOnItemClickListener;
+    private ForwardingListener.OnItemLongClickListener<ScrambleAdapter, RecyclerView.ViewHolder> mOnItemLongClickListener;
+
+    @SafeVarargs
+    public ScrambleAdapter(Context context, List<Object> items, IViewHolderFactory<ScrambleAdapter, RecyclerView.ViewHolder, ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder>, ?, ?>... viewHolderFactories) {
         super(viewHolderFactories);
         mContext = context;
         mItems = items;
@@ -36,17 +50,18 @@ public class ScrambleAdapter extends AbsScrambleAdapter<RecyclerView.ViewHolder,
     }
 
     @Override
-    public ForwardingListener createForwardingListener(IViewHolderFactory<? extends RecyclerView.ViewHolder, ? extends ForwardingListener> viewHolderFactory) {
-        return new ForwardingListener();
+    public ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder> createForwardingListener(IViewHolderFactory viewHolderFactory) {
+        ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder> fl = new ForwardingListener<>();
+        fl.setOnItemClickListener(mInnerOnItemClickListener);
+        fl.setOnItemLongClickListener(mInnerOnItemLongClickListener);
+        return fl;
     }
 
-    public void setOnItemClickListener(net.cattaka.android.snippets.adapter.OnItemClickListener<ScrambleAdapter, RecyclerView.ViewHolder> listener) {
-        mListener = listener;
+    @Override
+    public ScrambleAdapter getSelf() {
+        return this;
     }
 
-    public void setOnItemLongClickListener(net.cattaka.android.snippets.adapter.OnItemLongClickListener<ScrambleAdapter, RecyclerView.ViewHolder> longListener) {
-        mLongListener = longListener;
-    }
 
     @Override
     public Object getItemAt(int position) {
@@ -58,42 +73,11 @@ public class ScrambleAdapter extends AbsScrambleAdapter<RecyclerView.ViewHolder,
         return mItems.size();
     }
 
-    public class ForwardingListener implements AbsScrambleAdapter.IForwardingListener, View.OnClickListener, View.OnLongClickListener {
-        @Override
-        public void onClick(View view) {
-            if (mListener != null) {
-                RecyclerView.ViewHolder vh = (RecyclerView.ViewHolder) view.getTag(VIEW_HOLDER);
-                int position = (vh != null) ? pickCompatPosition(vh) : RecyclerView.NO_POSITION;
-                if (position != RecyclerView.NO_POSITION) {
-                    mListener.onItemClick(mRecyclerView, ScrambleAdapter.this, position, view.getId(), vh);
-                }
-            }
-        }
-
-        @Override
-        public boolean onLongClick(View view) {
-            if (mLongListener != null) {
-                RecyclerView.ViewHolder vh = (RecyclerView.ViewHolder) view.getTag(VIEW_HOLDER);
-                int position = (vh != null) ? pickCompatPosition(vh) : RecyclerView.NO_POSITION;
-                if (position != RecyclerView.NO_POSITION) {
-                    mLongListener.onItemLongClick(mRecyclerView, ScrambleAdapter.this, position, view.getId(), view, vh);
-                }
-                return true;
-            }
-            return false;
-        }
+    public void setOnItemClickListener(ForwardingListener.OnItemClickListener<ScrambleAdapter, RecyclerView.ViewHolder> onItemClickListener) {
+        mOnItemClickListener = onItemClickListener;
     }
 
-    public static int pickCompatPosition(RecyclerView.ViewHolder vh) {
-        if (vh instanceof AdapterConverter.ViewHolder) {
-            return ((AdapterConverter.ViewHolder) vh).getCompatPosition();
-        }
-        return vh.getAdapterPosition();
-    }
-
-    public interface OnItemClickListener extends net.cattaka.android.snippets.adapter.OnItemClickListener<ScrambleAdapter, RecyclerView.ViewHolder> {
-    }
-
-    public interface OnItemLongClickListener extends net.cattaka.android.snippets.adapter.OnItemLongClickListener<ScrambleAdapter, RecyclerView.ViewHolder> {
+    public void setOnItemLongClickListener(ForwardingListener.OnItemLongClickListener<ScrambleAdapter, RecyclerView.ViewHolder> onItemLongClickListener) {
+        mOnItemLongClickListener = onItemLongClickListener;
     }
 }

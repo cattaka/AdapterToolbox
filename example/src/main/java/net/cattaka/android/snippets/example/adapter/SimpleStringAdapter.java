@@ -29,8 +29,8 @@ public class SimpleStringAdapter extends CustomRecyclerAdapter<SimpleStringAdapt
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_simple_string, parent, false);
         ViewHolder vh = new ViewHolder(view);
         view.setTag(VIEW_HOLDER, vh);
-        view.setOnClickListener(this);
-        view.setOnLongClickListener(this);
+        view.setOnClickListener(getForwardingListener());
+        view.setOnLongClickListener(getForwardingListener());
         return vh;
     }
 

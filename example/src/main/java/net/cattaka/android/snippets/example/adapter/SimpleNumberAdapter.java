@@ -29,8 +29,8 @@ public class SimpleNumberAdapter extends CustomRecyclerAdapter<SimpleNumberAdapt
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_simple_number, parent, false);
         ViewHolder vh = new ViewHolder(view);
         view.setTag(VIEW_HOLDER, vh);
-        view.setOnClickListener(this);
-        view.setOnLongClickListener(this);
+        view.setOnClickListener(getForwardingListener());
+        view.setOnLongClickListener(getForwardingListener());
         return vh;
     }
 
