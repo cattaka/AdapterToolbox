@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import net.cattaka.android.snippets.adapter.AdapterConverter;
-import net.cattaka.android.snippets.adapter.ForwardingListener;
+import net.cattaka.android.snippets.adapter.listener.ForwardingListener;
 import net.cattaka.android.snippets.adapter.ScrambleAdapter;
 import net.cattaka.android.snippets.example.R;
 

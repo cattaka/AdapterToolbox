@@ -2,6 +2,8 @@ package net.cattaka.android.snippets.adapter;
 
 import android.support.v7.widget.RecyclerView;
 
+import net.cattaka.android.snippets.adapter.listener.ForwardingListener;
+
 import java.util.List;
 
 /**

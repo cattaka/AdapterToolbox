@@ -1,4 +1,4 @@
-package net.cattaka.android.snippets.adapter;
+package net.cattaka.android.snippets.adapter.listener;
 
 import android.support.v7.widget.RecyclerView;
 

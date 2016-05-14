@@ -4,6 +4,9 @@ import android.support.annotation.IdRes;
 import android.support.v7.widget.RecyclerView;
 
 import net.cattaka.android.snippets.R;
+import net.cattaka.android.snippets.adapter.listener.ForwardingListener;
+import net.cattaka.android.snippets.adapter.listener.IForwardingListener;
+import net.cattaka.android.snippets.adapter.listener.ListenerRelay;
 
 import java.util.List;
 
@@ -58,12 +61,8 @@ public abstract class AbsCustomRecyclerAdapter<
         mRecyclerView = null;
     }
 
-    public void setOnItemClickListener(ForwardingListener.OnItemClickListener listener) {
-        mForwardingListener.setOnItemClickListener(listener);
-    }
-
-    public void setOnItemLongClickListener(ForwardingListener.OnItemLongClickListener longListener) {
-        mForwardingListener.setOnItemLongClickListener(longListener);
+    public void setListenerRelay(ListenerRelay listenerRelay) {
+        mForwardingListener.setListenerRelay(listenerRelay);
     }
 
     public abstract T getItemAt(int position);

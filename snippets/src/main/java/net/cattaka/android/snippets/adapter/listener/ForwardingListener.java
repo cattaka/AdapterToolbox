@@ -1,10 +1,11 @@
-package net.cattaka.android.snippets.adapter;
+package net.cattaka.android.snippets.adapter.listener;
 
 import android.support.annotation.IdRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import net.cattaka.android.snippets.R;
+import net.cattaka.android.snippets.adapter.AdapterConverter;
 
 /**
  * Created by takao on 2016/05/12.
@@ -16,8 +17,7 @@ public class ForwardingListener<A extends RecyclerView.Adapter<? super VH>, VH e
 
     private IProvider<A, VH> mProvider;
 
-    private OnItemClickListener<? super A, ? super VH> mListener;
-    private OnItemLongClickListener<? super A, ? super VH> mLongListener;
+    private ListenerRelay mListenerRelay;
 
     @Override
     public void setProvider(IProvider<A, VH> provider) {
@@ -26,24 +26,24 @@ public class ForwardingListener<A extends RecyclerView.Adapter<? super VH>, VH e
 
     @Override
     public void onClick(View view) {
-        if (mListener != null) {
+        if (mListenerRelay != null) {
             @SuppressWarnings("unchecked")
             VH vh = (VH) view.getTag(VIEW_HOLDER);
             int position = (vh != null) ? pickCompatPosition(vh) : RecyclerView.NO_POSITION;
             if (position != RecyclerView.NO_POSITION) {
-                mListener.onItemClick(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), position, view.getId(), vh);
+                mListenerRelay.onItemClick(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), position, view.getId(), vh);
             }
         }
     }
 
     @Override
     public boolean onLongClick(View view) {
-        if (mLongListener != null) {
+        if (mListenerRelay != null) {
             @SuppressWarnings("unchecked")
             VH vh = (VH) view.getTag(VIEW_HOLDER);
             int position = (vh != null) ? pickCompatPosition(vh) : RecyclerView.NO_POSITION;
             if (position != RecyclerView.NO_POSITION) {
-                mLongListener.onItemLongClick(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), position, view.getId(), view, vh);
+                mListenerRelay.onItemLongClick(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), position, view.getId(), view, vh);
 
                 return true;
             }
@@ -58,19 +58,15 @@ public class ForwardingListener<A extends RecyclerView.Adapter<? super VH>, VH e
         return vh.getAdapterPosition();
     }
 
-    public void setOnItemClickListener(OnItemClickListener<? super A, ? super VH> listener) {
-        mListener = listener;
-    }
-
-    public void setOnItemLongClickListener(OnItemLongClickListener<? super A, ? super VH> longListener) {
-        mLongListener = longListener;
+    public void setListenerRelay(ListenerRelay listenerRelay) {
+        this.mListenerRelay = listenerRelay;
     }
 
     public interface OnItemClickListener<A extends RecyclerView.Adapter<? super VH>, VH extends RecyclerView.ViewHolder> {
         void onItemClick(RecyclerView parent, A adapter, int position, int id, VH vh);
     }
 
-    public interface OnItemLongClickListener<A extends RecyclerView.Adapter<VH>, VH extends RecyclerView.ViewHolder> {
+    public interface OnItemLongClickListener<A extends RecyclerView.Adapter<? super VH>, VH extends RecyclerView.ViewHolder> {
         boolean onItemLongClick(RecyclerView parent, A adapter, int position, int id, View view, VH vh);
     }
 
