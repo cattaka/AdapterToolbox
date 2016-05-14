@@ -19,9 +19,9 @@ import java.util.List;
  */
 public class ComplexStringExampleActivity extends AppCompatActivity {
 
-    ListenerRelay<ComplexStringAdapter, ComplexStringAdapter.ViewHolder> mListenerRelay = new ListenerRelay<ComplexStringAdapter, ComplexStringAdapter.ViewHolder>() {
+    ListenerRelay<CustomRecyclerAdapter<ComplexStringAdapter.ViewHolder, String>, ComplexStringAdapter.ViewHolder> mListenerRelay = new ListenerRelay<CustomRecyclerAdapter<ComplexStringAdapter.ViewHolder, String>, ComplexStringAdapter.ViewHolder>() {
         @Override
-        public void onItemClick(RecyclerView parent, ComplexStringAdapter adapter, int position, int id, ComplexStringAdapter.ViewHolder viewHolder) {
+        public void onItemClick(RecyclerView parent, CustomRecyclerAdapter<ComplexStringAdapter.ViewHolder, String> adapter, int position, int id, ComplexStringAdapter.ViewHolder viewHolder) {
             if (parent.getId() == R.id.recycler) {
                 String item = adapter.getItemAt(position);
                 if (id == R.id.text) {
@@ -35,7 +35,7 @@ public class ComplexStringExampleActivity extends AppCompatActivity {
         }
 
         @Override
-        public boolean onItemLongClick(RecyclerView parent, ComplexStringAdapter adapter, int position, int id, View view, ComplexStringAdapter.ViewHolder viewHolder) {
+        public boolean onItemLongClick(RecyclerView parent, CustomRecyclerAdapter<ComplexStringAdapter.ViewHolder, String> adapter, int position, int id, View view, ComplexStringAdapter.ViewHolder viewHolder) {
             if (parent.getId() == R.id.recycler) {
                 String item = adapter.getItemAt(position);
                 if (id == R.id.text) {

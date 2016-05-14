@@ -10,14 +10,21 @@ import net.cattaka.android.snippets.adapter.AdapterConverter;
 /**
  * Created by takao on 2016/05/12.
  */
-public class ForwardingListener<A extends RecyclerView.Adapter<? super VH>, VH extends RecyclerView.ViewHolder>
-        implements IForwardingListener<A, VH>, View.OnClickListener, View.OnLongClickListener {
+public class ForwardingListener<A extends RecyclerView.Adapter<? extends VH>, VH extends RecyclerView.ViewHolder>
+        implements IForwardingListener<A, VH, ListenerRelay<A, ? super VH>>, View.OnClickListener, View.OnLongClickListener {
     @IdRes
     public static int VIEW_HOLDER = R.id.viewholder;
 
     private IProvider<A, VH> mProvider;
+    private ListenerRelay<A, ? super VH> mListenerRelay;
 
-    private ListenerRelay mListenerRelay;
+    public ForwardingListener() {
+    }
+
+    @Override
+    public void setListenerRelay(ListenerRelay<A,? super VH> listenerRelay) {
+        mListenerRelay = listenerRelay;
+    }
 
     @Override
     public void setProvider(IProvider<A, VH> provider) {
@@ -56,18 +63,6 @@ public class ForwardingListener<A extends RecyclerView.Adapter<? super VH>, VH e
             return ((AdapterConverter.ViewHolder) vh).getCompatPosition();
         }
         return vh.getAdapterPosition();
-    }
-
-    public void setListenerRelay(ListenerRelay listenerRelay) {
-        this.mListenerRelay = listenerRelay;
-    }
-
-    public interface OnItemClickListener<A extends RecyclerView.Adapter<? super VH>, VH extends RecyclerView.ViewHolder> {
-        void onItemClick(RecyclerView parent, A adapter, int position, int id, VH vh);
-    }
-
-    public interface OnItemLongClickListener<A extends RecyclerView.Adapter<? super VH>, VH extends RecyclerView.ViewHolder> {
-        boolean onItemLongClick(RecyclerView parent, A adapter, int position, int id, View view, VH vh);
     }
 
 }

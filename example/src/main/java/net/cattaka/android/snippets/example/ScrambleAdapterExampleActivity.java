@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import net.cattaka.android.snippets.adapter.listener.ForwardingListener;
 import net.cattaka.android.snippets.adapter.ScrambleAdapter;
 import net.cattaka.android.snippets.adapter.listener.ListenerRelay;
 import net.cattaka.android.snippets.example.adapter.factory.CodeLableViewHolderFactory;
@@ -100,11 +99,11 @@ public class ScrambleAdapterExampleActivity extends AppCompatActivity {
                 }
             }
             ScrambleAdapter adapter = new ScrambleAdapter(this, items,
+                    mListenerRelay,
                     new SimpleStringViewHolderFactory(),
                     new SimpleNumberViewHolderFactory(),
                     new CodeLableViewHolderFactory(getResources())
             );
-            adapter.setListenerRelay(mListenerRelay);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
             mRecyclerView.setAdapter(adapter);
         }

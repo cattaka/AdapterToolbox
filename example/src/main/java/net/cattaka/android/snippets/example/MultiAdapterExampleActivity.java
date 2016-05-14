@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import net.cattaka.android.snippets.adapter.CustomRecyclerAdapter;
-import net.cattaka.android.snippets.adapter.listener.ForwardingListener;
 import net.cattaka.android.snippets.adapter.SingleViewAdapter;
+import net.cattaka.android.snippets.adapter.listener.IListenerRelay;
 import net.cattaka.android.snippets.adapter.listener.ListenerRelay;
 import net.cattaka.android.snippets.example.adapter.SimpleNumberAdapter;
 import net.cattaka.android.snippets.example.adapter.SimpleStringAdapter;
@@ -98,6 +98,7 @@ public class MultiAdapterExampleActivity extends AppCompatActivity {
                 for (int i = 0; i < 5; i++) {
                     items.add("item " + i);
                 }
+
                 mStringsAdapter = new SimpleStringAdapter(this, items);
                 mStringsAdapter.setListenerRelay(mListenerRelay);
                 mMergeRecyclerAdapter.addAdapter(mStringsAdapter);

@@ -16,7 +16,7 @@ import net.cattaka.android.snippets.example.R;
 /**
  * Created by cattaka on 16/05/02.
  */
-public class CodeLableViewHolderFactory implements ScrambleAdapter.IViewHolderFactory<ScrambleAdapter, RecyclerView.ViewHolder, ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder>, CodeLableViewHolderFactory.ViewHolder, ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder>> {
+public class CodeLableViewHolderFactory extends ScrambleAdapter.AbsViewHolderFactory<CodeLableViewHolderFactory.ViewHolder> {
     Resources mResources;
 
     public CodeLableViewHolderFactory(Resources resources) {

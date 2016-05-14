@@ -14,7 +14,7 @@ import net.cattaka.android.snippets.example.R;
 /**
  * Created by cattaka on 16/05/02.
  */
-public class SimpleNumberViewHolderFactory implements ScrambleAdapter.IViewHolderFactory<ScrambleAdapter, RecyclerView.ViewHolder, ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder>, SimpleNumberViewHolderFactory.ViewHolder, ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder>> {
+public class SimpleNumberViewHolderFactory extends ScrambleAdapter.AbsViewHolderFactory<SimpleNumberViewHolderFactory.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ScrambleAdapter adapter, ViewGroup parent, ForwardingListener forwardingListener) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_simple_number, parent, false);

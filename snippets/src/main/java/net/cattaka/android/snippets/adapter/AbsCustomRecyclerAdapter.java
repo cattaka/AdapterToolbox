@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import net.cattaka.android.snippets.R;
 import net.cattaka.android.snippets.adapter.listener.ForwardingListener;
 import net.cattaka.android.snippets.adapter.listener.IForwardingListener;
+import net.cattaka.android.snippets.adapter.listener.IListenerRelay;
 import net.cattaka.android.snippets.adapter.listener.ListenerRelay;
 
 import java.util.List;
@@ -14,10 +15,11 @@ import java.util.List;
  * Created by cattaka on 2015/07/15.
  */
 public abstract class AbsCustomRecyclerAdapter<
-        A extends AbsCustomRecyclerAdapter<A, VH, FL, T>,
+        A extends AbsCustomRecyclerAdapter<A, VH, T, FL, LR>,
         VH extends RecyclerView.ViewHolder,
-        FL extends IForwardingListener<A, ? super VH>,
-        T
+        T,
+        FL extends IForwardingListener<A, VH, LR>,
+        LR extends IListenerRelay<? super VH>
         > extends RecyclerView.Adapter<VH> {
     @IdRes
     public static int VIEW_HOLDER = R.id.viewholder;
@@ -36,18 +38,20 @@ public abstract class AbsCustomRecyclerAdapter<
 
     protected RecyclerView mRecyclerView;
 
-    private ForwardingListener<A, VH> mForwardingListener;
+    private FL mForwardingListener;
 
-    public ForwardingListener<A, VH> getForwardingListener() {
+    public FL getForwardingListener() {
         return mForwardingListener;
     }
 
     public AbsCustomRecyclerAdapter() {
-        mForwardingListener = new ForwardingListener<>();
+        mForwardingListener = createForwardingListener();
         mForwardingListener.setProvider(mProvider);
     }
 
     public abstract A getSelf();
+
+    public abstract FL createForwardingListener();
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
@@ -61,8 +65,9 @@ public abstract class AbsCustomRecyclerAdapter<
         mRecyclerView = null;
     }
 
-    public void setListenerRelay(ListenerRelay listenerRelay) {
-        mForwardingListener.setListenerRelay(listenerRelay);
+    //  public void setListenerRelay(LR listenerRelay) {
+    public <XLR extends IListenerRelay<? super VH>> void setListenerRelay(XLR listenerRelay) {
+        mForwardingListener.setListenerRelay((LR)listenerRelay);
     }
 
     public abstract T getItemAt(int position);
