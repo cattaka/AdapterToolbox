@@ -16,7 +16,9 @@ import java.util.List;
 /**
  * Created by cattaka on 16/05/02.
  */
-public class SimpleStringExampleActivity extends AppCompatActivity implements CustomRecyclerAdapter.OnItemClickListener, CustomRecyclerAdapter.OnItemLongClickListener {
+public class SimpleStringExampleActivity extends AppCompatActivity implements
+        CustomRecyclerAdapter.OnItemClickListener<SimpleStringAdapter.ViewHolder, String>,
+        CustomRecyclerAdapter.OnItemLongClickListener<SimpleStringAdapter.ViewHolder, String> {
     RecyclerView mRecyclerView;
 
     @Override
@@ -41,17 +43,17 @@ public class SimpleStringExampleActivity extends AppCompatActivity implements Cu
     }
 
     @Override
-    public void onItemClick(RecyclerView parent, CustomRecyclerAdapter adapter, int position, int id, RecyclerView.ViewHolder vh) {
+    public void onItemClick(RecyclerView parent, CustomRecyclerAdapter<SimpleStringAdapter.ViewHolder, String> adapter, int position, int id, SimpleStringAdapter.ViewHolder viewHolder) {
         if (parent.getId() == R.id.recycler) {
-            String item = (String) adapter.getItemAt(position);
+            String item = adapter.getItemAt(position);
             Toast.makeText(this, item + " is clicked.", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
-    public boolean onItemLongClick(RecyclerView parent, CustomRecyclerAdapter adapter, int position, int id, View view, RecyclerView.ViewHolder vh) {
+    public boolean onItemLongClick(RecyclerView parent, CustomRecyclerAdapter<SimpleStringAdapter.ViewHolder, String> adapter, int position, int id, View view, SimpleStringAdapter.ViewHolder viewHolder) {
         if (parent.getId() == R.id.recycler) {
-            String item = (String) adapter.getItemAt(position);
+            String item = adapter.getItemAt(position);
             Toast.makeText(this, item + " is long clicked.", Toast.LENGTH_SHORT).show();
             return true;
         }

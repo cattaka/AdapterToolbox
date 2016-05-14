@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import net.cattaka.android.snippets.adapter.ForwardingListener;
 import net.cattaka.android.snippets.adapter.ScrambleAdapter;
 import net.cattaka.android.snippets.example.adapter.factory.CodeLableViewHolderFactory;
 import net.cattaka.android.snippets.example.adapter.factory.SimpleNumberViewHolderFactory;
@@ -19,7 +20,9 @@ import java.util.List;
 /**
  * Created by cattaka on 16/05/02.
  */
-public class ScrambleAdapterExampleActivity extends AppCompatActivity implements ScrambleAdapter.OnItemClickListener, ScrambleAdapter.OnItemLongClickListener {
+public class ScrambleAdapterExampleActivity extends AppCompatActivity implements
+        ForwardingListener.OnItemClickListener<ScrambleAdapter, RecyclerView.ViewHolder>,
+        ForwardingListener.OnItemLongClickListener<ScrambleAdapter, RecyclerView.ViewHolder> {
     RecyclerView mRecyclerView;
 
     @Override

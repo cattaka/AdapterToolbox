@@ -29,14 +29,14 @@ public class ComplexStringAdapter extends CustomRecyclerAdapter<ComplexStringAda
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_complex_string, parent, false);
         ViewHolder vh = new ViewHolder(view);
         vh.text.setTag(VIEW_HOLDER, vh);
-        vh.text.setOnClickListener(this);
-        vh.text.setOnLongClickListener(this);
+        vh.text.setOnClickListener(getForwardingListener());
+        vh.text.setOnLongClickListener(getForwardingListener());
         vh.aButton.setTag(VIEW_HOLDER, vh);
-        vh.aButton.setOnClickListener(this);
-        vh.aButton.setOnLongClickListener(this);
+        vh.aButton.setOnClickListener(getForwardingListener());
+        vh.aButton.setOnLongClickListener(getForwardingListener());
         vh.bButton.setTag(VIEW_HOLDER, vh);
-        vh.bButton.setOnClickListener(this);
-        vh.bButton.setOnLongClickListener(this);
+        vh.bButton.setOnClickListener(getForwardingListener());
+        vh.bButton.setOnLongClickListener(getForwardingListener());
         return vh;
     }
 
