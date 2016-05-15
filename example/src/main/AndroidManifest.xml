@@ -22,6 +22,7 @@
         <activity android:name=".ComplexStringExampleActivity" />
         <activity android:name=".ScrambleAdapterExampleActivity" />
         <activity android:name=".OperatableListExampleActivity" />
+        <activity android:name=".NestedScrambleAdapterExampleActivity" />
     </application>
 
 </manifest>

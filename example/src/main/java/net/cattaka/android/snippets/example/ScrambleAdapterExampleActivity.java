@@ -96,7 +96,7 @@ public class ScrambleAdapterExampleActivity extends AppCompatActivity {
                         break;
                 }
             }
-            ScrambleAdapter adapter = new ScrambleAdapter(this, items,
+            ScrambleAdapter adapter = ScrambleAdapter.newInstance(this, items,
                     mListenerRelay,
                     new SimpleStringViewHolderFactory(),
                     new SimpleNumberViewHolderFactory(),

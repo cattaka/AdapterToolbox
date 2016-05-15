@@ -130,7 +130,7 @@ public class OperatableListExampleActivity extends AppCompatActivity {
                         break;
                 }
             }
-            mItemAdapter = new ScrambleAdapter(this, items, mListenerRelay,
+            mItemAdapter = ScrambleAdapter.newInstance(this, items, mListenerRelay,
                     new MyInfoViewHolderFactory(),
                     new TextInfoViewHolderFactory()
             );

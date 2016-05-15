@@ -39,13 +39,13 @@ public abstract class AbsScrambleAdapter<
     List<FL> mForwardingListeners;
     LR mListenerRelay;
 
-    @SafeVarargs
-    public AbsScrambleAdapter(LR listenerRelay, IViewHolderFactory<A, VH, FL, ?, ?, LR>... viewHolderFactories) {
+    public AbsScrambleAdapter(LR listenerRelay, List<? extends IViewHolderFactory<A, VH, FL, ?, ?, LR>> viewHolderFactories) {
         mListenerRelay = listenerRelay;
         mViewHolderFactory = new ArrayList<>();
 
-        mViewHolderFactory.addAll(Arrays.asList(viewHolderFactories));
+        mViewHolderFactory.addAll(viewHolderFactories);
 
+        @SuppressWarnings("unchecked")
         NullViewHolderFactory<A, VH, FL, ?, ?, LR> nvhf = new NullViewHolderFactory(this);
         mViewHolderFactory.add(nvhf);
         mForwardingListeners = new ArrayList<>();
