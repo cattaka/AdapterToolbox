@@ -22,7 +22,7 @@ public class ForwardingListener<A extends RecyclerView.Adapter<? extends VH>, VH
     }
 
     @Override
-    public void setListenerRelay(ListenerRelay<A,? super VH> listenerRelay) {
+    public void setListenerRelay(ListenerRelay<A, ? super VH> listenerRelay) {
         mListenerRelay = listenerRelay;
     }
 
