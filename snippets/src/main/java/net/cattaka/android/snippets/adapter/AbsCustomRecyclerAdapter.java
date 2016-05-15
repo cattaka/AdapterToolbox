@@ -4,10 +4,8 @@ import android.support.annotation.IdRes;
 import android.support.v7.widget.RecyclerView;
 
 import net.cattaka.android.snippets.R;
-import net.cattaka.android.snippets.adapter.listener.ForwardingListener;
 import net.cattaka.android.snippets.adapter.listener.IForwardingListener;
 import net.cattaka.android.snippets.adapter.listener.IListenerRelay;
-import net.cattaka.android.snippets.adapter.listener.ListenerRelay;
 
 import java.util.List;
 
@@ -67,7 +65,7 @@ public abstract class AbsCustomRecyclerAdapter<
 
     //  public void setListenerRelay(LR listenerRelay) {
     public <XLR extends IListenerRelay<? super VH>> void setListenerRelay(XLR listenerRelay) {
-        mForwardingListener.setListenerRelay((LR)listenerRelay);
+        mForwardingListener.setListenerRelay((LR) listenerRelay);
     }
 
     public abstract T getItemAt(int position);

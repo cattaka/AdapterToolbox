@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import net.cattaka.android.snippets.adapter.CustomRecyclerAdapter;
 import net.cattaka.android.snippets.adapter.SingleViewAdapter;
-import net.cattaka.android.snippets.adapter.listener.IListenerRelay;
 import net.cattaka.android.snippets.adapter.listener.ListenerRelay;
 import net.cattaka.android.snippets.example.adapter.SimpleNumberAdapter;
 import net.cattaka.android.snippets.example.adapter.SimpleStringAdapter;

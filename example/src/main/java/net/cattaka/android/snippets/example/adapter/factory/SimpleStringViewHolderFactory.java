@@ -1,14 +1,13 @@
 package net.cattaka.android.snippets.example.adapter.factory;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import net.cattaka.android.snippets.adapter.AdapterConverter;
-import net.cattaka.android.snippets.adapter.listener.ForwardingListener;
 import net.cattaka.android.snippets.adapter.ScrambleAdapter;
+import net.cattaka.android.snippets.adapter.listener.ForwardingListener;
 import net.cattaka.android.snippets.example.R;
 
 /**

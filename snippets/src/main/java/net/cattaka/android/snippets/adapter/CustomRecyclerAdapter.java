@@ -3,8 +3,6 @@ package net.cattaka.android.snippets.adapter;
 import android.support.v7.widget.RecyclerView;
 
 import net.cattaka.android.snippets.adapter.listener.ForwardingListener;
-import net.cattaka.android.snippets.adapter.listener.IForwardingListener;
-import net.cattaka.android.snippets.adapter.listener.IListenerRelay;
 import net.cattaka.android.snippets.adapter.listener.ListenerRelay;
 
 /**
