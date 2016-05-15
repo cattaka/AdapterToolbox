@@ -1,5 +1,6 @@
 package net.cattaka.android.snippets.example.adapter.factory;
 
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,7 @@ import net.cattaka.android.snippets.example.R;
  */
 public class SimpleNumberViewHolderFactory extends ScrambleAdapter.AbsViewHolderFactory<SimpleNumberViewHolderFactory.ViewHolder> {
     @Override
-    public ViewHolder onCreateViewHolder(ScrambleAdapter adapter, ViewGroup parent, ForwardingListener forwardingListener) {
+    public ViewHolder onCreateViewHolder(ScrambleAdapter adapter, ViewGroup parent, ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder> forwardingListener) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_simple_number, parent, false);
         ViewHolder vh = new ViewHolder(view);
         view.setTag(ForwardingListener.VIEW_HOLDER, vh);

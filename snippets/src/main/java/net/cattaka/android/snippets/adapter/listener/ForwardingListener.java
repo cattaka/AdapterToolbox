@@ -2,10 +2,13 @@ package net.cattaka.android.snippets.adapter.listener;
 
 import android.support.annotation.IdRes;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -179,9 +182,49 @@ public class ForwardingListener<A extends RecyclerView.Adapter<? extends VH>, VH
             @SuppressWarnings("unchecked")
             VH vh = (VH) v.getTag(VIEW_HOLDER);
             if (vh != null) {
-                return mListenerRelay.onEditorAction(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh, v, actionId,event);
+                return mListenerRelay.onEditorAction(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh, v, actionId, event);
             }
         }
         return false;
+    }
+
+    /**
+     * @see TextWatcher
+     */
+    public void addTextChangedListener(final EditText target) {
+        target.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                if (mListenerRelay != null) {
+                    @SuppressWarnings("unchecked")
+                    VH vh = (VH) target.getTag(VIEW_HOLDER);
+                    if (vh != null) {
+                        mListenerRelay.beforeTextChanged(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh,target, s, start, count, after);
+                    }
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (mListenerRelay != null) {
+                    @SuppressWarnings("unchecked")
+                    VH vh = (VH) target.getTag(VIEW_HOLDER);
+                    if (vh != null) {
+                        mListenerRelay.onTextChanged(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh,target, s, start, count, count);
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (mListenerRelay != null) {
+                    @SuppressWarnings("unchecked")
+                    VH vh = (VH) target.getTag(VIEW_HOLDER);
+                    if (vh != null) {
+                        mListenerRelay.afterTextChanged(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh,target, s);
+                    }
+                }
+            }
+        });
     }
 }

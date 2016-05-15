@@ -1,6 +1,8 @@
 package net.cattaka.android.snippets.adapter.listener;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -74,5 +76,23 @@ public class ListenerRelay<A extends RecyclerView.Adapter<? extends VH>, VH exte
      */
     public boolean onEditorAction(RecyclerView recyclerView, A adapter, VH vh, TextView v, int actionId, KeyEvent event) {
         return false;
+    }
+
+    /**
+     * @see TextWatcher
+     */
+    public void beforeTextChanged(RecyclerView recyclerView, A adapter, VH vh, TextView v, CharSequence s, int start, int count, int after) {
+    }
+
+    /**
+     * @see TextWatcher
+     */
+    public void onTextChanged(RecyclerView recyclerView, A adapter, VH vh, TextView v, CharSequence s, int start, int before, int count) {
+    }
+
+    /**
+     * @see TextWatcher
+     */
+    public void afterTextChanged(RecyclerView recyclerView, A adapter, VH vh, TextView v, Editable s) {
     }
 }

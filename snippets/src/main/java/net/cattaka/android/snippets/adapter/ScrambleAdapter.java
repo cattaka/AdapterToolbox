@@ -1,12 +1,15 @@
 package net.cattaka.android.snippets.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import net.cattaka.android.snippets.adapter.listener.ForwardingListener;
 import net.cattaka.android.snippets.adapter.listener.ListenerRelay;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -23,11 +26,15 @@ public class ScrambleAdapter extends AbsScrambleAdapter<
     private List<Object> mItems;
     private ListenerRelay<ScrambleAdapter, RecyclerView.ViewHolder> mListenerRelay = new ListenerRelay<>();
 
-    @SafeVarargs
-    public ScrambleAdapter(Context context, List<Object> items, ListenerRelay<ScrambleAdapter, RecyclerView.ViewHolder> listenerRelay, IViewHolderFactory<ScrambleAdapter, RecyclerView.ViewHolder, ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder>, ?, ?, ListenerRelay<ScrambleAdapter, ? super RecyclerView.ViewHolder>>... viewHolderFactories) {
-        super(listenerRelay, viewHolderFactories);
-        mContext = context;
-        mItems = items;
+
+    public static ScrambleAdapter newInstance(Context context, List<Object> items, ListenerRelay<ScrambleAdapter, RecyclerView.ViewHolder> listenerRelay, IViewHolderFactory<ScrambleAdapter, RecyclerView.ViewHolder, ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder>, ?, ?, ListenerRelay<ScrambleAdapter, ? super RecyclerView.ViewHolder>>... viewHolderFactories) {
+        return new ScrambleAdapter(context, items, listenerRelay, Arrays.asList(viewHolderFactories));
+    }
+
+    public ScrambleAdapter(Context context, List<Object> items, ListenerRelay<ScrambleAdapter, RecyclerView.ViewHolder> listenerRelay, List<? extends IViewHolderFactory<ScrambleAdapter, RecyclerView.ViewHolder, ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder>, ?, ?, ListenerRelay<ScrambleAdapter, ? super RecyclerView.ViewHolder>>> iViewHolderFactories) {
+        super(listenerRelay, iViewHolderFactories);
+        this.mContext = context;
+        this.mItems = items;
     }
 
     @Override
@@ -52,6 +59,10 @@ public class ScrambleAdapter extends AbsScrambleAdapter<
     @Override
     public Object getItemAt(int position) {
         return mItems.get(position);
+    }
+
+    public List<Object> getItems() {
+        return mItems;
     }
 
     @Override
