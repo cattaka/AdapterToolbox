@@ -1,6 +1,7 @@
 package net.cattaka.android.snippets.example.adapter.factory;
 
 import android.content.res.Resources;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +24,7 @@ public class CodeLableViewHolderFactory extends ScrambleAdapter.AbsViewHolderFac
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ScrambleAdapter adapter, ViewGroup
-            parent, ForwardingListener forwardingListener) {
+    public ViewHolder onCreateViewHolder(ScrambleAdapter adapter, ViewGroup parent, ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder> forwardingListener) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_code_label, parent, false);
         ViewHolder vh = new ViewHolder(view);
         vh.codeText.setTag(ForwardingListener.VIEW_HOLDER, vh);

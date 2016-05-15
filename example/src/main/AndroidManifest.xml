@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="net.cattaka.android.snippets.example"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="net.cattaka.android.snippets.example">
 
     <application
         android:allowBackup="true"
@@ -21,6 +21,7 @@
         <activity android:name=".MultiAdapterExampleActivity" />
         <activity android:name=".ComplexStringExampleActivity" />
         <activity android:name=".ScrambleAdapterExampleActivity" />
+        <activity android:name=".OperatableListExampleActivity" />
     </application>
 
 </manifest>
