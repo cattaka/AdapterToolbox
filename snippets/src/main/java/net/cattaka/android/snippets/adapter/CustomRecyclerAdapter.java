@@ -2,30 +2,27 @@ package net.cattaka.android.snippets.adapter;
 
 import android.support.v7.widget.RecyclerView;
 
-import java.util.List;
+import net.cattaka.android.snippets.adapter.listener.ForwardingListener;
+import net.cattaka.android.snippets.adapter.listener.IForwardingListener;
+import net.cattaka.android.snippets.adapter.listener.IListenerRelay;
+import net.cattaka.android.snippets.adapter.listener.ListenerRelay;
 
 /**
  * Created by cattaka on 2015/07/15.
  */
-public abstract class CustomRecyclerAdapter<VH extends RecyclerView.ViewHolder, T> extends AbsCustomRecyclerAdapter<
-        CustomRecyclerAdapter<VH, T>,
-        VH, ForwardingListener<CustomRecyclerAdapter<VH, T>, VH>, T
-        > {
+public abstract class CustomRecyclerAdapter<
+        VH extends RecyclerView.ViewHolder,
+        T
+        > extends AbsCustomRecyclerAdapter<CustomRecyclerAdapter<VH, T>, VH, T, ForwardingListener<CustomRecyclerAdapter<VH, T>, VH>, ListenerRelay<CustomRecyclerAdapter<VH, T>, ? super VH>> {
 
     @Override
     public CustomRecyclerAdapter<VH, T> getSelf() {
         return this;
     }
 
-    public abstract T getItemAt(int position);
-
-    public abstract List<T> getItems();
-
-    public interface OnItemClickListener<VH extends RecyclerView.ViewHolder, T> extends ForwardingListener.OnItemClickListener<CustomRecyclerAdapter<VH, T>, VH> {
-
-    }
-
-    public interface OnItemLongClickListener<VH extends RecyclerView.ViewHolder, T> extends ForwardingListener.OnItemLongClickListener<CustomRecyclerAdapter<VH, T>, VH> {
-
+    @Override
+    public ForwardingListener<CustomRecyclerAdapter<VH, T>, VH> createForwardingListener() {
+        return new ForwardingListener<>();
     }
 }
+

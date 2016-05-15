@@ -4,39 +4,28 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import net.cattaka.android.snippets.adapter.listener.ForwardingListener;
+import net.cattaka.android.snippets.adapter.listener.ListenerRelay;
+
 import java.util.List;
 
 /**
  * Created by takao on 2016/05/10.
  */
-public class ScrambleAdapter extends AbsScrambleAdapter<ScrambleAdapter, RecyclerView.ViewHolder, ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder>, RecyclerView.ViewHolder, ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder>> {
-    private ForwardingListener.OnItemClickListener<ScrambleAdapter, RecyclerView.ViewHolder> mInnerOnItemClickListener = new ForwardingListener.OnItemClickListener<ScrambleAdapter, RecyclerView.ViewHolder>() {
-        @Override
-        public void onItemClick(RecyclerView parent, ScrambleAdapter adapter, int position, int id, RecyclerView.ViewHolder viewHolder) {
-            if (mOnItemClickListener != null) {
-                mOnItemClickListener.onItemClick(parent, adapter, position, id, viewHolder);
-            }
-        }
-    };
-    private ForwardingListener.OnItemLongClickListener<ScrambleAdapter, RecyclerView.ViewHolder> mInnerOnItemLongClickListener = new ForwardingListener.OnItemLongClickListener<ScrambleAdapter, RecyclerView.ViewHolder>() {
-        @Override
-        public boolean onItemLongClick(RecyclerView parent, ScrambleAdapter adapter, int position, int id, View view, RecyclerView.ViewHolder viewHolder) {
-            if (mOnItemLongClickListener != null) {
-                return mOnItemLongClickListener.onItemLongClick(parent, adapter, position, id, view, viewHolder);
-            }
-            return false;
-        }
-    };
-
+public class ScrambleAdapter extends AbsScrambleAdapter<
+        ScrambleAdapter,
+        RecyclerView.ViewHolder,
+        ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder>,
+        RecyclerView.ViewHolder,
+        ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder>,
+        ListenerRelay<ScrambleAdapter, ? super RecyclerView.ViewHolder>> {
     private Context mContext;
     private List<Object> mItems;
-
-    private ForwardingListener.OnItemClickListener<ScrambleAdapter, RecyclerView.ViewHolder> mOnItemClickListener;
-    private ForwardingListener.OnItemLongClickListener<ScrambleAdapter, RecyclerView.ViewHolder> mOnItemLongClickListener;
+    private ListenerRelay<ScrambleAdapter, RecyclerView.ViewHolder> mListenerRelay = new ListenerRelay<>();
 
     @SafeVarargs
-    public ScrambleAdapter(Context context, List<Object> items, IViewHolderFactory<ScrambleAdapter, RecyclerView.ViewHolder, ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder>, ?, ?>... viewHolderFactories) {
-        super(viewHolderFactories);
+    public ScrambleAdapter(Context context, List<Object> items, ListenerRelay<ScrambleAdapter, RecyclerView.ViewHolder> listenerRelay, IViewHolderFactory<ScrambleAdapter, RecyclerView.ViewHolder, ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder>, ?, ?, ListenerRelay<ScrambleAdapter, ? super RecyclerView.ViewHolder>>... viewHolderFactories) {
+        super(listenerRelay, viewHolderFactories);
         mContext = context;
         mItems = items;
     }
@@ -50,11 +39,8 @@ public class ScrambleAdapter extends AbsScrambleAdapter<ScrambleAdapter, Recycle
     }
 
     @Override
-    public ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder> createForwardingListener(IViewHolderFactory viewHolderFactory) {
-        ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder> fl = new ForwardingListener<>();
-        fl.setOnItemClickListener(mInnerOnItemClickListener);
-        fl.setOnItemLongClickListener(mInnerOnItemLongClickListener);
-        return fl;
+    public ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder> createNullForwardingListener() {
+        return new ForwardingListener<>();
     }
 
     @Override
@@ -73,11 +59,10 @@ public class ScrambleAdapter extends AbsScrambleAdapter<ScrambleAdapter, Recycle
         return mItems.size();
     }
 
-    public void setOnItemClickListener(ForwardingListener.OnItemClickListener<ScrambleAdapter, RecyclerView.ViewHolder> onItemClickListener) {
-        mOnItemClickListener = onItemClickListener;
-    }
-
-    public void setOnItemLongClickListener(ForwardingListener.OnItemLongClickListener<ScrambleAdapter, RecyclerView.ViewHolder> onItemLongClickListener) {
-        mOnItemLongClickListener = onItemLongClickListener;
+    public abstract static class AbsViewHolderFactory<VH extends RecyclerView.ViewHolder> implements IViewHolderFactory<ScrambleAdapter, RecyclerView.ViewHolder, ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder>, VH, ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder>, ListenerRelay<ScrambleAdapter, ? super RecyclerView.ViewHolder>> {
+        @Override
+        public ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder> createForwardingListener() {
+            return new ForwardingListener<>();
+        }
     }
 }
