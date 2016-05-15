@@ -24,42 +24,42 @@ public class ScrambleAdapterExampleActivity extends AppCompatActivity {
 
     ListenerRelay<ScrambleAdapter, RecyclerView.ViewHolder> mListenerRelay = new ListenerRelay<ScrambleAdapter, RecyclerView.ViewHolder>() {
         @Override
-        public void onItemClick(RecyclerView parent, ScrambleAdapter adapter, int position, int id, RecyclerView.ViewHolder vh) {
-            if (parent.getId() == R.id.recycler) {
-                if (vh instanceof SimpleStringViewHolderFactory.ViewHolder) {
-                    String item = (String) adapter.getItemAt(position);
-                    Snackbar.make(vh.itemView, "String " + item + " is clicked.", Snackbar.LENGTH_SHORT).show();
-                } else if (vh instanceof SimpleNumberViewHolderFactory.ViewHolder) {
-                    Number item = (Number) adapter.getItemAt(position);
-                    Snackbar.make(vh.itemView, "Number " + item + " is clicked.", Snackbar.LENGTH_SHORT).show();
-                } else if (vh instanceof CodeLableViewHolderFactory.ViewHolder) {
-                    OrdinalLabel item = (OrdinalLabel) adapter.getItemAt(position);
+        public void onClick(RecyclerView recyclerView, ScrambleAdapter adapter, RecyclerView.ViewHolder viewHolder, View view) {
+            if (recyclerView.getId() == R.id.recycler) {
+                if (viewHolder instanceof SimpleStringViewHolderFactory.ViewHolder) {
+                    String item = (String) adapter.getItemAt(viewHolder.getAdapterPosition());
+                    Snackbar.make(viewHolder.itemView, "String " + item + " is clicked.", Snackbar.LENGTH_SHORT).show();
+                } else if (viewHolder instanceof SimpleNumberViewHolderFactory.ViewHolder) {
+                    Number item = (Number) adapter.getItemAt(viewHolder.getAdapterPosition());
+                    Snackbar.make(viewHolder.itemView, "Number " + item + " is clicked.", Snackbar.LENGTH_SHORT).show();
+                } else if (viewHolder instanceof CodeLableViewHolderFactory.ViewHolder) {
+                    OrdinalLabel item = (OrdinalLabel) adapter.getItemAt(viewHolder.getAdapterPosition());
                     String text = item.getLabel(getResources()) + "(" + item.getCode() + ")";
-                    if (id == R.id.text_code) {
-                        Snackbar.make(vh.itemView, "The code of " + text + " is clicked.", Snackbar.LENGTH_SHORT).show();
-                    } else {
-                        Snackbar.make(vh.itemView, "The label of " + text + " is clicked.", Snackbar.LENGTH_SHORT).show();
+                    if (view.getId() == R.id.text_code) {
+                        Snackbar.make(viewHolder.itemView, "The code of " + text + " is clicked.", Snackbar.LENGTH_SHORT).show();
+                    } else if (view.getId() == R.id.text_label) {
+                        Snackbar.make(viewHolder.itemView, "The label of " + text + " is clicked.", Snackbar.LENGTH_SHORT).show();
                     }
                 }
             }
         }
 
         @Override
-        public boolean onItemLongClick(RecyclerView parent, ScrambleAdapter adapter, int position, int id, View view, RecyclerView.ViewHolder vh) {
-            if (parent.getId() == R.id.recycler) {
-                if (vh instanceof SimpleStringViewHolderFactory.ViewHolder) {
-                    String item = (String) adapter.getItemAt(position);
-                    Snackbar.make(vh.itemView, "String " + item + " is long clicked.", Snackbar.LENGTH_SHORT).show();
-                } else if (vh instanceof SimpleNumberViewHolderFactory.ViewHolder) {
-                    Number item = (Number) adapter.getItemAt(position);
-                    Snackbar.make(vh.itemView, "Number " + item + " is long clicked.", Snackbar.LENGTH_SHORT).show();
-                } else if (vh instanceof CodeLableViewHolderFactory.ViewHolder) {
-                    OrdinalLabel item = (OrdinalLabel) adapter.getItemAt(position);
+        public boolean onLongClick(RecyclerView recyclerView, ScrambleAdapter adapter, RecyclerView.ViewHolder viewHolder, View view) {
+            if (recyclerView.getId() == R.id.recycler) {
+                if (viewHolder instanceof SimpleStringViewHolderFactory.ViewHolder) {
+                    String item = (String) adapter.getItemAt(viewHolder.getAdapterPosition());
+                    Snackbar.make(view, "String " + item + " is long clicked.", Snackbar.LENGTH_SHORT).show();
+                } else if (viewHolder instanceof SimpleNumberViewHolderFactory.ViewHolder) {
+                    Number item = (Number) adapter.getItemAt(viewHolder.getAdapterPosition());
+                    Snackbar.make(view, "Number " + item + " is long clicked.", Snackbar.LENGTH_SHORT).show();
+                } else if (viewHolder instanceof CodeLableViewHolderFactory.ViewHolder) {
+                    OrdinalLabel item = (OrdinalLabel) adapter.getItemAt(viewHolder.getAdapterPosition());
                     String text = item.getLabel(getResources()) + "(" + item.getCode() + ")";
-                    if (id == R.id.text_code) {
-                        Snackbar.make(vh.itemView, "The code of " + text + " is long clicked.", Snackbar.LENGTH_SHORT).show();
-                    } else {
-                        Snackbar.make(vh.itemView, "The label of " + text + " is long clicked.", Snackbar.LENGTH_SHORT).show();
+                    if (view.getId() == R.id.text_code) {
+                        Snackbar.make(view, "The code of " + text + " is long clicked.", Snackbar.LENGTH_SHORT).show();
+                    } else if (view.getId() == R.id.text_label) {
+                        Snackbar.make(view, "The label of " + text + " is long clicked.", Snackbar.LENGTH_SHORT).show();
                     }
                 }
                 return true;
@@ -68,8 +68,6 @@ public class ScrambleAdapterExampleActivity extends AppCompatActivity {
         }
     };
 
-
-    ScrambleAdapterExampleActivity me = this;
     RecyclerView mRecyclerView;
 
     @Override

@@ -1,6 +1,7 @@
 package net.cattaka.android.snippets.example;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,29 +22,43 @@ public class ComplexStringExampleActivity extends AppCompatActivity {
 
     ListenerRelay<CustomRecyclerAdapter<ComplexStringAdapter.ViewHolder, String>, ComplexStringAdapter.ViewHolder> mListenerRelay = new ListenerRelay<CustomRecyclerAdapter<ComplexStringAdapter.ViewHolder, String>, ComplexStringAdapter.ViewHolder>() {
         @Override
-        public void onItemClick(RecyclerView parent, CustomRecyclerAdapter<ComplexStringAdapter.ViewHolder, String> adapter, int position, int id, ComplexStringAdapter.ViewHolder viewHolder) {
-            if (parent.getId() == R.id.recycler) {
-                String item = adapter.getItemAt(position);
-                if (id == R.id.text) {
-                    Toast.makeText(me, item + " is clicked.(Text)", Toast.LENGTH_SHORT).show();
-                } else if (id == R.id.button_a) {
-                    Toast.makeText(me, item + " is clicked.(A)", Toast.LENGTH_SHORT).show();
-                } else if (id == R.id.button_b) {
-                    Toast.makeText(me, item + " is clicked.(B)", Toast.LENGTH_SHORT).show();
+        public void onClick(RecyclerView recyclerView, CustomRecyclerAdapter<ComplexStringAdapter.ViewHolder, String> adapter, ComplexStringAdapter.ViewHolder viewHolder, View view) {
+            if (recyclerView.getId() == R.id.recycler) {
+                String item = adapter.getItemAt(viewHolder.getCompatPosition());
+                switch (view.getId()) {
+                    case R.id.text: {
+                        Snackbar.make(view, item + " is clicked.(Text)", Snackbar.LENGTH_SHORT).show();
+                        break;
+                    }
+                    case R.id.button_a: {
+                        Snackbar.make(view, item + " is clicked.(A)", Snackbar.LENGTH_SHORT).show();
+                        break;
+                    }
+                    case R.id.button_b: {
+                        Snackbar.make(view, item + " is clicked.(B)", Snackbar.LENGTH_SHORT).show();
+                        break;
+                    }
                 }
             }
         }
 
         @Override
-        public boolean onItemLongClick(RecyclerView parent, CustomRecyclerAdapter<ComplexStringAdapter.ViewHolder, String> adapter, int position, int id, View view, ComplexStringAdapter.ViewHolder viewHolder) {
-            if (parent.getId() == R.id.recycler) {
-                String item = adapter.getItemAt(position);
-                if (id == R.id.text) {
-                    Toast.makeText(me, item + " is long clicked.(Text)", Toast.LENGTH_SHORT).show();
-                } else if (id == R.id.button_a) {
-                    Toast.makeText(me, item + " is long clicked.(A)", Toast.LENGTH_SHORT).show();
-                } else if (id == R.id.button_b) {
-                    Toast.makeText(me, item + " is long clicked.(B)", Toast.LENGTH_SHORT).show();
+        public boolean onLongClick(RecyclerView recyclerView, CustomRecyclerAdapter<ComplexStringAdapter.ViewHolder, String> adapter, ComplexStringAdapter.ViewHolder viewHolder, View view) {
+            if (recyclerView.getId() == R.id.recycler) {
+                String item = adapter.getItemAt(viewHolder.getCompatPosition());
+                switch (view.getId()) {
+                    case R.id.text: {
+                        Snackbar.make(view, item + " is long clicked.(Text)", Snackbar.LENGTH_SHORT).show();
+                        break;
+                    }
+                    case R.id.button_a: {
+                        Snackbar.make(view, item + " is long clicked.(A)", Snackbar.LENGTH_SHORT).show();
+                        break;
+                    }
+                    case R.id.button_b: {
+                        Snackbar.make(view, item + " is long clicked.(B)", Snackbar.LENGTH_SHORT).show();
+                        break;
+                    }
                 }
                 return true;
             }
@@ -51,7 +66,6 @@ public class ComplexStringExampleActivity extends AppCompatActivity {
         }
     };
 
-    ComplexStringExampleActivity me = this;
     RecyclerView mRecyclerView;
 
     @Override

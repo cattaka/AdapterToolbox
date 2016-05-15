@@ -1,6 +1,7 @@
 package net.cattaka.android.snippets.example;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,33 +24,31 @@ public class RecyclerViewHeaderExampleActivity extends AppCompatActivity {
 
     ListenerRelay<CustomRecyclerAdapter<RecyclerView.ViewHolder, Object>, RecyclerView.ViewHolder> mListenerRelay = new ListenerRelay<CustomRecyclerAdapter<RecyclerView.ViewHolder, Object>, RecyclerView.ViewHolder>() {
         @Override
-        public void onItemClick(RecyclerView parent, CustomRecyclerAdapter adapter, int position,
-                                int id, RecyclerView.ViewHolder vh) {
-            if (parent.getId() == R.id.recycler) {
-                MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(position);
+        public void onClick(RecyclerView recyclerView, CustomRecyclerAdapter<RecyclerView.ViewHolder, Object> adapter, RecyclerView.ViewHolder viewHolder, View view) {
+            if (recyclerView.getId() == R.id.recycler) {
+                MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
                 if (la.mAdapter == mHeaderAdapter) {
-                    Toast.makeText(me, "Header is clicked.", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Header is clicked.", Snackbar.LENGTH_SHORT).show();
                 } else if (la.mAdapter == mItemsAdapter) {
                     String item = mItemsAdapter.getItemAt(la.mLocalPosition);
-                    Toast.makeText(me, item + " is clicked.", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, item + " is clicked.", Snackbar.LENGTH_SHORT).show();
                 } else if (la.mAdapter == mFooterAdapter) {
-                    Toast.makeText(me, "Footer is clicked.", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Footer is clicked.", Snackbar.LENGTH_SHORT).show();
                 }
             }
         }
 
         @Override
-        public boolean onItemLongClick(RecyclerView parent, CustomRecyclerAdapter adapter,
-                                       int position, int id, View view, RecyclerView.ViewHolder vh) {
-            if (parent.getId() == R.id.recycler) {
-                MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(position);
+        public boolean onLongClick(RecyclerView recyclerView, CustomRecyclerAdapter<RecyclerView.ViewHolder, Object> adapter, RecyclerView.ViewHolder viewHolder, View view) {
+            if (recyclerView.getId() == R.id.recycler) {
+                MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
                 if (la.mAdapter == mHeaderAdapter) {
-                    Toast.makeText(me, "Header is long clicked.", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Header is long clicked.", Snackbar.LENGTH_SHORT).show();
                 } else if (la.mAdapter == mItemsAdapter) {
                     String item = mItemsAdapter.getItemAt(la.mLocalPosition);
-                    Toast.makeText(me, item + " is long clicked.", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, item + " is long clicked.", Snackbar.LENGTH_SHORT).show();
                 } else if (la.mAdapter == mFooterAdapter) {
-                    Toast.makeText(me, "Footer is long clicked.", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Footer is long clicked.", Snackbar.LENGTH_SHORT).show();
                 }
                 return true;
             }
@@ -57,7 +56,6 @@ public class RecyclerViewHeaderExampleActivity extends AppCompatActivity {
         }
     };
 
-    RecyclerViewHeaderExampleActivity me = this;
     RecyclerView mRecyclerView;
     MergeRecyclerAdapter<RecyclerView.Adapter> mMergeRecyclerAdapter;
     SingleViewAdapter mHeaderAdapter;
