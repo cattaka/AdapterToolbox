@@ -38,7 +38,10 @@ public abstract class AbsScrambleAdapter<
     List<FL> mForwardingListeners;
     LR mListenerRelay;
 
-    public AbsScrambleAdapter(LR listenerRelay, List<? extends IViewHolderFactory<SA, VH, FL, ?, LR>> viewHolderFactories) {
+    public AbsScrambleAdapter(
+            LR listenerRelay,
+            List<? extends IViewHolderFactory<SA, VH, FL, ?, LR>> viewHolderFactories
+    ) {
         mListenerRelay = listenerRelay;
         mViewHolderFactory = new ArrayList<>();
 
@@ -73,7 +76,11 @@ public abstract class AbsScrambleAdapter<
     }
 
     @SuppressWarnings("unchecked")
-    public <EVH extends VH> void onBindViewHolderInner(IViewHolderFactory<SA, VH, FL, EVH, LR> viewHolderFactory, VH holder, int position) {
+    private <EVH extends VH> void onBindViewHolderInner(
+            IViewHolderFactory<SA, VH, FL, EVH, LR> viewHolderFactory,
+            VH holder,
+            int position
+    ) {
         Object object = getItemAt(position);
         viewHolderFactory.onBindViewHolder(getSelf(), (EVH) holder, position, object);
     }
@@ -105,10 +112,6 @@ public abstract class AbsScrambleAdapter<
         mRecyclerView = null;
     }
 
-    public void setListenerRelay(LR listenerRelay) {
-        this.mListenerRelay = listenerRelay;
-    }
-
     public abstract SA getSelf();
 
     public abstract VH createNullViewHolder();
@@ -138,8 +141,8 @@ public abstract class AbsScrambleAdapter<
             > implements IViewHolderFactory<SA, VH, FL, VH, LR> {
         SA mAdapter;
 
-        public NullViewHolderFactory(SA mAdapter) {
-            this.mAdapter = mAdapter;
+        public NullViewHolderFactory(SA adapter) {
+            this.mAdapter = adapter;
         }
 
         @Override

@@ -11,10 +11,14 @@ import android.view.ViewGroup;
  */
 @Keep
 public class LayoutAnimatorHelper {
-    View mView;
+    private View mView;
 
     public LayoutAnimatorHelper(View view) {
         mView = view;
+    }
+
+    public View getView() {
+        return mView;
     }
 
     public int getTopMargin() {
