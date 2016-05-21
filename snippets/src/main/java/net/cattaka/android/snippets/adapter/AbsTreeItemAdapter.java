@@ -57,7 +57,7 @@ public abstract class AbsTreeItemAdapter<VH extends RecyclerView.ViewHolder, T e
     protected void doFold(W item, boolean fold) {
         for (W child : item.children) {
             child.fold = fold;
-            doFold(child, fold);
+            doFold(child, child.opened || fold);
         }
         notifyItemChanged(getItems().indexOf(item));
     }
