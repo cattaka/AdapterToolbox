@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         ScrambleAdapterExample(ScrambleAdapterExampleActivity.class),
         OperatableListExample(OperatableListExampleActivity.class),
         NestedScrambleAdapterExample(NestedScrambleAdapterExampleActivity.class),
+        ChoosableTreeItemAdapterExample(ChoosableTreeItemAdapterExampleActivity.class),
         //
         ;
         public final Class<? extends Activity> clazz;

@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import net.cattaka.android.snippets.adapter.CustomRecyclerAdapter;
 import net.cattaka.android.snippets.adapter.ScrambleAdapter;
 import net.cattaka.android.snippets.adapter.SingleViewAdapter;
 import net.cattaka.android.snippets.adapter.listener.ListenerRelay;

@@ -5,6 +5,6 @@ import java.util.List;
 /**
  * Created by cattaka on 16/05/21.
  */
-public interface INestedItem<T extends INestedItem<T>> {
+public interface ITreeItem<T extends ITreeItem<T>> {
     List<T> getChildren();
 }

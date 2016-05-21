@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import net.cattaka.android.snippets.adapter.CustomRecyclerAdapter;
 import net.cattaka.android.snippets.adapter.ScrambleAdapter;
 import net.cattaka.android.snippets.adapter.SingleViewAdapter;
 import net.cattaka.android.snippets.adapter.listener.ListenerRelay;
@@ -22,7 +21,7 @@ import java.util.List;
  */
 public class RecyclerViewHeaderExampleActivity extends AppCompatActivity {
 
-    ListenerRelay<ScrambleAdapter<?>,RecyclerView.ViewHolder> mListenerRelay = new ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder>() {
+    ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder> mListenerRelay = new ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder>() {
         @Override
         public void onClick(RecyclerView recyclerView, ScrambleAdapter<?> adapter, RecyclerView.ViewHolder viewHolder, View view) {
             if (recyclerView.getId() == R.id.recycler) {

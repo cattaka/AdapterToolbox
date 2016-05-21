@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 
-import net.cattaka.android.snippets.data.INestedItem;
+import net.cattaka.android.snippets.data.ITreeItem;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,11 +13,11 @@ import java.util.List;
 /**
  * Created by cattaka on 16/05/21.
  */
-public abstract class NestedItemAdapter<VH extends RecyclerView.ViewHolder, T extends INestedItem<T>, W extends NestedItemAdapter.WrappedItem<W, T>> extends CustomRecyclerAdapter<VH, W> {
+public abstract class AbsTreeItemAdapter<VH extends RecyclerView.ViewHolder, T extends ITreeItem<T>, W extends AbsTreeItemAdapter.WrappedItem<W, T>> extends RecyclerView.Adapter<VH> {
     private Context mContext;
     private List<W> mItems;
 
-    protected static <T extends INestedItem<T>, W extends NestedItemAdapter.WrappedItem<W, T>, REF extends INestedItemAdapterRef<?, T, W>>
+    protected static <T extends ITreeItem<T>, W extends AbsTreeItemAdapter.WrappedItem<W, T>, REF extends INestedItemAdapterRef<?, T, W>>
     List<W> inflateWrappedList(List<W> dest, List<T> items, int level, W parent, REF ref) {
         for (T item : items) {
             W child = ref.createWrappedItem(level, item, parent);
@@ -32,7 +32,7 @@ public abstract class NestedItemAdapter<VH extends RecyclerView.ViewHolder, T ex
         return dest;
     }
 
-    public <REF extends INestedItemAdapterRef<?, T, W>> NestedItemAdapter(Context context, List<T> items, REF ref) {
+    public <REF extends INestedItemAdapterRef<?, T, W>> AbsTreeItemAdapter(Context context, List<T> items, REF ref) {
         mContext = context;
         mItems = inflateWrappedList(new ArrayList<W>(), items, 0, null, ref);
     }
@@ -46,12 +46,10 @@ public abstract class NestedItemAdapter<VH extends RecyclerView.ViewHolder, T ex
         return mItems.size();
     }
 
-    @Override
     public W getItemAt(int position) {
         return mItems.get(position);
     }
 
-    @Override
     public List<W> getItems() {
         return mItems;
     }
@@ -64,7 +62,7 @@ public abstract class NestedItemAdapter<VH extends RecyclerView.ViewHolder, T ex
         notifyItemChanged(getItems().indexOf(item));
     }
 
-    public static class WrappedItem<W extends WrappedItem<W, T>, T extends INestedItem<T>> {
+    public static class WrappedItem<W extends WrappedItem<W, T>, T extends ITreeItem<T>> {
         public final int level;
         public boolean opened;
         public boolean fold;
@@ -99,12 +97,12 @@ public abstract class NestedItemAdapter<VH extends RecyclerView.ViewHolder, T ex
         }
     }
 
-    public interface INestedItemAdapterRef<VH extends RecyclerView.ViewHolder, T extends INestedItem<T>, W extends WrappedItem<W, T>> extends Serializable {
+    public interface INestedItemAdapterRef<VH extends RecyclerView.ViewHolder, T extends ITreeItem<T>, W extends WrappedItem<W, T>> extends Serializable {
         @NonNull
         Class<T> getItemClass();
 
         @NonNull
-        NestedItemAdapter<VH, T, W> createAdapter(@NonNull Context context, @NonNull List<T> items);
+        AbsTreeItemAdapter<VH, T, W> createAdapter(@NonNull Context context, @NonNull List<T> items);
 
         W createWrappedItem(int level, T item, W parent);
     }
