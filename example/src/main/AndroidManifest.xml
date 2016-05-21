@@ -23,6 +23,7 @@
         <activity android:name=".ScrambleAdapterExampleActivity" />
         <activity android:name=".OperatableListExampleActivity" />
         <activity android:name=".NestedScrambleAdapterExampleActivity" />
+        <activity android:name=".TreeItemAdapterExampleActivity" />
         <activity android:name=".ChoosableTreeItemAdapterExampleActivity" />
     </application>
 

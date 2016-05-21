@@ -21,12 +21,12 @@ import java.util.List;
 /**
  * Created by cattaka on 16/05/21.
  */
-public class MyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
-        MyTreeItemAdapter.ViewHolder,
+public class ChoosableMyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
+        ChoosableMyTreeItemAdapter.ViewHolder,
         MyTreeItem,
-        MyTreeItemAdapter.WrappedItem
+        ChoosableMyTreeItemAdapter.WrappedItem
         > {
-    public static INestedItemAdapterRef<ViewHolder, MyTreeItem, MyTreeItemAdapter.WrappedItem> REF = new INestedItemAdapterRef<ViewHolder, MyTreeItem, WrappedItem>() {
+    public static INestedItemAdapterRef<ViewHolder, MyTreeItem, ChoosableMyTreeItemAdapter.WrappedItem> REF = new INestedItemAdapterRef<ViewHolder, MyTreeItem, WrappedItem>() {
         @NonNull
         @Override
         public Class<MyTreeItem> getItemClass() {
@@ -36,7 +36,7 @@ public class MyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
         @NonNull
         @Override
         public AbsTreeItemAdapter<ViewHolder, MyTreeItem, WrappedItem> createAdapter(@NonNull Context context, @NonNull List<MyTreeItem> items) {
-            return new MyTreeItemAdapter(context, items);
+            return new ChoosableMyTreeItemAdapter(context, items);
         }
 
         @Override
@@ -65,16 +65,18 @@ public class MyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
         }
     };
 
-    public MyTreeItemAdapter(Context context, List<MyTreeItem> items) {
+    public ChoosableMyTreeItemAdapter(Context context, List<MyTreeItem> items) {
         super(context, items, REF);
     }
 
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.item_my_tree_item, parent, false);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.item_choosable_my_tree_item, parent, false);
         ViewHolder holder = new ViewHolder(view);
 
+        holder.chosenCheck.setTag(ForwardingListener.VIEW_HOLDER, holder);
+        holder.chosenCheck.setOnClickListener(mOnClickListener);
         holder.openedCheck.setTag(ForwardingListener.VIEW_HOLDER, holder);
         holder.openedCheck.setOnClickListener(mOnClickListener);
 
@@ -101,6 +103,7 @@ public class MyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
             holder.openedCheck.setVisibility(hasChildren ? View.VISIBLE : View.INVISIBLE);
         }
 
+        holder.chosenCheck.setChecked(wrappedItem.chosen);
         holder.openedCheck.setChecked(wrappedItem.opened);
         holder.labelText.setText(item.getText());
     }
@@ -113,12 +116,14 @@ public class MyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         Space levelSpace;
+        CompoundButton chosenCheck;
         CompoundButton openedCheck;
         TextView labelText;
 
         public ViewHolder(View itemView) {
             super(itemView);
             levelSpace = (Space) itemView.findViewById(R.id.space_level);
+            chosenCheck = (CompoundButton) itemView.findViewById(R.id.check_chosen);
             openedCheck = (CompoundButton) itemView.findViewById(R.id.check_opened);
             labelText = (TextView) itemView.findViewById(R.id.text_label);
         }
