@@ -11,7 +11,15 @@ import java.util.List;
 /**
  * Created by cattaka on 16/05/21.
  */
-public abstract class AbsChoosableTreeItemAdapter<VH extends RecyclerView.ViewHolder, T extends ITreeItem<T>, W extends AbsChoosableTreeItemAdapter.WrappedItem<W, T>> extends AbsTreeItemAdapter<VH, T, W> {
+public abstract class AbsChoosableTreeItemAdapter<
+        VH extends RecyclerView.ViewHolder,
+        T extends ITreeItem<T>,
+        W extends AbsChoosableTreeItemAdapter.WrappedItem<W, T>
+        > extends AbsTreeItemAdapter<
+        VH,
+        T,
+        W
+        > {
     public static final int CHOICE_MODE_MULTIPLE = 2;
     //public static final int CHOICE_MODE_MULTIPLE_MODAL = 3;
     //public static final int CHOICE_MODE_NONE = 0;

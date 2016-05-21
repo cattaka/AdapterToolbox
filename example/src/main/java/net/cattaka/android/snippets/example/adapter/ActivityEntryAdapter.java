@@ -14,33 +14,34 @@ import net.cattaka.android.snippets.adapter.AbsChoosableTreeItemAdapter;
 import net.cattaka.android.snippets.adapter.AbsTreeItemAdapter;
 import net.cattaka.android.snippets.adapter.listener.ForwardingListener;
 import net.cattaka.android.snippets.example.R;
-import net.cattaka.android.snippets.example.data.MyTreeItem;
+import net.cattaka.android.snippets.example.data.ActivityEntry;
+import net.cattaka.android.snippets.example.data.ActivityEntry;
 
 import java.util.List;
 
 /**
  * Created by cattaka on 16/05/21.
  */
-public class MyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
-        MyTreeItemAdapter.ViewHolder,
-        MyTreeItem,
-        MyTreeItemAdapter.WrappedItem
+public class ActivityEntryAdapter extends AbsChoosableTreeItemAdapter<
+        ActivityEntryAdapter.ViewHolder,
+        ActivityEntry,
+        ActivityEntryAdapter.WrappedItem
         > {
-    public static INestedItemAdapterRef<ViewHolder, MyTreeItem, MyTreeItemAdapter.WrappedItem> REF = new INestedItemAdapterRef<ViewHolder, MyTreeItem, WrappedItem>() {
+    public static INestedItemAdapterRef<ViewHolder, ActivityEntry, ActivityEntryAdapter.WrappedItem> REF = new INestedItemAdapterRef<ViewHolder, ActivityEntry, WrappedItem>() {
         @NonNull
         @Override
-        public Class<MyTreeItem> getItemClass() {
-            return MyTreeItem.class;
+        public Class<ActivityEntry> getItemClass() {
+            return ActivityEntry.class;
         }
 
         @NonNull
         @Override
-        public AbsTreeItemAdapter<ViewHolder, MyTreeItem, WrappedItem> createAdapter(@NonNull Context context, @NonNull List<MyTreeItem> items) {
-            return new MyTreeItemAdapter(context, items);
+        public AbsTreeItemAdapter<ViewHolder, ActivityEntry, WrappedItem> createAdapter(@NonNull Context context, @NonNull List<ActivityEntry> items) {
+            return new ActivityEntryAdapter(context, items);
         }
 
         @Override
-        public WrappedItem createWrappedItem(int level, MyTreeItem item, WrappedItem parent) {
+        public WrappedItem createWrappedItem(int level, ActivityEntry item, WrappedItem parent) {
             return new WrappedItem(level, item, parent);
         }
     };
@@ -65,14 +66,14 @@ public class MyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
         }
     };
 
-    public MyTreeItemAdapter(Context context, List<MyTreeItem> items) {
+    public ActivityEntryAdapter(Context context, List<ActivityEntry> items) {
         super(context, items, REF);
     }
 
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.item_my_tree_item, parent, false);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.item_activity_entry, parent, false);
         ViewHolder holder = new ViewHolder(view);
 
         holder.openedCheck.setTag(ForwardingListener.VIEW_HOLDER, holder);
@@ -80,7 +81,6 @@ public class MyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
 
         holder.itemView.setTag(ForwardingListener.VIEW_HOLDER, holder);
         holder.itemView.setOnClickListener(getForwardingListener());
-        holder.itemView.setOnLongClickListener(getForwardingListener());
 
         return holder;
     }
@@ -88,7 +88,7 @@ public class MyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         WrappedItem wrappedItem = getItemAt(position);
-        MyTreeItem item = wrappedItem.getItem();
+        ActivityEntry item = wrappedItem.getItem();
 
         {
             ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
@@ -106,11 +106,11 @@ public class MyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
         }
 
         holder.openedCheck.setChecked(wrappedItem.opened);
-        holder.labelText.setText(item.getText());
+        holder.labelText.setText(item.getLabel());
     }
 
-    public static class WrappedItem extends AbsChoosableTreeItemAdapter.WrappedItem<WrappedItem, MyTreeItem> {
-        public WrappedItem(int level, MyTreeItem item, WrappedItem parent) {
+    public static class WrappedItem extends AbsChoosableTreeItemAdapter.WrappedItem<WrappedItem, ActivityEntry> {
+        public WrappedItem(int level, ActivityEntry item, WrappedItem parent) {
             super(level, item, parent);
         }
     }

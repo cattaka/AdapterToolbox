@@ -20,6 +20,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/item_background"
             android:gravity="center_vertical"
+            android:padding="@dimen/element_spacing_normal"
             android:orientation="horizontal">
 
             <CheckBox

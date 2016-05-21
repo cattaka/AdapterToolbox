@@ -78,7 +78,7 @@ public class RecyclerViewHeaderExampleActivity extends AppCompatActivity {
             }
             {   // create items adapter
                 List<String> items = new ArrayList<>();
-                for (int i = 0; i < 100; i++) {
+                for (int i = 0; i < 30; i++) {
                     items.add("item " + i);
                 }
 
