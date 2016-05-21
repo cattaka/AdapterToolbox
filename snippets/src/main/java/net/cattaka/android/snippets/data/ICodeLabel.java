@@ -1,4 +1,4 @@
-package net.cattaka.android.snippets.adapter;
+package net.cattaka.android.snippets.data;
 
 import android.content.res.Resources;
 

@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import net.cattaka.android.snippets.data.ICodeLabel;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

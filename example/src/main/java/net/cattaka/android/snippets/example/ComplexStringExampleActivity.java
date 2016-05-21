@@ -7,7 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import net.cattaka.android.snippets.adapter.CustomRecyclerAdapter;
+import net.cattaka.android.snippets.adapter.ScrambleAdapter;
 import net.cattaka.android.snippets.adapter.listener.ListenerRelay;
 import net.cattaka.android.snippets.example.adapter.ComplexStringAdapter;
 
@@ -19,11 +19,11 @@ import java.util.List;
  */
 public class ComplexStringExampleActivity extends AppCompatActivity {
 
-    ListenerRelay<CustomRecyclerAdapter<ComplexStringAdapter.ViewHolder, String>, ComplexStringAdapter.ViewHolder> mListenerRelay = new ListenerRelay<CustomRecyclerAdapter<ComplexStringAdapter.ViewHolder, String>, ComplexStringAdapter.ViewHolder>() {
+    ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder> mListenerRelay = new ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder>() {
         @Override
-        public void onClick(RecyclerView recyclerView, CustomRecyclerAdapter<ComplexStringAdapter.ViewHolder, String> adapter, ComplexStringAdapter.ViewHolder viewHolder, View view) {
+        public void onClick(RecyclerView recyclerView, ScrambleAdapter<?> adapter, RecyclerView.ViewHolder viewHolder, View view) {
             if (recyclerView.getId() == R.id.recycler) {
-                String item = adapter.getItemAt(viewHolder.getCompatPosition());
+                String item = (String) adapter.getItemAt(viewHolder.getAdapterPosition());
                 switch (view.getId()) {
                     case R.id.text: {
                         Snackbar.make(view, item + " is clicked.(Text)", Snackbar.LENGTH_SHORT).show();
@@ -42,9 +42,9 @@ public class ComplexStringExampleActivity extends AppCompatActivity {
         }
 
         @Override
-        public boolean onLongClick(RecyclerView recyclerView, CustomRecyclerAdapter<ComplexStringAdapter.ViewHolder, String> adapter, ComplexStringAdapter.ViewHolder viewHolder, View view) {
+        public boolean onLongClick(RecyclerView recyclerView, ScrambleAdapter<?> adapter, RecyclerView.ViewHolder viewHolder, View view) {
             if (recyclerView.getId() == R.id.recycler) {
-                String item = adapter.getItemAt(viewHolder.getCompatPosition());
+                String item = (String) adapter.getItemAt(viewHolder.getAdapterPosition());
                 switch (view.getId()) {
                     case R.id.text: {
                         Snackbar.make(view, item + " is long clicked.(Text)", Snackbar.LENGTH_SHORT).show();
@@ -80,8 +80,7 @@ public class ComplexStringExampleActivity extends AppCompatActivity {
             for (int i = 0; i < 100; i++) {
                 items.add("item " + i);
             }
-            ComplexStringAdapter adapter = new ComplexStringAdapter(this, items);
-            adapter.setListenerRelay(mListenerRelay);
+            ComplexStringAdapter adapter = new ComplexStringAdapter(this, items, mListenerRelay);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
             mRecyclerView.setAdapter(adapter);
         }

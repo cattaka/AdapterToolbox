@@ -10,7 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import net.cattaka.android.snippets.adapter.CodeLabelAdapter;
-import net.cattaka.android.snippets.adapter.ICodeLabel;
+import net.cattaka.android.snippets.data.ICodeLabel;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     ListView mList;
@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         ScrambleAdapterExample(ScrambleAdapterExampleActivity.class),
         OperatableListExample(OperatableListExampleActivity.class),
         NestedScrambleAdapterExample(NestedScrambleAdapterExampleActivity.class),
+        TreeItemAdapterExample(TreeItemAdapterExampleActivity.class),
+        ChoosableTreeItemAdapterExample(ChoosableTreeItemAdapterExampleActivity.class),
         //
         ;
         public final Class<? extends Activity> clazz;
