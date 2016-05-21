@@ -56,8 +56,8 @@ public abstract class AbsScrambleAdapter<
             if (forwardingListener != null) {
                 forwardingListener.setListenerRelay(listenerRelay);
                 forwardingListener.setProvider(mProvider);
-                mForwardingListeners.add(forwardingListener);
             }
+            mForwardingListeners.add(forwardingListener);
         }
     }
 
