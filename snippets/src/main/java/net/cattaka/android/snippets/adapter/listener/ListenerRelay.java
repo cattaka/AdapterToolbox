@@ -14,7 +14,11 @@ import android.widget.TextView;
 /**
  * Created by cattaka on 16/05/14.
  */
-public class ListenerRelay<A extends RecyclerView.Adapter<? extends VH>, VH extends RecyclerView.ViewHolder> implements IListenerRelay<VH> {
+public class ListenerRelay<
+        A extends RecyclerView.Adapter<? extends VH>,
+        VH extends RecyclerView.ViewHolder
+        > implements IListenerRelay<VH> {
+    
     /**
      * @see android.view.View.OnClickListener
      */

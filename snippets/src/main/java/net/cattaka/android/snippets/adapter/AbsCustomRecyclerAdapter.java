@@ -17,7 +17,7 @@ public abstract class AbsCustomRecyclerAdapter<
         VH extends RecyclerView.ViewHolder,
         T,
         FL extends IForwardingListener<A, VH, LR>,
-        LR extends IListenerRelay<? super VH>
+        LR extends IListenerRelay<VH>
         > extends RecyclerView.Adapter<VH> {
     @IdRes
     public static int VIEW_HOLDER = R.id.viewholder;

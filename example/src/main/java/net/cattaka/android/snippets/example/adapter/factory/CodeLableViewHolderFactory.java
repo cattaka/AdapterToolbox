@@ -24,7 +24,7 @@ public class CodeLableViewHolderFactory extends ScrambleAdapter.AbsViewHolderFac
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ScrambleAdapter adapter, ViewGroup parent, ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder> forwardingListener) {
+    public ViewHolder onCreateViewHolder(ScrambleAdapter<?> adapter, ViewGroup parent, ForwardingListener<ScrambleAdapter<?>, RecyclerView.ViewHolder> forwardingListener) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_code_label, parent, false);
         ViewHolder vh = new ViewHolder(view);
         vh.codeText.setTag(ForwardingListener.VIEW_HOLDER, vh);

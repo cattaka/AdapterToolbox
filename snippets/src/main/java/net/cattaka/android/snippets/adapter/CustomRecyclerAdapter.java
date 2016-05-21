@@ -11,7 +11,7 @@ import net.cattaka.android.snippets.adapter.listener.ListenerRelay;
 public abstract class CustomRecyclerAdapter<
         VH extends RecyclerView.ViewHolder,
         T
-        > extends AbsCustomRecyclerAdapter<CustomRecyclerAdapter<VH, T>, VH, T, ForwardingListener<CustomRecyclerAdapter<VH, T>, VH>, ListenerRelay<CustomRecyclerAdapter<VH, T>, ? super VH>> {
+        > extends AbsCustomRecyclerAdapter<CustomRecyclerAdapter<VH, T>, VH, T, ForwardingListener<CustomRecyclerAdapter<VH, T>, VH>, ListenerRelay<CustomRecyclerAdapter<VH, T>, VH>> {
 
     @Override
     public CustomRecyclerAdapter<VH, T> getSelf() {

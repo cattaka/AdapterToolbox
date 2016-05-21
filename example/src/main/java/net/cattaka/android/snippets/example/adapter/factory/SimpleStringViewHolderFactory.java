@@ -17,7 +17,7 @@ import net.cattaka.android.snippets.example.R;
 public class SimpleStringViewHolderFactory extends ScrambleAdapter.AbsViewHolderFactory<SimpleStringViewHolderFactory.ViewHolder> {
 
     @Override
-    public ViewHolder onCreateViewHolder(ScrambleAdapter adapter, ViewGroup parent, ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder> forwardingListener) {
+    public ViewHolder onCreateViewHolder(ScrambleAdapter<?> adapter, ViewGroup parent, ForwardingListener<ScrambleAdapter<?>, RecyclerView.ViewHolder> forwardingListener) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_simple_string, parent, false);
         ViewHolder vh = new ViewHolder(view);
         view.setTag(ForwardingListener.VIEW_HOLDER, vh);

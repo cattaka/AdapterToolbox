@@ -2,9 +2,7 @@ package net.cattaka.android.snippets.example.data;
 
 import android.support.v7.widget.RecyclerView;
 
-import net.cattaka.android.snippets.adapter.AdapterConverter;
 import net.cattaka.android.snippets.adapter.ScrambleAdapter;
-import net.cattaka.android.snippets.adapter.listener.ForwardingListener;
 import net.cattaka.android.snippets.adapter.listener.ListenerRelay;
 
 import java.util.List;
@@ -15,13 +13,13 @@ import java.util.List;
 public class NestedScrambleInfo {
     private RecyclerView.LayoutManager layoutManager;
     private List<ScrambleAdapter.AbsViewHolderFactory<? extends RecyclerView.ViewHolder>> viewHolderFactories;
-    private ListenerRelay<ScrambleAdapter, RecyclerView.ViewHolder> listenerRelay;
+    private ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder> listenerRelay;
     private List<Object> items;
 
     public NestedScrambleInfo() {
     }
 
-    public NestedScrambleInfo(RecyclerView.LayoutManager layoutManager, List<ScrambleAdapter.AbsViewHolderFactory<? extends RecyclerView.ViewHolder>> viewHolderFactories, ListenerRelay<ScrambleAdapter, RecyclerView.ViewHolder> listenerRelay, List<Object> items) {
+    public NestedScrambleInfo(RecyclerView.LayoutManager layoutManager, List<ScrambleAdapter.AbsViewHolderFactory<? extends RecyclerView.ViewHolder>> viewHolderFactories, ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder> listenerRelay, List<Object> items) {
         this.layoutManager = layoutManager;
         this.viewHolderFactories = viewHolderFactories;
         this.listenerRelay = listenerRelay;
@@ -44,11 +42,11 @@ public class NestedScrambleInfo {
         this.viewHolderFactories = viewHolderFactories;
     }
 
-    public ListenerRelay<ScrambleAdapter, RecyclerView.ViewHolder> getListenerRelay() {
+    public ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder> getListenerRelay() {
         return listenerRelay;
     }
 
-    public void setListenerRelay(ListenerRelay<ScrambleAdapter, RecyclerView.ViewHolder> listenerRelay) {
+    public void setListenerRelay(ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder> listenerRelay) {
         this.listenerRelay = listenerRelay;
     }
 

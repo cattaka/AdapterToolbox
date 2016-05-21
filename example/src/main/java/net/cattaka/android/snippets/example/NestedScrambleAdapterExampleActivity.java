@@ -24,11 +24,11 @@ import java.util.List;
  */
 public class NestedScrambleAdapterExampleActivity extends AppCompatActivity {
 
-    ListenerRelay<ScrambleAdapter, RecyclerView.ViewHolder> mListenerRelay = new ListenerRelay<ScrambleAdapter, RecyclerView.ViewHolder>() {
+    ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder> mListenerRelay = new ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder>() {
     };
 
     RecyclerView mRecyclerView;
-    ScrambleAdapter mAdapter;
+    ScrambleAdapter<Object> mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +71,7 @@ public class NestedScrambleAdapterExampleActivity extends AppCompatActivity {
                 item.setListenerRelay(new NestedListenerRelay(item));
                 items.add(item);
             }
-            mAdapter = ScrambleAdapter.newInstance(this, items,
+            mAdapter = new ScrambleAdapter<Object>(this, items,
                     mListenerRelay,
                     new NestedScrambleInfoViewHolderFactory()
             );
@@ -80,7 +80,7 @@ public class NestedScrambleAdapterExampleActivity extends AppCompatActivity {
         }
     }
 
-    class NestedListenerRelay extends ListenerRelay<ScrambleAdapter, RecyclerView.ViewHolder> {
+    class NestedListenerRelay extends ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder> {
         NestedScrambleInfo item;
 
         public NestedListenerRelay(NestedScrambleInfo item) {
@@ -101,9 +101,9 @@ public class NestedScrambleAdapterExampleActivity extends AppCompatActivity {
                     OrdinalLabel item = (OrdinalLabel) adapter.getItemAt(viewHolder.getAdapterPosition());
                     String text = item.getLabel(getResources()) + "(" + item.getCode() + ")";
                     if (view.getId() == R.id.text_code) {
-                        Snackbar.make(viewHolder.itemView, row+", The code of " + text + " is clicked.", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(viewHolder.itemView, row + ", The code of " + text + " is clicked.", Snackbar.LENGTH_SHORT).show();
                     } else if (view.getId() == R.id.text_label) {
-                        Snackbar.make(viewHolder.itemView, row+", The label of " + text + " is clicked.", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(viewHolder.itemView, row + ", The label of " + text + " is clicked.", Snackbar.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -115,17 +115,17 @@ public class NestedScrambleAdapterExampleActivity extends AppCompatActivity {
                 String row = "Row=" + mAdapter.getItems().indexOf(item);
                 if (viewHolder instanceof SimpleStringViewHolderFactory.ViewHolder) {
                     String item = (String) adapter.getItemAt(viewHolder.getAdapterPosition());
-                    Snackbar.make(view, row+", String " + item + " is long clicked.", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(view, row + ", String " + item + " is long clicked.", Snackbar.LENGTH_SHORT).show();
                 } else if (viewHolder instanceof SimpleNumberViewHolderFactory.ViewHolder) {
                     Number item = (Number) adapter.getItemAt(viewHolder.getAdapterPosition());
-                    Snackbar.make(view, row+", Number " + item + " is long clicked.", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(view, row + ", Number " + item + " is long clicked.", Snackbar.LENGTH_SHORT).show();
                 } else if (viewHolder instanceof CodeLableViewHolderFactory.ViewHolder) {
                     OrdinalLabel item = (OrdinalLabel) adapter.getItemAt(viewHolder.getAdapterPosition());
                     String text = item.getLabel(getResources()) + "(" + item.getCode() + ")";
                     if (view.getId() == R.id.text_code) {
-                        Snackbar.make(view, row+", The code of " + text + " is long clicked.", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(view, row + ", The code of " + text + " is long clicked.", Snackbar.LENGTH_SHORT).show();
                     } else if (view.getId() == R.id.text_label) {
-                        Snackbar.make(view, row+", The label of " + text + " is long clicked.", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(view, row + ", The label of " + text + " is long clicked.", Snackbar.LENGTH_SHORT).show();
                     }
                 }
                 return true;
