@@ -1,5 +1,6 @@
 package net.cattaka.android.snippets.example.adapter.factory;
 
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +38,7 @@ public class NestedScrambleInfoViewHolderFactory extends ScrambleAdapter.AbsView
         NestedScrambleInfo item = (NestedScrambleInfo) object;
 
         ScrambleAdapter<Object> nextedAdapter = new ScrambleAdapter<Object>(holder.itemView.getContext(), item.getItems(), item.getListenerRelay(), item.getViewHolderFactories());
-        holder.recyclerView.setLayoutManager(item.getLayoutManager());
+        holder.recyclerView.setLayoutManager(new LinearLayoutManager(holder.itemView.getContext(), LinearLayoutManager.HORIZONTAL, false));
         holder.recyclerView.setAdapter(nextedAdapter);
     }
 

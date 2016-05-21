@@ -47,6 +47,7 @@ public class NestedScrambleAdapterExampleActivity extends AppCompatActivity {
             List<Object> items = new ArrayList<>();
             for (int i = 0; i < 100; i++) {
                 List<Object> nestedItems = new ArrayList<>();
+                nestedItems.add("<-- Slide me!!");
                 for (int j = 0; j < 12; j++) {
                     switch (j % 4) {
                         case 0:
@@ -64,7 +65,6 @@ public class NestedScrambleAdapterExampleActivity extends AppCompatActivity {
                     }
                 }
                 NestedScrambleInfo item = new NestedScrambleInfo(
-                        new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false),
                         viewHolderViewHolderFactories,
                         null,
                         nestedItems);
