@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 
+import net.cattaka.android.snippets.adapter.listener.ForwardingListener;
+import net.cattaka.android.snippets.adapter.listener.ListenerRelay;
 import net.cattaka.android.snippets.data.ITreeItem;
 
 import java.io.Serializable;
@@ -13,7 +15,17 @@ import java.util.List;
 /**
  * Created by cattaka on 16/05/21.
  */
-public abstract class AbsTreeItemAdapter<VH extends RecyclerView.ViewHolder, T extends ITreeItem<T>, W extends AbsTreeItemAdapter.WrappedItem<W, T>> extends RecyclerView.Adapter<VH> {
+public abstract class AbsTreeItemAdapter<
+        VH extends RecyclerView.ViewHolder,
+        T extends ITreeItem<T>,
+        W extends AbsTreeItemAdapter.WrappedItem<W, T>
+        > extends AbsCustomRecyclerAdapter<
+        AbsTreeItemAdapter<VH, T, W>,
+        VH,
+        W,
+        ForwardingListener<AbsTreeItemAdapter<VH, T, W>, VH>,
+        ListenerRelay<AbsTreeItemAdapter<VH, T, W>, VH>
+        > {
     private Context mContext;
     private List<W> mItems;
 
@@ -42,14 +54,26 @@ public abstract class AbsTreeItemAdapter<VH extends RecyclerView.ViewHolder, T e
     }
 
     @Override
+    public AbsTreeItemAdapter<VH, T, W> getSelf() {
+        return this;
+    }
+
+    @Override
+    public ForwardingListener<AbsTreeItemAdapter<VH, T, W>, VH> createForwardingListener() {
+        return new ForwardingListener<>();
+    }
+
+    @Override
     public int getItemCount() {
         return mItems.size();
     }
 
+    @Override
     public W getItemAt(int position) {
         return mItems.get(position);
     }
 
+    @Override
     public List<W> getItems() {
         return mItems;
     }

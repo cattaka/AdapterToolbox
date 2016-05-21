@@ -108,13 +108,13 @@ public class ChoosableMyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
         holder.labelText.setText(item.getText());
     }
 
-    static class WrappedItem extends AbsChoosableTreeItemAdapter.WrappedItem<WrappedItem, MyTreeItem> {
+    public static class WrappedItem extends AbsChoosableTreeItemAdapter.WrappedItem<WrappedItem, MyTreeItem> {
         public WrappedItem(int level, MyTreeItem item, WrappedItem parent) {
             super(level, item, parent);
         }
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         Space levelSpace;
         CompoundButton chosenCheck;
         CompoundButton openedCheck;
