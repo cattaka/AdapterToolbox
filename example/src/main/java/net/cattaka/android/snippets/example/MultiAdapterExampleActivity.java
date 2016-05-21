@@ -27,18 +27,12 @@ public class MultiAdapterExampleActivity extends AppCompatActivity {
         public void onClick(RecyclerView recyclerView, ScrambleAdapter<?> adapter, RecyclerView.ViewHolder viewHolder, View view) {
             if (recyclerView.getId() == R.id.recycler) {
                 MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
-                if (la.mAdapter == mStringsHeaderAdapter) {
-                    Snackbar.make(view, "Strings Header is clicked.", Snackbar.LENGTH_SHORT).show();
-                } else if (la.mAdapter == mStringsAdapter) {
+                if (la.mAdapter == mStringsAdapter) {
                     String item = mStringsAdapter.getItemAt(la.mLocalPosition);
                     Snackbar.make(view, item + " is clicked.", Snackbar.LENGTH_SHORT).show();
-                } else if (la.mAdapter == mNumbersHeaderAdapter) {
-                    Snackbar.make(view, "Numbers Header is clicked.", Snackbar.LENGTH_SHORT).show();
                 } else if (la.mAdapter == mNumbersAdapter) {
                     Number item = mNumbersAdapter.getItemAt(la.mLocalPosition);
                     Snackbar.make(view, item + " is clicked.", Snackbar.LENGTH_SHORT).show();
-                } else if (la.mAdapter == mFooterAdapter) {
-                    Snackbar.make(view, "Footer is clicked.", Snackbar.LENGTH_SHORT).show();
                 }
             }
         }
@@ -47,18 +41,40 @@ public class MultiAdapterExampleActivity extends AppCompatActivity {
         public boolean onLongClick(RecyclerView recyclerView, ScrambleAdapter<?> adapter, RecyclerView.ViewHolder viewHolder, View view) {
             if (recyclerView.getId() == R.id.recycler) {
                 MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
-                if (la.mAdapter == mStringsHeaderAdapter) {
-                    Snackbar.make(view, "Strings Header is long clicked.", Snackbar.LENGTH_SHORT).show();
-                } else if (la.mAdapter == mStringsAdapter) {
+                if (la.mAdapter == mStringsAdapter) {
                     String item = mStringsAdapter.getItemAt(la.mLocalPosition);
                     Snackbar.make(view, item + " is long clicked.", Snackbar.LENGTH_SHORT).show();
-                } else if (la.mAdapter == mNumbersHeaderAdapter) {
-                    Snackbar.make(view, "Numbers Header is long clicked.", Snackbar.LENGTH_SHORT).show();
                 } else if (la.mAdapter == mNumbersAdapter) {
                     Number item = mNumbersAdapter.getItemAt(la.mLocalPosition);
                     Snackbar.make(view, item + " is long clicked.", Snackbar.LENGTH_SHORT).show();
-                } else if (la.mAdapter == mFooterAdapter) {
-                    Snackbar.make(view, "Footer is long clicked.", Snackbar.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+            return false;
+        }
+    };
+
+    ListenerRelay<SingleViewAdapter, RecyclerView.ViewHolder> mHeaderListenerRelay = new ListenerRelay<SingleViewAdapter, RecyclerView.ViewHolder>() {
+        @Override
+        public void onClick(RecyclerView recyclerView, SingleViewAdapter adapter, RecyclerView.ViewHolder viewHolder, View view) {
+            if (recyclerView.getId() == R.id.recycler) {
+                MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
+                if (la.mAdapter == mStringsHeaderAdapter) {
+                    Snackbar.make(view, "Strings Header is clicked.", Snackbar.LENGTH_SHORT).show();
+                } else if (la.mAdapter == mNumbersHeaderAdapter) {
+                    Snackbar.make(view, "Numbers Header is clicked.", Snackbar.LENGTH_SHORT).show();
+                }
+            }
+        }
+
+        @Override
+        public boolean onLongClick(RecyclerView recyclerView, SingleViewAdapter adapter, RecyclerView.ViewHolder viewHolder, View view) {
+            if (recyclerView.getId() == R.id.recycler) {
+                MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
+                if (la.mAdapter == mStringsHeaderAdapter) {
+                    Snackbar.make(view, "Strings Header is long clicked.", Snackbar.LENGTH_SHORT).show();
+                } else if (la.mAdapter == mNumbersHeaderAdapter) {
+                    Snackbar.make(view, "Numbers Header is long clicked.", Snackbar.LENGTH_SHORT).show();
                 }
                 return true;
             }
@@ -72,7 +88,6 @@ public class MultiAdapterExampleActivity extends AppCompatActivity {
     SimpleStringAdapter mStringsAdapter;
     SingleViewAdapter mNumbersHeaderAdapter;
     SimpleNumberAdapter mNumbersAdapter;
-    SingleViewAdapter mFooterAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +101,7 @@ public class MultiAdapterExampleActivity extends AppCompatActivity {
             mMergeRecyclerAdapter = new MergeRecyclerAdapter<>(this);
             {   // create strings header adapter
                 mStringsHeaderAdapter = new SingleViewAdapter(this, R.layout.view_header_string);
-                mStringsHeaderAdapter.setListenerRelay(mListenerRelay);
+                mStringsHeaderAdapter.setListenerRelay(mHeaderListenerRelay);
                 mMergeRecyclerAdapter.addAdapter(mStringsHeaderAdapter);
             }
             {   // create strings adapter
@@ -100,7 +115,7 @@ public class MultiAdapterExampleActivity extends AppCompatActivity {
             }
             {   // create numbers header adapter
                 mNumbersHeaderAdapter = new SingleViewAdapter(this, R.layout.view_header_number);
-                mNumbersHeaderAdapter.setListenerRelay(mListenerRelay);
+                mNumbersHeaderAdapter.setListenerRelay(mHeaderListenerRelay);
                 mMergeRecyclerAdapter.addAdapter(mNumbersHeaderAdapter);
             }
             {   // create numbers adapter

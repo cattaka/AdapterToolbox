@@ -9,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:background="#CFCFCF"
         android:text="This is a header"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 

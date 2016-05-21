@@ -55,6 +55,34 @@ public class RecyclerViewHeaderExampleActivity extends AppCompatActivity {
         }
     };
 
+    ListenerRelay<SingleViewAdapter, RecyclerView.ViewHolder> mHeaderListenerRelay = new ListenerRelay<SingleViewAdapter, RecyclerView.ViewHolder>() {
+        @Override
+        public void onClick(RecyclerView recyclerView, SingleViewAdapter adapter, RecyclerView.ViewHolder viewHolder, View view) {
+            if (recyclerView.getId() == R.id.recycler) {
+                MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
+                if (la.mAdapter == mHeaderAdapter) {
+                    Snackbar.make(view, "Strings Header is clicked.", Snackbar.LENGTH_SHORT).show();
+                } else if (la.mAdapter == mFooterAdapter) {
+                    Snackbar.make(view, "Numbers Header is clicked.", Snackbar.LENGTH_SHORT).show();
+                }
+            }
+        }
+
+        @Override
+        public boolean onLongClick(RecyclerView recyclerView, SingleViewAdapter adapter, RecyclerView.ViewHolder viewHolder, View view) {
+            if (recyclerView.getId() == R.id.recycler) {
+                MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
+                if (la.mAdapter == mHeaderAdapter) {
+                    Snackbar.make(view, "Strings Header is long clicked.", Snackbar.LENGTH_SHORT).show();
+                } else if (la.mAdapter == mFooterAdapter) {
+                    Snackbar.make(view, "Numbers Header is long clicked.", Snackbar.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+            return false;
+        }
+    };
+
     RecyclerView mRecyclerView;
     MergeRecyclerAdapter<RecyclerView.Adapter> mMergeRecyclerAdapter;
     SingleViewAdapter mHeaderAdapter;
@@ -73,7 +101,7 @@ public class RecyclerViewHeaderExampleActivity extends AppCompatActivity {
             mMergeRecyclerAdapter = new MergeRecyclerAdapter<>(this);
             {   // create header adapter
                 mHeaderAdapter = new SingleViewAdapter(this, R.layout.view_header);
-                mHeaderAdapter.setListenerRelay(mListenerRelay);
+                mHeaderAdapter.setListenerRelay(mHeaderListenerRelay);
                 mMergeRecyclerAdapter.addAdapter(mHeaderAdapter);
             }
             {   // create items adapter
@@ -87,7 +115,7 @@ public class RecyclerViewHeaderExampleActivity extends AppCompatActivity {
             }
             {   // create footer adapter
                 mFooterAdapter = new SingleViewAdapter(this, R.layout.view_footer);
-                mFooterAdapter.setListenerRelay(mListenerRelay);
+                mFooterAdapter.setListenerRelay(mHeaderListenerRelay);
                 mMergeRecyclerAdapter.addAdapter(mFooterAdapter);
             }
             {

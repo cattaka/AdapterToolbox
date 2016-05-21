@@ -11,7 +11,6 @@ import java.util.List;
  * Created by cattaka on 16/05/16.
  */
 public class NestedScrambleInfo {
-    private RecyclerView.LayoutManager layoutManager;
     private List<ScrambleAdapter.AbsViewHolderFactory<? extends RecyclerView.ViewHolder>> viewHolderFactories;
     private ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder> listenerRelay;
     private List<Object> items;
@@ -19,19 +18,10 @@ public class NestedScrambleInfo {
     public NestedScrambleInfo() {
     }
 
-    public NestedScrambleInfo(RecyclerView.LayoutManager layoutManager, List<ScrambleAdapter.AbsViewHolderFactory<? extends RecyclerView.ViewHolder>> viewHolderFactories, ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder> listenerRelay, List<Object> items) {
-        this.layoutManager = layoutManager;
+    public NestedScrambleInfo(List<ScrambleAdapter.AbsViewHolderFactory<? extends RecyclerView.ViewHolder>> viewHolderFactories, ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder> listenerRelay, List<Object> items) {
         this.viewHolderFactories = viewHolderFactories;
         this.listenerRelay = listenerRelay;
         this.items = items;
-    }
-
-    public RecyclerView.LayoutManager getLayoutManager() {
-        return layoutManager;
-    }
-
-    public void setLayoutManager(RecyclerView.LayoutManager layoutManager) {
-        this.layoutManager = layoutManager;
     }
 
     public List<ScrambleAdapter.AbsViewHolderFactory<? extends RecyclerView.ViewHolder>> getViewHolderFactories() {
