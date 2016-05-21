@@ -19,7 +19,7 @@ import net.cattaka.android.snippets.R;
  * Created by takao on 2016/05/12.
  */
 public class ForwardingListener<A extends RecyclerView.Adapter<? extends VH>, VH extends RecyclerView.ViewHolder>
-        implements IForwardingListener<A, VH, ListenerRelay<A, ? super VH>>,
+        implements IForwardingListener<A, VH, ListenerRelay<A, VH>>,
         View.OnClickListener,
         View.OnLongClickListener,
         RadioGroup.OnCheckedChangeListener,
@@ -31,13 +31,13 @@ public class ForwardingListener<A extends RecyclerView.Adapter<? extends VH>, VH
     public static int VIEW_HOLDER = R.id.viewholder;
 
     private IProvider<A, VH> mProvider;
-    private ListenerRelay<A, ? super VH> mListenerRelay;
+    private ListenerRelay<A, VH> mListenerRelay;
 
     public ForwardingListener() {
     }
 
     @Override
-    public void setListenerRelay(ListenerRelay<A, ? super VH> listenerRelay) {
+    public void setListenerRelay(ListenerRelay<A, VH> listenerRelay) {
         mListenerRelay = listenerRelay;
     }
 
@@ -199,7 +199,7 @@ public class ForwardingListener<A extends RecyclerView.Adapter<? extends VH>, VH
                     @SuppressWarnings("unchecked")
                     VH vh = (VH) target.getTag(VIEW_HOLDER);
                     if (vh != null) {
-                        mListenerRelay.beforeTextChanged(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh,target, s, start, count, after);
+                        mListenerRelay.beforeTextChanged(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh, target, s, start, count, after);
                     }
                 }
             }
@@ -210,7 +210,7 @@ public class ForwardingListener<A extends RecyclerView.Adapter<? extends VH>, VH
                     @SuppressWarnings("unchecked")
                     VH vh = (VH) target.getTag(VIEW_HOLDER);
                     if (vh != null) {
-                        mListenerRelay.onTextChanged(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh,target, s, start, count, count);
+                        mListenerRelay.onTextChanged(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh, target, s, start, count, count);
                     }
                 }
             }
@@ -221,7 +221,7 @@ public class ForwardingListener<A extends RecyclerView.Adapter<? extends VH>, VH
                     @SuppressWarnings("unchecked")
                     VH vh = (VH) target.getTag(VIEW_HOLDER);
                     if (vh != null) {
-                        mListenerRelay.afterTextChanged(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh,target, s);
+                        mListenerRelay.afterTextChanged(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh, target, s);
                     }
                 }
             }

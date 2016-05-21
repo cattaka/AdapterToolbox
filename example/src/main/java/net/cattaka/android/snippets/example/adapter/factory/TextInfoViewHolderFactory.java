@@ -5,25 +5,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.SeekBar;
-import android.widget.Spinner;
-import android.widget.Switch;
 
 import net.cattaka.android.snippets.adapter.AdapterConverter;
-import net.cattaka.android.snippets.adapter.CodeLabelAdapter;
 import net.cattaka.android.snippets.adapter.ScrambleAdapter;
 import net.cattaka.android.snippets.adapter.listener.ForwardingListener;
 import net.cattaka.android.snippets.example.R;
 import net.cattaka.android.snippets.example.data.TextInfo;
-import net.cattaka.android.snippets.example.data.OrdinalLabel;
-import net.cattaka.android.snippets.utils.SpinnerUtils;
 
 /**
  * Created by cattaka on 16/05/15.
  */
 public class TextInfoViewHolderFactory extends ScrambleAdapter.AbsViewHolderFactory<TextInfoViewHolderFactory.ViewHolder> {
     @Override
-    public ViewHolder onCreateViewHolder(ScrambleAdapter adapter, ViewGroup parent, ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder> forwardingListener) {
+    public ViewHolder onCreateViewHolder(ScrambleAdapter<?> adapter, ViewGroup parent, ForwardingListener<ScrambleAdapter<?>, RecyclerView.ViewHolder> forwardingListener) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_text_info, parent, false);
         ViewHolder vh = new ViewHolder(view);
 

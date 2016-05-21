@@ -13,15 +13,23 @@ import net.cattaka.android.snippets.R;
 /**
  * Created by cattaka on 2016/04/12.
  */
-public class AdapterConverter<S extends AdapterConverter.Adapter<VH, T>, VH extends AdapterConverter.ViewHolder, T> extends BaseAdapter {
+public class AdapterConverter<
+        S extends AdapterConverter.Adapter<VH, T>,
+        VH extends AdapterConverter.ViewHolder,
+        T
+        > extends BaseAdapter {
     @IdRes
     public static int VIEW_HOLDER = R.id.viewholder;
 
-    S mOrig;
+    private S mOrig;
 
     public AdapterConverter(@NonNull Context context, @NonNull S orig) {
         super();
         mOrig = orig;
+    }
+
+    public S getOrig() {
+        return mOrig;
     }
 
     @Override
@@ -75,7 +83,10 @@ public class AdapterConverter<S extends AdapterConverter.Adapter<VH, T>, VH exte
         }
     }
 
-    public static abstract class Adapter<VH extends AdapterConverter.ViewHolder, T> extends CustomRecyclerAdapter<VH, T> {
+    public static abstract class Adapter<
+            VH extends AdapterConverter.ViewHolder,
+            T
+            > extends CustomRecyclerAdapter<VH, T> {
         public abstract T getItemAt(int position);
     }
 }

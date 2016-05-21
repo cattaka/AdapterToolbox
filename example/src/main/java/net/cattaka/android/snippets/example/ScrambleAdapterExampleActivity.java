@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class ScrambleAdapterExampleActivity extends AppCompatActivity {
 
-    ListenerRelay<ScrambleAdapter, RecyclerView.ViewHolder> mListenerRelay = new ListenerRelay<ScrambleAdapter, RecyclerView.ViewHolder>() {
+    ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder> mListenerRelay = new ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder>() {
         @Override
         public void onClick(RecyclerView recyclerView, ScrambleAdapter adapter, RecyclerView.ViewHolder viewHolder, View view) {
             if (recyclerView.getId() == R.id.recycler) {
@@ -96,7 +96,7 @@ public class ScrambleAdapterExampleActivity extends AppCompatActivity {
                         break;
                 }
             }
-            ScrambleAdapter adapter = ScrambleAdapter.newInstance(this, items,
+            ScrambleAdapter<Object> adapter = new ScrambleAdapter<>(this, items,
                     mListenerRelay,
                     new SimpleStringViewHolderFactory(),
                     new SimpleNumberViewHolderFactory(),

@@ -22,7 +22,7 @@ import net.cattaka.android.snippets.utils.SpinnerUtils;
  */
 public class MyInfoViewHolderFactory extends ScrambleAdapter.AbsViewHolderFactory<MyInfoViewHolderFactory.ViewHolder> {
     @Override
-    public ViewHolder onCreateViewHolder(ScrambleAdapter adapter, ViewGroup parent, ForwardingListener<ScrambleAdapter, RecyclerView.ViewHolder> forwardingListener) {
+    public ViewHolder onCreateViewHolder(ScrambleAdapter<?> adapter, ViewGroup parent, ForwardingListener<ScrambleAdapter<?>, RecyclerView.ViewHolder> forwardingListener) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_my_info, parent, false);
         ViewHolder vh = new ViewHolder(view);
 
@@ -39,7 +39,7 @@ public class MyInfoViewHolderFactory extends ScrambleAdapter.AbsViewHolderFactor
     }
 
     @Override
-    public void onBindViewHolder(ScrambleAdapter adapter, MyInfoViewHolderFactory.ViewHolder holder, int position, Object object) {
+    public void onBindViewHolder(ScrambleAdapter<?> adapter, ViewHolder holder, int position, Object object) {
         MyInfo item = (MyInfo) object;
 
         holder.intValueSeek.setProgress(item.getIntValue());
