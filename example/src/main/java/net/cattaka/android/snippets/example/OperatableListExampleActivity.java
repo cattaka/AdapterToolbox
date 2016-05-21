@@ -115,7 +115,7 @@ public class OperatableListExampleActivity extends AppCompatActivity {
 
         mMergeRecyclerAdapter = new MergeRecyclerAdapter<>(this);
         {
-            mSimpleStringAdapter = new SimpleStringAdapter(this, Collections.singletonList("This is header"));
+            mSimpleStringAdapter = new SimpleStringAdapter(this, Collections.singletonList("This is header"), null);
             mMergeRecyclerAdapter.addAdapter(mSimpleStringAdapter);
         }
         {

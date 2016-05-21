@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import net.cattaka.android.snippets.adapter.CustomRecyclerAdapter;
+import net.cattaka.android.snippets.adapter.ScrambleAdapter;
 import net.cattaka.android.snippets.adapter.SingleViewAdapter;
 import net.cattaka.android.snippets.adapter.listener.ListenerRelay;
 import net.cattaka.android.snippets.example.adapter.SimpleStringAdapter;
@@ -21,9 +22,9 @@ import java.util.List;
  */
 public class RecyclerViewHeaderExampleActivity extends AppCompatActivity {
 
-    ListenerRelay<CustomRecyclerAdapter<RecyclerView.ViewHolder, Object>, RecyclerView.ViewHolder> mListenerRelay = new ListenerRelay<CustomRecyclerAdapter<RecyclerView.ViewHolder, Object>, RecyclerView.ViewHolder>() {
+    ListenerRelay<ScrambleAdapter<?>,RecyclerView.ViewHolder> mListenerRelay = new ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder>() {
         @Override
-        public void onClick(RecyclerView recyclerView, CustomRecyclerAdapter<RecyclerView.ViewHolder, Object> adapter, RecyclerView.ViewHolder viewHolder, View view) {
+        public void onClick(RecyclerView recyclerView, ScrambleAdapter<?> adapter, RecyclerView.ViewHolder viewHolder, View view) {
             if (recyclerView.getId() == R.id.recycler) {
                 MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
                 if (la.mAdapter == mHeaderAdapter) {
@@ -38,7 +39,7 @@ public class RecyclerViewHeaderExampleActivity extends AppCompatActivity {
         }
 
         @Override
-        public boolean onLongClick(RecyclerView recyclerView, CustomRecyclerAdapter<RecyclerView.ViewHolder, Object> adapter, RecyclerView.ViewHolder viewHolder, View view) {
+        public boolean onLongClick(RecyclerView recyclerView, ScrambleAdapter<?> adapter, RecyclerView.ViewHolder viewHolder, View view) {
             if (recyclerView.getId() == R.id.recycler) {
                 MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
                 if (la.mAdapter == mHeaderAdapter) {
@@ -82,8 +83,7 @@ public class RecyclerViewHeaderExampleActivity extends AppCompatActivity {
                     items.add("item " + i);
                 }
 
-                mItemsAdapter = new SimpleStringAdapter(this, items);
-                mItemsAdapter.setListenerRelay(mListenerRelay);
+                mItemsAdapter = new SimpleStringAdapter(this, items, mListenerRelay);
                 mMergeRecyclerAdapter.addAdapter(mItemsAdapter);
             }
             {   // create footer adapter
