@@ -15,7 +15,6 @@ import net.cattaka.android.snippets.adapter.AbsTreeItemAdapter;
 import net.cattaka.android.snippets.adapter.listener.ForwardingListener;
 import net.cattaka.android.snippets.example.R;
 import net.cattaka.android.snippets.example.data.ActivityEntry;
-import net.cattaka.android.snippets.example.data.ActivityEntry;
 
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class ActivityEntryAdapter extends AbsChoosableTreeItemAdapter<
         ActivityEntry,
         ActivityEntryAdapter.WrappedItem
         > {
-    public static INestedItemAdapterRef<ViewHolder, ActivityEntry, ActivityEntryAdapter.WrappedItem> REF = new INestedItemAdapterRef<ViewHolder, ActivityEntry, WrappedItem>() {
+    public static ITreeItemAdapterRef<ViewHolder, ActivityEntry, WrappedItem> REF = new ITreeItemAdapterRef<ViewHolder, ActivityEntry, WrappedItem>() {
         @NonNull
         @Override
         public Class<ActivityEntry> getItemClass() {

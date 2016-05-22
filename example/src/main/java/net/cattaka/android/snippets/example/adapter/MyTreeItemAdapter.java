@@ -26,7 +26,7 @@ public class MyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
         MyTreeItem,
         MyTreeItemAdapter.WrappedItem
         > {
-    public static INestedItemAdapterRef<ViewHolder, MyTreeItem, MyTreeItemAdapter.WrappedItem> REF = new INestedItemAdapterRef<ViewHolder, MyTreeItem, WrappedItem>() {
+    public static ITreeItemAdapterRef<ViewHolder, MyTreeItem, WrappedItem> REF = new ITreeItemAdapterRef<ViewHolder, MyTreeItem, WrappedItem>() {
         @NonNull
         @Override
         public Class<MyTreeItem> getItemClass() {

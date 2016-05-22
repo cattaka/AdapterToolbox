@@ -29,7 +29,7 @@ public abstract class AbsTreeItemAdapter<
     private Context mContext;
     private List<W> mItems;
 
-    protected static <T extends ITreeItem<T>, W extends AbsTreeItemAdapter.WrappedItem<W, T>, REF extends INestedItemAdapterRef<?, T, W>>
+    protected static <T extends ITreeItem<T>, W extends AbsTreeItemAdapter.WrappedItem<W, T>, REF extends ITreeItemAdapterRef<?, T, W>>
     List<W> inflateWrappedList(List<W> dest, List<T> items, int level, W parent, REF ref) {
         for (T item : items) {
             W child = ref.createWrappedItem(level, item, parent);
@@ -44,7 +44,7 @@ public abstract class AbsTreeItemAdapter<
         return dest;
     }
 
-    public <REF extends INestedItemAdapterRef<?, T, W>> AbsTreeItemAdapter(Context context, List<T> items, REF ref) {
+    public <REF extends ITreeItemAdapterRef<?, T, W>> AbsTreeItemAdapter(Context context, List<T> items, REF ref) {
         mContext = context;
         mItems = inflateWrappedList(new ArrayList<W>(), items, 0, null, ref);
     }
@@ -121,7 +121,7 @@ public abstract class AbsTreeItemAdapter<
         }
     }
 
-    public interface INestedItemAdapterRef<VH extends RecyclerView.ViewHolder, T extends ITreeItem<T>, W extends WrappedItem<W, T>> extends Serializable {
+    public interface ITreeItemAdapterRef<VH extends RecyclerView.ViewHolder, T extends ITreeItem<T>, W extends WrappedItem<W, T>> extends Serializable {
         @NonNull
         Class<T> getItemClass();
 
