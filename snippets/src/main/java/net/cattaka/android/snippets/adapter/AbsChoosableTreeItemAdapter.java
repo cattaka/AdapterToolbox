@@ -32,7 +32,7 @@ public abstract class AbsChoosableTreeItemAdapter<
     @ChoiceMode
     private int mChoiceMode = CHOICE_MODE_MULTIPLE;
 
-    public <REF extends INestedItemAdapterRef<?, T, W>> AbsChoosableTreeItemAdapter(Context context, List<T> items, REF ref) {
+    public <REF extends ITreeItemAdapterRef<?, T, W>> AbsChoosableTreeItemAdapter(Context context, List<T> items, REF ref) {
         super(context, items, ref);
     }
 
