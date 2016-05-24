@@ -21,10 +21,8 @@ public class TextInfoViewHolderFactory extends ScrambleAdapter.AbsViewHolderFact
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_text_info, parent, false);
         ViewHolder vh = new ViewHolder(view);
 
-        vh.editText.setTag(ForwardingListener.VIEW_HOLDER, vh);
         vh.editText.setOnEditorActionListener(forwardingListener);
         forwardingListener.addTextChangedListener(vh.editText);
-        vh.goButton.setTag(ForwardingListener.VIEW_HOLDER, vh);
         vh.goButton.setOnClickListener(forwardingListener);
 
         return vh;

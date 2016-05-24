@@ -29,6 +29,8 @@ public abstract class AbsTreeItemAdapter<
     private Context mContext;
     private List<W> mItems;
 
+    private RecyclerView mRecyclerView;
+
     protected static <T extends ITreeItem<T>, W extends AbsTreeItemAdapter.WrappedItem<W, T>, REF extends ITreeItemAdapterRef<?, T, W>>
     List<W> inflateWrappedList(List<W> dest, List<T> items, int level, W parent, REF ref) {
         for (T item : items) {
@@ -119,6 +121,22 @@ public abstract class AbsTreeItemAdapter<
         public int hashCode() {
             return item != null ? item.hashCode() : 0;
         }
+    }
+
+    public RecyclerView getAttachedRecyclerView() {
+        return mRecyclerView;
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        mRecyclerView = recyclerView;
+    }
+
+    @Override
+    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+        mRecyclerView = null;
     }
 
     public interface ITreeItemAdapterRef<VH extends RecyclerView.ViewHolder, T extends ITreeItem<T>, W extends WrappedItem<W, T>> extends Serializable {
