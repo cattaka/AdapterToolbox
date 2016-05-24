@@ -13,7 +13,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 /**
- * Created by takao on 2016/05/12.
+ * Created by cattaka on 2016/05/12.
  */
 public class ForwardingListener<A extends RecyclerView.Adapter<? extends VH>, VH extends RecyclerView.ViewHolder>
         implements IForwardingListener<A, VH, ListenerRelay<A, VH>>,
