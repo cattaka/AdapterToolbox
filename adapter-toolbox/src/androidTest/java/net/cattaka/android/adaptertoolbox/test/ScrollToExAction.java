@@ -39,7 +39,7 @@ import static org.hamcrest.Matchers.anyOf;
  */
 
 /**
- * Created by takao on 2016/04/28.
+ * Created by cattaka on 2016/04/28.
  */
 public class ScrollToExAction implements ViewAction {
     private static final String TAG = ScrollToExAction.class.getSimpleName();

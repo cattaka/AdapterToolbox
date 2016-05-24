@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import net.cattaka.android.adaptertoolbox.adapter.AbsChoosableTreeItemAdapter;
 import net.cattaka.android.adaptertoolbox.adapter.AbsTreeItemAdapter;
-import net.cattaka.android.adaptertoolbox.adapter.listener.ForwardingListener;
 import net.cattaka.android.adaptertoolbox.example.R;
 import net.cattaka.android.adaptertoolbox.example.data.MyTreeItem;
 
@@ -48,7 +47,8 @@ public class MyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
     private View.OnClickListener mOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            ViewHolder vh = (ViewHolder) view.getTag(ForwardingListener.VIEW_HOLDER);
+            RecyclerView recyclerView = getAttachedRecyclerView();
+            ViewHolder vh = (ViewHolder) recyclerView.findContainingViewHolder(view);
             int position = vh.getAdapterPosition();
             WrappedItem item = getItemAt(position);
             switch (view.getId()) {
@@ -75,10 +75,8 @@ public class MyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
         View view = LayoutInflater.from(getContext()).inflate(R.layout.item_my_tree_item, parent, false);
         ViewHolder holder = new ViewHolder(view);
 
-        holder.openedCheck.setTag(ForwardingListener.VIEW_HOLDER, holder);
         holder.openedCheck.setOnClickListener(mOnClickListener);
 
-        holder.itemView.setTag(ForwardingListener.VIEW_HOLDER, holder);
         holder.itemView.setOnClickListener(getForwardingListener());
         holder.itemView.setOnLongClickListener(getForwardingListener());
 

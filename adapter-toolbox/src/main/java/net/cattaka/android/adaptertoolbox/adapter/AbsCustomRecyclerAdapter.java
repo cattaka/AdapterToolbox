@@ -1,9 +1,7 @@
 package net.cattaka.android.adaptertoolbox.adapter;
 
-import android.support.annotation.IdRes;
 import android.support.v7.widget.RecyclerView;
 
-import net.cattaka.android.adaptertoolbox.R;
 import net.cattaka.android.adaptertoolbox.adapter.listener.IForwardingListener;
 import net.cattaka.android.adaptertoolbox.adapter.listener.IListenerRelay;
 
@@ -19,8 +17,6 @@ public abstract class AbsCustomRecyclerAdapter<
         FL extends IForwardingListener<A, VH, LR>,
         LR extends IListenerRelay<VH>
         > extends RecyclerView.Adapter<VH> {
-    @IdRes
-    public static int VIEW_HOLDER = R.id.viewholder;
 
     IForwardingListener.IProvider<A, VH> mProvider = new IForwardingListener.IProvider<A, VH>() {
         @Override

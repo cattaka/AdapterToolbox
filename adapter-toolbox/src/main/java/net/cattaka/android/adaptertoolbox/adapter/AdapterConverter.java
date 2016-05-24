@@ -12,6 +12,8 @@ import net.cattaka.android.adaptertoolbox.R;
 
 /**
  * Created by cattaka on 2016/04/12.
+ *
+ * @deprecated This is not available with ScrambleAdapter because setTag(VIEW_HOLDER, hoge) is deprecated.
  */
 public class AdapterConverter<
         S extends AdapterConverter.Adapter<VH, T>,

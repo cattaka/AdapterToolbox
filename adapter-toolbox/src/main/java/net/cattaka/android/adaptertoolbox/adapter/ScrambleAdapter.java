@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by takao on 2016/05/10.
+ * Created by cattaka on 2016/05/10.
  */
 public class ScrambleAdapter<T> extends AbsScrambleAdapter<
         ScrambleAdapter<T>,

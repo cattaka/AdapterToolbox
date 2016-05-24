@@ -19,13 +19,10 @@ public class ComplexStringViewHolderFactory extends ScrambleAdapter.AbsViewHolde
     public ViewHolder onCreateViewHolder(ScrambleAdapter<?> adapter, ViewGroup parent, ForwardingListener<ScrambleAdapter<?>, RecyclerView.ViewHolder> forwardingListener) {
         View view = LayoutInflater.from(adapter.getContext()).inflate(R.layout.item_complex_string, parent, false);
         ViewHolder vh = new ViewHolder(view);
-        vh.text.setTag(ForwardingListener.VIEW_HOLDER, vh);
         vh.text.setOnClickListener(forwardingListener);
         vh.text.setOnLongClickListener(forwardingListener);
-        vh.aButton.setTag(ForwardingListener.VIEW_HOLDER, vh);
         vh.aButton.setOnClickListener(forwardingListener);
         vh.aButton.setOnLongClickListener(forwardingListener);
-        vh.bButton.setTag(ForwardingListener.VIEW_HOLDER, vh);
         vh.bButton.setOnClickListener(forwardingListener);
         vh.bButton.setOnLongClickListener(forwardingListener);
         return vh;

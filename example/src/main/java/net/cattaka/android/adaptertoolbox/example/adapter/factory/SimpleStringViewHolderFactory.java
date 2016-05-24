@@ -20,7 +20,6 @@ public class SimpleStringViewHolderFactory extends ScrambleAdapter.AbsViewHolder
     public ViewHolder onCreateViewHolder(ScrambleAdapter<?> adapter, ViewGroup parent, ForwardingListener<ScrambleAdapter<?>, RecyclerView.ViewHolder> forwardingListener) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_simple_string, parent, false);
         ViewHolder vh = new ViewHolder(view);
-        view.setTag(ForwardingListener.VIEW_HOLDER, vh);
         view.setOnClickListener(forwardingListener);
         view.setOnLongClickListener(forwardingListener);
         return vh;

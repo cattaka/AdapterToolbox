@@ -3,7 +3,7 @@ package net.cattaka.android.adaptertoolbox.adapter.listener;
 import android.support.v7.widget.RecyclerView;
 
 /**
- * Created by takao on 2016/05/12.
+ * Created by cattaka on 2016/05/12.
  */
 public interface IForwardingListener<
         A extends RecyclerView.Adapter<? extends VH>,

@@ -26,11 +26,8 @@ public class MyInfoViewHolderFactory extends ScrambleAdapter.AbsViewHolderFactor
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_my_info, parent, false);
         ViewHolder vh = new ViewHolder(view);
 
-        vh.intValueSeek.setTag(ForwardingListener.VIEW_HOLDER, vh);
         vh.intValueSeek.setOnSeekBarChangeListener(forwardingListener);
-        vh.ordinalLabelSpinner.setTag(ForwardingListener.VIEW_HOLDER, vh);
         vh.ordinalLabelSpinner.setOnItemSelectedListener(forwardingListener);
-        vh.checkedSwitch.setTag(ForwardingListener.VIEW_HOLDER, vh);
         vh.checkedSwitch.setOnCheckedChangeListener(forwardingListener);
 
         vh.ordinalLabelSpinner.setAdapter(CodeLabelAdapter.newInstance(view.getContext(), OrdinalLabel.values(), true));
