@@ -1,1 +1,1 @@
-include ':snippets', ':example'
+include ':library', ':example'

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Snippets Example</string>
+    <string name="app_name">Adapter Toolbox Example</string>
 
     <string name="ordinal_label_first">First</string>
     <string name="ordinal_label_second">Second</string>
