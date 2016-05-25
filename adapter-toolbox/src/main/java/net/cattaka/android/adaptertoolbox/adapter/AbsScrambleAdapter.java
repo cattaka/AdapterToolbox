@@ -21,7 +21,7 @@ public abstract class AbsScrambleAdapter<
         FL extends IForwardingListener<SA, VH, LR>,
         LR extends IListenerRelay<? super VH>,
         T
-        > extends RecyclerView.Adapter<VH> {
+        > extends RecyclerView.Adapter<VH> implements IHasItemAdapter<VH, T> {
     IForwardingListener.IProvider<SA, VH> mProvider = new IForwardingListener.IProvider<SA, VH>() {
         @NonNull
         @Override
@@ -128,7 +128,7 @@ public abstract class AbsScrambleAdapter<
         return mViewHolderFactory.size() - 1;
     }
 
-    public abstract Object getItemAt(int position);
+    public abstract T getItemAt(int position);
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {

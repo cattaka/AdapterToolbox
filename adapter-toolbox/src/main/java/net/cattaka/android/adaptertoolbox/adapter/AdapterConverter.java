@@ -3,6 +3,7 @@ package net.cattaka.android.adaptertoolbox.adapter;
 import android.content.Context;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +13,10 @@ import net.cattaka.android.adaptertoolbox.R;
 
 /**
  * Created by cattaka on 2016/04/12.
- *
- * @deprecated This is not available with ScrambleAdapter because setTag(VIEW_HOLDER, hoge) is deprecated.
  */
 public class AdapterConverter<
-        S extends AdapterConverter.Adapter<VH, T>,
-        VH extends AdapterConverter.ViewHolder,
+        S extends IHasItemAdapter<VH,T>,
+        VH extends RecyclerView.ViewHolder,
         T
         > extends BaseAdapter {
     @IdRes
@@ -30,6 +29,7 @@ public class AdapterConverter<
         mOrig = orig;
     }
 
+    @NonNull
     public S getOrig() {
         return mOrig;
     }
@@ -41,7 +41,7 @@ public class AdapterConverter<
 
     @Override
     public T getItem(int i) {
-        return mOrig.getItemAt(i);
+        return (T) mOrig.getItemAt(i);
     }
 
     @Override
@@ -55,17 +55,48 @@ public class AdapterConverter<
     }
 
     @Override
-    public View getView(int position, View view, ViewGroup viewGroup) {
+    public View getView(int position, View convertView, ViewGroup parent) {
         @SuppressWarnings("unchecked")
-        VH vh = view != null ? (VH) view.getTag(VIEW_HOLDER) : null;
+        VH vh = convertView != null ? (VH) findViewHolder(convertView) : null;
         if (vh == null) {
-            vh = mOrig.createViewHolder(viewGroup, getItemViewType(position));
+            vh = mOrig.onCreateViewHolder(parent, getItemViewType(position));
             vh.itemView.setTag(VIEW_HOLDER, vh);
         }
-        vh.setCompatPosition(position);
+        if(vh instanceof AdapterConverter.ViewHolder) {
+            ((AdapterConverter.ViewHolder)vh).setCompatPosition(position);
+        }
 
-        mOrig.bindViewHolder(vh, position);
+        mOrig.onBindViewHolder(vh, position);
         return vh.itemView;
+    }
+
+    @Override
+    public View getDropDownView(int position, View convertView, ViewGroup parent) {
+        @SuppressWarnings("unchecked")
+        VH vh = convertView != null ? (VH) findViewHolder(convertView) : null;
+        if (vh == null) {
+            vh = mOrig.onCreateViewHolder(parent, getItemViewType(position));
+            vh.itemView.setTag(VIEW_HOLDER, vh);
+        }
+        if(vh instanceof AdapterConverter.ViewHolder) {
+            ((AdapterConverter.ViewHolder)vh).setCompatPosition(position);
+        }
+
+        mOrig.onBindViewHolder(vh, position);
+        return vh.itemView;
+    }
+
+    @Nullable
+    public static Object findViewHolder(@Nullable View view) {
+        View p = view;
+        while (p != null) {
+            Object viewHolder = p.getTag(VIEW_HOLDER);
+            if (viewHolder != null) {
+                return viewHolder;
+            }
+            p = (p.getParent() instanceof View) ? (View) p.getParent() : null;
+        }
+        return null;
     }
 
     public static abstract class ViewHolder extends RecyclerView.ViewHolder {
@@ -85,10 +116,4 @@ public class AdapterConverter<
         }
     }
 
-    public static abstract class Adapter<
-            VH extends AdapterConverter.ViewHolder,
-            T
-            > extends CustomRecyclerAdapter<VH, T> {
-        public abstract T getItemAt(int position);
-    }
 }

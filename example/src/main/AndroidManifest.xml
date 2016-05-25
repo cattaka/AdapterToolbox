@@ -25,6 +25,7 @@
         <activity android:name=".NestedScrambleAdapterExampleActivity"/>
         <activity android:name=".TreeItemAdapterExampleActivity"/>
         <activity android:name=".ChoosableTreeItemAdapterExampleActivity"/>
+        <activity android:name=".AdapterConverterExampleActivity"/>
     </application>
 
 </manifest>
