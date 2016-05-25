@@ -75,6 +75,34 @@ public abstract class AbsScrambleAdapter<
         onBindViewHolderInner(viewHolderFactory, holder, position);
     }
 
+    @Override
+    public void onViewRecycled(VH holder) {
+        int viewType = getItemViewType(holder.getAdapterPosition());
+        IViewHolderFactory<SA, VH, FL, ?, LR> viewHolderFactory = mViewHolderFactory.get(viewType);
+        viewHolderFactory.onViewRecycled(holder);
+    }
+
+    @Override
+    public void onViewDetachedFromWindow(VH holder) {
+        int viewType = getItemViewType(holder.getAdapterPosition());
+        IViewHolderFactory<SA, VH, FL, ?, LR> viewHolderFactory = mViewHolderFactory.get(viewType);
+        viewHolderFactory.onViewDetachedFromWindow(holder);
+    }
+
+    @Override
+    public void onViewAttachedToWindow(VH holder) {
+        int viewType = getItemViewType(holder.getAdapterPosition());
+        IViewHolderFactory<SA, VH, FL, ?, LR> viewHolderFactory = mViewHolderFactory.get(viewType);
+        viewHolderFactory.onViewAttachedToWindow(holder);
+    }
+
+    @Override
+    public boolean onFailedToRecycleView(VH holder) {
+        int viewType = getItemViewType(holder.getAdapterPosition());
+        IViewHolderFactory<SA, VH, FL, ?, LR> viewHolderFactory = mViewHolderFactory.get(viewType);
+        return viewHolderFactory.onFailedToRecycleView(holder);
+    }
+
     @SuppressWarnings("unchecked")
     private <EVH extends VH> void onBindViewHolderInner(
             IViewHolderFactory<SA, VH, FL, EVH, LR> viewHolderFactory,
@@ -130,6 +158,14 @@ public abstract class AbsScrambleAdapter<
         boolean isAssignable(Object object);
 
         FL createForwardingListener();
+
+        boolean onFailedToRecycleView(VH holder);
+
+        void onViewAttachedToWindow(VH holder);
+
+        void onViewDetachedFromWindow(VH holder);
+
+        void onViewRecycled(VH holder);
     }
 
     public static class NullViewHolderFactory<
@@ -163,6 +199,27 @@ public abstract class AbsScrambleAdapter<
         @Override
         public FL createForwardingListener() {
             return null;
+        }
+
+        @Override
+        public void onViewRecycled(VH holder) {
+            // no-op
+        }
+
+        @Override
+        public void onViewDetachedFromWindow(VH holder) {
+            // no-op
+        }
+
+        @Override
+        public void onViewAttachedToWindow(VH holder) {
+            // no-op
+        }
+
+        @Override
+        public boolean onFailedToRecycleView(VH holder) {
+            // no-op
+            return false;
         }
     }
 }

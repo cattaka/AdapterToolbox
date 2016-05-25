@@ -98,5 +98,26 @@ public class ScrambleAdapter<T> extends AbsScrambleAdapter<
         public ForwardingListener<ScrambleAdapter<?>, RecyclerView.ViewHolder> createForwardingListener() {
             return new ForwardingListener<>();
         }
+
+        @Override
+        public boolean onFailedToRecycleView(RecyclerView.ViewHolder holder) {
+            // no-op
+            return false;
+        }
+
+        @Override
+        public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+            // no-op
+        }
+
+        @Override
+        public void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
+            // no-op
+        }
+
+        @Override
+        public void onViewRecycled(RecyclerView.ViewHolder holder) {
+            // no-op
+        }
     }
 }
