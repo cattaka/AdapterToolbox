@@ -128,7 +128,6 @@ public abstract class AbsScrambleAdapter<
         return mViewHolderFactory.size() - 1;
     }
 
-    @Nullable
     public abstract Object getItemAt(int position);
 
     @Override

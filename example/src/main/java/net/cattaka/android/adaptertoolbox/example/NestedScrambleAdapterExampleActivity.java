@@ -72,7 +72,7 @@ public class NestedScrambleAdapterExampleActivity extends AppCompatActivity {
                 item.setListenerRelay(new NestedListenerRelay(item));
                 items.add(item);
             }
-            mAdapter = new ScrambleAdapter<Object>(this, items,
+            mAdapter = new ScrambleAdapter<>(this, items,
                     mListenerRelay,
                     new NestedScrambleInfoViewHolderFactory()
             );

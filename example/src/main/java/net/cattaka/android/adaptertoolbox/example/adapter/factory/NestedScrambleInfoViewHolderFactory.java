@@ -31,15 +31,14 @@ public class NestedScrambleInfoViewHolderFactory extends ScrambleAdapter.AbsView
             }
         }
 
-        ViewHolder vh = new ViewHolder(view);
-        return vh;
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ScrambleAdapter<?> adapter, @NonNull ViewHolder holder, int position, Object object) {
         NestedScrambleInfo item = (NestedScrambleInfo) object;
 
-        ScrambleAdapter<Object> nextedAdapter = new ScrambleAdapter<Object>(holder.itemView.getContext(), item.getItems(), item.getListenerRelay(), item.getViewHolderFactories());
+        ScrambleAdapter<Object> nextedAdapter = new ScrambleAdapter<>(holder.itemView.getContext(), item.getItems(), item.getListenerRelay(), item.getViewHolderFactories());
         holder.recyclerView.setLayoutManager(new LinearLayoutManager(holder.itemView.getContext(), LinearLayoutManager.HORIZONTAL, false));
         holder.recyclerView.setAdapter(nextedAdapter);
     }
