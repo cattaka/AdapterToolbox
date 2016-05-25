@@ -2,6 +2,7 @@ package net.cattaka.android.adaptertoolbox.adapter;
 
 import android.content.Context;
 import android.support.annotation.IntDef;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 
 import net.cattaka.android.adaptertoolbox.data.ITreeItem;
@@ -36,11 +37,11 @@ public abstract class AbsChoosableTreeItemAdapter<
         super(context, items, ref);
     }
 
-    public void toggleCheck(W item) {
+    public void toggleCheck(@NonNull W item) {
         doCheck(item, !item.chosen);
     }
 
-    public void doCheck(W item, boolean checked) {
+    public void doCheck(@NonNull W item, boolean checked) {
         if (mChoiceMode == CHOICE_MODE_MULTIPLE) {
             if (!checked) {
                 W p = item.parent;
@@ -69,7 +70,7 @@ public abstract class AbsChoosableTreeItemAdapter<
         }
     }
 
-    private void doCheckInner(W item, boolean checked) {
+    private void doCheckInner(@NonNull W item, boolean checked) {
         item.chosen = checked;
         for (W child : item.children) {
             child.chosen = checked;

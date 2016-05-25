@@ -38,6 +38,7 @@ public class ActivityEntryAdapter extends AbsChoosableTreeItemAdapter<
             return new ActivityEntryAdapter(context, items);
         }
 
+        @NonNull
         @Override
         public WrappedItem createWrappedItem(int level, ActivityEntry item, WrappedItem parent) {
             return new WrappedItem(level, item, parent);

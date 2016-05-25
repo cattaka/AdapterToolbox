@@ -1,5 +1,6 @@
 package net.cattaka.android.adaptertoolbox.adapter.listener;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,81 +23,81 @@ public class ListenerRelay<
     /**
      * @see android.view.View.OnClickListener
      */
-    public void onClick(RecyclerView recyclerView, A adapter, VH vh, View view) {
+    public void onClick(@NonNull RecyclerView recyclerView, @NonNull A adapter, @NonNull VH vh, @NonNull View view) {
     }
 
     /**
      * @see android.view.View.OnLongClickListener
      */
-    public boolean onLongClick(RecyclerView recyclerView, A adapter, VH vh, View view) {
+    public boolean onLongClick(@NonNull RecyclerView recyclerView, @NonNull A adapter, @NonNull VH vh, @NonNull View view) {
         return false;
     }
 
     /**
      * @see RadioGroup.OnCheckedChangeListener
      */
-    public void onCheckedChanged(RecyclerView recyclerView, A adapter, VH vh, RadioGroup group, int checkedId) {
+    public void onCheckedChanged(@NonNull RecyclerView recyclerView, @NonNull A adapter, @NonNull VH vh, RadioGroup group, int checkedId) {
     }
 
     /**
      * @see android.widget.CompoundButton.OnCheckedChangeListener
      */
-    public void onCheckedChanged(RecyclerView recyclerView, A adapter, VH vh, CompoundButton buttonView, boolean isChecked) {
+    public void onCheckedChanged(@NonNull RecyclerView recyclerView, @NonNull A adapter, @NonNull VH vh, @NonNull CompoundButton buttonView, boolean isChecked) {
     }
 
     /**
      * @see android.widget.SeekBar.OnSeekBarChangeListener
      */
-    public void onProgressChanged(RecyclerView recyclerView, A adapter, VH vh, SeekBar seekBar, int progress, boolean fromUser) {
+    public void onProgressChanged(@NonNull RecyclerView recyclerView, @NonNull A adapter, @NonNull VH vh, @NonNull SeekBar seekBar, int progress, boolean fromUser) {
     }
 
     /**
      * @see android.widget.SeekBar.OnSeekBarChangeListener
      */
-    public void onStartTrackingTouch(RecyclerView recyclerView, A adapter, VH vh, SeekBar seekBar) {
+    public void onStartTrackingTouch(@NonNull RecyclerView recyclerView, @NonNull A adapter, @NonNull VH vh, @NonNull SeekBar seekBar) {
     }
 
     /**
      * @see android.widget.SeekBar.OnSeekBarChangeListener
      */
-    public void onStopTrackingTouch(RecyclerView recyclerView, A adapter, VH vh, SeekBar seekBar) {
+    public void onStopTrackingTouch(@NonNull RecyclerView recyclerView, @NonNull A adapter, @NonNull VH vh, @NonNull SeekBar seekBar) {
     }
 
     /**
      * @see android.widget.AdapterView.OnItemSelectedListener
      */
-    public void onNothingSelected(RecyclerView recyclerView, A adapter, VH vh, AdapterView<?> parent) {
+    public void onNothingSelected(@NonNull RecyclerView recyclerView, @NonNull A adapter, @NonNull VH vh, @NonNull AdapterView<?> parent) {
 
     }
 
     /**
      * @see android.widget.AdapterView.OnItemSelectedListener
      */
-    public void onItemSelected(RecyclerView recyclerView, A adapter, VH vh, AdapterView<?> parent, View view, int position, long id) {
+    public void onItemSelected(@NonNull RecyclerView recyclerView, @NonNull A adapter, @NonNull VH vh, @NonNull AdapterView<?> parent, @NonNull View view, int position, long id) {
     }
 
     /**
      * @see android.widget.TextView.OnEditorActionListener
      */
-    public boolean onEditorAction(RecyclerView recyclerView, A adapter, VH vh, TextView v, int actionId, KeyEvent event) {
+    public boolean onEditorAction(@NonNull RecyclerView recyclerView, @NonNull A adapter, @NonNull VH vh, @NonNull TextView v, int actionId, KeyEvent event) {
         return false;
     }
 
     /**
      * @see TextWatcher
      */
-    public void beforeTextChanged(RecyclerView recyclerView, A adapter, VH vh, TextView v, CharSequence s, int start, int count, int after) {
+    public void beforeTextChanged(@NonNull RecyclerView recyclerView, @NonNull A adapter, @NonNull VH vh, @NonNull TextView v, @NonNull CharSequence s, int start, int count, int after) {
     }
 
     /**
      * @see TextWatcher
      */
-    public void onTextChanged(RecyclerView recyclerView, A adapter, VH vh, TextView v, CharSequence s, int start, int before, int count) {
+    public void onTextChanged(@NonNull RecyclerView recyclerView, @NonNull A adapter, @NonNull VH vh, @NonNull TextView v, @NonNull CharSequence s, int start, int before, int count) {
     }
 
     /**
      * @see TextWatcher
      */
-    public void afterTextChanged(RecyclerView recyclerView, A adapter, VH vh, TextView v, Editable s) {
+    public void afterTextChanged(@NonNull RecyclerView recyclerView, @NonNull A adapter, @NonNull VH vh, @NonNull TextView v, @NonNull Editable s) {
     }
 }

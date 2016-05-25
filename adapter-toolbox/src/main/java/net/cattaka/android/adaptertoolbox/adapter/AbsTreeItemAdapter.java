@@ -2,6 +2,7 @@ package net.cattaka.android.adaptertoolbox.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 
 import net.cattaka.android.adaptertoolbox.adapter.listener.ForwardingListener;
@@ -31,8 +32,9 @@ public abstract class AbsTreeItemAdapter<
 
     private RecyclerView mRecyclerView;
 
+    @NonNull
     protected static <T extends ITreeItem<T>, W extends AbsTreeItemAdapter.WrappedItem<W, T>, REF extends ITreeItemAdapterRef<?, T, W>>
-    List<W> inflateWrappedList(List<W> dest, List<T> items, int level, W parent, REF ref) {
+    List<W> inflateWrappedList(@NonNull List<W> dest, @NonNull List<T> items, int level, @Nullable W parent, @NonNull REF ref) {
         for (T item : items) {
             W child = ref.createWrappedItem(level, item, parent);
             dest.add(child);
@@ -46,20 +48,23 @@ public abstract class AbsTreeItemAdapter<
         return dest;
     }
 
-    public <REF extends ITreeItemAdapterRef<?, T, W>> AbsTreeItemAdapter(Context context, List<T> items, REF ref) {
+    public <REF extends ITreeItemAdapterRef<?, T, W>> AbsTreeItemAdapter(@NonNull Context context, @NonNull List<T> items, @NonNull REF ref) {
         mContext = context;
         mItems = inflateWrappedList(new ArrayList<W>(), items, 0, null, ref);
     }
 
+    @NonNull
     public Context getContext() {
         return mContext;
     }
 
+    @NonNull
     @Override
     public AbsTreeItemAdapter<VH, T, W> getSelf() {
         return this;
     }
 
+    @NonNull
     @Override
     public ForwardingListener<AbsTreeItemAdapter<VH, T, W>, VH> createForwardingListener() {
         return new ForwardingListener<>();
@@ -70,11 +75,13 @@ public abstract class AbsTreeItemAdapter<
         return mItems.size();
     }
 
+    @NonNull
     @Override
     public W getItemAt(int position) {
         return mItems.get(position);
     }
 
+    @NonNull
     @Override
     public List<W> getItems() {
         return mItems;
@@ -96,7 +103,7 @@ public abstract class AbsTreeItemAdapter<
         public W parent;
         public final List<W> children = new ArrayList<>();
 
-        public WrappedItem(int level, T item, W parent) {
+        public WrappedItem(int level, T item, @NonNull W parent) {
             this.level = level;
             this.item = item;
             this.parent = parent;
@@ -123,6 +130,7 @@ public abstract class AbsTreeItemAdapter<
         }
     }
 
+    @Nullable
     public RecyclerView getAttachedRecyclerView() {
         return mRecyclerView;
     }
@@ -146,6 +154,7 @@ public abstract class AbsTreeItemAdapter<
         @NonNull
         AbsTreeItemAdapter<VH, T, W> createAdapter(@NonNull Context context, @NonNull List<T> items);
 
+        @NonNull
         W createWrappedItem(int level, T item, W parent);
     }
 }

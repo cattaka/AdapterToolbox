@@ -1,5 +1,7 @@
 package net.cattaka.android.adaptertoolbox.adapter;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 
 import net.cattaka.android.adaptertoolbox.adapter.listener.IForwardingListener;
@@ -19,11 +21,13 @@ public abstract class AbsCustomRecyclerAdapter<
         > extends RecyclerView.Adapter<VH> {
 
     IForwardingListener.IProvider<A, VH> mProvider = new IForwardingListener.IProvider<A, VH>() {
+        @NonNull
         @Override
         public A getAdapter() {
             return getSelf();
         }
 
+        @Nullable
         @Override
         public RecyclerView getAttachedRecyclerView() {
             return mRecyclerView;

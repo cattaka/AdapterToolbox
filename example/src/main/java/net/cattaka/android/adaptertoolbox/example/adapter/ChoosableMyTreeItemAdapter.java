@@ -38,6 +38,7 @@ public class ChoosableMyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
             return new ChoosableMyTreeItemAdapter(context, items);
         }
 
+        @NonNull
         @Override
         public WrappedItem createWrappedItem(int level, MyTreeItem item, WrappedItem parent) {
             return new WrappedItem(level, item, parent);
@@ -48,18 +49,20 @@ public class ChoosableMyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
         @Override
         public void onClick(View view) {
             RecyclerView recyclerView = getAttachedRecyclerView();
-            ViewHolder vh = (ViewHolder) recyclerView.findContainingViewHolder(view);
-            int position = vh.getAdapterPosition();
-            WrappedItem item = getItemAt(position);
-            switch (view.getId()) {
-                case R.id.check_opened: {
-                    item.opened = !item.opened;
-                    doFold(item, item.opened);
-                    break;
-                }
-                default: {
-                    toggleCheck(item);
-                    break;
+            ViewHolder vh = (ViewHolder) (recyclerView != null ? recyclerView.findContainingViewHolder(view) : null);
+            if (vh != null) {
+                int position = vh.getAdapterPosition();
+                WrappedItem item = getItemAt(position);
+                switch (view.getId()) {
+                    case R.id.check_opened: {
+                        item.opened = !item.opened;
+                        doFold(item, item.opened);
+                        break;
+                    }
+                    default: {
+                        toggleCheck(item);
+                        break;
+                    }
                 }
             }
         }
