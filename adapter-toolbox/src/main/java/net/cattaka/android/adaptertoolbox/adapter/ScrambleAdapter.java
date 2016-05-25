@@ -94,9 +94,38 @@ public class ScrambleAdapter<T> extends AbsScrambleAdapter<
             EVH,
             ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder>
             > {
+
+        @Override
+        public boolean isAssignable(ScrambleAdapter<?> adapter, Object object) {
+            return isAssignable(object);
+        }
+
+        public abstract boolean isAssignable(Object object);
+
         @Override
         public ForwardingListener<ScrambleAdapter<?>, RecyclerView.ViewHolder> createForwardingListener() {
             return new ForwardingListener<>();
+        }
+
+        @Override
+        public boolean onFailedToRecycleView(ScrambleAdapter<?> adapter, RecyclerView.ViewHolder holder) {
+            // no-op
+            return false;
+        }
+
+        @Override
+        public void onViewAttachedToWindow(ScrambleAdapter<?> adapter, RecyclerView.ViewHolder holder) {
+            // no-op
+        }
+
+        @Override
+        public void onViewDetachedFromWindow(ScrambleAdapter<?> adapter, RecyclerView.ViewHolder holder) {
+            // no-op
+        }
+
+        @Override
+        public void onViewRecycled(ScrambleAdapter<?> adapter, RecyclerView.ViewHolder holder) {
+            // no-op
         }
     }
 }
