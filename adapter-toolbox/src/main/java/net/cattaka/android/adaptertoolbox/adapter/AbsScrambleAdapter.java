@@ -79,28 +79,28 @@ public abstract class AbsScrambleAdapter<
     public void onViewRecycled(VH holder) {
         int viewType = getItemViewType(holder.getAdapterPosition());
         IViewHolderFactory<SA, VH, FL, ?, LR> viewHolderFactory = mViewHolderFactory.get(viewType);
-        viewHolderFactory.onViewRecycled(holder);
+        viewHolderFactory.onViewRecycled(getSelf(), holder);
     }
 
     @Override
     public void onViewDetachedFromWindow(VH holder) {
         int viewType = getItemViewType(holder.getAdapterPosition());
         IViewHolderFactory<SA, VH, FL, ?, LR> viewHolderFactory = mViewHolderFactory.get(viewType);
-        viewHolderFactory.onViewDetachedFromWindow(holder);
+        viewHolderFactory.onViewDetachedFromWindow(getSelf(), holder);
     }
 
     @Override
     public void onViewAttachedToWindow(VH holder) {
         int viewType = getItemViewType(holder.getAdapterPosition());
         IViewHolderFactory<SA, VH, FL, ?, LR> viewHolderFactory = mViewHolderFactory.get(viewType);
-        viewHolderFactory.onViewAttachedToWindow(holder);
+        viewHolderFactory.onViewAttachedToWindow(getSelf(), holder);
     }
 
     @Override
     public boolean onFailedToRecycleView(VH holder) {
         int viewType = getItemViewType(holder.getAdapterPosition());
         IViewHolderFactory<SA, VH, FL, ?, LR> viewHolderFactory = mViewHolderFactory.get(viewType);
-        return viewHolderFactory.onFailedToRecycleView(holder);
+        return viewHolderFactory.onFailedToRecycleView(getSelf(), holder);
     }
 
     @SuppressWarnings("unchecked")
@@ -118,7 +118,7 @@ public abstract class AbsScrambleAdapter<
         Object object = getItemAt(position);
         int index = 0;
         for (IViewHolderFactory viewHolderFactory : mViewHolderFactory) {
-            if (viewHolderFactory.isAssignable(object)) {
+            if (viewHolderFactory.isAssignable(this, object)) {
                 return index;
             }
             index++;
@@ -155,17 +155,17 @@ public abstract class AbsScrambleAdapter<
 
         void onBindViewHolder(SA adapter, EVH holder, int position, Object object);
 
-        boolean isAssignable(Object object);
+        boolean isAssignable(SA adapter, Object object);
 
         FL createForwardingListener();
 
-        boolean onFailedToRecycleView(VH holder);
+        boolean onFailedToRecycleView(SA adapter, VH holder);
 
-        void onViewAttachedToWindow(VH holder);
+        void onViewAttachedToWindow(SA adapter, VH holder);
 
-        void onViewDetachedFromWindow(VH holder);
+        void onViewDetachedFromWindow(SA adapter, VH holder);
 
-        void onViewRecycled(VH holder);
+        void onViewRecycled(SA adapter, VH holder);
     }
 
     public static class NullViewHolderFactory<
@@ -192,7 +192,7 @@ public abstract class AbsScrambleAdapter<
         }
 
         @Override
-        public boolean isAssignable(Object object) {
+        public boolean isAssignable(SA adapter, Object object) {
             return true;
         }
 
@@ -202,22 +202,22 @@ public abstract class AbsScrambleAdapter<
         }
 
         @Override
-        public void onViewRecycled(VH holder) {
+        public void onViewRecycled(SA adapter, VH holder) {
             // no-op
         }
 
         @Override
-        public void onViewDetachedFromWindow(VH holder) {
+        public void onViewDetachedFromWindow(SA adapter, VH holder) {
             // no-op
         }
 
         @Override
-        public void onViewAttachedToWindow(VH holder) {
+        public void onViewAttachedToWindow(SA adapter, VH holder) {
             // no-op
         }
 
         @Override
-        public boolean onFailedToRecycleView(VH holder) {
+        public boolean onFailedToRecycleView(SA adapter, VH holder) {
             // no-op
             return false;
         }
