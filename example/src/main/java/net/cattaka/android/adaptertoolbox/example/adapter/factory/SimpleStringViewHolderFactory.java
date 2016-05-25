@@ -1,5 +1,6 @@
 package net.cattaka.android.adaptertoolbox.example.adapter.factory;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +17,9 @@ import net.cattaka.android.adaptertoolbox.example.R;
  */
 public class SimpleStringViewHolderFactory extends ScrambleAdapter.AbsViewHolderFactory<SimpleStringViewHolderFactory.ViewHolder> {
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ScrambleAdapter<?> adapter, ViewGroup parent, ForwardingListener<ScrambleAdapter<?>, RecyclerView.ViewHolder> forwardingListener) {
+    public ViewHolder onCreateViewHolder(@NonNull ScrambleAdapter<?> adapter, @NonNull ViewGroup parent, @NonNull ForwardingListener<ScrambleAdapter<?>, RecyclerView.ViewHolder> forwardingListener) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_simple_string, parent, false);
         ViewHolder vh = new ViewHolder(view);
         view.setOnClickListener(forwardingListener);
@@ -26,7 +28,7 @@ public class SimpleStringViewHolderFactory extends ScrambleAdapter.AbsViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ScrambleAdapter adapter, ViewHolder holder, int position, Object object) {
+    public void onBindViewHolder(@NonNull ScrambleAdapter adapter, @NonNull ViewHolder holder, int position, Object object) {
         String item = (String) object;
 
         String str = "String = " + item;

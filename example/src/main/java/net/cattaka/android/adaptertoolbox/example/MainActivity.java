@@ -2,6 +2,7 @@ package net.cattaka.android.adaptertoolbox.example;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     ListenerRelay<ActivityEntryAdapter, ActivityEntryAdapter.ViewHolder> mListenerRelay = new ListenerRelay<ActivityEntryAdapter, ActivityEntryAdapter.ViewHolder>() {
         @Override
-        public void onClick(RecyclerView recyclerView, ActivityEntryAdapter adapter, ActivityEntryAdapter.ViewHolder viewHolder, View view) {
+        public void onClick(@NonNull RecyclerView recyclerView, @NonNull ActivityEntryAdapter adapter, @NonNull ActivityEntryAdapter.ViewHolder viewHolder, @NonNull View view) {
             if (recyclerView.getId() == R.id.recycler) {
                 ActivityEntry entry = adapter.getItemAt(viewHolder.getAdapterPosition()).getItem();
                 if (entry != null && entry.getClazz() != null) {

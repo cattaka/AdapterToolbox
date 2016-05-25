@@ -1,6 +1,8 @@
 package net.cattaka.android.adaptertoolbox.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -24,12 +26,13 @@ public class ScrambleAdapter<T> extends AbsScrambleAdapter<
     private Context mContext;
     private List<T> mItems;
 
+    @SafeVarargs
     public ScrambleAdapter(
-            Context context,
-            List<T> items,
-            ListenerRelay<ScrambleAdapter<?>,
+            @NonNull Context context,
+            @NonNull List<T> items,
+            @Nullable ListenerRelay<ScrambleAdapter<?>,
                     RecyclerView.ViewHolder> listenerRelay,
-            IViewHolderFactory<ScrambleAdapter<?>,
+            @NonNull IViewHolderFactory<ScrambleAdapter<?>,
                     RecyclerView.ViewHolder,
                     ForwardingListener<ScrambleAdapter<?>, RecyclerView.ViewHolder>,
                     ?,
@@ -40,11 +43,11 @@ public class ScrambleAdapter<T> extends AbsScrambleAdapter<
     }
 
     public ScrambleAdapter(
-            Context context,
-            List<T> items,
-            ListenerRelay<ScrambleAdapter<?>,
+            @NonNull Context context,
+            @NonNull List<T> items,
+            @Nullable ListenerRelay<ScrambleAdapter<?>,
                     RecyclerView.ViewHolder> listenerRelay,
-            List<? extends IViewHolderFactory<ScrambleAdapter<?>,
+            @NonNull List<? extends IViewHolderFactory<ScrambleAdapter<?>,
                     RecyclerView.ViewHolder,
                     ForwardingListener<ScrambleAdapter<?>, RecyclerView.ViewHolder>,
                     ?,
@@ -60,6 +63,7 @@ public class ScrambleAdapter<T> extends AbsScrambleAdapter<
         return mContext;
     }
 
+    @NonNull
     @Override
     public RecyclerView.ViewHolder createNullViewHolder() {
         View view = new View(mContext);
@@ -76,6 +80,7 @@ public class ScrambleAdapter<T> extends AbsScrambleAdapter<
         return mItems;
     }
 
+    @NonNull
     @Override
     public ScrambleAdapter<T> getSelf() {
         return this;
@@ -96,7 +101,7 @@ public class ScrambleAdapter<T> extends AbsScrambleAdapter<
             > {
 
         @Override
-        public boolean isAssignable(ScrambleAdapter<?> adapter, Object object) {
+        public boolean isAssignable(@NonNull ScrambleAdapter<?> adapter, Object object) {
             return isAssignable(object);
         }
 
@@ -108,23 +113,23 @@ public class ScrambleAdapter<T> extends AbsScrambleAdapter<
         }
 
         @Override
-        public boolean onFailedToRecycleView(ScrambleAdapter<?> adapter, RecyclerView.ViewHolder holder) {
+        public boolean onFailedToRecycleView(@NonNull ScrambleAdapter<?> adapter, @NonNull RecyclerView.ViewHolder holder) {
             // no-op
             return false;
         }
 
         @Override
-        public void onViewAttachedToWindow(ScrambleAdapter<?> adapter, RecyclerView.ViewHolder holder) {
+        public void onViewAttachedToWindow(@NonNull ScrambleAdapter<?> adapter, @NonNull RecyclerView.ViewHolder holder) {
             // no-op
         }
 
         @Override
-        public void onViewDetachedFromWindow(ScrambleAdapter<?> adapter, RecyclerView.ViewHolder holder) {
+        public void onViewDetachedFromWindow(@NonNull ScrambleAdapter<?> adapter, @NonNull RecyclerView.ViewHolder holder) {
             // no-op
         }
 
         @Override
-        public void onViewRecycled(ScrambleAdapter<?> adapter, RecyclerView.ViewHolder holder) {
+        public void onViewRecycled(@NonNull ScrambleAdapter<?> adapter, @NonNull RecyclerView.ViewHolder holder) {
             // no-op
         }
     }

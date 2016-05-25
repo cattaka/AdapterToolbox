@@ -2,6 +2,7 @@ package net.cattaka.android.adaptertoolbox.adapter;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +19,9 @@ public class SingleViewAdapter extends CustomRecyclerAdapter<RecyclerView.ViewHo
     @LayoutRes
     private int mViewResId;
     private boolean mVisible = true;
-    private Object mDummy;
+    private Object mDummy = new Object();
 
-    public SingleViewAdapter(Context context, @LayoutRes int viewResId) {
+    public SingleViewAdapter(@NonNull Context context, @LayoutRes int viewResId) {
         mContext = context;
         mViewResId = viewResId;
     }
@@ -62,11 +63,13 @@ public class SingleViewAdapter extends CustomRecyclerAdapter<RecyclerView.ViewHo
         }
     }
 
+    @NonNull
     @Override
     public Object getItemAt(int position) {
         return mDummy;
     }
 
+    @NonNull
     @Override
     public List<Object> getItems() {
         return Collections.singletonList(mDummy);

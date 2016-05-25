@@ -1,6 +1,7 @@
 package net.cattaka.android.adaptertoolbox.example;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,7 +34,7 @@ import java.util.List;
 public class OperatableListExampleActivity extends AppCompatActivity {
     ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder> mListenerRelay = new ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder>() {
         @Override
-        public void onCheckedChanged(RecyclerView recyclerView, ScrambleAdapter<?> adapter, RecyclerView.ViewHolder viewHolder, CompoundButton buttonView, boolean isChecked) {
+        public void onCheckedChanged(@NonNull RecyclerView recyclerView, @NonNull ScrambleAdapter<?> adapter, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull CompoundButton buttonView, boolean isChecked) {
             MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
             if (la.mAdapter == mItemAdapter) {
                 if (viewHolder instanceof MyInfoViewHolderFactory.ViewHolder) {
@@ -44,7 +45,7 @@ public class OperatableListExampleActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onProgressChanged(RecyclerView recyclerView, ScrambleAdapter<?> adapter, RecyclerView.ViewHolder viewHolder, SeekBar seekBar, int progress, boolean fromUser) {
+        public void onProgressChanged(@NonNull RecyclerView recyclerView, @NonNull ScrambleAdapter<?> adapter, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull SeekBar seekBar, int progress, boolean fromUser) {
             MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
             if (la.mAdapter == mItemAdapter) {
                 if (viewHolder instanceof MyInfoViewHolderFactory.ViewHolder) {
@@ -55,7 +56,7 @@ public class OperatableListExampleActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onItemSelected(RecyclerView recyclerView, ScrambleAdapter<?> adapter, RecyclerView.ViewHolder viewHolder, AdapterView<?> parent, View view, int position, long id) {
+        public void onItemSelected(@NonNull RecyclerView recyclerView, @NonNull ScrambleAdapter<?> adapter, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull AdapterView<?> parent, @NonNull View view, int position, long id) {
             MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
             if (la.mAdapter == mItemAdapter) {
                 if (viewHolder instanceof MyInfoViewHolderFactory.ViewHolder) {
@@ -66,7 +67,7 @@ public class OperatableListExampleActivity extends AppCompatActivity {
         }
 
         @Override
-        public void afterTextChanged(RecyclerView recyclerView, ScrambleAdapter<?> adapter, RecyclerView.ViewHolder viewHolder, TextView v, Editable s) {
+        public void afterTextChanged(@NonNull RecyclerView recyclerView, @NonNull ScrambleAdapter<?> adapter, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull TextView v, @NonNull Editable s) {
             MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
             if (la.mAdapter == mItemAdapter) {
                 if (viewHolder instanceof TextInfoViewHolderFactory.ViewHolder) {
@@ -77,7 +78,7 @@ public class OperatableListExampleActivity extends AppCompatActivity {
         }
 
         @Override
-        public boolean onEditorAction(RecyclerView recyclerView, ScrambleAdapter<?> adapter, RecyclerView.ViewHolder viewHolder, TextView v, int actionId, KeyEvent event) {
+        public boolean onEditorAction(@NonNull RecyclerView recyclerView, @NonNull ScrambleAdapter<?> adapter, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull TextView v, int actionId, KeyEvent event) {
             MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
             if (la.mAdapter == mItemAdapter) {
                 if (viewHolder instanceof TextInfoViewHolderFactory.ViewHolder) {
@@ -89,7 +90,7 @@ public class OperatableListExampleActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onClick(RecyclerView recyclerView, ScrambleAdapter<?> adapter, RecyclerView.ViewHolder viewHolder, View view) {
+        public void onClick(@NonNull RecyclerView recyclerView, @NonNull ScrambleAdapter<?> adapter, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull View view) {
             MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
             if (la.mAdapter == mItemAdapter) {
                 if (viewHolder instanceof TextInfoViewHolderFactory.ViewHolder) {
