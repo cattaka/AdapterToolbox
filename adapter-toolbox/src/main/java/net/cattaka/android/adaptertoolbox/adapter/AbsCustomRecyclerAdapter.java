@@ -18,7 +18,7 @@ public abstract class AbsCustomRecyclerAdapter<
         T,
         FL extends IForwardingListener<A, VH, LR>,
         LR extends IListenerRelay<VH>
-        > extends RecyclerView.Adapter<VH> {
+        > extends RecyclerView.Adapter<VH> implements IHasItemAdapter<VH, T> {
 
     IForwardingListener.IProvider<A, VH> mProvider = new IForwardingListener.IProvider<A, VH>() {
         @NonNull
