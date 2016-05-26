@@ -239,7 +239,7 @@ public class ForwardingListener<A extends RecyclerView.Adapter<? extends VH>, VH
     }
 
     @Nullable
-    public static RecyclerView.ViewHolder findContainingViewHolder(RecyclerView recyclerView, View view) {
+    public static RecyclerView.ViewHolder findContainingViewHolder(@NonNull RecyclerView recyclerView, @NonNull View view) {
         View v = view;
         while (v != null && v.getParent() instanceof View) {
             if (v.getParent() == recyclerView) {
