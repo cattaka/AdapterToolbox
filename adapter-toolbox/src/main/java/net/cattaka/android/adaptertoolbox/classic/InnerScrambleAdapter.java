@@ -22,7 +22,7 @@ public class InnerScrambleAdapter<T> extends AbsScrambleAdapter<
         InnerScrambleAdapter<T>,
         InnerScrambleAdapter<?>,
         AdapterConverter.ViewHolder,
-        ClassicForwardingListener<InnerScrambleAdapter<?>, AdapterConverter.ViewHolder>,
+        ClassicForwardingListener<InnerScrambleAdapter<?>>,
         ClassicListenerRelay<InnerScrambleAdapter<?>, AdapterConverter.ViewHolder>,
         T
         > {
@@ -37,7 +37,7 @@ public class InnerScrambleAdapter<T> extends AbsScrambleAdapter<
                     AdapterConverter.ViewHolder> listenerRelay,
             @NonNull IViewHolderFactory<InnerScrambleAdapter<?>,
                     AdapterConverter.ViewHolder,
-                    ClassicForwardingListener<InnerScrambleAdapter<?>, AdapterConverter.ViewHolder>,
+                    ClassicForwardingListener<InnerScrambleAdapter<?>>,
                     ?,
                     ClassicListenerRelay<InnerScrambleAdapter<?>,
                             AdapterConverter.ViewHolder>>... iViewHolderFactories
@@ -52,7 +52,7 @@ public class InnerScrambleAdapter<T> extends AbsScrambleAdapter<
                     AdapterConverter.ViewHolder> listenerRelay,
             @NonNull List<? extends IViewHolderFactory<InnerScrambleAdapter<?>,
                     AdapterConverter.ViewHolder,
-                    ClassicForwardingListener<InnerScrambleAdapter<?>, AdapterConverter.ViewHolder>,
+                    ClassicForwardingListener<InnerScrambleAdapter<?>>,
                     ?,
                     ClassicListenerRelay<InnerScrambleAdapter<?>,
                             AdapterConverter.ViewHolder>>> iViewHolderFactories
