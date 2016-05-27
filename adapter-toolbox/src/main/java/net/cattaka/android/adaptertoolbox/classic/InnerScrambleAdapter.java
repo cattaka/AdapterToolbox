@@ -22,25 +22,25 @@ public class InnerScrambleAdapter<T> extends AbsScrambleAdapter<
         InnerScrambleAdapter<T>,
         InnerScrambleAdapter<?>,
         AdapterConverter.ViewHolder,
-        ClassicForwardingListener<InnerScrambleAdapter<?>>,
-        ClassicListenerRelay<InnerScrambleAdapter<?>, AdapterConverter.ViewHolder>,
+        ClassicForwardingListener,
+        ClassicListenerRelay<AdapterConverter.ViewHolder>,
         T
         > {
     private Context mContext;
     private List<T> mItems;
 
+    private ClassicScrambleAdapter<T> mParentAdapter;
+
     @SafeVarargs
     public InnerScrambleAdapter(
             @NonNull Context context,
             @NonNull List<T> items,
-            @Nullable ClassicListenerRelay<InnerScrambleAdapter<?>,
-                    AdapterConverter.ViewHolder> listenerRelay,
+            @Nullable ClassicListenerRelay<AdapterConverter.ViewHolder> listenerRelay,
             @NonNull IViewHolderFactory<InnerScrambleAdapter<?>,
                     AdapterConverter.ViewHolder,
-                    ClassicForwardingListener<InnerScrambleAdapter<?>>,
+                    ClassicForwardingListener,
                     ?,
-                    ClassicListenerRelay<InnerScrambleAdapter<?>,
-                            AdapterConverter.ViewHolder>>... iViewHolderFactories
+                    ClassicListenerRelay<AdapterConverter.ViewHolder>>... iViewHolderFactories
     ) {
         this(context, items, listenerRelay, Arrays.asList(iViewHolderFactories));
     }
@@ -48,14 +48,12 @@ public class InnerScrambleAdapter<T> extends AbsScrambleAdapter<
     public InnerScrambleAdapter(
             @NonNull Context context,
             @NonNull List<T> items,
-            @Nullable ClassicListenerRelay<InnerScrambleAdapter<?>,
-                    AdapterConverter.ViewHolder> listenerRelay,
+            @Nullable ClassicListenerRelay<AdapterConverter.ViewHolder> listenerRelay,
             @NonNull List<? extends IViewHolderFactory<InnerScrambleAdapter<?>,
                     AdapterConverter.ViewHolder,
-                    ClassicForwardingListener<InnerScrambleAdapter<?>>,
+                    ClassicForwardingListener,
                     ?,
-                    ClassicListenerRelay<InnerScrambleAdapter<?>,
-                            AdapterConverter.ViewHolder>>> iViewHolderFactories
+                    ClassicListenerRelay<AdapterConverter.ViewHolder>>> iViewHolderFactories
     ) {
         super(listenerRelay, iViewHolderFactories);
         this.mContext = context;
@@ -64,6 +62,14 @@ public class InnerScrambleAdapter<T> extends AbsScrambleAdapter<
 
     public Context getContext() {
         return mContext;
+    }
+
+    public ClassicScrambleAdapter<T> getParentAdapter() {
+        return mParentAdapter;
+    }
+
+    public void setParentAdapter(ClassicScrambleAdapter<T> parentAdapter) {
+        mParentAdapter = parentAdapter;
     }
 
     @NonNull

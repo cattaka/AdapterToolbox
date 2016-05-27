@@ -18,28 +18,28 @@ public class ClassicScrambleAdapter<T> extends AdapterConverter<InnerScrambleAda
     public ClassicScrambleAdapter(
             @NonNull Context context,
             @NonNull List<T> items,
-            @NonNull ClassicListenerRelay<InnerScrambleAdapter<?>, ViewHolder> listenerRelay,
+            @NonNull ClassicListenerRelay<ViewHolder> listenerRelay,
             @NonNull AbsScrambleAdapter.IViewHolderFactory<InnerScrambleAdapter<?>,
                     ViewHolder,
-                    ClassicForwardingListener<InnerScrambleAdapter<?>>,
+                    ClassicForwardingListener,
                     ?,
-                    ClassicListenerRelay<InnerScrambleAdapter<?>,
-                            ViewHolder>>... iViewHolderFactories
+                    ClassicListenerRelay<ViewHolder>>... iViewHolderFactories
     ) {
         super(context, new InnerScrambleAdapter<T>(context, items, listenerRelay, Arrays.asList(iViewHolderFactories)));
+        getOrig().setParentAdapter(this);
     }
 
     public ClassicScrambleAdapter(
             @NonNull Context context,
             @NonNull List<T> items,
-            @NonNull ClassicListenerRelay<InnerScrambleAdapter<?>, ViewHolder> listenerRelay,
+            @NonNull ClassicListenerRelay<ViewHolder> listenerRelay,
             @NonNull List<? extends AbsScrambleAdapter.IViewHolderFactory<InnerScrambleAdapter<?>,
                     ViewHolder,
-                    ClassicForwardingListener<InnerScrambleAdapter<?>>,
+                    ClassicForwardingListener,
                     ?,
-                    ClassicListenerRelay<InnerScrambleAdapter<?>,
-                            ViewHolder>>> iViewHolderFactories
+                    ClassicListenerRelay<ViewHolder>>> iViewHolderFactories
     ) {
         super(context, new InnerScrambleAdapter<T>(context, items, listenerRelay, iViewHolderFactories));
+        getOrig().setParentAdapter(this);
     }
 }
