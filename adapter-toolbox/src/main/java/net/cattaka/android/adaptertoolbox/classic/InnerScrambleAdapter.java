@@ -7,6 +7,8 @@ import android.view.View;
 
 import net.cattaka.android.adaptertoolbox.adapter.AbsScrambleAdapter;
 import net.cattaka.android.adaptertoolbox.adapter.AdapterConverter;
+import net.cattaka.android.adaptertoolbox.adapter.listener.ForwardingListener;
+import net.cattaka.android.adaptertoolbox.adapter.listener.ListenerRelay;
 import net.cattaka.android.adaptertoolbox.classic.listener.ClassicForwardingListener;
 import net.cattaka.android.adaptertoolbox.classic.listener.ClassicListenerRelay;
 
@@ -26,7 +28,6 @@ public class InnerScrambleAdapter<T> extends AbsScrambleAdapter<
         > {
     private Context mContext;
     private List<T> mItems;
-    private ClassicScrambleAdapter<T> mParent;
 
     @SafeVarargs
     public InnerScrambleAdapter(
@@ -59,14 +60,6 @@ public class InnerScrambleAdapter<T> extends AbsScrambleAdapter<
         super(listenerRelay, iViewHolderFactories);
         this.mContext = context;
         this.mItems = items;
-    }
-
-    public ClassicScrambleAdapter<T> getParent() {
-        return mParent;
-    }
-
-    public void setParent(ClassicScrambleAdapter<T> parent) {
-        mParent = parent;
     }
 
     public Context getContext() {
@@ -105,9 +98,9 @@ public class InnerScrambleAdapter<T> extends AbsScrambleAdapter<
             implements IViewHolderFactory<
             InnerScrambleAdapter<?>,
             AdapterConverter.ViewHolder,
-            ClassicForwardingListener<InnerScrambleAdapter<?>, AdapterConverter.ViewHolder>,
+            ForwardingListener<InnerScrambleAdapter<?>, AdapterConverter.ViewHolder>,
             EVH,
-            ClassicListenerRelay<InnerScrambleAdapter<?>, AdapterConverter.ViewHolder>
+            ListenerRelay<InnerScrambleAdapter<?>, AdapterConverter.ViewHolder>
             > {
 
         @Override
@@ -118,8 +111,8 @@ public class InnerScrambleAdapter<T> extends AbsScrambleAdapter<
         public abstract boolean isAssignable(Object object);
 
         @Override
-        public ClassicForwardingListener<InnerScrambleAdapter<?>, AdapterConverter.ViewHolder> createForwardingListener() {
-            return new ClassicForwardingListener<>();
+        public ForwardingListener<InnerScrambleAdapter<?>, AdapterConverter.ViewHolder> createForwardingListener() {
+            return new ForwardingListener<>();
         }
 
         @Override

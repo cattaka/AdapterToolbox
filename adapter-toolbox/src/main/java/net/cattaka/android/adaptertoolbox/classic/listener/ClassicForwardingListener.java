@@ -2,7 +2,6 @@ package net.cattaka.android.adaptertoolbox.classic.listener;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,19 +10,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import net.cattaka.android.adaptertoolbox.adapter.AdapterConverter;
 import net.cattaka.android.adaptertoolbox.adapter.listener.IForwardingListener;
-import net.cattaka.android.adaptertoolbox.classic.InnerScrambleAdapter;
 
 /**
- * Created by cattaka on 16/05/27.
+ * Created by cattaka on 2016/05/12.
  */
-public class ClassicForwardingListener<A extends InnerScrambleAdapter<?>, VH extends AdapterConverter.ViewHolder>
+public class ClassicForwardingListener<A extends RecyclerView.Adapter<? extends VH>, VH extends AdapterConverter.ViewHolder>
         implements IForwardingListener<A, VH, ClassicListenerRelay<A, VH>>,
         View.OnClickListener,
         View.OnLongClickListener,
@@ -50,132 +47,152 @@ public class ClassicForwardingListener<A extends InnerScrambleAdapter<?>, VH ext
     }
 
     /**
-     * @see android.view.View.OnClickListener
+     * @see View.OnClickListener
      */
     @Override
     public void onClick(View view) {
         if (mListenerRelay != null) {
-            Pair<ListView, VH> pair = findContainingViewHolder(view);
-            if (pair != null) {
-                mListenerRelay.onClick(pair.first, mProvider.getAdapter(), pair.second, view);
+            RecyclerView recyclerView = mProvider.getAttachedRecyclerView();
+            @SuppressWarnings("unchecked")
+            VH vh = (VH) (recyclerView != null ? findContainingViewHolder(recyclerView, view) : null);
+            if (vh != null) {
+                mListenerRelay.onClick(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh, view);
             }
         }
     }
 
     /**
-     * @see android.view.View.OnLongClickListener
+     * @see View.OnLongClickListener
      */
     @Override
     public boolean onLongClick(View view) {
         if (mListenerRelay != null) {
-            Pair<ListView, VH> pair = findContainingViewHolder(view);
-            if (pair != null) {
-                return mListenerRelay.onLongClick(pair.first, mProvider.getAdapter(), pair.second, view);
+            RecyclerView recyclerView = mProvider.getAttachedRecyclerView();
+            @SuppressWarnings("unchecked")
+            VH vh = (VH) (recyclerView != null ? findContainingViewHolder(recyclerView, view) : null);
+            if (vh != null) {
+                return mListenerRelay.onLongClick(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh, view);
             }
         }
         return false;
     }
 
     /**
-     * @see android.widget.RadioGroup.OnCheckedChangeListener
+     * @see RadioGroup.OnCheckedChangeListener
      */
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         if (mListenerRelay != null) {
-            Pair<ListView, VH> pair = findContainingViewHolder(group);
-            if (pair != null) {
-                mListenerRelay.onCheckedChanged(pair.first, mProvider.getAdapter(), pair.second, group, checkedId);
+            RecyclerView recyclerView = mProvider.getAttachedRecyclerView();
+            @SuppressWarnings("unchecked")
+            VH vh = (VH) (recyclerView != null ? findContainingViewHolder(recyclerView, group) : null);
+            if (vh != null) {
+                mListenerRelay.onCheckedChanged(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh, group, checkedId);
             }
         }
     }
 
     /**
-     * @see android.widget.CompoundButton.OnCheckedChangeListener
+     * @see CompoundButton.OnCheckedChangeListener
      */
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (mListenerRelay != null) {
-            Pair<ListView, VH> pair = findContainingViewHolder(buttonView);
-            if (pair != null) {
-                mListenerRelay.onCheckedChanged(pair.first, mProvider.getAdapter(), pair.second, buttonView, isChecked);
+            RecyclerView recyclerView = mProvider.getAttachedRecyclerView();
+            @SuppressWarnings("unchecked")
+            VH vh = (VH) (recyclerView != null ? findContainingViewHolder(recyclerView, buttonView) : null);
+            if (vh != null) {
+                mListenerRelay.onCheckedChanged(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh, buttonView, isChecked);
             }
         }
     }
 
     /**
-     * @see android.widget.SeekBar.OnSeekBarChangeListener
+     * @see SeekBar.OnSeekBarChangeListener
      */
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if (mListenerRelay != null) {
-            Pair<ListView, VH> pair = findContainingViewHolder(seekBar);
-            if (pair != null) {
-                mListenerRelay.onProgressChanged(pair.first, mProvider.getAdapter(), pair.second, seekBar, progress, fromUser);
+            RecyclerView recyclerView = mProvider.getAttachedRecyclerView();
+            @SuppressWarnings("unchecked")
+            VH vh = (VH) (recyclerView != null ? findContainingViewHolder(recyclerView, seekBar) : null);
+            if (vh != null) {
+                mListenerRelay.onProgressChanged(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh, seekBar, progress, fromUser);
             }
         }
     }
 
     /**
-     * @see android.widget.SeekBar.OnSeekBarChangeListener
+     * @see SeekBar.OnSeekBarChangeListener
      */
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
         if (mListenerRelay != null) {
-            Pair<ListView, VH> pair = findContainingViewHolder(seekBar);
-            if (pair != null) {
-                mListenerRelay.onStartTrackingTouch(pair.first, mProvider.getAdapter(), pair.second, seekBar);
+            RecyclerView recyclerView = mProvider.getAttachedRecyclerView();
+            @SuppressWarnings("unchecked")
+            VH vh = (VH) (recyclerView != null ? findContainingViewHolder(recyclerView, seekBar) : null);
+            if (vh != null) {
+                mListenerRelay.onStartTrackingTouch(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh, seekBar);
             }
         }
     }
 
     /**
-     * @see android.widget.SeekBar.OnSeekBarChangeListener
+     * @see SeekBar.OnSeekBarChangeListener
      */
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
         if (mListenerRelay != null) {
-            Pair<ListView, VH> pair = findContainingViewHolder(seekBar);
-            if (pair != null) {
-                mListenerRelay.onStopTrackingTouch(pair.first, mProvider.getAdapter(), pair.second, seekBar);
+            RecyclerView recyclerView = mProvider.getAttachedRecyclerView();
+            @SuppressWarnings("unchecked")
+            VH vh = (VH) (recyclerView != null ? findContainingViewHolder(recyclerView, seekBar) : null);
+            if (vh != null) {
+                mListenerRelay.onStopTrackingTouch(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh, seekBar);
             }
         }
     }
 
     /**
-     * @see android.widget.AdapterView.OnItemSelectedListener
+     * @see AdapterView.OnItemSelectedListener
      */
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         if (mListenerRelay != null) {
-            Pair<ListView, VH> pair = findContainingViewHolder(parent);
-            if (pair != null) {
-                mListenerRelay.onNothingSelected(pair.first, mProvider.getAdapter(), pair.second, parent);
+            RecyclerView recyclerView = mProvider.getAttachedRecyclerView();
+            @SuppressWarnings("unchecked")
+            VH vh = (VH) (recyclerView != null ? findContainingViewHolder(recyclerView, parent) : null);
+            if (vh != null) {
+                mListenerRelay.onNothingSelected(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh, parent);
             }
         }
     }
 
     /**
-     * @see android.widget.AdapterView.OnItemSelectedListener
+     * @see AdapterView.OnItemSelectedListener
      */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (mListenerRelay != null) {
-            Pair<ListView, VH> pair = findContainingViewHolder(parent);
-            if (pair != null) {
-                mListenerRelay.onItemSelected(pair.first, mProvider.getAdapter(), pair.second, parent, view, position, id);
+            RecyclerView recyclerView = mProvider.getAttachedRecyclerView();
+            @SuppressWarnings("unchecked")
+            VH vh = (VH) (recyclerView != null ? findContainingViewHolder(recyclerView, parent) : null);
+            if (vh != null) {
+                mListenerRelay.onItemSelected(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh, parent, view, position, id);
             }
         }
     }
 
     /**
-     * @see android.widget.TextView.OnEditorActionListener
+     * @see TextView.OnEditorActionListener
      */
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if (mListenerRelay != null) {
-            Pair<ListView, VH> pair = findContainingViewHolder(v);
-            if (pair != null) {
-                return mListenerRelay.onEditorAction(pair.first, mProvider.getAdapter(), pair.second, v, actionId, event);
+            RecyclerView recyclerView = mProvider.getAttachedRecyclerView();
+            @SuppressWarnings("unchecked")
+            VH vh = (VH) (recyclerView != null ? findContainingViewHolder(recyclerView, v) : null);
+            if (vh != null) {
+                return mListenerRelay.onEditorAction(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh, v, actionId, event);
             }
         }
         return false;
@@ -189,9 +206,11 @@ public class ClassicForwardingListener<A extends InnerScrambleAdapter<?>, VH ext
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 if (mListenerRelay != null) {
-                    Pair<ListView, VH> pair = findContainingViewHolder(target);
-                    if (pair != null) {
-                        mListenerRelay.beforeTextChanged(pair.first, mProvider.getAdapter(), pair.second, target, s, start, count, after);
+                    RecyclerView recyclerView = mProvider.getAttachedRecyclerView();
+                    @SuppressWarnings("unchecked")
+                    VH vh = (VH) (recyclerView != null ? findContainingViewHolder(recyclerView, target) : null);
+                    if (vh != null) {
+                        mListenerRelay.beforeTextChanged(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh, target, s, start, count, after);
                     }
                 }
             }
@@ -199,9 +218,11 @@ public class ClassicForwardingListener<A extends InnerScrambleAdapter<?>, VH ext
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (mListenerRelay != null) {
-                    Pair<ListView, VH> pair = findContainingViewHolder(target);
-                    if (pair != null) {
-                        mListenerRelay.onTextChanged(pair.first, mProvider.getAdapter(), pair.second, target, s, start, count, count);
+                    RecyclerView recyclerView = mProvider.getAttachedRecyclerView();
+                    @SuppressWarnings("unchecked")
+                    VH vh = (VH) (recyclerView != null ? findContainingViewHolder(recyclerView, target) : null);
+                    if (vh != null) {
+                        mListenerRelay.onTextChanged(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh, target, s, start, count, count);
                     }
                 }
             }
@@ -209,9 +230,11 @@ public class ClassicForwardingListener<A extends InnerScrambleAdapter<?>, VH ext
             @Override
             public void afterTextChanged(Editable s) {
                 if (mListenerRelay != null) {
-                    Pair<ListView, VH> pair = findContainingViewHolder(target);
-                    if (pair != null) {
-                        mListenerRelay.afterTextChanged(pair.first, mProvider.getAdapter(), pair.second, target, s);
+                    RecyclerView recyclerView = mProvider.getAttachedRecyclerView();
+                    @SuppressWarnings("unchecked")
+                    VH vh = (VH) (recyclerView != null ? findContainingViewHolder(recyclerView, target) : null);
+                    if (vh != null) {
+                        mListenerRelay.afterTextChanged(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh, target, s);
                     }
                 }
             }
@@ -219,18 +242,14 @@ public class ClassicForwardingListener<A extends InnerScrambleAdapter<?>, VH ext
     }
 
     @Nullable
-    public static <VH extends AdapterConverter.ViewHolder> Pair<ListView, VH> findContainingViewHolder(@NonNull View view) {
+    public static AdapterConverter.ViewHolder findContainingViewHolder(@NonNull RecyclerView recyclerView, @NonNull View view) {
         View v = view;
-        VH vh = null;
         while (v != null && v.getParent() instanceof View) {
-            Object tag = v.getTag(AdapterConverter.VIEW_HOLDER);
-            if (tag instanceof AdapterConverter.ViewHolder) {
-                @SuppressWarnings("unchecked")
-                VH t = (VH) tag;
-                vh = t;
-            }
-            if (v.getParent() instanceof ListView && vh != null) {
-                return new Pair<>((ListView) v.getParent(), vh);
+            if (v.getParent() == recyclerView) {
+                RecyclerView.ViewHolder viewHolder = recyclerView.getChildViewHolder(v);
+                if (viewHolder instanceof AdapterConverter.ViewHolder) {
+                    return (AdapterConverter.ViewHolder) viewHolder;
+                }
             }
             v = (View) v.getParent();
         }
