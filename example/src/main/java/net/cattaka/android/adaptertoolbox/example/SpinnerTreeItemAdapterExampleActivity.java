@@ -3,6 +3,7 @@ package net.cattaka.android.adaptertoolbox.example;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -76,7 +77,7 @@ public class SpinnerTreeItemAdapterExampleActivity extends AppCompatActivity imp
             SpinnerMyTreeItemAdapter.WrappedItem wrappedItem = (SpinnerMyTreeItemAdapter.WrappedItem) parent.getItemAtPosition(position);
             MyTreeItem item = wrappedItem.getItem();
             String text = (item != null) ? item.getText() : "null";
-            Toast.makeText(this, text + " is selected.", Toast.LENGTH_SHORT).show();
+            Snackbar.make(parent, text + " is selected.", Snackbar.LENGTH_SHORT).show();
         }
     }
 
