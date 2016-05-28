@@ -3,6 +3,7 @@ package net.cattaka.android.adaptertoolbox.classic.listener;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.util.Pair;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -10,43 +11,21 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import net.cattaka.android.adaptertoolbox.adapter.AdapterConverter;
-import net.cattaka.android.adaptertoolbox.adapter.listener.IForwardingListener;
-import net.cattaka.android.adaptertoolbox.classic.InnerScrambleAdapter;
+import net.cattaka.android.adaptertoolbox.adapter.listener.ForwardingListener;
+import net.cattaka.android.adaptertoolbox.classic.ClassicScrambleAdapter;
 
 /**
  * Created by cattaka on 2016/05/12.
  */
-public class ClassicForwardingListener
-        implements IForwardingListener<InnerScrambleAdapter<?>, AdapterConverter.ViewHolder, ClassicListenerRelay<AdapterConverter.ViewHolder>>,
-        View.OnClickListener,
-        View.OnLongClickListener,
-        RadioGroup.OnCheckedChangeListener,
-        CompoundButton.OnCheckedChangeListener,
-        SeekBar.OnSeekBarChangeListener,
-        AdapterView.OnItemSelectedListener,
-        TextView.OnEditorActionListener {
-
-    private IProvider<InnerScrambleAdapter<?>, AdapterConverter.ViewHolder> mProvider;
-    private ClassicListenerRelay<AdapterConverter.ViewHolder> mListenerRelay;
-
-    public ClassicForwardingListener() {
-    }
-
-    @Override
-    public void setListenerRelay(@Nullable ClassicListenerRelay<AdapterConverter.ViewHolder> listenerRelay) {
-        mListenerRelay = listenerRelay;
-    }
-
-    @Override
-    public void setProvider(@NonNull IProvider<InnerScrambleAdapter<?>, AdapterConverter.ViewHolder> provider) {
-        mProvider = provider;
-    }
+public class ClassicForwardingListener<A extends RecyclerView.Adapter<? extends VH>, VH extends RecyclerView.ViewHolder>
+        extends ForwardingListener<A, VH> {
+    ClassicScrambleAdapter<?> mAdapter;
+    ClassicListenerRelay mListenerRelay;
 
     /**
      * @see View.OnClickListener
@@ -54,9 +33,9 @@ public class ClassicForwardingListener
     @Override
     public void onClick(View view) {
         if (mListenerRelay != null) {
-            Pair<AdapterView<?>, AdapterConverter.ViewHolder> pair = findContainingViewHolder(view);
+            Pair<AdapterView<?>, AdapterConverter.ViewHolderWrapper> pair = findContainingViewHolder(view);
             if (pair != null) {
-                mListenerRelay.onClick(pair.first, mProvider.getAdapter().getParentAdapter(), pair.second, view);
+                mListenerRelay.onClick(pair.first, mAdapter, pair.second.getPosition(), pair.second.getOrig(), view);
             }
         }
     }
@@ -67,9 +46,9 @@ public class ClassicForwardingListener
     @Override
     public boolean onLongClick(View view) {
         if (mListenerRelay != null) {
-            Pair<AdapterView<?>, AdapterConverter.ViewHolder> pair = findContainingViewHolder(view);
+            Pair<AdapterView<?>, AdapterConverter.ViewHolderWrapper> pair = findContainingViewHolder(view);
             if (pair != null) {
-                return mListenerRelay.onLongClick(pair.first, mProvider.getAdapter().getParentAdapter(), pair.second, view);
+                return mListenerRelay.onLongClick(pair.first, mAdapter, pair.second.getPosition(), pair.second.getOrig(), view);
             }
         }
         return false;
@@ -81,9 +60,9 @@ public class ClassicForwardingListener
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         if (mListenerRelay != null) {
-            Pair<AdapterView<?>, AdapterConverter.ViewHolder> pair = findContainingViewHolder(group);
+            Pair<AdapterView<?>, AdapterConverter.ViewHolderWrapper> pair = findContainingViewHolder(group);
             if (pair != null) {
-                mListenerRelay.onCheckedChanged(pair.first, mProvider.getAdapter().getParentAdapter(), pair.second, group, checkedId);
+                mListenerRelay.onCheckedChanged(pair.first, mAdapter, pair.second.getPosition(), pair.second.getOrig(), group, checkedId);
             }
         }
     }
@@ -94,9 +73,9 @@ public class ClassicForwardingListener
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (mListenerRelay != null) {
-            Pair<AdapterView<?>, AdapterConverter.ViewHolder> pair = findContainingViewHolder(buttonView);
+            Pair<AdapterView<?>, AdapterConverter.ViewHolderWrapper> pair = findContainingViewHolder(buttonView);
             if (pair != null) {
-                mListenerRelay.onCheckedChanged(pair.first, mProvider.getAdapter().getParentAdapter(), pair.second, buttonView, isChecked);
+                mListenerRelay.onCheckedChanged(pair.first, mAdapter, pair.second.getPosition(), pair.second.getOrig(), buttonView, isChecked);
             }
         }
     }
@@ -107,9 +86,9 @@ public class ClassicForwardingListener
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if (mListenerRelay != null) {
-            Pair<AdapterView<?>, AdapterConverter.ViewHolder> pair = findContainingViewHolder(seekBar);
+            Pair<AdapterView<?>, AdapterConverter.ViewHolderWrapper> pair = findContainingViewHolder(seekBar);
             if (pair != null) {
-                mListenerRelay.onProgressChanged(pair.first, mProvider.getAdapter().getParentAdapter(), pair.second, seekBar, progress, fromUser);
+                mListenerRelay.onProgressChanged(pair.first, mAdapter, pair.second.getPosition(), pair.second.getOrig(), seekBar, progress, fromUser);
             }
         }
     }
@@ -120,9 +99,9 @@ public class ClassicForwardingListener
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
         if (mListenerRelay != null) {
-            Pair<AdapterView<?>, AdapterConverter.ViewHolder> pair = findContainingViewHolder(seekBar);
+            Pair<AdapterView<?>, AdapterConverter.ViewHolderWrapper> pair = findContainingViewHolder(seekBar);
             if (pair != null) {
-                mListenerRelay.onStartTrackingTouch(pair.first, mProvider.getAdapter().getParentAdapter(), pair.second, seekBar);
+                mListenerRelay.onStartTrackingTouch(pair.first, mAdapter, pair.second.getPosition(), pair.second.getOrig(), seekBar);
             }
         }
     }
@@ -133,9 +112,9 @@ public class ClassicForwardingListener
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
         if (mListenerRelay != null) {
-            Pair<AdapterView<?>, AdapterConverter.ViewHolder> pair = findContainingViewHolder(seekBar);
+            Pair<AdapterView<?>, AdapterConverter.ViewHolderWrapper> pair = findContainingViewHolder(seekBar);
             if (pair != null) {
-                mListenerRelay.onStopTrackingTouch(pair.first, mProvider.getAdapter().getParentAdapter(), pair.second, seekBar);
+                mListenerRelay.onStopTrackingTouch(pair.first, mAdapter, pair.second.getPosition(), pair.second.getOrig(), seekBar);
             }
         }
     }
@@ -146,9 +125,9 @@ public class ClassicForwardingListener
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         if (mListenerRelay != null) {
-            Pair<AdapterView<?>, AdapterConverter.ViewHolder> pair = findContainingViewHolder(parent);
+            Pair<AdapterView<?>, AdapterConverter.ViewHolderWrapper> pair = findContainingViewHolder(parent);
             if (pair != null) {
-                mListenerRelay.onNothingSelected(pair.first, mProvider.getAdapter().getParentAdapter(), pair.second, parent);
+                mListenerRelay.onNothingSelected(pair.first, mAdapter, pair.second.getPosition(), pair.second.getOrig(), parent);
             }
         }
     }
@@ -159,9 +138,9 @@ public class ClassicForwardingListener
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (mListenerRelay != null) {
-            Pair<AdapterView<?>, AdapterConverter.ViewHolder> pair = findContainingViewHolder(parent);
+            Pair<AdapterView<?>, AdapterConverter.ViewHolderWrapper> pair = findContainingViewHolder(parent);
             if (pair != null) {
-                mListenerRelay.onItemSelected(pair.first, mProvider.getAdapter().getParentAdapter(), pair.second, parent, view, position, id);
+                mListenerRelay.onItemSelected(pair.first, mAdapter, pair.second.getPosition(), pair.second.getOrig(), parent, view, position, id);
             }
         }
     }
@@ -172,9 +151,9 @@ public class ClassicForwardingListener
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if (mListenerRelay != null) {
-            Pair<AdapterView<?>, AdapterConverter.ViewHolder> pair = findContainingViewHolder(v);
+            Pair<AdapterView<?>, AdapterConverter.ViewHolderWrapper> pair = findContainingViewHolder(v);
             if (pair != null) {
-                return mListenerRelay.onEditorAction(pair.first, mProvider.getAdapter().getParentAdapter(), pair.second, v, actionId, event);
+                return mListenerRelay.onEditorAction(pair.first, mAdapter, pair.second.getPosition(), pair.second.getOrig(), v, actionId, event);
             }
         }
         return false;
@@ -188,9 +167,9 @@ public class ClassicForwardingListener
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 if (mListenerRelay != null) {
-                    Pair<AdapterView<?>, AdapterConverter.ViewHolder> pair = findContainingViewHolder(target);
+                    Pair<AdapterView<?>, AdapterConverter.ViewHolderWrapper> pair = findContainingViewHolder(target);
                     if (pair != null) {
-                        mListenerRelay.beforeTextChanged(pair.first, mProvider.getAdapter().getParentAdapter(), pair.second, target, s, start, count, after);
+                        mListenerRelay.beforeTextChanged(pair.first, mAdapter, pair.second.getPosition(), pair.second.getOrig(), target, s, start, count, after);
                     }
                 }
             }
@@ -198,9 +177,9 @@ public class ClassicForwardingListener
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (mListenerRelay != null) {
-                    Pair<AdapterView<?>, AdapterConverter.ViewHolder> pair = findContainingViewHolder(target);
+                    Pair<AdapterView<?>, AdapterConverter.ViewHolderWrapper> pair = findContainingViewHolder(target);
                     if (pair != null) {
-                        mListenerRelay.onTextChanged(pair.first, mProvider.getAdapter().getParentAdapter(), pair.second, target, s, start, count, count);
+                        mListenerRelay.onTextChanged(pair.first, mAdapter, pair.second.getPosition(), pair.second.getOrig(), target, s, start, count, count);
                     }
                 }
             }
@@ -208,9 +187,9 @@ public class ClassicForwardingListener
             @Override
             public void afterTextChanged(Editable s) {
                 if (mListenerRelay != null) {
-                    Pair<AdapterView<?>, AdapterConverter.ViewHolder> pair = findContainingViewHolder(target);
+                    Pair<AdapterView<?>, AdapterConverter.ViewHolderWrapper> pair = findContainingViewHolder(target);
                     if (pair != null) {
-                        mListenerRelay.afterTextChanged(pair.first, mProvider.getAdapter().getParentAdapter(), pair.second, target, s);
+                        mListenerRelay.afterTextChanged(pair.first, mAdapter, pair.second.getPosition(), pair.second.getOrig(), target, s);
                     }
                 }
             }
@@ -218,13 +197,13 @@ public class ClassicForwardingListener
     }
 
     @Nullable
-    public static Pair<AdapterView<?>, AdapterConverter.ViewHolder> findContainingViewHolder(@NonNull View view) {
+    public Pair<AdapterView<?>, AdapterConverter.ViewHolderWrapper> findContainingViewHolder(@NonNull View view) {
         View v = view;
         while (v != null && v.getParent() instanceof View) {
-            if (v.getParent() instanceof ListView) {
+            if (v.getParent() instanceof AdapterView) {
                 Object tag = v.getTag(AdapterConverter.VIEW_HOLDER);
-                if (tag instanceof AdapterConverter.ViewHolder) {
-                    return new Pair<AdapterView<?>, AdapterConverter.ViewHolder>((AdapterView<?>) v, (AdapterConverter.ViewHolder) tag);
+                if (tag instanceof AdapterConverter.ViewHolderWrapper) {
+                    return new Pair<AdapterView<?>, AdapterConverter.ViewHolderWrapper>((AdapterView<?>) v, (AdapterConverter.ViewHolderWrapper) tag);
                 }
             }
             v = (View) v.getParent();
