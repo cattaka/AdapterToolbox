@@ -47,10 +47,13 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(@NonNull RecyclerView recyclerView, @NonNull ActivityEntryAdapter adapter, @NonNull ActivityEntryAdapter.ViewHolder viewHolder, @NonNull View view) {
             if (recyclerView.getId() == R.id.recycler) {
-                ActivityEntry entry = adapter.getItemAt(viewHolder.getAdapterPosition()).getItem();
+                ActivityEntryAdapter.WrappedItem wrappedItem = adapter.getItemAt(viewHolder.getAdapterPosition());
+                ActivityEntry entry = wrappedItem.getItem();
                 if (entry != null && entry.getClazz() != null) {
                     Intent intent = new Intent(MainActivity.this, entry.getClazz());
                     startActivity(intent);
+                } else {
+                    adapter.doOpen(wrappedItem, !wrappedItem.isOpened());
                 }
             }
         }

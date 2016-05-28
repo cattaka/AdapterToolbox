@@ -77,7 +77,7 @@ public abstract class AbsTreeItemAdapter<
         return mItems;
     }
 
-    protected void doOpen(W item, boolean opened) {
+    public void doOpen(W item, boolean opened) {
         if (item.isOpened() != opened) {
             item.setOpened(opened);
             List<W> children = new ArrayList<>();
