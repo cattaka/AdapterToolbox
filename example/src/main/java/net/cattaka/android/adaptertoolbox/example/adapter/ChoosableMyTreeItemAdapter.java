@@ -55,7 +55,7 @@ public class ChoosableMyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
                 WrappedItem item = getItemAt(position);
                 switch (view.getId()) {
                     case R.id.check_opened: {
-                        doOpen(item, !item.opened);
+                        doOpen(item, !item.isOpened());
                         break;
                     }
                     default: {
@@ -98,8 +98,8 @@ public class ChoosableMyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
             holder.openedCheck.setVisibility(hasChildren ? View.VISIBLE : View.INVISIBLE);
         }
 
-        holder.chosenCheck.setChecked(wrappedItem.chosen);
-        holder.openedCheck.setChecked(wrappedItem.opened);
+        holder.chosenCheck.setChecked(wrappedItem.isChecked());
+        holder.openedCheck.setChecked(wrappedItem.isOpened());
         holder.labelText.setText(item.getText());
     }
 
