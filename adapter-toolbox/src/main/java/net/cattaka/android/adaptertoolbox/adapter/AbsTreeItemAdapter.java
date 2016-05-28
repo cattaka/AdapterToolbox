@@ -37,7 +37,7 @@ public abstract class AbsTreeItemAdapter<
     List<W> inflateWrappedList(@NonNull List<W> dest, @NonNull List<T> items, int level, @Nullable W parent, @NonNull REF ref) {
         for (T item : items) {
             W child = ref.createWrappedItem(level, item, parent);
-            child.opened = true;
+            child.setOpened(true);
             dest.add(child);
             if (parent != null) {
                 parent.children.add(child);
@@ -83,8 +83,8 @@ public abstract class AbsTreeItemAdapter<
     }
 
     protected void doOpen(W item, boolean opened) {
-        if (item.opened != opened) {
-            item.opened = opened;
+        if (item.isOpened() != opened) {
+            item.setOpened(opened);
             List<W> children = new ArrayList<>();
             flattenChildren(children, item);
             if (opened) {
@@ -107,7 +107,7 @@ public abstract class AbsTreeItemAdapter<
         if (item.children != null) {
             for (W child : item.children) {
                 dest.add(child);
-                if (child.opened) {
+                if (child.isOpened()) {
                     flattenChildren(dest, child);
                 }
             }
@@ -116,10 +116,10 @@ public abstract class AbsTreeItemAdapter<
 
     public static class WrappedItem<W extends WrappedItem<W, T>, T extends ITreeItem<T>> {
         public final int level;
-        public boolean opened;
         public final T item;
-        public W parent;
         public final List<W> children = new ArrayList<>();
+        public final W parent;
+        private boolean opened;
 
         public WrappedItem(int level, T item, @NonNull W parent) {
             this.level = level;
@@ -129,6 +129,14 @@ public abstract class AbsTreeItemAdapter<
 
         public T getItem() {
             return item;
+        }
+
+        public boolean isOpened() {
+            return opened;
+        }
+
+        void setOpened(boolean opened) {
+            this.opened = opened;
         }
 
         @Override
