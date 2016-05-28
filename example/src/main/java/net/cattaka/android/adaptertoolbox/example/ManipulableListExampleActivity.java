@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * Created by cattaka on 16/05/15.
  */
-public class OperatableListExampleActivity extends AppCompatActivity {
+public class ManipulableListExampleActivity extends AppCompatActivity {
     ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder> mListenerRelay = new ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder>() {
         @Override
         public void onCheckedChanged(@NonNull RecyclerView recyclerView, @NonNull ScrambleAdapter<?> adapter, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull CompoundButton buttonView, boolean isChecked) {
@@ -109,7 +109,7 @@ public class OperatableListExampleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_multi_adapter_example);
+        setContentView(R.layout.activity_manipulable_list_example);
 
         // find views
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler);

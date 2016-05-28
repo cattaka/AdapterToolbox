@@ -17,24 +17,24 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private static final List<ActivityEntry> ACTIVITY_ENTRIES = Arrays.asList(
-            new ActivityEntry("Spinner", null,
+            new ActivityEntry("Enum with Spinner", null,
                     new ActivityEntry("CodeLabelAdapter", CodeLabelExampleActivity.class)
             ),
-            new ActivityEntry("RecyclerView", null,
+            new ActivityEntry("MergeRecyclerAdapter", null,
                     new ActivityEntry("Simple String", SimpleStringExampleActivity.class),
-                    new ActivityEntry("Complex String", ComplexStringExampleActivity.class),
+                    new ActivityEntry("Multi event handling", ComplexStringExampleActivity.class),
                     new ActivityEntry("Header and footer", RecyclerViewHeaderExampleActivity.class),
-                    new ActivityEntry("Multi adapter", MultiAdapterExampleActivity.class)
+                    new ActivityEntry("Sectioned list by multi adapters", MultiAdapterExampleActivity.class)
             ),
             new ActivityEntry("ScrambleAdapter", null,
-                    new ActivityEntry("ScrambleAdapter", ScrambleAdapterExampleActivity.class),
-                    new ActivityEntry("Operatable list", OperatableListExampleActivity.class),
+                    new ActivityEntry("Multi types in List<Object>", ScrambleAdapterExampleActivity.class),
+                    new ActivityEntry("Manipulable list", ManipulableListExampleActivity.class),
                     new ActivityEntry("Nested ScrambleAdapter", NestedScrambleAdapterExampleActivity.class),
-                    new ActivityEntry("Multi adapter", MultiAdapterExampleActivity.class)
+                    new ActivityEntry("Sectioned list by List<Object>", MultiAdapterExampleActivity.class)
             ),
             new ActivityEntry("Tree", null,
                     new ActivityEntry("Simple tree", TreeItemAdapterExampleActivity.class),
-                    new ActivityEntry("Choosable tree", ChoosableTreeItemAdapterExampleActivity.class)
+                    new ActivityEntry("Selectable tree", ChoosableTreeItemAdapterExampleActivity.class)
             ),
             new ActivityEntry("Classic AdapterView", null,
                     new ActivityEntry("ClassicScrambleAdapter with ListView", ClassicScrambleAdapterExampleActivity.class),

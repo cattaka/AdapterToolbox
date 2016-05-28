@@ -11,7 +11,6 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import net.cattaka.android.adaptertoolbox.adapter.AbsChoosableTreeItemAdapter;
-import net.cattaka.android.adaptertoolbox.adapter.AbsTreeItemAdapter;
 import net.cattaka.android.adaptertoolbox.example.R;
 import net.cattaka.android.adaptertoolbox.example.data.MyTreeItem;
 
