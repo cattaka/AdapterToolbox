@@ -42,7 +42,7 @@ public class TextInfoViewHolderFactory extends ScrambleAdapter.AbsViewHolderFact
         return object instanceof TextInfo;
     }
 
-    public class ViewHolder extends AdapterConverter.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public final EditText editText;
         public final View goButton;
 

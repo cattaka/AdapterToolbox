@@ -27,6 +27,22 @@ public class ClassicForwardingListener<A extends RecyclerView.Adapter<? extends 
     ClassicScrambleAdapter<?> mAdapter;
     ClassicListenerRelay mListenerRelay;
 
+    public ClassicScrambleAdapter<?> getAdapter() {
+        return mAdapter;
+    }
+
+    public void setAdapter(ClassicScrambleAdapter<?> adapter) {
+        mAdapter = adapter;
+    }
+
+    public ClassicListenerRelay getListenerRelay() {
+        return mListenerRelay;
+    }
+
+    public void setClassicListenerRelay(ClassicListenerRelay listenerRelay) {
+        mListenerRelay = listenerRelay;
+    }
+
     /**
      * @see View.OnClickListener
      */
@@ -203,7 +219,7 @@ public class ClassicForwardingListener<A extends RecyclerView.Adapter<? extends 
             if (v.getParent() instanceof AdapterView) {
                 Object tag = v.getTag(AdapterConverter.VIEW_HOLDER);
                 if (tag instanceof AdapterConverter.ViewHolderWrapper) {
-                    return new Pair<AdapterView<?>, AdapterConverter.ViewHolderWrapper>((AdapterView<?>) v, (AdapterConverter.ViewHolderWrapper) tag);
+                    return new Pair<AdapterView<?>, AdapterConverter.ViewHolderWrapper>((AdapterView<?>) v.getParent(), (AdapterConverter.ViewHolderWrapper) tag);
                 }
             }
             v = (View) v.getParent();

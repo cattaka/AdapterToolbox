@@ -8,6 +8,7 @@ import android.view.View;
 
 import net.cattaka.android.adaptertoolbox.adapter.listener.ForwardingListener;
 import net.cattaka.android.adaptertoolbox.adapter.listener.ListenerRelay;
+import net.cattaka.android.adaptertoolbox.classic.listener.ClassicForwardingListener;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,11 +21,12 @@ public class ScrambleAdapter<T> extends AbsScrambleAdapter<
         ScrambleAdapter<?>,
         RecyclerView.ViewHolder,
         ForwardingListener<ScrambleAdapter<?>, RecyclerView.ViewHolder>,
-        ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder>,
         T
         > {
     private Context mContext;
     private List<T> mItems;
+
+    private ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder> mListenerRelay;
 
     @SafeVarargs
     public ScrambleAdapter(
@@ -35,9 +37,8 @@ public class ScrambleAdapter<T> extends AbsScrambleAdapter<
             @NonNull IViewHolderFactory<ScrambleAdapter<?>,
                     RecyclerView.ViewHolder,
                     ForwardingListener<ScrambleAdapter<?>, RecyclerView.ViewHolder>,
-                    ?,
-                    ListenerRelay<ScrambleAdapter<?>,
-                            RecyclerView.ViewHolder>>... iViewHolderFactories
+                    ?
+                    >... iViewHolderFactories
     ) {
         this(context, items, listenerRelay, Arrays.asList(iViewHolderFactories));
     }
@@ -50,17 +51,26 @@ public class ScrambleAdapter<T> extends AbsScrambleAdapter<
             @NonNull List<? extends IViewHolderFactory<ScrambleAdapter<?>,
                     RecyclerView.ViewHolder,
                     ForwardingListener<ScrambleAdapter<?>, RecyclerView.ViewHolder>,
-                    ?,
-                    ListenerRelay<ScrambleAdapter<?>,
-                            RecyclerView.ViewHolder>>> iViewHolderFactories
+                    ?
+                    >> iViewHolderFactories
     ) {
-        super(listenerRelay, iViewHolderFactories);
+        super(iViewHolderFactories);
         this.mContext = context;
         this.mItems = items;
+        this.mListenerRelay = listenerRelay;
     }
 
     public Context getContext() {
         return mContext;
+    }
+
+    @Override
+    public ForwardingListener<ScrambleAdapter<?>, RecyclerView.ViewHolder> createForwardingListener(IViewHolderFactory<ScrambleAdapter<?>, RecyclerView.ViewHolder, ForwardingListener<ScrambleAdapter<?>, RecyclerView.ViewHolder>, ?> viewHolderFactory) {
+        ForwardingListener<ScrambleAdapter<?>, RecyclerView.ViewHolder> forwardingListener = viewHolderFactory.createForwardingListener();
+        if (forwardingListener != null) {
+            forwardingListener.setListenerRelay(mListenerRelay);
+        }
+        return forwardingListener;
     }
 
     @NonNull
@@ -80,12 +90,6 @@ public class ScrambleAdapter<T> extends AbsScrambleAdapter<
         return mItems;
     }
 
-    @NonNull
-    @Override
-    public ScrambleAdapter<T> getSelf() {
-        return this;
-    }
-
     @Override
     public int getItemCount() {
         return mItems.size();
@@ -96,8 +100,7 @@ public class ScrambleAdapter<T> extends AbsScrambleAdapter<
             ScrambleAdapter<?>,
             RecyclerView.ViewHolder,
             ForwardingListener<ScrambleAdapter<?>, RecyclerView.ViewHolder>,
-            EVH,
-            ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder>
+            EVH
             > {
 
         @Override
@@ -110,6 +113,10 @@ public class ScrambleAdapter<T> extends AbsScrambleAdapter<
         @Override
         public ForwardingListener<ScrambleAdapter<?>, RecyclerView.ViewHolder> createForwardingListener() {
             return new ForwardingListener<>();
+        }
+
+        public ClassicForwardingListener<ScrambleAdapter<?>, RecyclerView.ViewHolder> createClassicForwardingListener() {
+            return new ClassicForwardingListener<>();
         }
 
         @Override

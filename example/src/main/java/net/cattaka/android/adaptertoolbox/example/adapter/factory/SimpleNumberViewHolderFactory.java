@@ -39,7 +39,7 @@ public class SimpleNumberViewHolderFactory extends ScrambleAdapter.AbsViewHolder
         return object instanceof Number;
     }
 
-    public static class ViewHolder extends AdapterConverter.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView text;
 
         public ViewHolder(View itemView) {

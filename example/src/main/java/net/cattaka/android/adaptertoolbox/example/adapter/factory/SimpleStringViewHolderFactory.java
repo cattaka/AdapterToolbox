@@ -40,7 +40,7 @@ public class SimpleStringViewHolderFactory extends ScrambleAdapter.AbsViewHolder
         return object instanceof String;
     }
 
-    public static class ViewHolder extends AdapterConverter.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView text;
 
         public ViewHolder(View itemView) {

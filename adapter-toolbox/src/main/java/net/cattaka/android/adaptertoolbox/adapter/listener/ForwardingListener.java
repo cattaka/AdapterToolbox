@@ -18,7 +18,7 @@ import android.widget.TextView;
  * Created by cattaka on 2016/05/12.
  */
 public class ForwardingListener<A extends RecyclerView.Adapter<? extends VH>, VH extends RecyclerView.ViewHolder>
-        implements IForwardingListener<A, VH, ListenerRelay<A, VH>>,
+        implements IForwardingListener<A, VH>,
         View.OnClickListener,
         View.OnLongClickListener,
         RadioGroup.OnCheckedChangeListener,
@@ -33,7 +33,6 @@ public class ForwardingListener<A extends RecyclerView.Adapter<? extends VH>, VH
     public ForwardingListener() {
     }
 
-    @Override
     public void setListenerRelay(@Nullable ListenerRelay<A, VH> listenerRelay) {
         mListenerRelay = listenerRelay;
     }

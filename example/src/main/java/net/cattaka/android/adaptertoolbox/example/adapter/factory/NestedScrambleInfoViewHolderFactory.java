@@ -43,7 +43,7 @@ public class NestedScrambleInfoViewHolderFactory extends ScrambleAdapter.AbsView
         holder.recyclerView.setAdapter(nextedAdapter);
     }
 
-    public static class ViewHolder extends AdapterConverter.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         RecyclerView recyclerView;
 
         public ViewHolder(View itemView) {

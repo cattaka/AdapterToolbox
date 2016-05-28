@@ -51,7 +51,7 @@ public class MyInfoViewHolderFactory extends ScrambleAdapter.AbsViewHolderFactor
         return object instanceof MyInfo;
     }
 
-    public class ViewHolder extends AdapterConverter.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         SeekBar intValueSeek;
         Spinner ordinalLabelSpinner;
         Switch checkedSwitch;

@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by cattaka on 2015/07/30.
  */
-public class SingleViewAdapter extends CustomRecyclerAdapter<RecyclerView.ViewHolder, Object> {
+public class SingleViewAdapter extends CustomRecyclerAdapter<SingleViewAdapter, RecyclerView.ViewHolder, Object> {
     private Context mContext;
     @LayoutRes
     private int mViewResId;

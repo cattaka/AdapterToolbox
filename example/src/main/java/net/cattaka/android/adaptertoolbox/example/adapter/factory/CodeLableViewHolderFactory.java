@@ -50,7 +50,7 @@ public class CodeLableViewHolderFactory extends ScrambleAdapter.AbsViewHolderFac
         return object instanceof ICodeLabel;
     }
 
-    public static class ViewHolder extends AdapterConverter.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView codeText;
         TextView labelText;
 

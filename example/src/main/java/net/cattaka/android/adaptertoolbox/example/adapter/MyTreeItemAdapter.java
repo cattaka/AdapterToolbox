@@ -21,11 +21,12 @@ import java.util.List;
  * Created by cattaka on 16/05/21.
  */
 public class MyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
+        MyTreeItemAdapter,
         MyTreeItemAdapter.ViewHolder,
         MyTreeItem,
         MyTreeItemAdapter.WrappedItem
         > {
-    public static ITreeItemAdapterRef<ViewHolder, MyTreeItem, WrappedItem> REF = new ITreeItemAdapterRef<ViewHolder, MyTreeItem, WrappedItem>() {
+    public static ITreeItemAdapterRef<MyTreeItemAdapter, ViewHolder, MyTreeItem, WrappedItem> REF = new ITreeItemAdapterRef<MyTreeItemAdapter, ViewHolder, MyTreeItem, WrappedItem>() {
         @NonNull
         @Override
         public Class<MyTreeItem> getItemClass() {
@@ -34,7 +35,7 @@ public class MyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
 
         @NonNull
         @Override
-        public AbsTreeItemAdapter<ViewHolder, MyTreeItem, WrappedItem> createAdapter(@NonNull Context context, @NonNull List<MyTreeItem> items) {
+        public MyTreeItemAdapter createAdapter(@NonNull Context context, @NonNull List<MyTreeItem> items) {
             return new MyTreeItemAdapter(context, items);
         }
 

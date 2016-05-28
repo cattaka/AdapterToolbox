@@ -1,5 +1,6 @@
 package net.cattaka.android.adaptertoolbox.adapter;
 
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 
 import net.cattaka.android.adaptertoolbox.adapter.listener.ForwardingListener;
@@ -9,23 +10,22 @@ import net.cattaka.android.adaptertoolbox.adapter.listener.ListenerRelay;
  * Created by cattaka on 2015/07/15.
  */
 public abstract class CustomRecyclerAdapter<
+        A extends CustomRecyclerAdapter<A, VH, T>,
         VH extends RecyclerView.ViewHolder,
         T
         > extends AbsCustomRecyclerAdapter<
-        CustomRecyclerAdapter<VH, T>,
+        A,
         VH,
         T,
-        ForwardingListener<CustomRecyclerAdapter<VH, T>, VH>,
-        ListenerRelay<CustomRecyclerAdapter<VH, T>, VH>
+        ForwardingListener<A, VH>
         > {
 
     @Override
-    public CustomRecyclerAdapter<VH, T> getSelf() {
-        return this;
+    public ForwardingListener<A, VH> createForwardingListener() {
+        return new ForwardingListener<>();
     }
 
-    @Override
-    public ForwardingListener<CustomRecyclerAdapter<VH, T>, VH> createForwardingListener() {
-        return new ForwardingListener<>();
+    public void setListenerRelay(@Nullable ListenerRelay<A, VH> listenerRelay) {
+        getForwardingListener().setListenerRelay(listenerRelay);
     }
 }

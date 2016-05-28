@@ -17,7 +17,7 @@ import android.widget.TextView;
 public class ListenerRelay<
         A extends RecyclerView.Adapter<? extends VH>,
         VH extends RecyclerView.ViewHolder
-        > implements IListenerRelay<VH> {
+        > {
 
     /**
      * @see android.view.View.OnClickListener
