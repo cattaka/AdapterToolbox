@@ -23,6 +23,7 @@ public class AdapterConverter<
     public static int VIEW_HOLDER = R.id.viewholder;
 
     private S mOrig;
+    private boolean mRecyclingDisabled = false;
 
     public AdapterConverter(@NonNull Context context, @NonNull S orig) {
         super();
@@ -51,18 +52,25 @@ public class AdapterConverter<
 
     @Override
     public int getItemViewType(int position) {
-        return mOrig.getItemViewType(position);
+        return mRecyclingDisabled ? 1 : mOrig.getItemViewType(position);
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return mRecyclingDisabled ? 1 : mOrig.getViewTypeCount();
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        int itemViewType = mOrig.getItemViewType(position);
         @SuppressWarnings("unchecked")
         ViewHolderWrapper<VH> vhw = convertView != null ? (ViewHolderWrapper<VH>) findViewHolder(convertView) : null;
-        if (vhw == null) {
-            vhw = new ViewHolderWrapper<>(mOrig.onCreateViewHolder(parent, getItemViewType(position)));
+        if (vhw == null || vhw.getItemViewType() != itemViewType) {
+            vhw = new ViewHolderWrapper<>(mOrig.onCreateViewHolder(parent, itemViewType));
             vhw.getOrig().itemView.setTag(VIEW_HOLDER, vhw);
         }
         vhw.setPosition(position);
+        vhw.setItemViewType(itemViewType);
 
         mOrig.onBindViewHolder(vhw.getOrig(), position);
         return vhw.getOrig().itemView;
@@ -70,13 +78,15 @@ public class AdapterConverter<
 
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
+        int itemViewType = mOrig.getItemViewType(position);
         @SuppressWarnings("unchecked")
         ViewHolderWrapper<VH> vhw = convertView != null ? (ViewHolderWrapper<VH>) findViewHolder(convertView) : null;
-        if (vhw == null) {
-            vhw = new ViewHolderWrapper<>(mOrig.onCreateViewHolder(parent, getItemViewType(position)));
+        if (vhw == null || vhw.getItemViewType() != itemViewType) {
+            vhw = new ViewHolderWrapper<>(mOrig.onCreateViewHolder(parent, itemViewType));
             vhw.getOrig().itemView.setTag(VIEW_HOLDER, vhw);
         }
         vhw.setPosition(position);
+        vhw.setItemViewType(itemViewType);
 
         mOrig.onBindViewHolder(vhw.getOrig(), position);
         return vhw.getOrig().itemView;
@@ -95,9 +105,18 @@ public class AdapterConverter<
         return null;
     }
 
+    public boolean isRecyclingDisabled() {
+        return mRecyclingDisabled;
+    }
+
+    public void setRecyclingDisabled(boolean recyclingDisabled) {
+        mRecyclingDisabled = recyclingDisabled;
+    }
+
     public static class ViewHolderWrapper<VH extends RecyclerView.ViewHolder> {
         VH orig;
         private int position;
+        private int itemViewType;
 
         public ViewHolderWrapper(VH orig) {
             this.orig = orig;
@@ -113,6 +132,14 @@ public class AdapterConverter<
 
         void setPosition(int position) {
             this.position = position;
+        }
+
+        public int getItemViewType() {
+            return itemViewType;
+        }
+
+        public void setItemViewType(int itemViewType) {
+            this.itemViewType = itemViewType;
         }
     }
 }

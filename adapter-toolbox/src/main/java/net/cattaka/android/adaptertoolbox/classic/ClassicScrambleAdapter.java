@@ -55,10 +55,6 @@ public class ClassicScrambleAdapter<T> extends AdapterConverter<ScrambleAdapter<
         }
     }
 
-    private void initialize() {
-        ClassicForwardingListener<ScrambleAdapter<?>, RecyclerView.ViewHolder> forwardingListener = new ClassicForwardingListener<>();
-    }
-
     private static class InnerScrambleAdapter<T> extends ScrambleAdapter<T> {
         ClassicScrambleAdapter<T> mParentAdapter;
         ClassicListenerRelay mClassicListenerRelay;

@@ -147,6 +147,10 @@ public abstract class AbsScrambleAdapter<
         return (SA) this;
     }
 
+    public int getViewTypeCount() {
+        return mViewHolderFactory.size();
+    }
+
     @Nullable
     public abstract FL createForwardingListener(@NonNull IViewHolderFactory<SA, VH, FL, ?> viewHolderFactory);
 

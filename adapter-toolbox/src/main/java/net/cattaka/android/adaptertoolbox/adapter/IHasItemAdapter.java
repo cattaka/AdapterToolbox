@@ -13,6 +13,8 @@ public interface IHasItemAdapter<VH extends RecyclerView.ViewHolder, T> {
 
     int getItemViewType(int position);
 
+    int getViewTypeCount();
+
     int getItemCount();
 
     T getItemAt(int position);

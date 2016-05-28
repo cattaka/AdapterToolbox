@@ -65,6 +65,10 @@ public abstract class AbsCustomRecyclerAdapter<
         mRecyclerView = null;
     }
 
+    public int getViewTypeCount() {
+        return 1;
+    }
+
     public abstract T getItemAt(int position);
 
     public abstract List<T> getItems();
