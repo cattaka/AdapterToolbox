@@ -1,17 +1,23 @@
 package net.cattaka.android.adaptertoolbox.example;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import net.cattaka.android.adaptertoolbox.classic.AdapterConverter;
+import net.cattaka.android.adaptertoolbox.classic.ClassicScrambleAdapter;
+import net.cattaka.android.adaptertoolbox.classic.listener.ClassicForwardingListener;
+import net.cattaka.android.adaptertoolbox.classic.listener.ClassicListenerRelay;
 import net.cattaka.android.adaptertoolbox.example.data.MyTreeItem;
 import net.cattaka.android.adaptertoolbox.example.data.OrdinalLabel;
 import net.cattaka.android.adaptertoolbox.example.spinner.SpinnerMyTreeItemAdapter;
 import net.cattaka.android.adaptertoolbox.example.utils.ExampleDataGenerator;
+import net.cattaka.android.adaptertoolbox.utils.SpinnerUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +26,20 @@ import java.util.List;
  * Created by cattaka on 16/05/02.
  */
 public class SpinnerTreeItemAdapterExampleActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    ClassicListenerRelay mListenerRelay = new ClassicListenerRelay() {
+        @Override
+        public void onClick(@NonNull AdapterView<?> adapterView, @NonNull AdapterConverter adapter, int position, @NonNull RecyclerView.ViewHolder vh, @NonNull View view) {
+            super.onClick(adapterView, adapter, position, vh, view);
+            if (adapter == mAdapterConverter) {
+                SpinnerMyTreeItemAdapter.WrappedItem wrappedItem = (SpinnerMyTreeItemAdapter.WrappedItem) adapter.getItem(position);
+                SpinnerUtils.selectSpinnerValue(mSpinner, wrappedItem);
+                SpinnerUtils.dismissPopup(mSpinner);
+            }
+        }
+    };
+
     Spinner mSpinner;
+    AdapterConverter<SpinnerMyTreeItemAdapter, SpinnerMyTreeItemAdapter.ViewHolder, SpinnerMyTreeItemAdapter.WrappedItem> mAdapterConverter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +54,15 @@ public class SpinnerTreeItemAdapterExampleActivity extends AppCompatActivity imp
 
         { // set adapter
             List<MyTreeItem> items = ExampleDataGenerator.generateMyTreeItem(Arrays.asList(5, 3, 2), 0);
+
             SpinnerMyTreeItemAdapter adapter = new SpinnerMyTreeItemAdapter(this, items);
-            AdapterConverter<SpinnerMyTreeItemAdapter, SpinnerMyTreeItemAdapter.ViewHolder, SpinnerMyTreeItemAdapter.WrappedItem> adapterConverter = new AdapterConverter<>(this, adapter);
+            mAdapterConverter = new AdapterConverter<>(this, adapter);
+            adapter.setForwardingListener(new ClassicForwardingListener<SpinnerMyTreeItemAdapter, SpinnerMyTreeItemAdapter.ViewHolder>(mAdapterConverter, mListenerRelay));
 
             // Issue: Spinner Doesn't Allow Heterogeneous ListAdapters in Lollipop.
             // https://code.google.com/p/android/issues/detail?id=79011
-            adapterConverter.setRecyclingDisabled(true);
-            mSpinner.setAdapter(adapterConverter);
+            mAdapterConverter.setRecyclingDisabled(true);
+            mSpinner.setAdapter(mAdapterConverter);
             mSpinner.setSelection(1);
         }
     }

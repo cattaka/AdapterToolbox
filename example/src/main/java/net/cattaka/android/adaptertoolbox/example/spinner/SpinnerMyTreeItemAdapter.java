@@ -79,6 +79,8 @@ public class SpinnerMyTreeItemAdapter extends AbsTreeItemAdapter<
         holder.openedCheck.setTag(AdapterConverter.VIEW_HOLDER, holder);
         holder.openedCheck.setOnClickListener(mOnClickListener);
 
+        holder.itemView.setOnClickListener(getForwardingListener());
+
         return holder;
     }
 

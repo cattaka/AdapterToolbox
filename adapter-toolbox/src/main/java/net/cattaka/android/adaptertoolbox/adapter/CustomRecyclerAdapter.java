@@ -20,9 +20,8 @@ public abstract class CustomRecyclerAdapter<
         ForwardingListener<A, VH>
         > {
 
-    @Override
-    public ForwardingListener<A, VH> createForwardingListener() {
-        return new ForwardingListener<>();
+    public CustomRecyclerAdapter() {
+        super(new ForwardingListener<A, VH>());
     }
 
     public void setListenerRelay(@Nullable ListenerRelay<A, VH> listenerRelay) {
