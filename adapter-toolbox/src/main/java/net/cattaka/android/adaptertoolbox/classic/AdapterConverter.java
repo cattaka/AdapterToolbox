@@ -198,19 +198,19 @@ public class AdapterConverter<
         @Override
         public void onItemRangeInserted(int positionStart, int itemCount) {
             super.onItemRangeInserted(positionStart, itemCount);
-            observer.onInvalidated();
+            observer.onChanged();
         }
 
         @Override
         public void onItemRangeRemoved(int positionStart, int itemCount) {
             super.onItemRangeRemoved(positionStart, itemCount);
-            observer.onInvalidated();
+            observer.onChanged();
         }
 
         @Override
         public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
             super.onItemRangeMoved(fromPosition, toPosition, itemCount);
-            observer.onInvalidated();
+            observer.onChanged();
         }
     }
 }
