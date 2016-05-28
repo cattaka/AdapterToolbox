@@ -18,4 +18,8 @@ public interface IHasItemAdapter<VH extends RecyclerView.ViewHolder, T> {
     int getItemCount();
 
     T getItemAt(int position);
+
+    void registerAdapterDataObserver(RecyclerView.AdapterDataObserver observer);
+
+    void unregisterAdapterDataObserver(RecyclerView.AdapterDataObserver observer);
 }

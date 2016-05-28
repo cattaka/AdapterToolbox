@@ -1,4 +1,4 @@
-package net.cattaka.android.adaptertoolbox.example.adapter.spinner;
+package net.cattaka.android.adaptertoolbox.example.spinner.factory;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

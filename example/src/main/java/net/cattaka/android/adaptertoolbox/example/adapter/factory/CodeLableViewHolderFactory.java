@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import net.cattaka.android.adaptertoolbox.adapter.AdapterConverter;
 import net.cattaka.android.adaptertoolbox.adapter.ScrambleAdapter;
 import net.cattaka.android.adaptertoolbox.adapter.listener.ForwardingListener;
 import net.cattaka.android.adaptertoolbox.data.ICodeLabel;

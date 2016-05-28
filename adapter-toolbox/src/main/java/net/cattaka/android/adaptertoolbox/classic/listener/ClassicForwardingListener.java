@@ -15,8 +15,8 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import net.cattaka.android.adaptertoolbox.adapter.AdapterConverter;
 import net.cattaka.android.adaptertoolbox.adapter.listener.ForwardingListener;
+import net.cattaka.android.adaptertoolbox.classic.AdapterConverter;
 import net.cattaka.android.adaptertoolbox.classic.ClassicScrambleAdapter;
 
 /**

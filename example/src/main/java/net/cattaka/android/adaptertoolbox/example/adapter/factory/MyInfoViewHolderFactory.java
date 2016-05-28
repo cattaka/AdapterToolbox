@@ -9,7 +9,6 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.Switch;
 
-import net.cattaka.android.adaptertoolbox.adapter.AdapterConverter;
 import net.cattaka.android.adaptertoolbox.adapter.CodeLabelAdapter;
 import net.cattaka.android.adaptertoolbox.adapter.ScrambleAdapter;
 import net.cattaka.android.adaptertoolbox.adapter.listener.ForwardingListener;

@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import net.cattaka.android.adaptertoolbox.adapter.AbsScrambleAdapter;
-import net.cattaka.android.adaptertoolbox.adapter.AdapterConverter;
 import net.cattaka.android.adaptertoolbox.adapter.ScrambleAdapter;
 import net.cattaka.android.adaptertoolbox.adapter.listener.ForwardingListener;
 import net.cattaka.android.adaptertoolbox.adapter.listener.ListenerRelay;
