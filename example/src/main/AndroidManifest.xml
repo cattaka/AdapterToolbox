@@ -24,7 +24,8 @@
         <activity android:name=".ManipulableListExampleActivity"/>
         <activity android:name=".NestedScrambleAdapterExampleActivity"/>
         <activity android:name=".TreeItemAdapterExampleActivity"/>
-        <activity android:name=".ChoosableTreeItemAdapterExampleActivity"/>
+        <activity android:name=".MultiChoosableTreeItemAdapterExampleActivity"/>
+        <activity android:name=".SingleChoosableTreeItemAdapterExampleActivity"/>
         <activity android:name=".ClassicScrambleAdapterExampleActivity"/>
         <activity android:name=".SpinnerScrambleAdapterExampleActivity"/>
         <activity android:name=".SpinnerTreeItemAdapterExampleActivity"/>

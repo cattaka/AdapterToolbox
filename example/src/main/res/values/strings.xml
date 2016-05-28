@@ -19,7 +19,8 @@
     <string name="activity_entry_sectioned_list_by_list_object"><![CDATA[Sectioned list by List<Object>]]></string>
     <string name="activity_entry_tree">Tree</string>
     <string name="activity_entry_simple_tree">Simple tree</string>
-    <string name="activity_entry_multi_choosable_tree">Selectable tree</string>
+    <string name="activity_entry_single_choosable_tree">Single choosable tree</string>
+    <string name="activity_entry_multi_choosable_tree">Multi choosable tree</string>
     <string name="activity_entry_classic_adapter_view">Classic AdapterView</string>
     <string name="activity_entry_classic_scramble_adapter_with_list_view">ClassicScrambleAdapter with ListView</string>
     <string name="activity_entry_classic_scramble_adapter_with_spinner">ClassicScrambleAdapter with Spinner</string>

@@ -34,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
             ),
             new ActivityEntry(R.string.activity_entry_tree, null,
                     new ActivityEntry(R.string.activity_entry_simple_tree, TreeItemAdapterExampleActivity.class),
-                    new ActivityEntry(R.string.activity_entry_multi_choosable_tree, ChoosableTreeItemAdapterExampleActivity.class)
+                    new ActivityEntry(R.string.activity_entry_single_choosable_tree, SingleChoosableTreeItemAdapterExampleActivity.class),
+                    new ActivityEntry(R.string.activity_entry_multi_choosable_tree, MultiChoosableTreeItemAdapterExampleActivity.class)
             ),
             new ActivityEntry(R.string.activity_entry_classic_adapter_view, null,
                     new ActivityEntry(R.string.activity_entry_classic_scramble_adapter_with_list_view, ClassicScrambleAdapterExampleActivity.class),
