@@ -3,7 +3,6 @@ package net.cattaka.android.adaptertoolbox.adapter.listener;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,7 +17,7 @@ import android.widget.TextView;
 public class ListenerRelay<
         A extends RecyclerView.Adapter<? extends VH>,
         VH extends RecyclerView.ViewHolder
-        > implements IListenerRelay<VH> {
+        > {
 
     /**
      * @see android.view.View.OnClickListener
@@ -84,19 +83,19 @@ public class ListenerRelay<
     }
 
     /**
-     * @see TextWatcher
+     * @see android.text.TextWatcher
      */
     public void beforeTextChanged(@NonNull RecyclerView recyclerView, @NonNull A adapter, @NonNull VH vh, @NonNull TextView v, @NonNull CharSequence s, int start, int count, int after) {
     }
 
     /**
-     * @see TextWatcher
+     * @see android.text.TextWatcher
      */
     public void onTextChanged(@NonNull RecyclerView recyclerView, @NonNull A adapter, @NonNull VH vh, @NonNull TextView v, @NonNull CharSequence s, int start, int before, int count) {
     }
 
     /**
-     * @see TextWatcher
+     * @see android.text.TextWatcher
      */
     public void afterTextChanged(@NonNull RecyclerView recyclerView, @NonNull A adapter, @NonNull VH vh, @NonNull TextView v, @NonNull Editable s) {
     }

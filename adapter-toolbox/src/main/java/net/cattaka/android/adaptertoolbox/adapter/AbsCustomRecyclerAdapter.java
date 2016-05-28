@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 
 import net.cattaka.android.adaptertoolbox.adapter.listener.IForwardingListener;
-import net.cattaka.android.adaptertoolbox.adapter.listener.IListenerRelay;
 
 import java.util.List;
 
@@ -13,11 +12,10 @@ import java.util.List;
  * Created by cattaka on 2015/07/15.
  */
 public abstract class AbsCustomRecyclerAdapter<
-        A extends AbsCustomRecyclerAdapter<A, VH, T, FL, LR>,
+        A extends AbsCustomRecyclerAdapter<A, VH, T, FL>,
         VH extends RecyclerView.ViewHolder,
         T,
-        FL extends IForwardingListener<A, VH, LR>,
-        LR extends IListenerRelay<VH>
+        FL extends IForwardingListener<A, VH>
         > extends RecyclerView.Adapter<VH> implements IHasItemAdapter<VH, T> {
 
     IForwardingListener.IProvider<A, VH> mProvider = new IForwardingListener.IProvider<A, VH>() {
@@ -47,7 +45,11 @@ public abstract class AbsCustomRecyclerAdapter<
         mForwardingListener.setProvider(mProvider);
     }
 
-    public abstract A getSelf();
+    @SuppressWarnings("unchecked")
+    @NonNull
+    public A getSelf() {
+        return (A) this;
+    }
 
     public abstract FL createForwardingListener();
 
@@ -63,9 +65,8 @@ public abstract class AbsCustomRecyclerAdapter<
         mRecyclerView = null;
     }
 
-    //  public void setListenerRelay(LR listenerRelay) {
-    public <XLR extends IListenerRelay<? super VH>> void setListenerRelay(XLR listenerRelay) {
-        mForwardingListener.setListenerRelay((LR) listenerRelay);
+    public int getViewTypeCount() {
+        return 1;
     }
 
     public abstract T getItemAt(int position);

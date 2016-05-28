@@ -9,12 +9,8 @@ import android.support.v7.widget.RecyclerView;
  */
 public interface IForwardingListener<
         A extends RecyclerView.Adapter<? extends VH>,
-        VH extends RecyclerView.ViewHolder,
-        LR extends IListenerRelay<? super VH>
-        > {
+        VH extends RecyclerView.ViewHolder> {
     void setProvider(@NonNull IProvider<A, VH> provider);
-
-    void setListenerRelay(@Nullable LR listenerRelay);
 
     interface IProvider<A extends RecyclerView.Adapter<? extends VH>, VH extends RecyclerView.ViewHolder> {
         @NonNull

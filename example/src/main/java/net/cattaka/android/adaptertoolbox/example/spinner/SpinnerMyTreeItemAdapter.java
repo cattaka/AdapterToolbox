@@ -1,4 +1,4 @@
-package net.cattaka.android.adaptertoolbox.example.adapter;
+package net.cattaka.android.adaptertoolbox.example.spinner;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import net.cattaka.android.adaptertoolbox.adapter.AbsChoosableTreeItemAdapter;
 import net.cattaka.android.adaptertoolbox.adapter.AbsTreeItemAdapter;
+import net.cattaka.android.adaptertoolbox.classic.AdapterConverter;
 import net.cattaka.android.adaptertoolbox.example.R;
 import net.cattaka.android.adaptertoolbox.example.data.MyTreeItem;
 
@@ -20,13 +21,13 @@ import java.util.List;
 /**
  * Created by cattaka on 16/05/21.
  */
-public class MyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
-        MyTreeItemAdapter,
-        MyTreeItemAdapter.ViewHolder,
+public class SpinnerMyTreeItemAdapter extends AbsTreeItemAdapter<
+        SpinnerMyTreeItemAdapter,
+        SpinnerMyTreeItemAdapter.ViewHolder,
         MyTreeItem,
-        MyTreeItemAdapter.WrappedItem
+        SpinnerMyTreeItemAdapter.WrappedItem
         > {
-    public static ITreeItemAdapterRef<MyTreeItemAdapter, ViewHolder, MyTreeItem, WrappedItem> REF = new ITreeItemAdapterRef<MyTreeItemAdapter, ViewHolder, MyTreeItem, WrappedItem>() {
+    public static ITreeItemAdapterRef<SpinnerMyTreeItemAdapter, ViewHolder, MyTreeItem, WrappedItem> REF = new ITreeItemAdapterRef<SpinnerMyTreeItemAdapter, ViewHolder, MyTreeItem, WrappedItem>() {
         @NonNull
         @Override
         public Class<MyTreeItem> getItemClass() {
@@ -35,8 +36,8 @@ public class MyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
 
         @NonNull
         @Override
-        public MyTreeItemAdapter createAdapter(@NonNull Context context, @NonNull List<MyTreeItem> items) {
-            return new MyTreeItemAdapter(context, items);
+        public SpinnerMyTreeItemAdapter createAdapter(@NonNull Context context, @NonNull List<MyTreeItem> items) {
+            return new SpinnerMyTreeItemAdapter(context, items);
         }
 
         @NonNull
@@ -49,18 +50,15 @@ public class MyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
     private View.OnClickListener mOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            RecyclerView recyclerView = getAttachedRecyclerView();
-            ViewHolder vh = (ViewHolder) (recyclerView != null ? recyclerView.findContainingViewHolder(view) : null);
+            ViewHolder vh = (ViewHolder) view.getTag(AdapterConverter.VIEW_HOLDER);
             if (vh != null) {
-                int position = vh.getAdapterPosition();
-                WrappedItem item = getItemAt(position);
+                WrappedItem item = getItemAt(vh.position);
                 switch (view.getId()) {
                     case R.id.check_opened: {
                         doOpen(item, !item.opened);
                         break;
                     }
                     default: {
-                        toggleCheck(item);
                         break;
                     }
                 }
@@ -68,16 +66,17 @@ public class MyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
         }
     };
 
-    public MyTreeItemAdapter(Context context, List<MyTreeItem> items) {
+    public SpinnerMyTreeItemAdapter(Context context, List<MyTreeItem> items) {
         super(context, items, REF);
     }
 
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.item_my_tree_item, parent, false);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.item_spinner_my_tree_item, parent, false);
         ViewHolder holder = new ViewHolder(view);
 
+        holder.openedCheck.setTag(AdapterConverter.VIEW_HOLDER, holder);
         holder.openedCheck.setOnClickListener(mOnClickListener);
 
         holder.itemView.setOnClickListener(getForwardingListener());
@@ -103,6 +102,9 @@ public class MyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
 
         holder.openedCheck.setChecked(wrappedItem.opened);
         holder.labelText.setText(item.getText());
+
+        // Because of holder.getAdapterPosition() is only for RecyclerView. So it keep position by itself.
+        holder.position = position;
     }
 
     public static class WrappedItem extends AbsChoosableTreeItemAdapter.WrappedItem<WrappedItem, MyTreeItem> {
@@ -115,6 +117,7 @@ public class MyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
         Space levelSpace;
         CompoundButton openedCheck;
         TextView labelText;
+        int position;
 
         public ViewHolder(View itemView) {
             super(itemView);

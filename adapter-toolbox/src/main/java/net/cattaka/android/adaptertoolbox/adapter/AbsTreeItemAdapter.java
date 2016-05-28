@@ -17,15 +17,15 @@ import java.util.List;
  * Created by cattaka on 16/05/21.
  */
 public abstract class AbsTreeItemAdapter<
+        A extends AbsTreeItemAdapter<A, VH, T, W>,
         VH extends RecyclerView.ViewHolder,
         T extends ITreeItem<T>,
         W extends AbsTreeItemAdapter.WrappedItem<W, T>
         > extends AbsCustomRecyclerAdapter<
-        AbsTreeItemAdapter<VH, T, W>,
+        A,
         VH,
         W,
-        ForwardingListener<AbsTreeItemAdapter<VH, T, W>, VH>,
-        ListenerRelay<AbsTreeItemAdapter<VH, T, W>, VH>
+        ForwardingListener<A, VH>
         > {
     private Context mContext;
     private List<W> mItems;
@@ -33,10 +33,11 @@ public abstract class AbsTreeItemAdapter<
     private RecyclerView mRecyclerView;
 
     @NonNull
-    protected static <T extends ITreeItem<T>, W extends AbsTreeItemAdapter.WrappedItem<W, T>, REF extends ITreeItemAdapterRef<?, T, W>>
+    protected static <T extends ITreeItem<T>, W extends AbsTreeItemAdapter.WrappedItem<W, T>, REF extends ITreeItemAdapterRef<?, ?, T, W>>
     List<W> inflateWrappedList(@NonNull List<W> dest, @NonNull List<T> items, int level, @Nullable W parent, @NonNull REF ref) {
         for (T item : items) {
             W child = ref.createWrappedItem(level, item, parent);
+            child.opened = true;
             dest.add(child);
             if (parent != null) {
                 parent.children.add(child);
@@ -48,7 +49,7 @@ public abstract class AbsTreeItemAdapter<
         return dest;
     }
 
-    public <REF extends ITreeItemAdapterRef<?, T, W>> AbsTreeItemAdapter(@NonNull Context context, @NonNull List<T> items, @NonNull REF ref) {
+    public <REF extends ITreeItemAdapterRef<A, ?, T, W>> AbsTreeItemAdapter(@NonNull Context context, @NonNull List<T> items, @NonNull REF ref) {
         mContext = context;
         mItems = inflateWrappedList(new ArrayList<W>(), items, 0, null, ref);
     }
@@ -60,13 +61,7 @@ public abstract class AbsTreeItemAdapter<
 
     @NonNull
     @Override
-    public AbsTreeItemAdapter<VH, T, W> getSelf() {
-        return this;
-    }
-
-    @NonNull
-    @Override
-    public ForwardingListener<AbsTreeItemAdapter<VH, T, W>, VH> createForwardingListener() {
+    public ForwardingListener<A, VH> createForwardingListener() {
         return new ForwardingListener<>();
     }
 
@@ -87,18 +82,41 @@ public abstract class AbsTreeItemAdapter<
         return mItems;
     }
 
-    protected void doFold(W item, boolean fold) {
-        for (W child : item.children) {
-            child.fold = fold;
-            doFold(child, child.opened || fold);
+    protected void doOpen(W item, boolean opened) {
+        if (item.opened != opened) {
+            item.opened = opened;
+            List<W> children = new ArrayList<>();
+            flattenChildren(children, item);
+            if (opened) {
+                int p = mItems.indexOf(item);
+                mItems.addAll(p + 1, children);
+                notifyItemRangeInserted(p + 1, children.size());
+            } else {
+                for (W child : children) {
+                    int p = mItems.indexOf(child);
+                    if (p != -1) {
+                        mItems.remove(p);
+                        notifyItemRemoved(p);
+                    }
+                }
+            }
         }
-        notifyItemChanged(getItems().indexOf(item));
+    }
+
+    private void flattenChildren(List<W> dest, W item) {
+        if (item.children != null) {
+            for (W child : item.children) {
+                dest.add(child);
+                if (child.opened) {
+                    flattenChildren(dest, child);
+                }
+            }
+        }
     }
 
     public static class WrappedItem<W extends WrappedItem<W, T>, T extends ITreeItem<T>> {
         public final int level;
         public boolean opened;
-        public boolean fold;
         public final T item;
         public W parent;
         public final List<W> children = new ArrayList<>();
@@ -147,12 +165,21 @@ public abstract class AbsTreeItemAdapter<
         mRecyclerView = null;
     }
 
-    public interface ITreeItemAdapterRef<VH extends RecyclerView.ViewHolder, T extends ITreeItem<T>, W extends WrappedItem<W, T>> extends Serializable {
+    public void setListenerRelay(@Nullable ListenerRelay<A, VH> listenerRelay) {
+        getForwardingListener().setListenerRelay(listenerRelay);
+    }
+
+    public interface ITreeItemAdapterRef<
+            A extends AbsTreeItemAdapter<A, VH, T, W>,
+            VH extends RecyclerView.ViewHolder,
+            T extends ITreeItem<T>,
+            W extends WrappedItem<W, T>
+            > extends Serializable {
         @NonNull
         Class<T> getItemClass();
 
         @NonNull
-        AbsTreeItemAdapter<VH, T, W> createAdapter(@NonNull Context context, @NonNull List<T> items);
+        A createAdapter(@NonNull Context context, @NonNull List<T> items);
 
         @NonNull
         W createWrappedItem(int level, T item, W parent);

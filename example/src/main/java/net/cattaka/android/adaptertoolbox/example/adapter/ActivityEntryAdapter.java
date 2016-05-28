@@ -21,11 +21,12 @@ import java.util.List;
  * Created by cattaka on 16/05/21.
  */
 public class ActivityEntryAdapter extends AbsChoosableTreeItemAdapter<
+        ActivityEntryAdapter,
         ActivityEntryAdapter.ViewHolder,
         ActivityEntry,
         ActivityEntryAdapter.WrappedItem
         > {
-    public static ITreeItemAdapterRef<ViewHolder, ActivityEntry, WrappedItem> REF = new ITreeItemAdapterRef<ViewHolder, ActivityEntry, WrappedItem>() {
+    public static ITreeItemAdapterRef<ActivityEntryAdapter, ViewHolder, ActivityEntry, WrappedItem> REF = new ITreeItemAdapterRef<ActivityEntryAdapter, ViewHolder, ActivityEntry, WrappedItem>() {
         @NonNull
         @Override
         public Class<ActivityEntry> getItemClass() {
@@ -34,7 +35,7 @@ public class ActivityEntryAdapter extends AbsChoosableTreeItemAdapter<
 
         @NonNull
         @Override
-        public AbsTreeItemAdapter<ViewHolder, ActivityEntry, WrappedItem> createAdapter(@NonNull Context context, @NonNull List<ActivityEntry> items) {
+        public ActivityEntryAdapter createAdapter(@NonNull Context context, @NonNull List<ActivityEntry> items) {
             return new ActivityEntryAdapter(context, items);
         }
 
@@ -54,8 +55,7 @@ public class ActivityEntryAdapter extends AbsChoosableTreeItemAdapter<
             WrappedItem item = getItemAt(position);
             switch (view.getId()) {
                 case R.id.check_opened: {
-                    item.opened = !item.opened;
-                    doFold(item, item.opened);
+                    doOpen(item, !item.opened);
                     break;
                 }
                 default: {
@@ -88,11 +88,6 @@ public class ActivityEntryAdapter extends AbsChoosableTreeItemAdapter<
         WrappedItem wrappedItem = getItemAt(position);
         ActivityEntry item = wrappedItem.getItem();
 
-        {
-            ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
-            params.height = wrappedItem.fold ? 0 : ViewGroup.LayoutParams.WRAP_CONTENT;
-            holder.itemView.setLayoutParams(params);
-        }
         {
             ViewGroup.LayoutParams params = holder.levelSpace.getLayoutParams();
             params.width = wrappedItem.level * getContext().getResources().getDimensionPixelSize(R.dimen.element_spacing_large);

@@ -1,4 +1,4 @@
-package net.cattaka.android.adaptertoolbox.example.adapter.factory;
+package net.cattaka.android.adaptertoolbox.example.spinner.factory;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,16 +10,17 @@ import android.widget.TextView;
 import net.cattaka.android.adaptertoolbox.adapter.ScrambleAdapter;
 import net.cattaka.android.adaptertoolbox.adapter.listener.ForwardingListener;
 import net.cattaka.android.adaptertoolbox.example.R;
+import net.cattaka.android.adaptertoolbox.example.data.HeaderInfo;
 
 /**
  * Created by cattaka on 16/05/02.
  */
-public class SimpleStringViewHolderFactory extends ScrambleAdapter.AbsViewHolderFactory<SimpleStringViewHolderFactory.ViewHolder> {
+public class HeaderInfoViewHolderFactory extends ScrambleAdapter.AbsViewHolderFactory<HeaderInfoViewHolderFactory.ViewHolder> {
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ScrambleAdapter<?> adapter, @NonNull ViewGroup parent, @NonNull ForwardingListener<ScrambleAdapter<?>, RecyclerView.ViewHolder> forwardingListener) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_simple_string, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_spinner_header, parent, false);
         ViewHolder vh = new ViewHolder(view);
         view.setOnClickListener(forwardingListener);
         view.setOnLongClickListener(forwardingListener);
@@ -28,15 +29,15 @@ public class SimpleStringViewHolderFactory extends ScrambleAdapter.AbsViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ScrambleAdapter adapter, @NonNull ViewHolder holder, int position, Object object) {
-        String item = (String) object;
+        HeaderInfo item = (HeaderInfo) object;
 
-        String str = "String = " + item;
+        String str = item.getText();
         holder.text.setText(str);
     }
 
     @Override
     public boolean isAssignable(Object object) {
-        return object instanceof String;
+        return object instanceof HeaderInfo;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

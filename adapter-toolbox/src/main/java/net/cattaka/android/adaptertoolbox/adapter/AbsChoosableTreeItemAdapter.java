@@ -13,10 +13,12 @@ import java.util.List;
  * Created by cattaka on 16/05/21.
  */
 public abstract class AbsChoosableTreeItemAdapter<
+        A extends AbsChoosableTreeItemAdapter<A, VH, T, W>,
         VH extends RecyclerView.ViewHolder,
         T extends ITreeItem<T>,
         W extends AbsChoosableTreeItemAdapter.WrappedItem<W, T>
         > extends AbsTreeItemAdapter<
+        A,
         VH,
         T,
         W
@@ -33,7 +35,7 @@ public abstract class AbsChoosableTreeItemAdapter<
     @ChoiceMode
     private int mChoiceMode = CHOICE_MODE_MULTIPLE;
 
-    public <REF extends ITreeItemAdapterRef<?, T, W>> AbsChoosableTreeItemAdapter(Context context, List<T> items, REF ref) {
+    public <REF extends ITreeItemAdapterRef<A, ?, T, W>> AbsChoosableTreeItemAdapter(Context context, List<T> items, REF ref) {
         super(context, items, ref);
     }
 
