@@ -26,6 +26,7 @@
         <activity android:name=".TreeItemAdapterExampleActivity"/>
         <activity android:name=".ChoosableTreeItemAdapterExampleActivity"/>
         <activity android:name=".ClassicScrambleAdapterExampleActivity"/>
+        <activity android:name=".SpinnerScrambleAdapterExampleActivity"/>
     </application>
 
 </manifest>

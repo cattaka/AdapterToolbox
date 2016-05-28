@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
                     new ActivityEntry("Choosable tree", ChoosableTreeItemAdapterExampleActivity.class)
             ),
             new ActivityEntry("ClassicScrambleAdapter", null,
-                    new ActivityEntry("RecyclerView.ViewHolder with ListView", ClassicScrambleAdapterExampleActivity.class)
+                    new ActivityEntry("RecyclerView.ViewHolder with ListView", ClassicScrambleAdapterExampleActivity.class),
+                    new ActivityEntry("RecyclerView.ViewHolder with Spinner", SpinnerScrambleAdapterExampleActivity.class)
             )
     );
 

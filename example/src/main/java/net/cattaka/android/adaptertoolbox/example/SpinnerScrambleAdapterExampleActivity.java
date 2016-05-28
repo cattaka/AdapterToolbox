@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import net.cattaka.android.adaptertoolbox.classic.ClassicScrambleAdapter;
 import net.cattaka.android.adaptertoolbox.classic.listener.ClassicListenerRelay;
@@ -19,7 +20,7 @@ import java.util.List;
 /**
  * Created by cattaka on 16/05/02.
  */
-public class ClassicScrambleAdapterExampleActivity extends AppCompatActivity {
+public class SpinnerScrambleAdapterExampleActivity extends AppCompatActivity {
     ClassicListenerRelay mListenerRelay = new ClassicListenerRelay() {
         @Override
         public void onClick(@NonNull AdapterView<?> adapterView, @NonNull ClassicScrambleAdapter<?> adapter, int position, @NonNull RecyclerView.ViewHolder vh, @NonNull View view) {
@@ -40,15 +41,15 @@ public class ClassicScrambleAdapterExampleActivity extends AppCompatActivity {
         }
     };
 
-    ListView mListView;
+    Spinner mSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_classic_scramble_adapter_example);
+        setContentView(R.layout.activity_spinner_scramble_adapter_example);
 
         // find views
-        mListView = (ListView) findViewById(R.id.list);
+        mSpinner = (Spinner) findViewById(R.id.spinner);
 
         { // set adapter
             List<String> items = new ArrayList<>();
@@ -56,7 +57,7 @@ public class ClassicScrambleAdapterExampleActivity extends AppCompatActivity {
                 items.add("item " + i);
             }
             ClassicScrambleAdapter<String> adapter = new ClassicScrambleAdapter<String>(this, items, mListenerRelay, new SimpleStringViewHolderFactory());
-            mListView.setAdapter(adapter);
+            mSpinner.setAdapter(adapter);
         }
     }
 }
