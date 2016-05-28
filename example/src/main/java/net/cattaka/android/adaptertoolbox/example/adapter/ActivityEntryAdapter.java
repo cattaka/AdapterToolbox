@@ -55,8 +55,7 @@ public class ActivityEntryAdapter extends AbsChoosableTreeItemAdapter<
             WrappedItem item = getItemAt(position);
             switch (view.getId()) {
                 case R.id.check_opened: {
-                    item.opened = !item.opened;
-                    doFold(item, item.opened);
+                    doOpen(item, !item.opened);
                     break;
                 }
                 default: {
@@ -89,11 +88,6 @@ public class ActivityEntryAdapter extends AbsChoosableTreeItemAdapter<
         WrappedItem wrappedItem = getItemAt(position);
         ActivityEntry item = wrappedItem.getItem();
 
-        {
-            ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
-            params.height = wrappedItem.fold ? 0 : ViewGroup.LayoutParams.WRAP_CONTENT;
-            holder.itemView.setLayoutParams(params);
-        }
         {
             ViewGroup.LayoutParams params = holder.levelSpace.getLayoutParams();
             params.width = wrappedItem.level * getContext().getResources().getDimensionPixelSize(R.dimen.element_spacing_large);

@@ -37,6 +37,7 @@ public abstract class AbsTreeItemAdapter<
     List<W> inflateWrappedList(@NonNull List<W> dest, @NonNull List<T> items, int level, @Nullable W parent, @NonNull REF ref) {
         for (T item : items) {
             W child = ref.createWrappedItem(level, item, parent);
+            child.opened = true;
             dest.add(child);
             if (parent != null) {
                 parent.children.add(child);
@@ -81,18 +82,41 @@ public abstract class AbsTreeItemAdapter<
         return mItems;
     }
 
-    protected void doFold(W item, boolean fold) {
-        for (W child : item.children) {
-            child.fold = fold;
-            doFold(child, child.opened || fold);
+    protected void doOpen(W item, boolean opened) {
+        if (item.opened != opened) {
+            item.opened = opened;
+            List<W> children = new ArrayList<>();
+            flattenChildren(children, item);
+            if (opened) {
+                int p = mItems.indexOf(item);
+                mItems.addAll(p + 1, children);
+                notifyItemRangeInserted(p + 1, children.size());
+            } else {
+                for (W child : children) {
+                    int p = mItems.indexOf(child);
+                    if (p != -1) {
+                        mItems.remove(p);
+                        notifyItemRemoved(p);
+                    }
+                }
+            }
         }
-        notifyItemChanged(getItems().indexOf(item));
+    }
+
+    private void flattenChildren(List<W> dest, W item) {
+        if (item.children != null) {
+            for (W child : item.children) {
+                dest.add(child);
+                if (child.opened) {
+                    flattenChildren(dest, child);
+                }
+            }
+        }
     }
 
     public static class WrappedItem<W extends WrappedItem<W, T>, T extends ITreeItem<T>> {
         public final int level;
         public boolean opened;
-        public boolean fold;
         public final T item;
         public W parent;
         public final List<W> children = new ArrayList<>();
