@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import net.cattaka.android.adaptertoolbox.adapter.ScrambleAdapter;
+import net.cattaka.android.adaptertoolbox.classic.AdapterConverter;
 import net.cattaka.android.adaptertoolbox.classic.ClassicScrambleAdapter;
 import net.cattaka.android.adaptertoolbox.classic.listener.ClassicListenerRelay;
 import net.cattaka.android.adaptertoolbox.example.adapter.factory.CodeLableViewHolderFactory;
@@ -27,7 +28,7 @@ import java.util.List;
 public class ClassicScrambleAdapterExampleActivity extends AppCompatActivity {
     ClassicListenerRelay mListenerRelay = new ClassicListenerRelay() {
         @Override
-        public void onClick(@NonNull AdapterView<?> adapterView, @NonNull ClassicScrambleAdapter<?> adapter, int position, @NonNull RecyclerView.ViewHolder vh, @NonNull View view) {
+        public void onClick(@NonNull AdapterView<?> adapterView, @NonNull AdapterConverter adapter, int position, @NonNull RecyclerView.ViewHolder vh, @NonNull View view) {
             if (adapterView.getId() == R.id.list) {
                 if (vh instanceof SimpleStringViewHolderFactory.ViewHolder) {
                     String item = (String) adapter.getItem(position);
@@ -48,7 +49,7 @@ public class ClassicScrambleAdapterExampleActivity extends AppCompatActivity {
         }
 
         @Override
-        public boolean onLongClick(@NonNull AdapterView<?> adapterView, @NonNull ClassicScrambleAdapter<?> adapter, int position, @NonNull RecyclerView.ViewHolder vh, @NonNull View view) {
+        public boolean onLongClick(@NonNull AdapterView<?> adapterView, @NonNull AdapterConverter adapter, int position, @NonNull RecyclerView.ViewHolder vh, @NonNull View view) {
             if (adapterView.getId() == R.id.list) {
                 if (vh instanceof SimpleStringViewHolderFactory.ViewHolder) {
                     String item = (String) adapter.getItem(position);

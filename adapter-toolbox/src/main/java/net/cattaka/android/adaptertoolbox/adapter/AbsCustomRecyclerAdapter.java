@@ -36,13 +36,8 @@ public abstract class AbsCustomRecyclerAdapter<
 
     private FL mForwardingListener;
 
-    public FL getForwardingListener() {
-        return mForwardingListener;
-    }
-
-    public AbsCustomRecyclerAdapter() {
-        mForwardingListener = createForwardingListener();
-        mForwardingListener.setProvider(mProvider);
+    public AbsCustomRecyclerAdapter(FL forwardingListener) {
+        setForwardingListener(forwardingListener);
     }
 
     @SuppressWarnings("unchecked")
@@ -51,7 +46,15 @@ public abstract class AbsCustomRecyclerAdapter<
         return (A) this;
     }
 
-    public abstract FL createForwardingListener();
+    @NonNull
+    public FL getForwardingListener() {
+        return mForwardingListener;
+    }
+
+    public void setForwardingListener(@NonNull FL forwardingListener) {
+        mForwardingListener = forwardingListener;
+        mForwardingListener.setProvider(mProvider);
+    }
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {

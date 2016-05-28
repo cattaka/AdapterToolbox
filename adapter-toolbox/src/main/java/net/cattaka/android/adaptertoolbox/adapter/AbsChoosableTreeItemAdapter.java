@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import net.cattaka.android.adaptertoolbox.data.ITreeItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,7 +41,7 @@ public abstract class AbsChoosableTreeItemAdapter<
     }
 
     public void toggleCheck(@NonNull W item) {
-        doCheck(item, !item.chosen);
+        doCheck(item, !item.isChecked());
     }
 
     public void doCheck(@NonNull W item, boolean checked) {
@@ -48,7 +49,7 @@ public abstract class AbsChoosableTreeItemAdapter<
             if (!checked) {
                 W p = item.parent;
                 while (p != null) {
-                    p.chosen = checked;
+                    p.setChecked(checked);
                     notifyItemChanged(getItems().indexOf(p));
                     p = p.parent;
                 }
@@ -58,27 +59,41 @@ public abstract class AbsChoosableTreeItemAdapter<
             for (int i = 0; i < getItemCount(); i++) {
                 W w = getItemAt(i);
                 if (w == item) {
-                    if (!w.chosen) {
-                        w.chosen = true;
+                    if (!w.isChecked()) {
                         notifyItemChanged(getItems().indexOf(w));
                     }
                 } else {
-                    if (w.chosen) {
-                        w.chosen = false;
+                    if (w.isChecked()) {
                         notifyItemChanged(getItems().indexOf(w));
                     }
                 }
             }
+            for (int i = 0; i < getItemCount(); i++) {
+                W w = getItemAt(i);
+                if (w.level == 0) {
+                    uncheckAll(w);
+                }
+            }
+            item.setChecked(checked);
         }
     }
 
     private void doCheckInner(@NonNull W item, boolean checked) {
-        item.chosen = checked;
+        item.setChecked(checked);
         for (W child : item.children) {
-            child.chosen = checked;
+            child.setChecked(checked);
             doCheckInner(child, checked);
         }
         notifyItemChanged(getItems().indexOf(item));
+    }
+
+    private void uncheckAll(@NonNull W item) {
+        item.setChecked(false);
+        if (item.children != null) {
+            for (W child : item.children) {
+                uncheckAll(child);
+            }
+        }
     }
 
     @ChoiceMode
@@ -90,11 +105,43 @@ public abstract class AbsChoosableTreeItemAdapter<
         mChoiceMode = choiceMode;
     }
 
+    public List<T> getCheckedItems() {
+        List<T> checkedItems = new ArrayList<>();
+        for (W witem: getItems()) {
+            if (witem.level == 0) {
+                collectCheckedItems(checkedItems, witem);
+            }
+        }
+        return checkedItems;
+    }
+
+    private void collectCheckedItems(List<T> dest, W witem) {
+        if (witem == null) {
+            return;
+        }
+        if (witem.isChecked()) {
+            dest.add(witem.getItem());
+        }
+        if (witem.children != null) {
+            for (W child : witem.children) {
+                collectCheckedItems(dest, child);
+            }
+        }
+    }
+
     public static class WrappedItem<W extends WrappedItem<W, T>, T extends ITreeItem<T>> extends AbsTreeItemAdapter.WrappedItem<W, T> {
-        public boolean chosen;
+        private boolean checked;
 
         public WrappedItem(int level, T item, W parent) {
             super(level, item, parent);
+        }
+
+        public boolean isChecked() {
+            return checked;
+        }
+
+        void setChecked(boolean checked) {
+            this.checked = checked;
         }
     }
 }

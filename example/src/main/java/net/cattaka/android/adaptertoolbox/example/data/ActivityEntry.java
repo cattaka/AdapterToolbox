@@ -1,6 +1,8 @@
 package net.cattaka.android.adaptertoolbox.example.data;
 
 import android.app.Activity;
+import android.content.res.Resources;
+import android.support.annotation.StringRes;
 
 import net.cattaka.android.adaptertoolbox.data.ITreeItem;
 
@@ -11,38 +13,27 @@ import java.util.List;
  * Created by cattaka on 16/05/22.
  */
 public class ActivityEntry implements ITreeItem<ActivityEntry> {
-    private String label;
+    @StringRes
+    private int labelResId;
     private Class<? extends Activity> clazz;
     private List<ActivityEntry> children;
 
-    public ActivityEntry(String label, Class<? extends Activity> clazz, ActivityEntry... children) {
-        this.label = label;
+    public ActivityEntry(@StringRes int labelResId, Class<? extends Activity> clazz, ActivityEntry... children) {
+        this.labelResId = labelResId;
         this.clazz = clazz;
         this.children = Arrays.asList(children);
     }
 
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
+    public String getLabel(Resources res) {
+        return res.getString(labelResId);
     }
 
     public Class<? extends Activity> getClazz() {
         return clazz;
     }
 
-    public void setClazz(Class<? extends Activity> clazz) {
-        this.clazz = clazz;
-    }
-
     @Override
     public List<ActivityEntry> getChildren() {
         return children;
-    }
-
-    public void setChildren(List<ActivityEntry> children) {
-        this.children = children;
     }
 }

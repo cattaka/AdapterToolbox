@@ -55,7 +55,7 @@ public class SpinnerMyTreeItemAdapter extends AbsTreeItemAdapter<
                 WrappedItem item = getItemAt(vh.position);
                 switch (view.getId()) {
                     case R.id.check_opened: {
-                        doOpen(item, !item.opened);
+                        doOpen(item, !item.isOpened());
                         break;
                     }
                     default: {
@@ -80,7 +80,6 @@ public class SpinnerMyTreeItemAdapter extends AbsTreeItemAdapter<
         holder.openedCheck.setOnClickListener(mOnClickListener);
 
         holder.itemView.setOnClickListener(getForwardingListener());
-        holder.itemView.setOnLongClickListener(getForwardingListener());
 
         return holder;
     }
@@ -100,7 +99,7 @@ public class SpinnerMyTreeItemAdapter extends AbsTreeItemAdapter<
             holder.openedCheck.setVisibility(hasChildren ? View.VISIBLE : View.INVISIBLE);
         }
 
-        holder.openedCheck.setChecked(wrappedItem.opened);
+        holder.openedCheck.setChecked(wrappedItem.isOpened());
         holder.labelText.setText(item.getText());
 
         // Because of holder.getAdapterPosition() is only for RecyclerView. So it keep position by itself.
@@ -114,9 +113,9 @@ public class SpinnerMyTreeItemAdapter extends AbsTreeItemAdapter<
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        Space levelSpace;
-        CompoundButton openedCheck;
-        TextView labelText;
+        public final Space levelSpace;
+        public final CompoundButton openedCheck;
+        public final TextView labelText;
         int position;
 
         public ViewHolder(View itemView) {

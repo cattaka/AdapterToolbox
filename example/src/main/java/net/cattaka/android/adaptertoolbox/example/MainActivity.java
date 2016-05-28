@@ -17,29 +17,30 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private static final List<ActivityEntry> ACTIVITY_ENTRIES = Arrays.asList(
-            new ActivityEntry("Spinner", null,
-                    new ActivityEntry("CodeLabelAdapter", CodeLabelExampleActivity.class)
+            new ActivityEntry(R.string.activity_entry_enum_with_spinner, null,
+                    new ActivityEntry(R.string.activity_entry_code_label_adapter, CodeLabelExampleActivity.class)
             ),
-            new ActivityEntry("RecyclerView", null,
-                    new ActivityEntry("Simple String", SimpleStringExampleActivity.class),
-                    new ActivityEntry("Complex String", ComplexStringExampleActivity.class),
-                    new ActivityEntry("Header and footer", RecyclerViewHeaderExampleActivity.class),
-                    new ActivityEntry("Multi adapter", MultiAdapterExampleActivity.class)
+            new ActivityEntry(R.string.activity_entry_merge_recycler_adapter, null,
+                    new ActivityEntry(R.string.activity_entry_simple_string, SimpleStringExampleActivity.class),
+                    new ActivityEntry(R.string.activity_entry_multi_event_handling, ComplexStringExampleActivity.class),
+                    new ActivityEntry(R.string.activity_entry_header_and_footer, RecyclerViewHeaderExampleActivity.class),
+                    new ActivityEntry(R.string.activity_entry_sectined_list_by_multi_adapters, MultiAdapterExampleActivity.class)
             ),
-            new ActivityEntry("ScrambleAdapter", null,
-                    new ActivityEntry("ScrambleAdapter", ScrambleAdapterExampleActivity.class),
-                    new ActivityEntry("Operatable list", OperatableListExampleActivity.class),
-                    new ActivityEntry("Nested ScrambleAdapter", NestedScrambleAdapterExampleActivity.class),
-                    new ActivityEntry("Multi adapter", MultiAdapterExampleActivity.class)
+            new ActivityEntry(R.string.activity_entry_scramble_adapter, null,
+                    new ActivityEntry(R.string.activity_entry_muluti_types_in_list_object, ScrambleAdapterExampleActivity.class),
+                    new ActivityEntry(R.string.activity_entry_manipulatable_list, ManipulableListExampleActivity.class),
+                    new ActivityEntry(R.string.activity_entry_nested_scramble_adapter, NestedScrambleAdapterExampleActivity.class),
+                    new ActivityEntry(R.string.activity_entry_sectioned_list_by_list_object, MultiAdapterExampleActivity.class)
             ),
-            new ActivityEntry("Tree", null,
-                    new ActivityEntry("Simple tree", TreeItemAdapterExampleActivity.class),
-                    new ActivityEntry("Choosable tree", ChoosableTreeItemAdapterExampleActivity.class)
+            new ActivityEntry(R.string.activity_entry_tree, null,
+                    new ActivityEntry(R.string.activity_entry_simple_tree, TreeItemAdapterExampleActivity.class),
+                    new ActivityEntry(R.string.activity_entry_single_choosable_tree, SingleChoosableTreeItemAdapterExampleActivity.class),
+                    new ActivityEntry(R.string.activity_entry_multi_choosable_tree, MultiChoosableTreeItemAdapterExampleActivity.class)
             ),
-            new ActivityEntry("Classic AdapterView", null,
-                    new ActivityEntry("ClassicScrambleAdapter with ListView", ClassicScrambleAdapterExampleActivity.class),
-                    new ActivityEntry("ClassicScrambleAdapter with Spinner", SpinnerScrambleAdapterExampleActivity.class),
-                    new ActivityEntry("AbsTreeItemAdapter with Spinner", SpinnerTreeItemAdapterExampleActivity.class)
+            new ActivityEntry(R.string.activity_entry_classic_adapter_view, null,
+                    new ActivityEntry(R.string.activity_entry_classic_scramble_adapter_with_list_view, ClassicScrambleAdapterExampleActivity.class),
+                    new ActivityEntry(R.string.activity_entry_classic_scramble_adapter_with_spinner, SpinnerScrambleAdapterExampleActivity.class),
+                    new ActivityEntry(R.string.activity_entry_abs_tree_item_adapter_with_spinner, SpinnerTreeItemAdapterExampleActivity.class)
             )
     );
 
@@ -47,10 +48,13 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(@NonNull RecyclerView recyclerView, @NonNull ActivityEntryAdapter adapter, @NonNull ActivityEntryAdapter.ViewHolder viewHolder, @NonNull View view) {
             if (recyclerView.getId() == R.id.recycler) {
-                ActivityEntry entry = adapter.getItemAt(viewHolder.getAdapterPosition()).getItem();
+                ActivityEntryAdapter.WrappedItem wrappedItem = adapter.getItemAt(viewHolder.getAdapterPosition());
+                ActivityEntry entry = wrappedItem.getItem();
                 if (entry != null && entry.getClazz() != null) {
                     Intent intent = new Intent(MainActivity.this, entry.getClazz());
                     startActivity(intent);
+                } else {
+                    adapter.doOpen(wrappedItem, !wrappedItem.isOpened());
                 }
             }
         }

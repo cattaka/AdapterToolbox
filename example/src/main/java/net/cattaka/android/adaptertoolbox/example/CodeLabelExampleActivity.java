@@ -1,6 +1,7 @@
 package net.cattaka.android.adaptertoolbox.example;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -36,7 +37,7 @@ public class CodeLabelExampleActivity extends AppCompatActivity implements Adapt
         if (parent.getId() == R.id.spinner) {
             OrdinalLabel item = (OrdinalLabel) parent.getItemAtPosition(position);
             String text = (item != null) ? item.getLabel(getResources()) : "null";
-            Toast.makeText(this, text + " is selected.", Toast.LENGTH_SHORT).show();
+            Snackbar.make(view, text + " is selected.", Snackbar.LENGTH_SHORT).show();
         }
     }
 

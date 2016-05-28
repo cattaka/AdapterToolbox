@@ -24,14 +24,22 @@ import net.cattaka.android.adaptertoolbox.classic.ClassicScrambleAdapter;
  */
 public class ClassicForwardingListener<A extends RecyclerView.Adapter<? extends VH>, VH extends RecyclerView.ViewHolder>
         extends ForwardingListener<A, VH> {
-    ClassicScrambleAdapter<?> mAdapter;
+    AdapterConverter mAdapter;
     ClassicListenerRelay mListenerRelay;
 
-    public ClassicScrambleAdapter<?> getAdapter() {
+    public ClassicForwardingListener() {
+    }
+
+    public ClassicForwardingListener(AdapterConverter adapter, ClassicListenerRelay listenerRelay) {
+        mAdapter = adapter;
+        mListenerRelay = listenerRelay;
+    }
+
+    public AdapterConverter getAdapter() {
         return mAdapter;
     }
 
-    public void setAdapter(ClassicScrambleAdapter<?> adapter) {
+    public void setAdapter(AdapterConverter adapter) {
         mAdapter = adapter;
     }
 

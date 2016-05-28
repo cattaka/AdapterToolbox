@@ -15,7 +15,7 @@ import net.cattaka.android.adaptertoolbox.example.data.HeaderInfo;
 /**
  * Created by cattaka on 16/05/02.
  */
-public class HeaderInfoViewHolderFactory extends ScrambleAdapter.AbsViewHolderFactory<HeaderInfoViewHolderFactory.ViewHolder> {
+public class SpinnerHeaderInfoViewHolderFactory extends ScrambleAdapter.AbsViewHolderFactory<SpinnerHeaderInfoViewHolderFactory.ViewHolder> {
 
     @NonNull
     @Override

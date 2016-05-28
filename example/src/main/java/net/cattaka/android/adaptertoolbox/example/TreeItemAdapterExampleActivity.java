@@ -46,7 +46,7 @@ public class TreeItemAdapterExampleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choosable_tree_item_adapter);
+        setContentView(R.layout.activity_tree_item_adapter);
 
         // find views
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler);

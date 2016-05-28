@@ -5,4 +5,26 @@
     <string name="ordinal_label_second">Second</string>
     <string name="ordinal_label_third">Third</string>
     <string name="ordinal_label_fourth">Fourth</string>
+
+    <string name="activity_entry_enum_with_spinner">Enum with Spinner</string>
+    <string name="activity_entry_code_label_adapter">CodeLabelAdapter</string>
+    <string name="activity_entry_merge_recycler_adapter">MergeRecyclerAdapter</string>
+    <string name="activity_entry_simple_string">Simple String</string>
+    <string name="activity_entry_multi_event_handling">Multi event handling</string>
+    <string name="activity_entry_header_and_footer">Header and footer</string>
+    <string name="activity_entry_sectined_list_by_multi_adapters">Sectioned list by multi adapters</string>
+    <string name="activity_entry_scramble_adapter">ScrambleAdapter</string>
+    <string name="activity_entry_muluti_types_in_list_object"><![CDATA[Multi types in List<Object>]]></string>
+    <string name="activity_entry_manipulatable_list">Manipulable list</string>
+    <string name="activity_entry_nested_scramble_adapter">Nested ScrambleAdapter</string>
+    <string name="activity_entry_sectioned_list_by_list_object"><![CDATA[Sectioned list by List<Object>]]></string>
+    <string name="activity_entry_tree">Tree</string>
+    <string name="activity_entry_simple_tree">Simple tree</string>
+    <string name="activity_entry_single_choosable_tree">Single choosable tree</string>
+    <string name="activity_entry_multi_choosable_tree">Multi choosable tree</string>
+    <string name="activity_entry_classic_adapter_view">Classic AdapterView</string>
+    <string name="activity_entry_classic_scramble_adapter_with_list_view">ClassicScrambleAdapter with ListView</string>
+    <string name="activity_entry_classic_scramble_adapter_with_spinner">ClassicScrambleAdapter with Spinner</string>
+    <string name="activity_entry_abs_tree_item_adapter_with_spinner">AbsTreeItemAdapter with Spinner</string>
+
 </resources>
