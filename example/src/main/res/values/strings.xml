@@ -5,6 +5,7 @@
     <string name="ordinal_label_second">Second</string>
     <string name="ordinal_label_third">Third</string>
     <string name="ordinal_label_fourth">Fourth</string>
+
     <string name="activity_entry_enum_with_spinner">Enum with Spinner</string>
     <string name="activity_entry_code_label_adapter">CodeLabelAdapter</string>
     <string name="activity_entry_merge_recycler_adapter">MergeRecyclerAdapter</string>
@@ -25,4 +26,5 @@
     <string name="activity_entry_classic_scramble_adapter_with_list_view">ClassicScrambleAdapter with ListView</string>
     <string name="activity_entry_classic_scramble_adapter_with_spinner">ClassicScrambleAdapter with Spinner</string>
     <string name="activity_entry_abs_tree_item_adapter_with_spinner">AbsTreeItemAdapter with Spinner</string>
+
 </resources>

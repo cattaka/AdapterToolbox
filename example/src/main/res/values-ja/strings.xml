@@ -4,4 +4,26 @@
     <string name="ordinal_label_second">ふたつめ</string>
     <string name="ordinal_label_third">みっつめ</string>
     <string name="ordinal_label_fourth">よっつめ</string>
+
+    <string name="activity_entry_enum_with_spinner">SpinnerでEnumを使う</string>
+    <string name="activity_entry_code_label_adapter">CodeLabelAdapter</string>
+    <string name="activity_entry_merge_recycler_adapter">MergeRecyclerAdapter</string>
+    <string name="activity_entry_simple_string">単純なString</string>
+    <string name="activity_entry_multi_event_handling">複数のイベントのハンドリング</string>
+    <string name="activity_entry_header_and_footer">ヘッダーとフッター</string>
+    <string name="activity_entry_sectined_list_by_multi_adapters">複数のAdapterを使ったセクション分けされたリスト</string>
+    <string name="activity_entry_scramble_adapter">ScrambleAdapter</string>
+    <string name="activity_entry_muluti_types_in_list_object"><![CDATA[List<Object>に入った複数のデータ型]]></string>
+    <string name="activity_entry_manipulatable_list">操作可能なリスト</string>
+    <string name="activity_entry_nested_scramble_adapter">ネストしたScrambleAdapter</string>
+    <string name="activity_entry_sectioned_list_by_list_object"><![CDATA[List<Object>を使ったセクション分けされたリスト]]></string>
+    <string name="activity_entry_tree">ツリー</string>
+    <string name="activity_entry_simple_tree">単純なツリー</string>
+    <string name="activity_entry_single_choosable_tree">単一選択が可能なツリー</string>
+    <string name="activity_entry_multi_choosable_tree">複数選択が可能なツリー</string>
+    <string name="activity_entry_classic_adapter_view">Classic AdapterView</string>
+    <string name="activity_entry_classic_scramble_adapter_with_list_view">ClassicScrambleAdapterとListView</string>
+    <string name="activity_entry_classic_scramble_adapter_with_spinner">ClassicScrambleAdapterとSpinner</string>
+    <string name="activity_entry_abs_tree_item_adapter_with_spinner">AbsTreeItemAdapterとSpinner</string>
+
 </resources>
