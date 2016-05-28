@@ -1,17 +1,11 @@
 package net.cattaka.android.adaptertoolbox.example;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Spinner;
 
 import net.cattaka.android.adaptertoolbox.classic.ClassicScrambleAdapter;
-import net.cattaka.android.adaptertoolbox.classic.listener.ClassicListenerRelay;
-import net.cattaka.android.adaptertoolbox.example.spinner.factory.HeaderInfoViewHolderFactory;
+import net.cattaka.android.adaptertoolbox.example.spinner.factory.SpinnerHeaderInfoViewHolderFactory;
 import net.cattaka.android.adaptertoolbox.example.spinner.factory.SpinnerStringViewHolderFactory;
 import net.cattaka.android.adaptertoolbox.example.data.HeaderInfo;
 
@@ -44,7 +38,7 @@ public class SpinnerScrambleAdapterExampleActivity extends AppCompatActivity {
                     this,
                     items,
                     null,
-                    new HeaderInfoViewHolderFactory(),
+                    new SpinnerHeaderInfoViewHolderFactory(),
                     new SpinnerStringViewHolderFactory()
                     );
             // Issue: Spinner Doesn't Allow Heterogeneous ListAdapters in Lollipop.

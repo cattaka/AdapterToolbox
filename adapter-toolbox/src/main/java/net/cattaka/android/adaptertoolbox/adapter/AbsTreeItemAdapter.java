@@ -50,6 +50,7 @@ public abstract class AbsTreeItemAdapter<
     }
 
     public <REF extends ITreeItemAdapterRef<A, ?, T, W>> AbsTreeItemAdapter(@NonNull Context context, @NonNull List<T> items, @NonNull REF ref) {
+        super(new ForwardingListener<A, VH>());
         mContext = context;
         mItems = inflateWrappedList(new ArrayList<W>(), items, 0, null, ref);
     }
@@ -57,12 +58,6 @@ public abstract class AbsTreeItemAdapter<
     @NonNull
     public Context getContext() {
         return mContext;
-    }
-
-    @NonNull
-    @Override
-    public ForwardingListener<A, VH> createForwardingListener() {
-        return new ForwardingListener<>();
     }
 
     @Override
@@ -82,7 +77,7 @@ public abstract class AbsTreeItemAdapter<
         return mItems;
     }
 
-    protected void doOpen(W item, boolean opened) {
+    public void doOpen(W item, boolean opened) {
         if (item.isOpened() != opened) {
             item.setOpened(opened);
             List<W> children = new ArrayList<>();
