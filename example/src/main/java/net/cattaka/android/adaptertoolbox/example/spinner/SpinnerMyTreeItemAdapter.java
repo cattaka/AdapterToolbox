@@ -113,9 +113,9 @@ public class SpinnerMyTreeItemAdapter extends AbsTreeItemAdapter<
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        Space levelSpace;
-        CompoundButton openedCheck;
-        TextView labelText;
+        public final Space levelSpace;
+        public final CompoundButton openedCheck;
+        public final TextView labelText;
         int position;
 
         public ViewHolder(View itemView) {

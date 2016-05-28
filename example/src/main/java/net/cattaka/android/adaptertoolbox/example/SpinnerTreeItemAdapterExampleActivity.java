@@ -1,10 +1,12 @@
 package net.cattaka.android.adaptertoolbox.example;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -39,7 +41,7 @@ public class SpinnerTreeItemAdapterExampleActivity extends AppCompatActivity imp
     };
 
     Spinner mSpinner;
-    AdapterConverter<SpinnerMyTreeItemAdapter, SpinnerMyTreeItemAdapter.ViewHolder, SpinnerMyTreeItemAdapter.WrappedItem> mAdapterConverter;
+    AdapterConverterEx mAdapterConverter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +58,7 @@ public class SpinnerTreeItemAdapterExampleActivity extends AppCompatActivity imp
             List<MyTreeItem> items = ExampleDataGenerator.generateMyTreeItem(Arrays.asList(5, 3, 2), 0);
 
             SpinnerMyTreeItemAdapter adapter = new SpinnerMyTreeItemAdapter(this, items);
-            mAdapterConverter = new AdapterConverter<>(this, adapter);
+            mAdapterConverter = new AdapterConverterEx(this, adapter);
             adapter.setForwardingListener(new ClassicForwardingListener<SpinnerMyTreeItemAdapter, SpinnerMyTreeItemAdapter.ViewHolder>(mAdapterConverter, mListenerRelay));
 
             // Issue: Spinner Doesn't Allow Heterogeneous ListAdapters in Lollipop.
@@ -81,5 +83,21 @@ public class SpinnerTreeItemAdapterExampleActivity extends AppCompatActivity imp
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         // no-op
+    }
+
+    private static class AdapterConverterEx extends AdapterConverter<SpinnerMyTreeItemAdapter, SpinnerMyTreeItemAdapter.ViewHolder, SpinnerMyTreeItemAdapter.WrappedItem> {
+        public AdapterConverterEx(@NonNull Context context, @NonNull SpinnerMyTreeItemAdapter orig) {
+            super(context, orig);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = super.getView(position, convertView, parent);
+            @SuppressWarnings("unchecked")
+            ViewHolderWrapper<SpinnerMyTreeItemAdapter.ViewHolder> vhw = (ViewHolderWrapper<SpinnerMyTreeItemAdapter.ViewHolder>) view.getTag(VIEW_HOLDER);
+            vhw.getOrig().levelSpace.setVisibility(View.GONE);
+            vhw.getOrig().openedCheck.setVisibility(View.GONE);
+            return view;
+        }
     }
 }
