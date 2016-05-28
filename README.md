@@ -1,3 +1,51 @@
+AdapterToolbox
+==================
+This is utility classes for RecyclerView and classic AdapterView(such as ListView, Spinner).
+
+- ScrambleAdapter
+ - This separate creating ViewHolder logic from RecyclerView.Adapter.
+ - Once gave DataClass-ViewHolder relation, this will bind them automatically.
+ - The relation of DataClass-ViewHolder are declared by ViewHolderFactory.
+- ViewHolderFactory
+ - Describe the relation of DataClass-ViewHolder.
+ - This has onCreateViewHolder() / onBindViewHolder() / isAssignable() / etc methods.
+- ListenerRelay
+ - Empty implementation of frequently used listeners. This is used by ScrambleAdapter.
+- CodeLabelAdapter
+ - The adapter for Enum. But you can adopt this to other standard data classes.
+- ClassicScrambleAdapter
+ - Classic version of ScrambleAdapter. It can go with classic AdapterView(such as ListView, Spinner).
+- AbsTreeItemAdapter
+ - This provides foldable tree list.
+- AbsChoosableTreeItemAdapter
+ - This supports single choice and multi choice mode.
+
+
+## How to use
+Add folloing lines to build.gradle
+
+```groovy
+repositories {
+    maven {
+        url "http://dl.bintray.com/cattaka/maven"
+    }
+}
+
+dependencies {
+    compile 'net.cattaka:adapter-toolbox:$VERSION@aar'
+}
+```
+
+Put $VERSION that you want to use.
+You can check available versions here. https://bintray.com/cattaka/maven/adapter-toolbox/view
+
+
+## Examples
+
+This repository contains example application.
+You can clone this repository and run example application with Android Studio.
+
+
 ## License
 
 ```
