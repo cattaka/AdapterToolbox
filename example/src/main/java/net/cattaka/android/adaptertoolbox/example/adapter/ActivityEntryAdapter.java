@@ -98,7 +98,7 @@ public class ActivityEntryAdapter extends AbsChoosableTreeItemAdapter<
         }
 
         holder.openedCheck.setChecked(wrappedItem.opened);
-        holder.labelText.setText(item.getLabel());
+        holder.labelText.setText(item.getLabel(holder.itemView.getResources()));
     }
 
     public static class WrappedItem extends AbsChoosableTreeItemAdapter.WrappedItem<WrappedItem, ActivityEntry> {
