@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * Created by cattaka on 16/05/02.
  */
-public class AdapterConverterExampleActivity extends AppCompatActivity {
+public class ClassicScrambleAdapterExampleActivity extends AppCompatActivity {
     ClassicListenerRelay mListenerRelay = new ClassicListenerRelay() {
         @Override
         public void onClick(@NonNull AdapterView<?> adapterView, @NonNull ClassicScrambleAdapter<?> adapter, int position, @NonNull RecyclerView.ViewHolder vh, @NonNull View view) {
