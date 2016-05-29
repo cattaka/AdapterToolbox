@@ -391,11 +391,52 @@ public class MergeRecyclerAdapter<T extends RecyclerView.Adapter> extends Recycl
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
         super.onDetachedFromRecyclerView(recyclerView);
         for (LocalAdapter adapter : mAdapters) {
             adapter.mAdapter.onDetachedFromRecyclerView(recyclerView);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public void onViewRecycled(RecyclerView.ViewHolder holder) {
+        super.onViewRecycled(holder);
+        LocalAdapter la = getAdapterOffsetForItem(holder.getAdapterPosition());
+        if (la != null) {
+            la.mAdapter.onViewRecycled(holder);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public boolean onFailedToRecycleView(RecyclerView.ViewHolder holder) {
+        LocalAdapter la = getAdapterOffsetForItem(holder.getAdapterPosition());
+        if (la != null) {
+            return la.mAdapter.onFailedToRecycleView(holder);
+        }
+        return super.onFailedToRecycleView(holder);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
+        LocalAdapter la = getAdapterOffsetForItem(holder.getAdapterPosition());
+        if (la != null) {
+            la.mAdapter.onViewAttachedToWindow(holder);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
+        super.onViewDetachedFromWindow(holder);
+        LocalAdapter la = getAdapterOffsetForItem(holder.getAdapterPosition());
+        if (la != null) {
+            la.mAdapter.onViewDetachedFromWindow(holder);
         }
     }
 }
