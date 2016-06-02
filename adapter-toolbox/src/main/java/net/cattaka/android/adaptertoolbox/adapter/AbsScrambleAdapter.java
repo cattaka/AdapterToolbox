@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import net.cattaka.android.adaptertoolbox.adapter.listener.IForwardingListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by cattaka on 16/05/10.
@@ -38,12 +40,14 @@ public abstract class AbsScrambleAdapter<
     RecyclerView mRecyclerView;
 
     List<IViewHolderFactory<SA, VH, FL, ? extends VH>> mViewHolderFactory;
+    Map<Class<? extends RecyclerView.ViewHolder>, IViewHolderFactory<SA, VH, FL, ? extends VH>> mViewHolder2FactoryMap;
     SparseArray<FL> mForwardingListeners;
 
     public AbsScrambleAdapter(
             @NonNull List<? extends IViewHolderFactory<SA, VH, FL, ?>> viewHolderFactories
     ) {
         mViewHolderFactory = new ArrayList<>();
+        mViewHolder2FactoryMap = new HashMap<>();
 
         mViewHolderFactory.addAll(viewHolderFactories);
 
@@ -66,7 +70,9 @@ public abstract class AbsScrambleAdapter<
         } else {
             forwardingListener = mForwardingListeners.get(viewType);
         }
-        return viewHolderFactory.onCreateViewHolder(getSelf(), parent, forwardingListener);
+        VH holder = viewHolderFactory.onCreateViewHolder(getSelf(), parent, forwardingListener);
+        mViewHolder2FactoryMap.put(holder.getClass(), viewHolderFactory);
+        return holder;
     }
 
     @Override
@@ -78,30 +84,36 @@ public abstract class AbsScrambleAdapter<
 
     @Override
     public void onViewRecycled(VH holder) {
-        int viewType = getItemViewType(holder.getAdapterPosition());
-        IViewHolderFactory<SA, VH, FL, ?> viewHolderFactory = mViewHolderFactory.get(viewType);
-        viewHolderFactory.onViewRecycled(getSelf(), holder);
+        IViewHolderFactory<SA, VH, FL, ?> viewHolderFactory = mViewHolder2FactoryMap.get(holder.getClass());
+        if (viewHolderFactory != null) {
+            viewHolderFactory.onViewRecycled(getSelf(), holder);
+        }
     }
 
     @Override
     public void onViewDetachedFromWindow(VH holder) {
-        int viewType = getItemViewType(holder.getAdapterPosition());
-        IViewHolderFactory<SA, VH, FL, ?> viewHolderFactory = mViewHolderFactory.get(viewType);
-        viewHolderFactory.onViewDetachedFromWindow(getSelf(), holder);
+        IViewHolderFactory<SA, VH, FL, ?> viewHolderFactory = mViewHolder2FactoryMap.get(holder.getClass());
+        if (viewHolderFactory != null) {
+            viewHolderFactory.onViewDetachedFromWindow(getSelf(), holder);
+        }
     }
 
     @Override
     public void onViewAttachedToWindow(VH holder) {
-        int viewType = getItemViewType(holder.getAdapterPosition());
-        IViewHolderFactory<SA, VH, FL, ?> viewHolderFactory = mViewHolderFactory.get(viewType);
-        viewHolderFactory.onViewAttachedToWindow(getSelf(), holder);
+        IViewHolderFactory<SA, VH, FL, ?> viewHolderFactory = mViewHolder2FactoryMap.get(holder.getClass());
+        if (viewHolderFactory != null) {
+            viewHolderFactory.onViewAttachedToWindow(getSelf(), holder);
+        }
     }
 
     @Override
     public boolean onFailedToRecycleView(VH holder) {
-        int viewType = getItemViewType(holder.getAdapterPosition());
-        IViewHolderFactory<SA, VH, FL, ?> viewHolderFactory = mViewHolderFactory.get(viewType);
-        return viewHolderFactory.onFailedToRecycleView(getSelf(), holder);
+        IViewHolderFactory<SA, VH, FL, ?> viewHolderFactory = mViewHolder2FactoryMap.get(holder.getClass());
+        if (viewHolderFactory != null) {
+            return viewHolderFactory.onFailedToRecycleView(getSelf(), holder);
+        } else {
+            return super.onFailedToRecycleView(holder);
+        }
     }
 
     @SuppressWarnings("unchecked")
