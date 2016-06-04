@@ -7,10 +7,13 @@ import android.support.annotation.Nullable;
 import android.support.test.InstrumentationRegistry;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.AdapterView;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+
+import java.util.List;
 
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.Matchers.allOf;
@@ -66,6 +69,43 @@ public class TestUtils {
         };
     }
 
+    public static Matcher<View> withIdInAdapterView(int id, int adapterViewId, int position) {
+        return allOf(withId(id), isDescendantOfAdapterView(adapterViewId, position));
+    }
+
+    public static Matcher<View> isDescendantOfAdapterView(final int adapterViewId, final int position) {
+        return new BaseMatcher<View>() {
+            @Override
+            public boolean matches(Object arg) {
+                if (arg instanceof View) {
+                    View view = (View) arg;
+                    while (view.getParent() != null && view.getParent() instanceof View) {
+                        View parent = (View) view.getParent();
+                        if (parent.getId() == adapterViewId && parent instanceof AdapterView) {
+                            AdapterView adapterView = ((AdapterView) parent);
+                            int offsetPosition = position - adapterView.getFirstVisiblePosition();
+                            if (0 <= offsetPosition && offsetPosition < adapterView.getChildCount()
+                                    && adapterView.getChildAt(offsetPosition) == view) {
+                                return true;
+                            }
+                        }
+                        view = parent;
+                    }
+                }
+                return false;
+            }
+
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("isDescendantOfAdapterView(")
+                        .appendValue(InstrumentationRegistry.getTargetContext().getResources().getResourceEntryName(adapterViewId))
+                        .appendText(",")
+                        .appendValue(position)
+                        .appendText(")");
+            }
+        };
+    }
+
     /* This method is implemented in newer RecyclerView. */
     @Nullable
     public static RecyclerView.ViewHolder findContainingViewHolder(RecyclerView recyclerView, View view) {
@@ -77,5 +117,33 @@ public class TestUtils {
             v = (View) v.getParent();
         }
         return null;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T> Entry<T> find(@Nullable List<?> items, @NonNull Class<T> clazz, int position) {
+        if (items == null) {
+            return null;
+        }
+        int count = 0;
+        for (int i = 0; i < items.size(); i++) {
+            Object item = items.get(i);
+            if (clazz.isInstance(item)) {
+                if (count == position) {
+                    return new Entry<>(i, (T) item);
+                }
+                count++;
+            }
+        }
+        return null;
+    }
+
+    public static class Entry<T> {
+        public final int index;
+        public final T object;
+
+        public Entry(int index, T object) {
+            this.index = index;
+            this.object = object;
+        }
     }
 }

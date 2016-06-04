@@ -25,7 +25,7 @@ import static org.junit.Assert.assertThat;
  */
 public class MainActivityTest {
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<MainActivity>(MainActivity.class, false, false);
+    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class, false, false);
 
     @Test
     public void clickAll() {
