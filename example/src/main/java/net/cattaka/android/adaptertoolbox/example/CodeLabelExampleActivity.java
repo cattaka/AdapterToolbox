@@ -27,11 +27,12 @@ public class CodeLabelExampleActivity extends AppCompatActivity implements Adapt
         // find views
         mSpinner = (Spinner) findViewById(R.id.spinner);
 
-        // bind event handlers
-        mSpinner.setOnItemSelectedListener(this);
-
         // set adapter
         mSpinner.setAdapter(CodeLabelAdapter.newInstance(this, OrdinalLabel.values(), true));
+        mSpinner.setSelection(0, false);
+
+        // bind event handlers
+        mSpinner.setOnItemSelectedListener(this);
     }
 
     @Override

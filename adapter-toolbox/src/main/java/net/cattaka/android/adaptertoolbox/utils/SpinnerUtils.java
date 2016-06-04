@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
 
@@ -15,7 +16,11 @@ import java.lang.reflect.Method;
  * Created by cattaka on 16/05/15.
  */
 public class SpinnerUtils {
-    public static boolean selectSpinnerValue(Spinner spinner, Object value) {
+    public static boolean selectSpinnerValue(@NonNull Spinner spinner, Object value) {
+        return selectSpinnerValue(spinner, value, false);
+    }
+
+    public static boolean selectSpinnerValue(@NonNull Spinner spinner, Object value, boolean cancelListener) {
         if (value == null) {
             for (int i = 0; i < spinner.getCount(); i++) {
                 if (spinner.getItemAtPosition(i) == null) {
@@ -32,6 +37,21 @@ public class SpinnerUtils {
             }
         }
         return false;
+    }
+
+    public static void setSelection(@NonNull Spinner spinner, int position, boolean cancelListener) {
+        if (cancelListener) {
+            AdapterView.OnItemSelectedListener listener = spinner.getOnItemSelectedListener();
+            if (listener != null) {
+                spinner.setOnItemSelectedListener(null);
+            }
+            spinner.setSelection(position);
+            if (listener != null) {
+                spinner.setOnItemSelectedListener(listener);
+            }
+        } else {
+            spinner.setSelection(position);
+        }
     }
 
     public static void dismissPopup(@NonNull Spinner spinner) {
