@@ -1,16 +1,8 @@
 package net.cattaka.android.adaptertoolbox.example;
 
-import android.support.test.espresso.Espresso;
-import android.support.test.espresso.action.ViewActions;
-import android.support.test.espresso.contrib.RecyclerViewActions;
-import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.view.View;
 
-import net.cattaka.android.adaptertoolbox.adapter.ScrambleAdapter;
-import net.cattaka.android.adaptertoolbox.adapter.SingleViewAdapter;
-import net.cattaka.android.adaptertoolbox.example.adapter.SimpleNumberAdapter;
-import net.cattaka.android.adaptertoolbox.example.adapter.SimpleStringAdapter;
 import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
 import net.cattaka.android.adaptertoolbox.example.test.TestUtils;
 import net.cattaka.android.adaptertoolbox.thirdparty.MergeRecyclerAdapter;

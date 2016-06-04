@@ -152,7 +152,7 @@ public class TestUtils {
             @Override
             public void check(View view, NoMatchingViewException noViewFoundException) {
                 if (view instanceof ProgressBar) {
-                    if (progress.matches(((ProgressBar)view).getProgress())) {
+                    if (progress.matches(((ProgressBar) view).getProgress())) {
                         return;
                     }
                 }
@@ -166,7 +166,7 @@ public class TestUtils {
             @Override
             public void check(View view, NoMatchingViewException noViewFoundException) {
                 if (view instanceof AdapterView) {
-                    if (item.matches(((AdapterView)view).getSelectedItem())) {
+                    if (item.matches(((AdapterView) view).getSelectedItem())) {
                         return;
                     }
                 }
@@ -177,7 +177,7 @@ public class TestUtils {
 
     public static int calcPositionOffset(MergeRecyclerAdapter mergeRecyclerAdapter, RecyclerView.Adapter adapter) {
         int offset = 0;
-        for (int i=0;i<mergeRecyclerAdapter.getSubAdapterCount();i++) {
+        for (int i = 0; i < mergeRecyclerAdapter.getSubAdapterCount(); i++) {
             RecyclerView.Adapter a = mergeRecyclerAdapter.getSubAdapter(i);
             if (a == adapter) {
                 break;
