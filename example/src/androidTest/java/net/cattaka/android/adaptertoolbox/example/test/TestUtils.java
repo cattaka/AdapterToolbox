@@ -175,6 +175,19 @@ public class TestUtils {
         };
     }
 
+    public static int calcPositionOffset(MergeRecyclerAdapter mergeRecyclerAdapter, RecyclerView.Adapter adapter) {
+        int offset = 0;
+        for (int i=0;i<mergeRecyclerAdapter.getSubAdapterCount();i++) {
+            RecyclerView.Adapter a = mergeRecyclerAdapter.getSubAdapter(i);
+            if (a == adapter) {
+                break;
+            }
+            offset += a.getItemCount();
+        }
+        return offset;
+    }
+
+
     @SuppressWarnings("unchecked")
     public static <T extends RecyclerView.Adapter> T find(@Nullable MergeRecyclerAdapter mergeRecyclerAdapter, @NonNull Class<T> clazz, int position) {
         if (mergeRecyclerAdapter == null) {
