@@ -5,9 +5,18 @@ import android.app.Instrumentation;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.NoMatchingViewException;
+import android.support.test.espresso.UiController;
+import android.support.test.espresso.ViewAction;
+import android.support.test.espresso.ViewAssertion;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ProgressBar;
+import android.widget.SeekBar;
+
+import net.cattaka.android.adaptertoolbox.thirdparty.MergeRecyclerAdapter;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
@@ -115,6 +124,71 @@ public class TestUtils {
                 return recyclerView.getChildViewHolder(v);
             }
             v = (View) v.getParent();
+        }
+        return null;
+    }
+
+    public static ViewAction setProgress(final int progress) {
+        return new ViewAction() {
+            @Override
+            public void perform(UiController uiController, View view) {
+                ((SeekBar) view).setProgress(progress);
+            }
+
+            @Override
+            public String getDescription() {
+                return "Set a progress";
+            }
+
+            @Override
+            public Matcher<View> getConstraints() {
+                return ViewMatchers.isAssignableFrom(SeekBar.class);
+            }
+        };
+    }
+
+    public static ViewAssertion hasProgress(final Matcher<Integer> progress) {
+        return new ViewAssertion() {
+            @Override
+            public void check(View view, NoMatchingViewException noViewFoundException) {
+                if (view instanceof ProgressBar) {
+                    if (progress.matches(((ProgressBar)view).getProgress())) {
+                        return;
+                    }
+                }
+                throw noViewFoundException;
+            }
+        };
+    }
+
+    public static ViewAssertion hasSelectedItem(final Matcher<? extends Object> item) {
+        return new ViewAssertion() {
+            @Override
+            public void check(View view, NoMatchingViewException noViewFoundException) {
+                if (view instanceof AdapterView) {
+                    if (item.matches(((AdapterView)view).getSelectedItem())) {
+                        return;
+                    }
+                }
+                throw noViewFoundException;
+            }
+        };
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T extends RecyclerView.Adapter> T find(@Nullable MergeRecyclerAdapter mergeRecyclerAdapter, @NonNull Class<T> clazz, int position) {
+        if (mergeRecyclerAdapter == null) {
+            return null;
+        }
+        int count = 0;
+        for (int i = 0; i < mergeRecyclerAdapter.getSubAdapterCount(); i++) {
+            RecyclerView.Adapter item = mergeRecyclerAdapter.getSubAdapter(i);
+            if (clazz.isInstance(item)) {
+                if (count == position) {
+                    return (T) item;
+                }
+                count++;
+            }
         }
         return null;
     }
