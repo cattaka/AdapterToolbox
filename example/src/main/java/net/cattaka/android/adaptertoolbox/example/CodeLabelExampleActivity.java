@@ -10,11 +10,13 @@ import android.widget.Toast;
 
 import net.cattaka.android.adaptertoolbox.adapter.CodeLabelAdapter;
 import net.cattaka.android.adaptertoolbox.example.data.OrdinalLabel;
+import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
 
 /**
  * Created by cattaka on 16/05/02.
  */
 public class CodeLabelExampleActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    SnackbarLogic mSnackbarLogic = new SnackbarLogic();
     Spinner mSpinner;
 
     @Override
@@ -37,7 +39,7 @@ public class CodeLabelExampleActivity extends AppCompatActivity implements Adapt
         if (parent.getId() == R.id.spinner) {
             OrdinalLabel item = (OrdinalLabel) parent.getItemAtPosition(position);
             String text = (item != null) ? item.getLabel(getResources()) : "null";
-            Snackbar.make(view, text + " is selected.", Snackbar.LENGTH_SHORT).show();
+            mSnackbarLogic.make(view, text + " is selected.", Snackbar.LENGTH_SHORT).show();
         }
     }
 

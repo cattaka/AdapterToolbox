@@ -11,6 +11,7 @@ import android.view.View;
 import net.cattaka.android.adaptertoolbox.adapter.listener.ListenerRelay;
 import net.cattaka.android.adaptertoolbox.example.adapter.MyTreeItemAdapter;
 import net.cattaka.android.adaptertoolbox.example.data.MyTreeItem;
+import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
 import net.cattaka.android.adaptertoolbox.example.utils.ExampleDataGenerator;
 
 import java.util.Arrays;
@@ -25,7 +26,7 @@ public class TreeItemAdapterExampleActivity extends AppCompatActivity {
         public void onClick(@NonNull RecyclerView recyclerView, @NonNull MyTreeItemAdapter adapter, @NonNull MyTreeItemAdapter.ViewHolder viewHolder, @NonNull View view) {
             if (recyclerView.getId() == R.id.recycler) {
                 MyTreeItem item = adapter.getItemAt(viewHolder.getAdapterPosition()).getItem();
-                Snackbar.make(view, "Clicked: " + item.getText(), Snackbar.LENGTH_SHORT).show();
+                mSnackbarLogic.make(view, "Clicked: " + item.getText(), Snackbar.LENGTH_SHORT).show();
             }
         }
 
@@ -33,14 +34,15 @@ public class TreeItemAdapterExampleActivity extends AppCompatActivity {
         public boolean onLongClick(@NonNull RecyclerView recyclerView, @NonNull MyTreeItemAdapter adapter, @NonNull MyTreeItemAdapter.ViewHolder viewHolder, @NonNull View view) {
             if (recyclerView.getId() == R.id.recycler) {
                 MyTreeItem item = adapter.getItemAt(viewHolder.getAdapterPosition()).getItem();
-                Snackbar.make(view, "Long clicked: " + item.getText(), Snackbar.LENGTH_SHORT).show();
+                mSnackbarLogic.make(view, "Long clicked: " + item.getText(), Snackbar.LENGTH_SHORT).show();
                 return true;
             }
             return false;
         }
     };
 
-
+    SnackbarLogic mSnackbarLogic = new SnackbarLogic();
+    
     RecyclerView mRecyclerView;
 
     @Override

@@ -11,6 +11,7 @@ import android.view.View;
 import net.cattaka.android.adaptertoolbox.adapter.ScrambleAdapter;
 import net.cattaka.android.adaptertoolbox.adapter.listener.ListenerRelay;
 import net.cattaka.android.adaptertoolbox.example.adapter.ComplexStringAdapter;
+import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,15 +28,15 @@ public class ComplexStringExampleActivity extends AppCompatActivity {
                 String item = (String) adapter.getItemAt(viewHolder.getAdapterPosition());
                 switch (view.getId()) {
                     case R.id.text: {
-                        Snackbar.make(view, item + " is clicked.(Text)", Snackbar.LENGTH_SHORT).show();
+                        mSnackbarLogic.make(view, item + " is clicked.(Text)", Snackbar.LENGTH_SHORT).show();
                         break;
                     }
                     case R.id.button_a: {
-                        Snackbar.make(view, item + " is clicked.(A)", Snackbar.LENGTH_SHORT).show();
+                        mSnackbarLogic.make(view, item + " is clicked.(A)", Snackbar.LENGTH_SHORT).show();
                         break;
                     }
                     case R.id.button_b: {
-                        Snackbar.make(view, item + " is clicked.(B)", Snackbar.LENGTH_SHORT).show();
+                        mSnackbarLogic.make(view, item + " is clicked.(B)", Snackbar.LENGTH_SHORT).show();
                         break;
                     }
                 }
@@ -48,15 +49,15 @@ public class ComplexStringExampleActivity extends AppCompatActivity {
                 String item = (String) adapter.getItemAt(viewHolder.getAdapterPosition());
                 switch (view.getId()) {
                     case R.id.text: {
-                        Snackbar.make(view, item + " is long clicked.(Text)", Snackbar.LENGTH_SHORT).show();
+                        mSnackbarLogic.make(view, item + " is long clicked.(Text)", Snackbar.LENGTH_SHORT).show();
                         break;
                     }
                     case R.id.button_a: {
-                        Snackbar.make(view, item + " is long clicked.(A)", Snackbar.LENGTH_SHORT).show();
+                        mSnackbarLogic.make(view, item + " is long clicked.(A)", Snackbar.LENGTH_SHORT).show();
                         break;
                     }
                     case R.id.button_b: {
-                        Snackbar.make(view, item + " is long clicked.(B)", Snackbar.LENGTH_SHORT).show();
+                        mSnackbarLogic.make(view, item + " is long clicked.(B)", Snackbar.LENGTH_SHORT).show();
                         break;
                     }
                 }
@@ -67,6 +68,8 @@ public class ComplexStringExampleActivity extends AppCompatActivity {
     };
 
     RecyclerView mRecyclerView;
+
+    SnackbarLogic mSnackbarLogic = new SnackbarLogic();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

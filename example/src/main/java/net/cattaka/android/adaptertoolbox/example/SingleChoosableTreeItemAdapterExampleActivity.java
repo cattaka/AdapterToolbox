@@ -10,6 +10,7 @@ import android.view.View;
 import net.cattaka.android.adaptertoolbox.adapter.AbsChoosableTreeItemAdapter;
 import net.cattaka.android.adaptertoolbox.example.adapter.ChoosableMyTreeItemAdapter;
 import net.cattaka.android.adaptertoolbox.example.data.MyTreeItem;
+import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
 import net.cattaka.android.adaptertoolbox.example.utils.ExampleDataGenerator;
 
 import java.util.Arrays;
@@ -19,6 +20,8 @@ import java.util.List;
  * Created by cattaka on 16/05/21.
  */
 public class SingleChoosableTreeItemAdapterExampleActivity extends AppCompatActivity implements View.OnClickListener {
+    SnackbarLogic mSnackbarLogic = new SnackbarLogic();
+    
     RecyclerView mRecyclerView;
     ChoosableMyTreeItemAdapter mAdapter;
 
@@ -53,7 +56,7 @@ public class SingleChoosableTreeItemAdapterExampleActivity extends AppCompatActi
                 }
                 sb.append(item.getText());
             }
-            Snackbar.make(mRecyclerView, sb.toString(), Snackbar.LENGTH_SHORT).show();
+            mSnackbarLogic.make(mRecyclerView, sb.toString(), Snackbar.LENGTH_SHORT).show();
         }
     }
 }

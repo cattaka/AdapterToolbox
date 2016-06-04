@@ -11,6 +11,7 @@ import android.view.View;
 import net.cattaka.android.adaptertoolbox.adapter.ScrambleAdapter;
 import net.cattaka.android.adaptertoolbox.adapter.listener.ListenerRelay;
 import net.cattaka.android.adaptertoolbox.example.adapter.SimpleStringAdapter;
+import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class SimpleStringExampleActivity extends AppCompatActivity {
         public void onClick(@NonNull RecyclerView recyclerView, @NonNull ScrambleAdapter<?> adapter, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull View view) {
             if (recyclerView.getId() == R.id.recycler) {
                 String item = (String) adapter.getItemAt(viewHolder.getAdapterPosition());
-                Snackbar.make(view, item + " is clicked.", Snackbar.LENGTH_SHORT).show();
+                mSnackbarLogic.make(view, item + " is clicked.", Snackbar.LENGTH_SHORT).show();
             }
         }
 
@@ -32,13 +33,15 @@ public class SimpleStringExampleActivity extends AppCompatActivity {
         public boolean onLongClick(@NonNull RecyclerView recyclerView, @NonNull ScrambleAdapter<?> adapter, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull View view) {
             if (recyclerView.getId() == R.id.recycler) {
                 String item = (String) adapter.getItemAt(viewHolder.getAdapterPosition());
-                Snackbar.make(view, item + " is long clicked.", Snackbar.LENGTH_SHORT).show();
+                mSnackbarLogic.make(view, item + " is long clicked.", Snackbar.LENGTH_SHORT).show();
                 return true;
             }
             return false;
         }
     };
 
+    SnackbarLogic mSnackbarLogic = new SnackbarLogic();
+    
     RecyclerView mRecyclerView;
 
     @Override
