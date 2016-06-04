@@ -41,5 +41,4 @@ public class CodeLabelExampleActivityTest {
             verify(activity.mSnackbarLogic).make(any(View.class), contains(item.getLabel(res)), anyInt());
         }
     }
-
 }
