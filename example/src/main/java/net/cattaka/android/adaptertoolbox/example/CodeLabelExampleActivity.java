@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import net.cattaka.android.adaptertoolbox.adapter.CodeLabelAdapter;
 import net.cattaka.android.adaptertoolbox.example.data.OrdinalLabel;

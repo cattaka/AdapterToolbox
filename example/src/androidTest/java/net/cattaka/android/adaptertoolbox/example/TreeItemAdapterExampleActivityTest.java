@@ -3,7 +3,6 @@ package net.cattaka.android.adaptertoolbox.example;
 import android.support.test.rule.ActivityTestRule;
 import android.view.View;
 
-import net.cattaka.android.adaptertoolbox.example.adapter.ChoosableMyTreeItemAdapter;
 import net.cattaka.android.adaptertoolbox.example.adapter.MyTreeItemAdapter;
 import net.cattaka.android.adaptertoolbox.example.data.MyTreeItem;
 import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
@@ -22,9 +21,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static net.cattaka.android.adaptertoolbox.example.test.TestUtils.find;
 import static net.cattaka.android.adaptertoolbox.example.test.TestUtils.waitForIdlingResource;
 import static net.cattaka.android.adaptertoolbox.example.test.TestUtils.withIdInRecyclerView;
-import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.not;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.argThat;
@@ -86,7 +83,7 @@ public class TreeItemAdapterExampleActivityTest {
 
         activity.mSnackbarLogic = spy(new SnackbarLogic());
 
-        for (int i=0;i<adapter.getItemCount();i++) {
+        for (int i = 0; i < adapter.getItemCount(); i++) {
             reset(activity.mSnackbarLogic);
             MyTreeItem item = adapter.getItemAt(i).item;
 

@@ -71,7 +71,7 @@ public class ScrambleAdapterExampleActivity extends AppCompatActivity {
     };
 
     SnackbarLogic mSnackbarLogic = new SnackbarLogic();
-    
+
     RecyclerView mRecyclerView;
 
     @Override

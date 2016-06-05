@@ -10,14 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import net.cattaka.android.adaptertoolbox.classic.AdapterConverter;
-import net.cattaka.android.adaptertoolbox.classic.ClassicScrambleAdapter;
 import net.cattaka.android.adaptertoolbox.classic.listener.ClassicForwardingListener;
 import net.cattaka.android.adaptertoolbox.classic.listener.ClassicListenerRelay;
 import net.cattaka.android.adaptertoolbox.example.data.MyTreeItem;
-import net.cattaka.android.adaptertoolbox.example.data.OrdinalLabel;
 import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
 import net.cattaka.android.adaptertoolbox.example.spinner.SpinnerMyTreeItemAdapter;
 import net.cattaka.android.adaptertoolbox.example.utils.ExampleDataGenerator;
@@ -43,7 +40,7 @@ public class SpinnerTreeItemAdapterExampleActivity extends AppCompatActivity imp
     };
 
     SnackbarLogic mSnackbarLogic = new SnackbarLogic();
-    
+
     Spinner mSpinner;
     AdapterConverterEx mAdapterConverter;
 

@@ -8,10 +8,10 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 
 import net.cattaka.android.adaptertoolbox.classic.ClassicScrambleAdapter;
+import net.cattaka.android.adaptertoolbox.example.data.HeaderInfo;
 import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
 import net.cattaka.android.adaptertoolbox.example.spinner.factory.SpinnerHeaderInfoViewHolderFactory;
 import net.cattaka.android.adaptertoolbox.example.spinner.factory.SpinnerStringViewHolderFactory;
-import net.cattaka.android.adaptertoolbox.example.data.HeaderInfo;
 import net.cattaka.android.adaptertoolbox.utils.SpinnerUtils;
 
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ public class SpinnerScrambleAdapterExampleActivity extends AppCompatActivity imp
             List<Object> items = new ArrayList<>();
             for (int i = 0; i < 3; i++) {
                 items.add(new HeaderInfo("Header " + i));
-                for (int j=0;j<4;j++) {
+                for (int j = 0; j < 4; j++) {
                     items.add("item " + i + "-" + j);
                 }
             }
@@ -50,7 +50,7 @@ public class SpinnerScrambleAdapterExampleActivity extends AppCompatActivity imp
                     null,
                     new SpinnerHeaderInfoViewHolderFactory(),
                     new SpinnerStringViewHolderFactory()
-                    );
+            );
             // Issue: Spinner Doesn't Allow Heterogeneous ListAdapters in Lollipop.
             // https://code.google.com/p/android/issues/detail?id=79011
             adapter.setRecyclingDisabled(true);

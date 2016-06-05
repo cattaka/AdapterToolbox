@@ -41,7 +41,7 @@ public class SimpleStringExampleActivity extends AppCompatActivity {
     };
 
     SnackbarLogic mSnackbarLogic = new SnackbarLogic();
-    
+
     RecyclerView mRecyclerView;
 
     @Override

@@ -1,11 +1,9 @@
 package net.cattaka.android.adaptertoolbox.example;
 
-import android.content.res.Resources;
 import android.support.test.rule.ActivityTestRule;
 import android.view.View;
 
 import net.cattaka.android.adaptertoolbox.adapter.ScrambleAdapter;
-import net.cattaka.android.adaptertoolbox.example.data.OrdinalLabel;
 import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
 import net.cattaka.android.adaptertoolbox.example.test.RecyclerViewAnimatingIdlingResource;
 import net.cattaka.android.adaptertoolbox.example.test.TestUtils;
@@ -23,7 +21,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static net.cattaka.android.adaptertoolbox.example.test.TestUtils.find;
 import static net.cattaka.android.adaptertoolbox.example.test.TestUtils.waitForIdlingResource;
 import static net.cattaka.android.adaptertoolbox.example.test.TestUtils.withIdInRecyclerView;
-import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
@@ -60,7 +57,7 @@ public class SimpleStringExampleActivityTest {
 
     @Test
     public void clickItem_stringItem() {
-        for (int i=0;i<10;i++) {
+        for (int i = 0; i < 10; i++) {
             TestUtils.Entry<String> entry = find(mAdapter.getItems(), String.class, i);
             onView(withId(R.id.recycler)).perform(scrollToPosition(entry.index));
             onView(withIdInRecyclerView(R.id.text, R.id.recycler, entry.index)).perform(click());

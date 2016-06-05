@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
 
     <android.support.v4.widget.Space
         android:id="@+id/space_level"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
                 android:id="@+id/check_chosen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/element_spacing_normal" />
+                android:padding="@dimen/element_spacing_normal"/>
 
             <TextView
                 android:id="@+id/text_label"
@@ -35,14 +35,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textAppearance="?android:textAppearanceLarge"
-                tools:text="This is label" />
+                tools:text="This is label"/>
 
             <CheckBox
                 android:id="@+id/check_opened"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@drawable/btn_open_close"
-                android:padding="@dimen/element_spacing_normal" />
+                android:padding="@dimen/element_spacing_normal"/>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

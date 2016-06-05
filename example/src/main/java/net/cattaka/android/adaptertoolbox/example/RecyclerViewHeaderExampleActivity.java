@@ -78,7 +78,7 @@ public class RecyclerViewHeaderExampleActivity extends AppCompatActivity {
     };
 
     SnackbarLogic mSnackbarLogic = new SnackbarLogic();
-    
+
     RecyclerView mRecyclerView;
     MergeRecyclerAdapter<RecyclerView.Adapter> mMergeRecyclerAdapter;
     SingleViewAdapter mHeaderAdapter;

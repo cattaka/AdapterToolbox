@@ -103,7 +103,7 @@ public class ManipulableListExampleActivity extends AppCompatActivity {
     };
 
     SnackbarLogic mSnackbarLogic = new SnackbarLogic();
-    
+
     RecyclerView mRecyclerView;
     MergeRecyclerAdapter<RecyclerView.Adapter> mMergeRecyclerAdapter;
     SimpleStringAdapter mSimpleStringAdapter;

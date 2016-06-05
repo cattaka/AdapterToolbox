@@ -42,7 +42,7 @@ public class TreeItemAdapterExampleActivity extends AppCompatActivity {
     };
 
     SnackbarLogic mSnackbarLogic = new SnackbarLogic();
-    
+
     RecyclerView mRecyclerView;
 
     @Override

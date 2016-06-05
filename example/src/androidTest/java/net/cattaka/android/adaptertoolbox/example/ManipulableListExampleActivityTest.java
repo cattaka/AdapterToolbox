@@ -2,7 +2,6 @@ package net.cattaka.android.adaptertoolbox.example;
 
 import android.support.test.espresso.assertion.ViewAssertions;
 import android.support.test.rule.ActivityTestRule;
-import android.view.View;
 
 import net.cattaka.android.adaptertoolbox.adapter.ScrambleAdapter;
 import net.cattaka.android.adaptertoolbox.example.data.MyInfo;
@@ -28,16 +27,8 @@ import static net.cattaka.android.adaptertoolbox.example.test.TestUtils.hasProgr
 import static net.cattaka.android.adaptertoolbox.example.test.TestUtils.hasSelectedItem;
 import static net.cattaka.android.adaptertoolbox.example.test.TestUtils.setProgress;
 import static net.cattaka.android.adaptertoolbox.example.test.TestUtils.withIdInRecyclerView;
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Matchers.matches;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 
 /**
  * Created by cattaka on 16/06/05.

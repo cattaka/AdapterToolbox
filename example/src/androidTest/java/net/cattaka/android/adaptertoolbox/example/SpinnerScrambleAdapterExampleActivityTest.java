@@ -10,7 +10,6 @@ import net.cattaka.android.adaptertoolbox.example.test.TestUtils.Entry;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;

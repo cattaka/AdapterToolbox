@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class SingleChoosableTreeItemAdapterExampleActivity extends AppCompatActivity implements View.OnClickListener {
     SnackbarLogic mSnackbarLogic = new SnackbarLogic();
-    
+
     RecyclerView mRecyclerView;
     ChoosableMyTreeItemAdapter mAdapter;
 

@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import net.cattaka.android.adaptertoolbox.adapter.listener.ForwardingListener;
 import net.cattaka.android.adaptertoolbox.classic.AdapterConverter;
-import net.cattaka.android.adaptertoolbox.classic.ClassicScrambleAdapter;
 
 /**
  * Created by cattaka on 2016/05/12.

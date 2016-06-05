@@ -12,7 +12,6 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import net.cattaka.android.adaptertoolbox.classic.AdapterConverter;
-import net.cattaka.android.adaptertoolbox.classic.ClassicScrambleAdapter;
 
 /**
  * Created by cattaka on 16/05/14.
