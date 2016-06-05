@@ -101,6 +101,7 @@ public class SpinnerTreeItemAdapterExampleActivity extends AppCompatActivity imp
             ViewHolderWrapper<SpinnerMyTreeItemAdapter.ViewHolder> vhw = (ViewHolderWrapper<SpinnerMyTreeItemAdapter.ViewHolder>) view.getTag(VIEW_HOLDER);
             vhw.getOrig().levelSpace.setVisibility(View.GONE);
             vhw.getOrig().openedCheck.setVisibility(View.GONE);
+            view.setClickable(false);
             return view;
         }
     }

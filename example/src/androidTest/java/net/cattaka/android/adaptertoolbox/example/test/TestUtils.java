@@ -2,6 +2,7 @@ package net.cattaka.android.adaptertoolbox.example.test;
 
 import android.app.Activity;
 import android.app.Instrumentation;
+import android.content.res.Resources;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -57,7 +58,8 @@ public class TestUtils {
                     View v = (View) arg;
                     View parent = v;
                     while (parent.getParent() != null && parent.getParent() instanceof View) {
-                        if (parent.getId() == recyclerViewId && parent instanceof RecyclerView) {
+                        if ((recyclerViewId == -1 || parent.getId() == recyclerViewId)
+                                && parent instanceof RecyclerView) {
                             RecyclerView.ViewHolder holder = findContainingViewHolder((RecyclerView) parent, v);
                             if (holder != null && holder.getAdapterPosition() == position) {
                                 return true;
@@ -71,8 +73,14 @@ public class TestUtils {
 
             @Override
             public void describeTo(Description description) {
+                String resName = String.valueOf(recyclerViewId);
+                try {
+                    resName = InstrumentationRegistry.getTargetContext().getResources().getResourceEntryName(recyclerViewId);
+                } catch (Resources.NotFoundException e) {
+                    // ignore
+                }
                 description.appendText("isDescendantOfRecyclerView(")
-                        .appendValue(InstrumentationRegistry.getTargetContext().getResources().getResourceEntryName(recyclerViewId))
+                        .appendValue(resName)
                         .appendText(",")
                         .appendValue(position)
                         .appendText(")");
@@ -92,7 +100,8 @@ public class TestUtils {
                     View view = (View) arg;
                     while (view.getParent() != null && view.getParent() instanceof View) {
                         View parent = (View) view.getParent();
-                        if (parent.getId() == adapterViewId && parent instanceof AdapterView) {
+                        if ((adapterViewId == -1 || parent.getId() == adapterViewId)
+                                && parent instanceof AdapterView) {
                             AdapterView adapterView = ((AdapterView) parent);
                             int offsetPosition = position - adapterView.getFirstVisiblePosition();
                             if (0 <= offsetPosition && offsetPosition < adapterView.getChildCount()
@@ -108,8 +117,14 @@ public class TestUtils {
 
             @Override
             public void describeTo(Description description) {
+                String resName = String.valueOf(adapterViewId);
+                try {
+                    resName = InstrumentationRegistry.getTargetContext().getResources().getResourceEntryName(adapterViewId);
+                } catch (Resources.NotFoundException e) {
+                    // ignore
+                }
                 description.appendText("isDescendantOfAdapterView(")
-                        .appendValue(InstrumentationRegistry.getTargetContext().getResources().getResourceEntryName(adapterViewId))
+                        .appendValue(resName)
                         .appendText(",")
                         .appendValue(position)
                         .appendText(")");
