@@ -93,7 +93,7 @@ public class NestedScrambleAdapterExampleActivity extends AppCompatActivity {
 
         @Override
         public void onClick(@NonNull RecyclerView recyclerView, @NonNull ScrambleAdapter adapter, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull View view) {
-            if (recyclerView.getId() == R.id.recycler) {
+            if (recyclerView.getId() == R.id.recycler_nested) {
                 String row = "Row=" + mAdapter.getItems().indexOf(item);
                 if (viewHolder instanceof SimpleStringViewHolderFactory.ViewHolder) {
                     String item = (String) adapter.getItemAt(viewHolder.getAdapterPosition());

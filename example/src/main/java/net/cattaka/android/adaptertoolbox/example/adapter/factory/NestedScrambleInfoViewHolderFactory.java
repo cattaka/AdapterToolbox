@@ -37,9 +37,9 @@ public class NestedScrambleInfoViewHolderFactory extends ScrambleAdapter.AbsView
     public void onBindViewHolder(@NonNull ScrambleAdapter<?> adapter, @NonNull ViewHolder holder, int position, Object object) {
         NestedScrambleInfo item = (NestedScrambleInfo) object;
 
-        ScrambleAdapter<Object> nextedAdapter = new ScrambleAdapter<>(holder.itemView.getContext(), item.getItems(), item.getListenerRelay(), item.getViewHolderFactories());
+        ScrambleAdapter<Object> nestedAdapter = new ScrambleAdapter<>(holder.itemView.getContext(), item.getItems(), item.getListenerRelay(), item.getViewHolderFactories());
         holder.recyclerView.setLayoutManager(new LinearLayoutManager(holder.itemView.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        holder.recyclerView.setAdapter(nextedAdapter);
+        holder.recyclerView.setAdapter(nestedAdapter);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -47,7 +47,7 @@ public class NestedScrambleInfoViewHolderFactory extends ScrambleAdapter.AbsView
 
         public ViewHolder(View itemView) {
             super(itemView);
-            recyclerView = (RecyclerView) itemView.findViewById(R.id.recycler);
+            recyclerView = (RecyclerView) itemView.findViewById(R.id.recycler_nested);
         }
     }
 
