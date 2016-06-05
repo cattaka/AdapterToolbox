@@ -2,9 +2,11 @@ package net.cattaka.android.adaptertoolbox.example.test;
 
 import android.app.Activity;
 import android.app.Instrumentation;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.IdlingResource;
 import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.espresso.UiController;
 import android.support.test.espresso.ViewAction;
@@ -173,6 +175,20 @@ public class TestUtils {
                 throw noViewFoundException;
             }
         };
+    }
+
+    /**
+     * To be truthful, We should use Espresso#registerIdlingResource.
+     * But sometime it become too slow.
+     */
+    public static void waitForIdlingResource(IdlingResource idlingResource, int timeout) {
+        long l = SystemClock.elapsedRealtime();
+        do {
+            if (idlingResource.isIdleNow()) {
+                break;
+            }
+            SystemClock.sleep(100);
+        } while (SystemClock.elapsedRealtime() - l > timeout);
     }
 
     public static int calcPositionOffset(MergeRecyclerAdapter mergeRecyclerAdapter, RecyclerView.Adapter adapter) {
