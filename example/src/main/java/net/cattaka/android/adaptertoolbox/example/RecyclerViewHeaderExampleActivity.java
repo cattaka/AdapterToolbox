@@ -28,13 +28,9 @@ public class RecyclerViewHeaderExampleActivity extends AppCompatActivity {
         public void onClick(@NonNull RecyclerView recyclerView, @NonNull ScrambleAdapter<?> adapter, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull View view) {
             if (recyclerView.getId() == R.id.recycler) {
                 MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
-                if (la.mAdapter == mHeaderAdapter) {
-                    mSnackbarLogic.make(view, "Header is clicked.", Snackbar.LENGTH_SHORT).show();
-                } else if (la.mAdapter == mItemsAdapter) {
+                if (la.mAdapter == mItemsAdapter) {
                     String item = mItemsAdapter.getItemAt(la.mLocalPosition);
                     mSnackbarLogic.make(view, item + " is clicked.", Snackbar.LENGTH_SHORT).show();
-                } else if (la.mAdapter == mFooterAdapter) {
-                    mSnackbarLogic.make(view, "Footer is clicked.", Snackbar.LENGTH_SHORT).show();
                 }
             }
         }
@@ -43,13 +39,9 @@ public class RecyclerViewHeaderExampleActivity extends AppCompatActivity {
         public boolean onLongClick(@NonNull RecyclerView recyclerView, @NonNull ScrambleAdapter<?> adapter, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull View view) {
             if (recyclerView.getId() == R.id.recycler) {
                 MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
-                if (la.mAdapter == mHeaderAdapter) {
-                    mSnackbarLogic.make(view, "Header is long clicked.", Snackbar.LENGTH_SHORT).show();
-                } else if (la.mAdapter == mItemsAdapter) {
+                if (la.mAdapter == mItemsAdapter) {
                     String item = mItemsAdapter.getItemAt(la.mLocalPosition);
                     mSnackbarLogic.make(view, item + " is long clicked.", Snackbar.LENGTH_SHORT).show();
-                } else if (la.mAdapter == mFooterAdapter) {
-                    mSnackbarLogic.make(view, "Footer is long clicked.", Snackbar.LENGTH_SHORT).show();
                 }
                 return true;
             }
@@ -63,9 +55,9 @@ public class RecyclerViewHeaderExampleActivity extends AppCompatActivity {
             if (recyclerView.getId() == R.id.recycler) {
                 MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
                 if (la.mAdapter == mHeaderAdapter) {
-                    mSnackbarLogic.make(view, "Strings Header is clicked.", Snackbar.LENGTH_SHORT).show();
+                    mSnackbarLogic.make(view, "Header is clicked.", Snackbar.LENGTH_SHORT).show();
                 } else if (la.mAdapter == mFooterAdapter) {
-                    mSnackbarLogic.make(view, "Numbers Header is clicked.", Snackbar.LENGTH_SHORT).show();
+                    mSnackbarLogic.make(view, "Footer is clicked.", Snackbar.LENGTH_SHORT).show();
                 }
             }
         }
@@ -75,9 +67,9 @@ public class RecyclerViewHeaderExampleActivity extends AppCompatActivity {
             if (recyclerView.getId() == R.id.recycler) {
                 MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
                 if (la.mAdapter == mHeaderAdapter) {
-                    mSnackbarLogic.make(view, "Strings Header is long clicked.", Snackbar.LENGTH_SHORT).show();
+                    mSnackbarLogic.make(view, "Header is long clicked.", Snackbar.LENGTH_SHORT).show();
                 } else if (la.mAdapter == mFooterAdapter) {
-                    mSnackbarLogic.make(view, "Numbers Header is long clicked.", Snackbar.LENGTH_SHORT).show();
+                    mSnackbarLogic.make(view, "Footer is long clicked.", Snackbar.LENGTH_SHORT).show();
                 }
                 return true;
             }
