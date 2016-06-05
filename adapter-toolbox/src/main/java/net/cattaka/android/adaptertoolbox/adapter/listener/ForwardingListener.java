@@ -156,7 +156,7 @@ public class ForwardingListener<A extends RecyclerView.Adapter<? extends VH>, VH
         if (mListenerRelay != null) {
             RecyclerView recyclerView = mProvider.getAttachedRecyclerView();
             @SuppressWarnings("unchecked")
-            VH vh = (VH) (recyclerView != null ? findContainingViewHolder(recyclerView, parent)  : null);
+            VH vh = (VH) (recyclerView != null ? findContainingViewHolder(recyclerView, parent) : null);
             if (vh != null) {
                 mListenerRelay.onNothingSelected(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh, parent);
             }
@@ -171,7 +171,7 @@ public class ForwardingListener<A extends RecyclerView.Adapter<? extends VH>, VH
         if (mListenerRelay != null) {
             RecyclerView recyclerView = mProvider.getAttachedRecyclerView();
             @SuppressWarnings("unchecked")
-            VH vh = (VH) (recyclerView != null ? findContainingViewHolder(recyclerView, parent)  : null);
+            VH vh = (VH) (recyclerView != null ? findContainingViewHolder(recyclerView, parent) : null);
             if (vh != null) {
                 mListenerRelay.onItemSelected(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh, parent, view, position, id);
             }
@@ -186,7 +186,7 @@ public class ForwardingListener<A extends RecyclerView.Adapter<? extends VH>, VH
         if (mListenerRelay != null) {
             RecyclerView recyclerView = mProvider.getAttachedRecyclerView();
             @SuppressWarnings("unchecked")
-            VH vh = (VH) (recyclerView != null ? findContainingViewHolder(recyclerView, v)  : null);
+            VH vh = (VH) (recyclerView != null ? findContainingViewHolder(recyclerView, v) : null);
             if (vh != null) {
                 return mListenerRelay.onEditorAction(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh, v, actionId, event);
             }
@@ -204,7 +204,7 @@ public class ForwardingListener<A extends RecyclerView.Adapter<? extends VH>, VH
                 if (mListenerRelay != null) {
                     RecyclerView recyclerView = mProvider.getAttachedRecyclerView();
                     @SuppressWarnings("unchecked")
-                    VH vh = (VH) (recyclerView != null ? findContainingViewHolder(recyclerView, target)  : null);
+                    VH vh = (VH) (recyclerView != null ? findContainingViewHolder(recyclerView, target) : null);
                     if (vh != null) {
                         mListenerRelay.beforeTextChanged(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh, target, s, start, count, after);
                     }
@@ -216,7 +216,7 @@ public class ForwardingListener<A extends RecyclerView.Adapter<? extends VH>, VH
                 if (mListenerRelay != null) {
                     RecyclerView recyclerView = mProvider.getAttachedRecyclerView();
                     @SuppressWarnings("unchecked")
-                    VH vh = (VH) (recyclerView != null ? findContainingViewHolder(recyclerView, target)  : null);
+                    VH vh = (VH) (recyclerView != null ? findContainingViewHolder(recyclerView, target) : null);
                     if (vh != null) {
                         mListenerRelay.onTextChanged(mProvider.getAttachedRecyclerView(), mProvider.getAdapter(), vh, target, s, start, count, count);
                     }

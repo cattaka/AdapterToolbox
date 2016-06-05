@@ -44,7 +44,7 @@ public class ClassicScrambleAdapter<T> extends AdapterConverter<ScrambleAdapter<
                     ForwardingListener<ScrambleAdapter<?>, RecyclerView.ViewHolder>, ?
                     >> iViewHolderFactory) {
         super(context, new InnerScrambleAdapter<T>(context, items, classicListenerRelay, iViewHolderFactory));
-        InnerScrambleAdapter<T> orig = (InnerScrambleAdapter<T>)getOrig();
+        InnerScrambleAdapter<T> orig = (InnerScrambleAdapter<T>) getOrig();
         orig.setParentAdapter(this);
     }
 

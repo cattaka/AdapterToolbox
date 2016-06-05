@@ -4,13 +4,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import net.cattaka.android.adaptertoolbox.adapter.ScrambleAdapter;
 import net.cattaka.android.adaptertoolbox.classic.AdapterConverter;
 import net.cattaka.android.adaptertoolbox.classic.ClassicScrambleAdapter;
 import net.cattaka.android.adaptertoolbox.classic.listener.ClassicListenerRelay;
@@ -18,6 +16,7 @@ import net.cattaka.android.adaptertoolbox.example.adapter.factory.CodeLableViewH
 import net.cattaka.android.adaptertoolbox.example.adapter.factory.SimpleNumberViewHolderFactory;
 import net.cattaka.android.adaptertoolbox.example.adapter.factory.SimpleStringViewHolderFactory;
 import net.cattaka.android.adaptertoolbox.example.data.OrdinalLabel;
+import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,17 +31,17 @@ public class ClassicScrambleAdapterExampleActivity extends AppCompatActivity {
             if (adapterView.getId() == R.id.list) {
                 if (vh instanceof SimpleStringViewHolderFactory.ViewHolder) {
                     String item = (String) adapter.getItem(position);
-                    Snackbar.make(vh.itemView, "String " + item + " is clicked.", Snackbar.LENGTH_SHORT).show();
+                    mSnackbarLogic.make(vh.itemView, "String " + item + " is clicked.", Snackbar.LENGTH_SHORT).show();
                 } else if (vh instanceof SimpleNumberViewHolderFactory.ViewHolder) {
                     Number item = (Number) adapter.getItem(position);
-                    Snackbar.make(vh.itemView, "Number " + item + " is clicked.", Snackbar.LENGTH_SHORT).show();
+                    mSnackbarLogic.make(vh.itemView, "Number " + item + " is clicked.", Snackbar.LENGTH_SHORT).show();
                 } else if (vh instanceof CodeLableViewHolderFactory.ViewHolder) {
                     OrdinalLabel item = (OrdinalLabel) adapter.getItem(position);
                     String text = item.getLabel(getResources()) + "(" + item.getCode() + ")";
                     if (view.getId() == R.id.text_code) {
-                        Snackbar.make(vh.itemView, "The code of " + text + " is clicked.", Snackbar.LENGTH_SHORT).show();
+                        mSnackbarLogic.make(vh.itemView, "The code of " + text + " is clicked.", Snackbar.LENGTH_SHORT).show();
                     } else if (view.getId() == R.id.text_label) {
-                        Snackbar.make(vh.itemView, "The label of " + text + " is clicked.", Snackbar.LENGTH_SHORT).show();
+                        mSnackbarLogic.make(vh.itemView, "The label of " + text + " is clicked.", Snackbar.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -53,17 +52,17 @@ public class ClassicScrambleAdapterExampleActivity extends AppCompatActivity {
             if (adapterView.getId() == R.id.list) {
                 if (vh instanceof SimpleStringViewHolderFactory.ViewHolder) {
                     String item = (String) adapter.getItem(position);
-                    Snackbar.make(view, "String " + item + " is long clicked.", Snackbar.LENGTH_SHORT).show();
+                    mSnackbarLogic.make(view, "String " + item + " is long clicked.", Snackbar.LENGTH_SHORT).show();
                 } else if (vh instanceof SimpleNumberViewHolderFactory.ViewHolder) {
                     Number item = (Number) adapter.getItem(position);
-                    Snackbar.make(view, "Number " + item + " is long clicked.", Snackbar.LENGTH_SHORT).show();
+                    mSnackbarLogic.make(view, "Number " + item + " is long clicked.", Snackbar.LENGTH_SHORT).show();
                 } else if (vh instanceof CodeLableViewHolderFactory.ViewHolder) {
                     OrdinalLabel item = (OrdinalLabel) adapter.getItem(position);
                     String text = item.getLabel(getResources()) + "(" + item.getCode() + ")";
                     if (view.getId() == R.id.text_code) {
-                        Snackbar.make(view, "The code of " + text + " is long clicked.", Snackbar.LENGTH_SHORT).show();
+                        mSnackbarLogic.make(view, "The code of " + text + " is long clicked.", Snackbar.LENGTH_SHORT).show();
                     } else if (view.getId() == R.id.text_label) {
-                        Snackbar.make(view, "The label of " + text + " is long clicked.", Snackbar.LENGTH_SHORT).show();
+                        mSnackbarLogic.make(view, "The label of " + text + " is long clicked.", Snackbar.LENGTH_SHORT).show();
                     }
                 }
                 return true;
@@ -72,6 +71,7 @@ public class ClassicScrambleAdapterExampleActivity extends AppCompatActivity {
         }
     };
 
+    SnackbarLogic mSnackbarLogic = new SnackbarLogic();
     ListView mListView;
 
     @Override

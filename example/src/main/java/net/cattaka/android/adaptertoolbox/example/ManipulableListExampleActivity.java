@@ -22,6 +22,7 @@ import net.cattaka.android.adaptertoolbox.example.adapter.factory.TextInfoViewHo
 import net.cattaka.android.adaptertoolbox.example.data.MyInfo;
 import net.cattaka.android.adaptertoolbox.example.data.OrdinalLabel;
 import net.cattaka.android.adaptertoolbox.example.data.TextInfo;
+import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
 import net.cattaka.android.adaptertoolbox.thirdparty.MergeRecyclerAdapter;
 
 import java.util.ArrayList;
@@ -82,7 +83,7 @@ public class ManipulableListExampleActivity extends AppCompatActivity {
             MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
             if (la.mAdapter == mItemAdapter) {
                 if (viewHolder instanceof TextInfoViewHolderFactory.ViewHolder) {
-                    Snackbar.make(v, "Action button pressed : " + v.getText(), Snackbar.LENGTH_SHORT).show();
+                    mSnackbarLogic.make(v, "Action button pressed : " + v.getText(), Snackbar.LENGTH_SHORT).show();
                     return true;
                 }
             }
@@ -95,11 +96,13 @@ public class ManipulableListExampleActivity extends AppCompatActivity {
             if (la.mAdapter == mItemAdapter) {
                 if (viewHolder instanceof TextInfoViewHolderFactory.ViewHolder) {
                     TextInfoViewHolderFactory.ViewHolder vh = (TextInfoViewHolderFactory.ViewHolder) viewHolder;
-                    Snackbar.make(view, "Action button pressed : " + vh.editText.getText(), Snackbar.LENGTH_SHORT).show();
+                    mSnackbarLogic.make(view, "Action button pressed : " + vh.editText.getText(), Snackbar.LENGTH_SHORT).show();
                 }
             }
         }
     };
+
+    SnackbarLogic mSnackbarLogic = new SnackbarLogic();
 
     RecyclerView mRecyclerView;
     MergeRecyclerAdapter<RecyclerView.Adapter> mMergeRecyclerAdapter;

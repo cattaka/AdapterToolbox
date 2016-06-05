@@ -107,7 +107,7 @@ public abstract class AbsChoosableTreeItemAdapter<
 
     public List<T> getCheckedItems() {
         List<T> checkedItems = new ArrayList<>();
-        for (W witem: getItems()) {
+        for (W witem : getItems()) {
             if (witem.level == 0) {
                 collectCheckedItems(checkedItems, witem);
             }

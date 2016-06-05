@@ -41,7 +41,7 @@ public class MyInfoViewHolderFactory extends ScrambleAdapter.AbsViewHolderFactor
         MyInfo item = (MyInfo) object;
 
         holder.intValueSeek.setProgress(item.getIntValue());
-        SpinnerUtils.selectSpinnerValue(holder.ordinalLabelSpinner, item.getOrdinalLabel());
+        SpinnerUtils.selectSpinnerValue(holder.ordinalLabelSpinner, item.getOrdinalLabel(), true);
         holder.checkedSwitch.setChecked(item.isChecked());
     }
 

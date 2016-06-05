@@ -2,8 +2,8 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-            android:color="?colorControlHighlight">
-            <item android:drawable="@android:color/white" />
+                android:color="?colorControlHighlight">
+            <item android:drawable="@android:color/white"/>
         </ripple>
     </item>
 </layer-list>

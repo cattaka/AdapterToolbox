@@ -10,14 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import net.cattaka.android.adaptertoolbox.classic.AdapterConverter;
-import net.cattaka.android.adaptertoolbox.classic.ClassicScrambleAdapter;
 import net.cattaka.android.adaptertoolbox.classic.listener.ClassicForwardingListener;
 import net.cattaka.android.adaptertoolbox.classic.listener.ClassicListenerRelay;
 import net.cattaka.android.adaptertoolbox.example.data.MyTreeItem;
-import net.cattaka.android.adaptertoolbox.example.data.OrdinalLabel;
+import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
 import net.cattaka.android.adaptertoolbox.example.spinner.SpinnerMyTreeItemAdapter;
 import net.cattaka.android.adaptertoolbox.example.utils.ExampleDataGenerator;
 import net.cattaka.android.adaptertoolbox.utils.SpinnerUtils;
@@ -40,6 +38,8 @@ public class SpinnerTreeItemAdapterExampleActivity extends AppCompatActivity imp
             }
         }
     };
+
+    SnackbarLogic mSnackbarLogic = new SnackbarLogic();
 
     Spinner mSpinner;
     AdapterConverterEx mAdapterConverter;
@@ -77,7 +77,7 @@ public class SpinnerTreeItemAdapterExampleActivity extends AppCompatActivity imp
             SpinnerMyTreeItemAdapter.WrappedItem wrappedItem = (SpinnerMyTreeItemAdapter.WrappedItem) parent.getItemAtPosition(position);
             MyTreeItem item = wrappedItem.getItem();
             String text = (item != null) ? item.getText() : "null";
-            Snackbar.make(parent, text + " is selected.", Snackbar.LENGTH_SHORT).show();
+            mSnackbarLogic.make(parent, text + " is selected.", Snackbar.LENGTH_SHORT).show();
         }
     }
 
@@ -98,6 +98,7 @@ public class SpinnerTreeItemAdapterExampleActivity extends AppCompatActivity imp
             ViewHolderWrapper<SpinnerMyTreeItemAdapter.ViewHolder> vhw = (ViewHolderWrapper<SpinnerMyTreeItemAdapter.ViewHolder>) view.getTag(VIEW_HOLDER);
             vhw.getOrig().levelSpace.setVisibility(View.GONE);
             vhw.getOrig().openedCheck.setVisibility(View.GONE);
+            view.setClickable(false);
             return view;
         }
     }

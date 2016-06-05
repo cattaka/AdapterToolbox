@@ -13,6 +13,7 @@ import net.cattaka.android.adaptertoolbox.adapter.SingleViewAdapter;
 import net.cattaka.android.adaptertoolbox.adapter.listener.ListenerRelay;
 import net.cattaka.android.adaptertoolbox.example.adapter.SimpleNumberAdapter;
 import net.cattaka.android.adaptertoolbox.example.adapter.SimpleStringAdapter;
+import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
 import net.cattaka.android.adaptertoolbox.thirdparty.MergeRecyclerAdapter;
 
 import java.util.ArrayList;
@@ -30,10 +31,10 @@ public class MultiAdapterExampleActivity extends AppCompatActivity {
                 MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
                 if (la.mAdapter == mStringsAdapter) {
                     String item = mStringsAdapter.getItemAt(la.mLocalPosition);
-                    Snackbar.make(view, item + " is clicked.", Snackbar.LENGTH_SHORT).show();
+                    mSnackbarLogic.make(view, item + " is clicked.", Snackbar.LENGTH_SHORT).show();
                 } else if (la.mAdapter == mNumbersAdapter) {
                     Number item = mNumbersAdapter.getItemAt(la.mLocalPosition);
-                    Snackbar.make(view, item + " is clicked.", Snackbar.LENGTH_SHORT).show();
+                    mSnackbarLogic.make(view, item + " is clicked.", Snackbar.LENGTH_SHORT).show();
                 }
             }
         }
@@ -44,10 +45,10 @@ public class MultiAdapterExampleActivity extends AppCompatActivity {
                 MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
                 if (la.mAdapter == mStringsAdapter) {
                     String item = mStringsAdapter.getItemAt(la.mLocalPosition);
-                    Snackbar.make(view, item + " is long clicked.", Snackbar.LENGTH_SHORT).show();
+                    mSnackbarLogic.make(view, item + " is long clicked.", Snackbar.LENGTH_SHORT).show();
                 } else if (la.mAdapter == mNumbersAdapter) {
                     Number item = mNumbersAdapter.getItemAt(la.mLocalPosition);
-                    Snackbar.make(view, item + " is long clicked.", Snackbar.LENGTH_SHORT).show();
+                    mSnackbarLogic.make(view, item + " is long clicked.", Snackbar.LENGTH_SHORT).show();
                 }
                 return true;
             }
@@ -61,9 +62,9 @@ public class MultiAdapterExampleActivity extends AppCompatActivity {
             if (recyclerView.getId() == R.id.recycler) {
                 MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
                 if (la.mAdapter == mStringsHeaderAdapter) {
-                    Snackbar.make(view, "Strings Header is clicked.", Snackbar.LENGTH_SHORT).show();
+                    mSnackbarLogic.make(view, "Strings Header is clicked.", Snackbar.LENGTH_SHORT).show();
                 } else if (la.mAdapter == mNumbersHeaderAdapter) {
-                    Snackbar.make(view, "Numbers Header is clicked.", Snackbar.LENGTH_SHORT).show();
+                    mSnackbarLogic.make(view, "Numbers Header is clicked.", Snackbar.LENGTH_SHORT).show();
                 }
             }
         }
@@ -73,15 +74,17 @@ public class MultiAdapterExampleActivity extends AppCompatActivity {
             if (recyclerView.getId() == R.id.recycler) {
                 MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
                 if (la.mAdapter == mStringsHeaderAdapter) {
-                    Snackbar.make(view, "Strings Header is long clicked.", Snackbar.LENGTH_SHORT).show();
+                    mSnackbarLogic.make(view, "Strings Header is long clicked.", Snackbar.LENGTH_SHORT).show();
                 } else if (la.mAdapter == mNumbersHeaderAdapter) {
-                    Snackbar.make(view, "Numbers Header is long clicked.", Snackbar.LENGTH_SHORT).show();
+                    mSnackbarLogic.make(view, "Numbers Header is long clicked.", Snackbar.LENGTH_SHORT).show();
                 }
                 return true;
             }
             return false;
         }
     };
+
+    SnackbarLogic mSnackbarLogic = new SnackbarLogic();
 
     RecyclerView mRecyclerView;
     MergeRecyclerAdapter<RecyclerView.Adapter> mMergeRecyclerAdapter;
