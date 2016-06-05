@@ -24,7 +24,7 @@ public class SpinnerUtils {
         if (value == null) {
             for (int i = 0; i < spinner.getCount(); i++) {
                 if (spinner.getItemAtPosition(i) == null) {
-                    spinner.setSelection(i);
+                    setSelection(spinner, i, cancelListener);
                     return true;
                 }
             }
@@ -32,7 +32,7 @@ public class SpinnerUtils {
         }
         for (int i = 0; i < spinner.getCount(); i++) {
             if (value.equals(spinner.getItemAtPosition(i))) {
-                spinner.setSelection(i);
+                setSelection(spinner, i, cancelListener);
                 return true;
             }
         }
@@ -45,7 +45,7 @@ public class SpinnerUtils {
             if (listener != null) {
                 spinner.setOnItemSelectedListener(null);
             }
-            spinner.setSelection(position);
+            spinner.setSelection(position, false);
             if (listener != null) {
                 spinner.setOnItemSelectedListener(listener);
             }
