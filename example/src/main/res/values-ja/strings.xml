@@ -17,6 +17,7 @@
     <string name="activity_entry_manipulatable_list">操作可能なリスト</string>
     <string name="activity_entry_nested_scramble_adapter">ネストしたScrambleAdapter</string>
     <string name="activity_entry_sectioned_list_by_list_object"><![CDATA[List<Object>を使ったセクション分けされたリスト]]></string>
+    <string name="activity_entry_fizz_buzz">Fizz Buzz</string>
     <string name="activity_entry_tree">ツリー</string>
     <string name="activity_entry_simple_tree">単純なツリー</string>
     <string name="activity_entry_single_choosable_tree">単一選択が可能なツリー</string>

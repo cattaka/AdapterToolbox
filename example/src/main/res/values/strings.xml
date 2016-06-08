@@ -18,6 +18,7 @@
     <string name="activity_entry_manipulatable_list">Manipulable list</string>
     <string name="activity_entry_nested_scramble_adapter">Nested ScrambleAdapter</string>
     <string name="activity_entry_sectioned_list_by_list_object"><![CDATA[Sectioned list by List<Object>]]></string>
+    <string name="activity_entry_fizz_buzz">Fizz Buzz</string>
     <string name="activity_entry_tree">Tree</string>
     <string name="activity_entry_simple_tree">Simple tree</string>
     <string name="activity_entry_single_choosable_tree">Single choosable tree</string>

@@ -30,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
                     new ActivityEntry(R.string.activity_entry_muluti_types_in_list_object, ScrambleAdapterExampleActivity.class),
                     new ActivityEntry(R.string.activity_entry_manipulatable_list, ManipulableListExampleActivity.class),
                     new ActivityEntry(R.string.activity_entry_nested_scramble_adapter, NestedScrambleAdapterExampleActivity.class),
-                    new ActivityEntry(R.string.activity_entry_sectioned_list_by_list_object, MultiAdapterExampleActivity.class)
+                    new ActivityEntry(R.string.activity_entry_sectioned_list_by_list_object, MultiAdapterExampleActivity.class),
+                    new ActivityEntry(R.string.activity_entry_fizz_buzz, FizzBuzzExampleActivity.class)
             ),
             new ActivityEntry(R.string.activity_entry_tree, null,
                     new ActivityEntry(R.string.activity_entry_simple_tree, TreeItemAdapterExampleActivity.class),
