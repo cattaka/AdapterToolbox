@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <data>
+
+        <variable
+            name="myInfo"
+            type="net.cattaka.android.adaptertoolbox.example.data.ObservableMyInfo"/>
+
+        <variable
+            name="holder"
+            type="net.cattaka.android.adaptertoolbox.example.adapter.factory.DataBindingMyInfoViewHolderFactory.ViewHolder"/>
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/element_spacing_normal">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_background"
+            android:orientation="horizontal"
+            android:padding="@dimen/element_spacing_normal">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="IntValue"
+                    android:textAppearance="?android:textAppearanceLarge"/>
+
+                <SeekBar
+                    android:id="@+id/seek_int_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:max="100"
+                    android:onProgressChanged="@{holder.onProgressChanged}"
+                    android:progress="@{myInfo.intValue}"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="OrdinalLabel"
+                    android:textAppearance="?android:textAppearanceLarge"/>
+
+                <net.cattaka.android.adaptertoolbox.example.view.SpinnerEx
+                    android:id="@+id/spinner_ordinal_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:onItemSelected="@{holder.onItemSelected}"
+                    android:selectedItem="@{myInfo.ordinalLabel}"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Checked"
+                    android:textAppearance="?android:textAppearanceLarge"/>
+
+                <Switch
+                    android:id="@+id/switch_checked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:checked="@{myInfo.checked}"
+                    android:onCheckedChanged="@{holder.onCheckedChanged}"/>
+            </TableRow>
+
+        </TableLayout>
+    </android.support.v7.widget.CardView>
+</layout>
