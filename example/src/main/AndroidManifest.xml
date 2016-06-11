@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="net.cattaka.android.adaptertoolbox.example">
+<manifest package="net.cattaka.android.adaptertoolbox.example"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:allowBackup="true"
@@ -30,6 +30,7 @@
         <activity android:name=".SpinnerScrambleAdapterExampleActivity"/>
         <activity android:name=".SpinnerTreeItemAdapterExampleActivity"/>
         <activity android:name=".FizzBuzzExampleActivity"/>
+        <activity android:name=".DataBindingManipulableListExampleActivity"/>
     </application>
 
 </manifest>

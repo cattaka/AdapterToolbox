@@ -33,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
                     new ActivityEntry(R.string.activity_entry_sectioned_list_by_list_object, MultiAdapterExampleActivity.class),
                     new ActivityEntry(R.string.activity_entry_fizz_buzz, FizzBuzzExampleActivity.class)
             ),
+            new ActivityEntry(R.string.activity_entry_data_binding, null,
+                    new ActivityEntry(R.string.activity_entry_manipulatable_list_with_data_binding, DataBindingManipulableListExampleActivity.class)
+            ),
             new ActivityEntry(R.string.activity_entry_tree, null,
                     new ActivityEntry(R.string.activity_entry_simple_tree, TreeItemAdapterExampleActivity.class),
                     new ActivityEntry(R.string.activity_entry_single_choosable_tree, SingleChoosableTreeItemAdapterExampleActivity.class),

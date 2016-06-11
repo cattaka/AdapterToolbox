@@ -16,6 +16,7 @@
     <string name="activity_entry_scramble_adapter">ScrambleAdapter</string>
     <string name="activity_entry_muluti_types_in_list_object"><![CDATA[Multi types in List<Object>]]></string>
     <string name="activity_entry_manipulatable_list">Manipulable list</string>
+    <string name="activity_entry_manipulatable_list_with_data_binding">Manipulable list with DataBinding</string>
     <string name="activity_entry_nested_scramble_adapter">Nested ScrambleAdapter</string>
     <string name="activity_entry_sectioned_list_by_list_object"><![CDATA[Sectioned list by List<Object>]]></string>
     <string name="activity_entry_fizz_buzz">Fizz Buzz</string>
@@ -27,5 +28,6 @@
     <string name="activity_entry_classic_scramble_adapter_with_list_view">ClassicScrambleAdapter with ListView</string>
     <string name="activity_entry_classic_scramble_adapter_with_spinner">ClassicScrambleAdapter with Spinner</string>
     <string name="activity_entry_abs_tree_item_adapter_with_spinner">AbsTreeItemAdapter with Spinner</string>
+    <string name="activity_entry_data_binding">Data Binding</string>
 
 </resources>
