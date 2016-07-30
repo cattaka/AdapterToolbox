@@ -132,13 +132,32 @@ public class MergeRecyclerAdapter<T extends RecyclerView.Adapter> extends Recycl
     }
 
     /**
+     * Append the given adapter to the list of merged adapters.
+     */
+    public void addAdapter(T adapter, boolean useNotifyItemRangeInserted) {
+        addAdapter(mAdapters.size(), adapter, useNotifyItemRangeInserted);
+    }
+
+    /**
      * Add the given adapter to the list of merged adapters at the given index.
      */
     public void addAdapter(int index, T adapter) {
+        addAdapter(index, adapter, true);
+    }
+
+    /**
+     * Add the given adapter to the list of merged adapters at the given index.
+     */
+    public void addAdapter(int index, T adapter, boolean useNotifyItemRangeInserted) {
         LocalAdapter la = new LocalAdapter(adapter);
         mAdapters.add(index, la);
         adapter.registerAdapterDataObserver(la);
-        notifyDataSetChanged();
+        if (useNotifyItemRangeInserted) {
+            int position = getAdapterOffsetForAdapter(la);
+            notifyItemRangeInserted(position, adapter.getItemCount());
+        } else {
+            notifyDataSetChanged();
+        }
     }
 
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -149,19 +168,57 @@ public class MergeRecyclerAdapter<T extends RecyclerView.Adapter> extends Recycl
      * Remove the given adapter from the list of merged adapters.
      */
     public void removeAdapter(T adapter) {
-        if (!mAdapters.contains(adapter)) return;
-        removeAdapter(mAdapters.indexOf(adapter));
+        removeAdapter(adapter, true);
+    }
+
+    /**
+     * Remove the given adapter from the list of merged adapters.
+     */
+    public void removeAdapter(T adapter, boolean useNotifyItemRangeRemoved) {
+        int index = indexOfAdapter(adapter);
+        if (index != -1) {
+            removeAdapter(index, useNotifyItemRangeRemoved);
+        }
     }
 
     /**
      * Remove the adapter at the given index from the list of merged adapters.
      */
     public void removeAdapter(int index) {
-        if (index < 0 || index >= mAdapters.size()) return;
-        LocalAdapter adapter = mAdapters.remove(index);
-        adapter.mAdapter.unregisterAdapterDataObserver(adapter);
-        notifyDataSetChanged();
+        removeAdapter(index, true);
     }
+
+    /**
+     * Remove the adapter at the given index from the list of merged adapters.
+     */
+    public void removeAdapter(int index, boolean useNotifyItemRangeRemoved) {
+        if (index < 0 || index >= mAdapters.size()) return;
+        LocalAdapter adapter = mAdapters.get(index);
+        int position = getAdapterOffsetForAdapter(adapter);
+        int itemCount = adapter.mAdapter.getItemCount();
+        mAdapters.remove(index);
+        adapter.mAdapter.unregisterAdapterDataObserver(adapter);
+        if (useNotifyItemRangeRemoved) {
+            notifyItemRangeRemoved(position, itemCount);
+        } else {
+            notifyDataSetChanged();
+        }
+    }
+
+    /**
+     * Returns the index of the first occurrence of the specified adapter in this list, or -1 if this list does not contain the adapter.
+     */
+    public int indexOfAdapter(T adapter) {
+        int index = 0;
+        for (LocalAdapter la : mAdapters) {
+            if (la.mAdapter.equals(adapter)) {
+                return index;
+            }
+            index++;
+        }
+        return -1;
+    }
+
 
     public int getSubAdapterCount() {
         return mAdapters.size();
