@@ -7,7 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import net.cattaka.android.adaptertoolbox.adapter.ScrambleAdapter;
 import net.cattaka.android.adaptertoolbox.adapter.SingleViewAdapter;
 import net.cattaka.android.adaptertoolbox.adapter.listener.ListenerRelay;
@@ -84,8 +85,35 @@ public class MultiAdapterExampleActivity extends AppCompatActivity {
         }
     };
 
+    CompoundButton.OnCheckedChangeListener mOnCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (buttonView.getId() == R.id.check_string_items) {
+                if (buttonView.isChecked()) {
+                    int position = 0;
+                    mMergeRecyclerAdapter.addAdapter(position, mStringsAdapter, true);
+                    mMergeRecyclerAdapter.addAdapter(position, mStringsHeaderAdapter, true);
+                } else {
+                    mMergeRecyclerAdapter.removeAdapter(mStringsAdapter, true);
+                    mMergeRecyclerAdapter.removeAdapter(mStringsHeaderAdapter, true);
+                }
+            } else if (buttonView.getId() == R.id.check_number_items) {
+                if (buttonView.isChecked()) {
+                    int position = mMergeRecyclerAdapter.getSubAdapterCount();
+                    mMergeRecyclerAdapter.addAdapter(position, mNumbersAdapter, true);
+                    mMergeRecyclerAdapter.addAdapter(position, mNumbersHeaderAdapter, true);
+                } else {
+                    mMergeRecyclerAdapter.removeAdapter(mNumbersAdapter, true);
+                    mMergeRecyclerAdapter.removeAdapter(mNumbersHeaderAdapter, true);
+                }
+            }
+        }
+    };
+
     SnackbarLogic mSnackbarLogic = new SnackbarLogic();
 
+    CheckBox mStringItemsCheck;
+    CheckBox mNumberItemsCheck;
     RecyclerView mRecyclerView;
     MergeRecyclerAdapter<RecyclerView.Adapter> mMergeRecyclerAdapter;
     SingleViewAdapter mStringsHeaderAdapter;
@@ -100,6 +128,12 @@ public class MultiAdapterExampleActivity extends AppCompatActivity {
 
         // find views
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler);
+        mStringItemsCheck = (CheckBox) findViewById(R.id.check_string_items);
+        mNumberItemsCheck = (CheckBox) findViewById(R.id.check_number_items);
+
+        // bind event handlers
+        mStringItemsCheck.setOnCheckedChangeListener(mOnCheckedChangeListener);
+        mNumberItemsCheck.setOnCheckedChangeListener(mOnCheckedChangeListener);
 
         {   // prepare adapters
             mMergeRecyclerAdapter = new MergeRecyclerAdapter<>(this);
