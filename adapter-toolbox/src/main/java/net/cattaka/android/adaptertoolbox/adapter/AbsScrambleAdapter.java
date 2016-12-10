@@ -83,6 +83,13 @@ public abstract class AbsScrambleAdapter<
     }
 
     @Override
+    public void onBindViewHolder(VH holder, int position, List<Object> payloads) {
+        int viewType = getItemViewType(position);
+        IViewHolderFactory<SA, VH, FL, ?> viewHolderFactory = mViewHolderFactory.get(viewType);
+        onBindViewHolderInner(viewHolderFactory, holder, position, payloads);
+    }
+
+    @Override
     public void onViewRecycled(VH holder) {
         IViewHolderFactory<SA, VH, FL, ?> viewHolderFactory = mViewHolder2FactoryMap.get(holder.getClass());
         if (viewHolderFactory != null) {
@@ -124,6 +131,17 @@ public abstract class AbsScrambleAdapter<
     ) {
         Object object = getItemAt(position);
         viewHolderFactory.onBindViewHolder(getSelf(), (EVH) holder, position, object);
+    }
+
+    @SuppressWarnings("unchecked")
+    private <EVH extends VH> void onBindViewHolderInner(
+            IViewHolderFactory<SA, VH, FL, EVH> viewHolderFactory,
+            VH holder,
+            int position,
+            List<Object> payloads
+    ) {
+        Object object = getItemAt(position);
+        viewHolderFactory.onBindViewHolder(getSelf(), (EVH) holder, position, object, payloads);
     }
 
     @Override
@@ -180,6 +198,8 @@ public abstract class AbsScrambleAdapter<
 
         void onBindViewHolder(@NonNull SA adapter, @NonNull EVH holder, int position, @Nullable Object object);
 
+        void onBindViewHolder(@NonNull SA adapter, @NonNull EVH holder, int position, @Nullable Object object, List<Object> payloads);
+
         boolean isAssignable(@NonNull SA adapter, @Nullable Object object);
 
         @Nullable
@@ -214,6 +234,11 @@ public abstract class AbsScrambleAdapter<
         @Override
         public void onBindViewHolder(@NonNull SA adapter, @NonNull VH holder, int position, @Nullable Object object) {
             // no-op
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull SA adapter, @NonNull VH holder, int position, @Nullable Object object, List<Object> payloads) {
+            this.onBindViewHolder(adapter, holder, position, object);
         }
 
         @Override

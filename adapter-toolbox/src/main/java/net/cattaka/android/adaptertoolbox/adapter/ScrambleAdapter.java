@@ -111,6 +111,11 @@ public class ScrambleAdapter<T> extends AbsScrambleAdapter<
         public abstract boolean isAssignable(Object object);
 
         @Override
+        public void onBindViewHolder(@NonNull ScrambleAdapter<?> adapter, @NonNull EVH holder, int position, @Nullable Object object, List<Object> payloads) {
+            this.onBindViewHolder(adapter, holder, position, object);
+        }
+
+        @Override
         public ForwardingListener<ScrambleAdapter<?>, RecyclerView.ViewHolder> createForwardingListener() {
             return new ForwardingListener<>();
         }

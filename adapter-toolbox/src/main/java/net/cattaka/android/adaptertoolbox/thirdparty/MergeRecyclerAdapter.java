@@ -342,6 +342,12 @@ public class MergeRecyclerAdapter<T extends RecyclerView.Adapter> extends Recycl
         result.mAdapter.onBindViewHolder(viewHolder, result.mLocalPosition);
     }
 
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position, List payloads) {
+        LocalAdapter result = getAdapterOffsetForItem(position);
+        result.mAdapter.onBindViewHolder(viewHolder, result.mLocalPosition, payloads);
+    }
+
     /**
      * ViewsAdapter, ported from CommonsWare SackOfViews adapter.
      */
