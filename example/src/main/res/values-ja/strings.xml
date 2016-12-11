@@ -28,5 +28,7 @@
     <string name="activity_entry_classic_scramble_adapter_with_spinner">ClassicScrambleAdapterとSpinner</string>
     <string name="activity_entry_abs_tree_item_adapter_with_spinner">AbsTreeItemAdapterとSpinner</string>
     <string name="activity_entry_data_binding">Data Binding</string>
+    <string name="activity_entry_divider">Divider</string>
+    <string name="activity_entry_vertical_list_divider">Vertical List</string>
 
 </resources>
