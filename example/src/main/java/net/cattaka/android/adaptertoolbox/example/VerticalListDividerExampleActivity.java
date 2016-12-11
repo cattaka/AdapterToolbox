@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import net.cattaka.android.adaptertoolbox.decoration.VerticalDividerItemDecoration;
+import net.cattaka.android.adaptertoolbox.decoration.VerticalListDividerItemDecoration;
 import net.cattaka.android.adaptertoolbox.example.adapter.SimpleStringAdapter;
 
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class VerticalListDividerExampleActivity extends AppCompatActivity {
             SimpleStringAdapter adapter = new SimpleStringAdapter(this, items, null);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
             mRecyclerView.setAdapter(adapter);
-            mRecyclerView.addItemDecoration(new VerticalDividerItemDecoration(this, false, R.drawable.vertical_list_divider));
+            mRecyclerView.addItemDecoration(new VerticalListDividerItemDecoration(this, false, R.drawable.vertical_list_divider));
         }
     }
 }

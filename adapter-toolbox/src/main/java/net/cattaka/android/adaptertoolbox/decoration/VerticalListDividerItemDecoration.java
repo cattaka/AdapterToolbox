@@ -19,11 +19,11 @@ import net.cattaka.android.adaptertoolbox.adapter.listener.ForwardingListener;
 /**
  * Created by cattaka on 16/12/11.
  */
-public class VerticalDividerItemDecoration extends RecyclerView.ItemDecoration {
+public class VerticalListDividerItemDecoration extends RecyclerView.ItemDecoration {
     private Drawable mDrawable;
     private boolean mIgnoreParentPadding = true;
 
-    public VerticalDividerItemDecoration(Context context, boolean ignoreParentPadding) {
+    public VerticalListDividerItemDecoration(Context context, boolean ignoreParentPadding) {
         mIgnoreParentPadding = ignoreParentPadding;
         final TypedArray a = context.obtainStyledAttributes(new int[]{
                 android.R.attr.listDivider
@@ -32,7 +32,7 @@ public class VerticalDividerItemDecoration extends RecyclerView.ItemDecoration {
         a.recycle();
     }
 
-    public VerticalDividerItemDecoration(Context context, boolean ignoreParentPadding, @DrawableRes int drawableRes) {
+    public VerticalListDividerItemDecoration(Context context, boolean ignoreParentPadding, @DrawableRes int drawableRes) {
         mIgnoreParentPadding = ignoreParentPadding;
         mDrawable = ContextCompat.getDrawable(context, drawableRes);
     }
@@ -108,13 +108,13 @@ public class VerticalDividerItemDecoration extends RecyclerView.ItemDecoration {
         mIgnoreParentPadding = ignoreParentPadding;
     }
 
-    @BindingAdapter("verticalDivider")
-    public static void verticalDivider(RecyclerView view, @DrawableRes int drawableRes) {
-        view.addItemDecoration(new VerticalDividerItemDecoration(view.getContext(), false, drawableRes));
+    @BindingAdapter("verticalListDivider")
+    public static void verticalListDivider(RecyclerView view, @DrawableRes int drawableRes) {
+        view.addItemDecoration(new VerticalListDividerItemDecoration(view.getContext(), false, drawableRes));
     }
 
-    @BindingAdapter("verticalDividerIgnoreParentPadding")
-    public static void verticalDividerIgnoreParentPadding(RecyclerView view, @DrawableRes int drawableRes) {
-        view.addItemDecoration(new VerticalDividerItemDecoration(view.getContext(), true, drawableRes));
+    @BindingAdapter("verticalListDividerIgnoreParentPadding")
+    public static void verticalListDividerIgnoreParentPadding(RecyclerView view, @DrawableRes int drawableRes) {
+        view.addItemDecoration(new VerticalListDividerItemDecoration(view.getContext(), true, drawableRes));
     }
 }
