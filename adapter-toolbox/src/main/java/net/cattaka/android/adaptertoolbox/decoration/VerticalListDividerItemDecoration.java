@@ -49,8 +49,8 @@ public class VerticalListDividerItemDecoration extends RecyclerView.ItemDecorati
         for (int i = 0; i < childCount; i++) {
             final View child = parent.getChildAt(i);
             RecyclerView.ViewHolder nextHolder = ForwardingListener.findContainingViewHolder(parent, child);
-            RecyclerView.ViewHolder prevHolder = findPrevViewHolder(parent, nextHolder);
-            if (nextHolder != null && prevHolder != null && isAssignable(parent, prevHolder, nextHolder)) {
+            Integer prevViewType = findPrevViewType(parent, nextHolder);
+            if (nextHolder != null && prevViewType != null && isAssignable(parent, nextHolder, prevViewType)) {
                 final ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) child.getLayoutParams();
                 final int bottom = child.getTop() - params.topMargin;
                 final int top = bottom - mDrawable.getIntrinsicHeight();
@@ -63,8 +63,8 @@ public class VerticalListDividerItemDecoration extends RecyclerView.ItemDecorati
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         RecyclerView.ViewHolder nextHolder = ForwardingListener.findContainingViewHolder(parent, view);
-        RecyclerView.ViewHolder prevHolder = findPrevViewHolder(parent, nextHolder);
-        if (mDrawable == null && nextHolder != null && prevHolder != null && isAssignable(parent, prevHolder, nextHolder)) {
+        Integer prevViewType = findPrevViewType(parent, nextHolder);
+        if (mDrawable != null && nextHolder != null && prevViewType != null && isAssignable(parent, nextHolder, prevViewType)) {
             outRect.set(0, mDrawable.getIntrinsicHeight(), 0, 0);
         } else {
             outRect.set(0, 0, 0, 0);
@@ -72,14 +72,13 @@ public class VerticalListDividerItemDecoration extends RecyclerView.ItemDecorati
     }
 
     @Nullable
-    private RecyclerView.ViewHolder findPrevViewHolder(@NonNull RecyclerView parent, @Nullable RecyclerView.ViewHolder nextHolder) {
+    private Integer findPrevViewType(@NonNull RecyclerView parent, @Nullable RecyclerView.ViewHolder nextHolder) {
         if (nextHolder == null) {
             return null;
         }
         RecyclerView.Adapter adapter = parent.getAdapter();
-        if (adapter != null && nextHolder.getLayoutPosition() > 0) {
-            View prevView = parent.getChildAt(nextHolder.getLayoutPosition() - 1);
-            return ForwardingListener.findContainingViewHolder(parent, prevView);
+        if (adapter != null && nextHolder.getAdapterPosition() > 0) {
+            return adapter.getItemViewType(nextHolder.getAdapterPosition() - 1);
         } else {
             return null;
         }
@@ -88,7 +87,7 @@ public class VerticalListDividerItemDecoration extends RecyclerView.ItemDecorati
     /**
      * Override this if needed.
      */
-    public boolean isAssignable(@NonNull RecyclerView parent, @NonNull RecyclerView.ViewHolder prevHolder, @NonNull RecyclerView.ViewHolder nextHolder) {
+    public boolean isAssignable(@NonNull RecyclerView parent, RecyclerView.ViewHolder nextViewHolder, int prevViewType) {
         return true;
     }
 
