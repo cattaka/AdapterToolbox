@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="net.cattaka.android.adaptertoolbox.example.VerticalListDividerExampleActivity">
+
+    <data>
+
+        <import type="net.cattaka.android.adaptertoolbox.decoration.VerticalListDividerItemDecoration" />
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:verticalListDivider="@{@drawable/vertical_list_divider_brg}"
+            app:verticalListDividerIgnoreParentPadding="@{true}" />
+
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

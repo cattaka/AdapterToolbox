@@ -20,8 +20,8 @@ import net.cattaka.android.adaptertoolbox.adapter.listener.ForwardingListener;
  * Created by cattaka on 16/12/11.
  */
 public class VerticalListDividerItemDecoration extends RecyclerView.ItemDecoration {
-    private Drawable mDrawable;
     private boolean mIgnoreParentPadding = true;
+    private Drawable mDrawable;
 
     public VerticalListDividerItemDecoration(Context context, boolean ignoreParentPadding) {
         mIgnoreParentPadding = ignoreParentPadding;
@@ -35,6 +35,11 @@ public class VerticalListDividerItemDecoration extends RecyclerView.ItemDecorati
     public VerticalListDividerItemDecoration(Context context, boolean ignoreParentPadding, @DrawableRes int drawableRes) {
         mIgnoreParentPadding = ignoreParentPadding;
         mDrawable = ContextCompat.getDrawable(context, drawableRes);
+    }
+
+    public VerticalListDividerItemDecoration(boolean ignoreParentPadding, Drawable drawable) {
+        mDrawable = drawable;
+        mIgnoreParentPadding = ignoreParentPadding;
     }
 
     @Override
@@ -108,12 +113,12 @@ public class VerticalListDividerItemDecoration extends RecyclerView.ItemDecorati
     }
 
     @BindingAdapter("verticalListDivider")
-    public static void verticalListDivider(RecyclerView view, @DrawableRes int drawableRes) {
-        view.addItemDecoration(new VerticalListDividerItemDecoration(view.getContext(), false, drawableRes));
+    public static void verticalListDivider(RecyclerView view, Drawable drawable) {
+        verticalListDivider(view, drawable, false);
     }
 
-    @BindingAdapter("verticalListDividerIgnoreParentPadding")
-    public static void verticalListDividerIgnoreParentPadding(RecyclerView view, @DrawableRes int drawableRes) {
-        view.addItemDecoration(new VerticalListDividerItemDecoration(view.getContext(), true, drawableRes));
+    @BindingAdapter({"verticalListDivider", "verticalListDividerIgnoreParentPadding"})
+    public static void verticalListDivider(RecyclerView view, Drawable drawable, boolean ignoreParentPadding) {
+        view.addItemDecoration(new VerticalListDividerItemDecoration(ignoreParentPadding, drawable));
     }
 }
