@@ -2,7 +2,6 @@ package net.cattaka.android.adaptertoolbox.decoration;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.databinding.BindingAdapter;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -110,15 +109,5 @@ public class VerticalListDividerItemDecoration extends RecyclerView.ItemDecorati
 
     public void setIgnoreParentPadding(boolean ignoreParentPadding) {
         mIgnoreParentPadding = ignoreParentPadding;
-    }
-
-    @BindingAdapter("verticalListDivider")
-    public static void verticalListDivider(RecyclerView view, Drawable drawable) {
-        verticalListDivider(view, drawable, false);
-    }
-
-    @BindingAdapter({"verticalListDivider", "verticalListDividerIgnoreParentPadding"})
-    public static void verticalListDivider(RecyclerView view, Drawable drawable, boolean ignoreParentPadding) {
-        view.addItemDecoration(new VerticalListDividerItemDecoration(ignoreParentPadding, drawable));
     }
 }
