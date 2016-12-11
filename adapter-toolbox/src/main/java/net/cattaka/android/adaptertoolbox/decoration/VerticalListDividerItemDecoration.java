@@ -47,7 +47,7 @@ public class VerticalListDividerItemDecoration extends RecyclerView.ItemDecorati
             return;
         }
         int left = (mIgnoreParentPadding) ? 0 : parent.getPaddingLeft();
-        int right = (mIgnoreParentPadding) ? 0 : (parent.getWidth() - parent.getPaddingRight());
+        int right = (mIgnoreParentPadding) ? parent.getWidth() : (parent.getWidth() - parent.getPaddingRight());
 
         int childCount = parent.getChildCount();
         for (int i = 0; i < childCount; i++) {
