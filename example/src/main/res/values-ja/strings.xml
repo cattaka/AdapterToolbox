@@ -30,5 +30,6 @@
     <string name="activity_entry_data_binding">Data Binding</string>
     <string name="activity_entry_divider">Divider</string>
     <string name="activity_entry_vertical_list_divider">Vertical List</string>
+    <string name="activity_entry_difference_divider">ViewTypeごとに異なるdivider</string>
 
 </resources>

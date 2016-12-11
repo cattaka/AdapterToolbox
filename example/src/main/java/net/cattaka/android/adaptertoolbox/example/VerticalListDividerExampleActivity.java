@@ -34,7 +34,7 @@ public class VerticalListDividerExampleActivity extends AppCompatActivity {
             SimpleStringAdapter adapter = new SimpleStringAdapter(this, items, null);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
             mRecyclerView.setAdapter(adapter);
-            mRecyclerView.addItemDecoration(new VerticalListDividerItemDecoration(this, false, R.drawable.vertical_list_divider));
+            mRecyclerView.addItemDecoration(new VerticalListDividerItemDecoration(this, false, R.drawable.vertical_list_divider_rgb));
         }
     }
 }
