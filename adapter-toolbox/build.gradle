@@ -5,6 +5,7 @@ group = 'net.cattaka'
 version = '0.4.0'
 
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
 android {
@@ -37,6 +38,41 @@ def gitUrl = 'https://github.com/cattaka/AdapterToolbox.git'
 def issueUrl = 'https://github.com/cattaka/AdapterToolbox/issues'
 def projectDesc = 'ScrambleAdapter and CustomRecyclerAdapter'
 def artifactVersion = version
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+
+                // Add your description here
+                name projectName
+                url siteUrl
+
+                // Set your license
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'cattaka'
+                        name 'Takao Sumitomo'
+                        email 'cattaka@mail.cattaka.net'
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
 
 bintray {
     user = bintray_user
