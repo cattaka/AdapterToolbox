@@ -10,6 +10,7 @@ import android.view.View;
 import net.cattaka.android.adaptertoolbox.adapter.ScrambleAdapter;
 import net.cattaka.android.adaptertoolbox.adapter.listener.ListenerRelay;
 import net.cattaka.android.adaptertoolbox.example.adapter.factory.StringWithPayloadViewHolderFactory;
+import net.cattaka.android.adaptertoolbox.example.utils.FlashColorItemAnimator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +25,10 @@ public class StringWithPayloadExampleActivity extends AppCompatActivity {
             if (viewHolder instanceof StringWithPayloadViewHolderFactory.ViewHolder) {
                 if (view.getId() == R.id.button_none) {
                     mAdapter.notifyItemChanged(viewHolder.getAdapterPosition(), null);
-                } else if (view.getId() == R.id.button_a) {
-                    mAdapter.notifyItemChanged(viewHolder.getAdapterPosition(), "A");
-                } else if (view.getId() == R.id.button_b) {
-                    mAdapter.notifyItemChanged(viewHolder.getAdapterPosition(), "B");
+                } else if (view.getId() == R.id.button_red) {
+                    mAdapter.notifyItemChanged(viewHolder.getAdapterPosition(), FlashColorItemAnimator.FlashColor.RED);
+                } else if (view.getId() == R.id.button_blue) {
+                    mAdapter.notifyItemChanged(viewHolder.getAdapterPosition(), FlashColorItemAnimator.FlashColor.BLUE);
                 }
             }
         }
@@ -51,6 +52,7 @@ public class StringWithPayloadExampleActivity extends AppCompatActivity {
             }
             mAdapter = new ScrambleAdapter<String>(this, items, mListenerRelay, new StringWithPayloadViewHolderFactory());
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+            mRecyclerView.setItemAnimator(new FlashColorItemAnimator());
             mRecyclerView.setAdapter(mAdapter);
         }
     }

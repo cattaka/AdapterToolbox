@@ -25,8 +25,8 @@ public class StringWithPayloadViewHolderFactory extends ScrambleAdapter.AbsViewH
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_string_with_payload, parent, false);
         ViewHolder vh = new ViewHolder(view);
         view.findViewById(R.id.button_none).setOnClickListener(forwardingListener);
-        view.findViewById(R.id.button_a).setOnClickListener(forwardingListener);
-        view.findViewById(R.id.button_b).setOnClickListener(forwardingListener);
+        view.findViewById(R.id.button_red).setOnClickListener(forwardingListener);
+        view.findViewById(R.id.button_blue).setOnClickListener(forwardingListener);
         return vh;
     }
 
