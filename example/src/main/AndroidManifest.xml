@@ -31,6 +31,8 @@
         <activity android:name=".SpinnerTreeItemAdapterExampleActivity"/>
         <activity android:name=".FizzBuzzExampleActivity"/>
         <activity android:name=".DataBindingManipulableListExampleActivity"/>
+        <activity android:name=".VerticalListDividerExampleActivity"/>
+        <activity android:name=".DifferenceDividerExampleActivity"/>
     </application>
 
 </manifest>
