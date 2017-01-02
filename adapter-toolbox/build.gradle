@@ -2,14 +2,14 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 
 group = 'net.cattaka'
-version = '0.3.4'
+version = '0.3.5'
 
 apply plugin: 'com.android.library'
 apply plugin: 'com.jfrog.bintray'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
         minSdkVersion 15
@@ -22,6 +22,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    dataBinding {
+        enabled true
     }
 }
 

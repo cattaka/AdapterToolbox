@@ -17,6 +17,10 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private static final List<ActivityEntry> ACTIVITY_ENTRIES = Arrays.asList(
+            new ActivityEntry(R.string.activity_entry_divider, null,
+                    new ActivityEntry(R.string.activity_entry_vertical_list_divider, VerticalListDividerExampleActivity.class),
+                    new ActivityEntry(R.string.activity_entry_difference_divider, DifferenceDividerExampleActivity.class)
+            ),
             new ActivityEntry(R.string.activity_entry_enum_with_spinner, null,
                     new ActivityEntry(R.string.activity_entry_code_label_adapter, CodeLabelExampleActivity.class)
             ),
