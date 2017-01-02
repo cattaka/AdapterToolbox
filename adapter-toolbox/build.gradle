@@ -97,7 +97,7 @@ artifacts {
 
 dependencies {
     provided fileTree(dir: 'libs', include: ['*.jar'])
-    provided 'com.android.support:recyclerview-v7:25.0.1'
+    provided 'com.android.support:recyclerview-v7:25.1.0'
 
     androidTestProvided('com.android.support.test.espresso:espresso-core:2.2.1') {
         exclude module: 'support-annotations'
