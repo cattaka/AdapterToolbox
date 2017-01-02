@@ -116,6 +116,11 @@ public class ScrambleAdapter<T> extends AbsScrambleAdapter<
         }
 
         @Override
+        public void onBindViewHolder(@NonNull ScrambleAdapter<?> adapter, @NonNull EVH holder, int position, @Nullable Object object) {
+            // override me
+        }
+
+        @Override
         public ForwardingListener<ScrambleAdapter<?>, RecyclerView.ViewHolder> createForwardingListener() {
             return new ForwardingListener<>();
         }

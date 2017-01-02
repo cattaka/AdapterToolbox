@@ -32,5 +32,12 @@
     <string name="activity_entry_divider">Divider</string>
     <string name="activity_entry_vertical_list_divider">Vertical List</string>
     <string name="activity_entry_difference_divider">Use difference divider per type</string>
+    <string name="activity_entry_payload">Payload</string>
+    <string name="activity_entry_payload_as_string">Display payload as string</string>
+    <string name="label_payload_label">payload:</string>
+    <string name="payload">Payload</string>
+    <string name="none">none</string>
+    <string name="a">A</string>
+    <string name="b">B</string>
 
 </resources>
