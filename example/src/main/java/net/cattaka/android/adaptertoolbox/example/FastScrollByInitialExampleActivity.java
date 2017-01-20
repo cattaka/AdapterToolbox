@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import net.cattaka.android.adaptertoolbox.adapter.ScrambleAdapter;
+import net.cattaka.android.adaptertoolbox.decoration.VerticalListDividerItemDecoration;
 import net.cattaka.android.adaptertoolbox.example.adapter.factory.FastScrollStringViewHolderFactory;
 import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
 import net.cattaka.android.adaptertoolbox.view.VerticalFastScrollView;
@@ -39,7 +40,7 @@ public class FastScrollByInitialExampleActivity extends AppCompatActivity {
             List<String> items = new ArrayList<>();
             for (int i = 0; i < initials.length(); i++) {
                 char ch = initials.charAt(i);
-                int n = random.nextInt(100);
+                int n = random.nextInt(3);
                 for (int j = 0; j < n; j++) {
                     items.add(String.format(Locale.ROOT, "%c%02d", ch, j));
                 }
@@ -47,6 +48,7 @@ public class FastScrollByInitialExampleActivity extends AppCompatActivity {
             ScrambleAdapter<String> adapter = new ScrambleAdapter<String>(this, items, null, new FastScrollStringViewHolderFactory());
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
             mRecyclerView.setAdapter(adapter);
+            mRecyclerView.addItemDecoration(new VerticalListDividerItemDecoration(this, false));
         }
         { // Attach FastScrollView
             mVerticalFastScrollView.attachRecyclerView(mRecyclerView);
