@@ -82,10 +82,14 @@ public class VerticalFastScrollView extends FrameLayout {
         addView(mIndexLabelView);
         addView(mKnobView);
 
+        mKnobMinHeight = getResources().getDimensionPixelSize(R.dimen.adapter_toolbox_fast_scroll_knob_min_height);
+
+        if (isInEditMode()) {
+            return;
+        }
+
         mIndexLabelView.setAlpha(0);
         mKnobView.setAlpha(0);
-
-        mKnobMinHeight = getResources().getDimensionPixelSize(R.dimen.adapter_toolbox_fast_scroll_knob_min_height);
     }
 
     @Override
