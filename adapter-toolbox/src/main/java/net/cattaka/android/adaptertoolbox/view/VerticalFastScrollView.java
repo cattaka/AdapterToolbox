@@ -30,6 +30,7 @@ public class VerticalFastScrollView extends FrameLayout {
             if (!mDragging) {
                 syncFromRecyclerView();
             }
+            refreshIndexLabel();
         }
 
         @Override
@@ -185,6 +186,15 @@ public class VerticalFastScrollView extends FrameLayout {
             int count = (adapter != null) ? adapter.getItemCount() : 1;
 
             setScrollPosition((float) p / (float) count);
+        }
+    }
+
+    private void refreshIndexLabel() {
+        if (mRecyclerView != null) {
+            RecyclerView.ViewHolder holder = mRecyclerView.getChildCount() > 0 ? mRecyclerView.getChildViewHolder(mRecyclerView.getChildAt(0)) : null;
+            if (holder instanceof IFastScrollViewHolder) {
+                ((IFastScrollViewHolder) holder).updateIndexLabelView(getIndexLabelView());
+            }
         }
     }
 
