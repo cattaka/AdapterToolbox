@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="adapter_toolbox_fast_scroll_knob_min_height">64dp</dimen>
+    <dimen name="adapter_toolbox_fast_scroll_knob_width_thick">32dp</dimen>
+    <dimen name="adapter_toolbox_fast_scroll_knob_width_thin">16dp</dimen>
+    <dimen name="adapter_toolbox_fast_scroll_index_label_radius">32dp</dimen>
+    <dimen name="adapter_toolbox_fast_scroll_index_label_padding">16dp</dimen>
+    <dimen name="adapter_toolbox_fast_scroll_index_label_margin">36dp</dimen>
+    <color name="adapter_toolbox_fast_scroll_view_color">#7f7fff</color>
+    <color name="adapter_toolbox_fast_scroll_text_color">#ffffff</color>
+</resources>

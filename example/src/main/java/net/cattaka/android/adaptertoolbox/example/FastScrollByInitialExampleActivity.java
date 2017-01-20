@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import net.cattaka.android.adaptertoolbox.example.adapter.SimpleStringAdapter;
 import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
+import net.cattaka.android.adaptertoolbox.view.VerticalFastScrollView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ public class FastScrollByInitialExampleActivity extends AppCompatActivity {
     SnackbarLogic mSnackbarLogic = new SnackbarLogic();
 
     RecyclerView mRecyclerView;
+    VerticalFastScrollView mVerticalFastScrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class FastScrollByInitialExampleActivity extends AppCompatActivity {
 
         // find views
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler);
+        mVerticalFastScrollView = (VerticalFastScrollView) findViewById(R.id.fast_scroll);
 
         { // set adapter
             Random random = new Random();
@@ -43,6 +46,9 @@ public class FastScrollByInitialExampleActivity extends AppCompatActivity {
             SimpleStringAdapter adapter = new SimpleStringAdapter(this, items, null);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
             mRecyclerView.setAdapter(adapter);
+        }
+        { // Attach FastScrollView
+            mVerticalFastScrollView.attachRecyclerView(mRecyclerView);
         }
     }
 }
