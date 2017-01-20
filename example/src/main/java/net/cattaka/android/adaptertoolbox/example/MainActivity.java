@@ -17,6 +17,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private static final List<ActivityEntry> ACTIVITY_ENTRIES = Arrays.asList(
+            new ActivityEntry(R.string.activity_entry_fast_scroll, null,
+                    new ActivityEntry(R.string.activity_entry_fast_scroll_by_initial, FastScrollByInitialExampleActivity.class)
+            ),
             new ActivityEntry(R.string.activity_entry_payload, null,
                     new ActivityEntry(R.string.activity_entry_payload_as_string, StringWithPayloadExampleActivity.class)
             ),
