@@ -1,6 +1,5 @@
 package net.cattaka.android.adaptertoolbox.classic;
 
-import android.content.Context;
 import android.database.DataSetObserver;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
@@ -32,8 +31,11 @@ public class AdapterConverter<
 
     private Map<DataSetObserver, AdapterDataObserver> mAdapterDataObservers = new HashMap<>();
 
-    public AdapterConverter(@NonNull Context context, @NonNull S orig) {
+    public AdapterConverter() {
         super();
+    }
+
+    public void setOriginal(S orig) {
         mOrig = orig;
     }
 

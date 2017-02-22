@@ -11,6 +11,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import net.cattaka.android.adaptertoolbox.adapter.AbsChoosableTreeItemAdapter;
+import net.cattaka.android.adaptertoolbox.adapter.listener.IForwardingListener;
 import net.cattaka.android.adaptertoolbox.example.R;
 import net.cattaka.android.adaptertoolbox.example.data.MyTreeItem;
 
@@ -45,27 +46,30 @@ public class MyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
         }
     };
 
-    private View.OnClickListener mOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            RecyclerView recyclerView = getAttachedRecyclerView();
-            ViewHolder vh = (ViewHolder) (recyclerView != null ? recyclerView.findContainingViewHolder(view) : null);
-            if (vh != null) {
-                int position = vh.getAdapterPosition();
-                WrappedItem item = getItemAt(position);
-                switch (view.getId()) {
-                    case R.id.check_opened: {
-                        doOpen(item, !item.isOpened());
-                        break;
-                    }
-                    default: {
-                        toggleCheck(item);
-                        break;
+    private View.OnClickListener createOnClickListener(View parent) {
+        final IForwardingListener.IProvider provider = getProvider(parent);
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RecyclerView recyclerView = provider.getAttachedRecyclerView();
+                ViewHolder vh = (ViewHolder) (recyclerView != null ? recyclerView.findContainingViewHolder(view) : null);
+                if (vh != null) {
+                    int position = vh.getAdapterPosition();
+                    WrappedItem item = getItemAt(position);
+                    switch (view.getId()) {
+                        case R.id.check_opened: {
+                            doOpen(item, !item.isOpened());
+                            break;
+                        }
+                        default: {
+                            toggleCheck(item);
+                            break;
+                        }
                     }
                 }
             }
-        }
-    };
+        };
+    }
 
     public MyTreeItemAdapter(Context context, List<MyTreeItem> items) {
         super(context, items, REF);
@@ -77,10 +81,10 @@ public class MyTreeItemAdapter extends AbsChoosableTreeItemAdapter<
         View view = LayoutInflater.from(getContext()).inflate(R.layout.item_my_tree_item, parent, false);
         ViewHolder holder = new ViewHolder(view);
 
-        holder.openedCheck.setOnClickListener(mOnClickListener);
+        holder.openedCheck.setOnClickListener(createOnClickListener(parent));
 
-        holder.itemView.setOnClickListener(getForwardingListener());
-        holder.itemView.setOnLongClickListener(getForwardingListener());
+        holder.itemView.setOnClickListener(getForwardingListener(parent));
+        holder.itemView.setOnLongClickListener(getForwardingListener(parent));
 
         return holder;
     }

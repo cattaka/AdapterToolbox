@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
+import android.view.View;
 import android.view.ViewGroup;
 
 import net.cattaka.android.adaptertoolbox.adapter.listener.IForwardingListener;
@@ -23,7 +24,8 @@ public abstract class AbsScrambleAdapter<
         FL extends IForwardingListener<SA, VH>,
         T
         > extends RecyclerView.Adapter<VH> implements IHasItemAdapter<VH, T> {
-    IForwardingListener.IProvider<SA, VH> mProvider = new IForwardingListener.IProvider<SA, VH>() {
+    Map<View, IForwardingListener.IProvider<SA, VH>> mProviderMap = new HashMap<>();
+    IForwardingListener.IProvider<SA, VH> mNullProvider = new IForwardingListener.IProvider<SA, VH>() {
         @NonNull
         @Override
         public SA getAdapter() {
@@ -33,15 +35,13 @@ public abstract class AbsScrambleAdapter<
         @Nullable
         @Override
         public RecyclerView getAttachedRecyclerView() {
-            return mRecyclerView;
+            return null;
         }
     };
 
-    RecyclerView mRecyclerView;
-
     List<IViewHolderFactory<SA, VH, FL, ? extends VH>> mViewHolderFactory;
     Map<Class<? extends RecyclerView.ViewHolder>, IViewHolderFactory<SA, VH, FL, ? extends VH>> mViewHolder2FactoryMap;
-    SparseArray<FL> mForwardingListeners;
+    Map<View, SparseArray<FL>> mForwardingListenersMap = new HashMap<>();
 
     public AbsScrambleAdapter(
             @NonNull List<? extends IViewHolderFactory<SA, VH, FL, ?>> viewHolderFactories
@@ -54,21 +54,26 @@ public abstract class AbsScrambleAdapter<
         @SuppressWarnings("unchecked")
         NullViewHolderFactory<SA, VH, FL> nvhf = new NullViewHolderFactory(this);
         mViewHolderFactory.add(nvhf);
-        mForwardingListeners = new SparseArray<>();
     }
 
     @Override
     public VH onCreateViewHolder(ViewGroup parent, int viewType) {
         IViewHolderFactory<SA, VH, FL, ?> viewHolderFactory = mViewHolderFactory.get(viewType);
         FL forwardingListener;
-        if (mForwardingListeners.indexOfKey(viewType) < 0) {
+        SparseArray<FL> forwardingListeners = mForwardingListenersMap.get(parent);
+        if (forwardingListeners == null) {
+            // Error case
+            forwardingListeners = new SparseArray<>();
+            mForwardingListenersMap.put(parent, forwardingListeners);
+        }
+        if (forwardingListeners.indexOfKey(viewType) < 0) {
             forwardingListener = createForwardingListener(viewHolderFactory);
             if (forwardingListener != null) {
-                forwardingListener.setProvider(mProvider);
+                forwardingListener.setProvider(getProvider(parent));
             }
-            mForwardingListeners.put(viewType, forwardingListener);
+            forwardingListeners.put(viewType, forwardingListener);
         } else {
-            forwardingListener = mForwardingListeners.get(viewType);
+            forwardingListener = forwardingListeners.get(viewType);
         }
         VH holder = viewHolderFactory.onCreateViewHolder(getSelf(), parent, forwardingListener);
         mViewHolder2FactoryMap.put(holder.getClass(), viewHolderFactory);
@@ -160,15 +165,33 @@ public abstract class AbsScrambleAdapter<
     public abstract T getItemAt(int position);
 
     @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+    public void onAttachedToRecyclerView(final RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-        mRecyclerView = recyclerView;
+        mProviderMap.put(recyclerView, new IForwardingListener.IProvider<SA, VH>() {
+            @NonNull
+            @Override
+            public SA getAdapter() {
+                return getSelf();
+            }
+
+            @Nullable
+            @Override
+            public RecyclerView getAttachedRecyclerView() {
+                return recyclerView;
+            }
+        });
     }
 
     @Override
     public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
         super.onDetachedFromRecyclerView(recyclerView);
-        mRecyclerView = null;
+        mProviderMap.remove(recyclerView);
+        mForwardingListenersMap.remove(recyclerView);
+    }
+
+    protected IForwardingListener.IProvider<SA, VH> getProvider(View parent) {
+        IForwardingListener.IProvider<SA, VH> provider = mProviderMap.get(parent);
+        return (provider != null) ? provider : mNullProvider;
     }
 
     @SuppressWarnings("unchecked")

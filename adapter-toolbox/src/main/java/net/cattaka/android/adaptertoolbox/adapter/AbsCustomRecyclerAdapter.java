@@ -3,10 +3,13 @@ package net.cattaka.android.adaptertoolbox.adapter;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import net.cattaka.android.adaptertoolbox.adapter.listener.IForwardingListener;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by cattaka on 2015/07/15.
@@ -18,7 +21,8 @@ public abstract class AbsCustomRecyclerAdapter<
         FL extends IForwardingListener<A, VH>
         > extends RecyclerView.Adapter<VH> implements IHasItemAdapter<VH, T> {
 
-    IForwardingListener.IProvider<A, VH> mProvider = new IForwardingListener.IProvider<A, VH>() {
+    Map<View, IForwardingListener.IProvider<A, VH>> mProviderMap = new HashMap<>();
+    IForwardingListener.IProvider<A, VH> mNullProvider = new IForwardingListener.IProvider<A, VH>() {
         @NonNull
         @Override
         public A getAdapter() {
@@ -28,16 +32,15 @@ public abstract class AbsCustomRecyclerAdapter<
         @Nullable
         @Override
         public RecyclerView getAttachedRecyclerView() {
-            return mRecyclerView;
+            return null;
         }
     };
 
-    protected RecyclerView mRecyclerView;
+    Map<View, FL> mForwardingListenerMap = new HashMap<>();
 
     private FL mForwardingListener;
 
-    public AbsCustomRecyclerAdapter(FL forwardingListener) {
-        setForwardingListener(forwardingListener);
+    public AbsCustomRecyclerAdapter() {
     }
 
     @SuppressWarnings("unchecked")
@@ -47,26 +50,48 @@ public abstract class AbsCustomRecyclerAdapter<
     }
 
     @NonNull
-    public FL getForwardingListener() {
-        return mForwardingListener;
-    }
-
-    public void setForwardingListener(@NonNull FL forwardingListener) {
-        mForwardingListener = forwardingListener;
-        mForwardingListener.setProvider(mProvider);
+    public FL getForwardingListener(View parent) {
+        FL forwardingListener = mForwardingListenerMap.get(parent);
+        if (forwardingListener == null) {
+            forwardingListener = createForwardingListener();
+            forwardingListener.setProvider(getProvider(parent));
+            mForwardingListenerMap.put(parent, forwardingListener);
+        }
+        return forwardingListener;
     }
 
     @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+    public void onAttachedToRecyclerView(final RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-        mRecyclerView = recyclerView;
+        mProviderMap.put(recyclerView, new IForwardingListener.IProvider<A, VH>() {
+            @NonNull
+            @Override
+            public A getAdapter() {
+                return getSelf();
+            }
+
+            @Nullable
+            @Override
+            public RecyclerView getAttachedRecyclerView() {
+                return recyclerView;
+            }
+        });
     }
 
     @Override
     public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
         super.onDetachedFromRecyclerView(recyclerView);
-        mRecyclerView = null;
+        mProviderMap.remove(recyclerView);
+        mForwardingListenerMap.remove(recyclerView);
     }
+
+    protected IForwardingListener.IProvider<A, VH> getProvider(View parent) {
+        IForwardingListener.IProvider<A, VH> provider = mProviderMap.get(parent);
+        return (provider != null) ? provider : mNullProvider;
+    }
+
+    @NonNull
+    public abstract FL createForwardingListener();
 
     public int getViewTypeCount() {
         return 1;

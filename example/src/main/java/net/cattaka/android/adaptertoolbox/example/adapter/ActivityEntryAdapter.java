@@ -11,6 +11,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import net.cattaka.android.adaptertoolbox.adapter.AbsChoosableTreeItemAdapter;
+import net.cattaka.android.adaptertoolbox.adapter.listener.IForwardingListener;
 import net.cattaka.android.adaptertoolbox.example.R;
 import net.cattaka.android.adaptertoolbox.example.data.ActivityEntry;
 
@@ -45,26 +46,6 @@ public class ActivityEntryAdapter extends AbsChoosableTreeItemAdapter<
         }
     };
 
-    private View.OnClickListener mOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            RecyclerView recyclerView = getAttachedRecyclerView();
-            ViewHolder vh = (ViewHolder) recyclerView.findContainingViewHolder(view);
-            int position = vh.getAdapterPosition();
-            WrappedItem item = getItemAt(position);
-            switch (view.getId()) {
-                case R.id.check_opened: {
-                    doOpen(item, !item.isOpened());
-                    break;
-                }
-                default: {
-                    toggleCheck(item);
-                    break;
-                }
-            }
-        }
-    };
-
     public ActivityEntryAdapter(Context context, List<ActivityEntry> items) {
         super(context, items, REF);
     }
@@ -75,9 +56,9 @@ public class ActivityEntryAdapter extends AbsChoosableTreeItemAdapter<
         View view = LayoutInflater.from(getContext()).inflate(R.layout.item_activity_entry, parent, false);
         ViewHolder holder = new ViewHolder(view);
 
-        holder.openedCheck.setOnClickListener(mOnClickListener);
+        holder.openedCheck.setOnClickListener(createOnClickListener(parent));
 
-        holder.itemView.setOnClickListener(getForwardingListener());
+        holder.itemView.setOnClickListener(getForwardingListener(parent));
 
         return holder;
     }
@@ -99,6 +80,29 @@ public class ActivityEntryAdapter extends AbsChoosableTreeItemAdapter<
 
         holder.openedCheck.setChecked(wrappedItem.isOpened());
         holder.labelText.setText(item.getLabel(holder.itemView.getResources()));
+    }
+
+    private View.OnClickListener createOnClickListener(View parent) {
+        final IForwardingListener.IProvider<ActivityEntryAdapter, ViewHolder> listenerRelay = getProvider(parent);
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RecyclerView recyclerView = listenerRelay.getAttachedRecyclerView();
+                ViewHolder vh = (ViewHolder) recyclerView.findContainingViewHolder(view);
+                int position = vh.getAdapterPosition();
+                WrappedItem item = getItemAt(position);
+                switch (view.getId()) {
+                    case R.id.check_opened: {
+                        doOpen(item, !item.isOpened());
+                        break;
+                    }
+                    default: {
+                        toggleCheck(item);
+                        break;
+                    }
+                }
+            }
+        };
     }
 
     public static class WrappedItem extends AbsChoosableTreeItemAdapter.WrappedItem<WrappedItem, ActivityEntry> {

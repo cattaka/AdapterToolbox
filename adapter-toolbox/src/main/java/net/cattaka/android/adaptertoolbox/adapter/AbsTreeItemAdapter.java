@@ -30,7 +30,7 @@ public abstract class AbsTreeItemAdapter<
     private Context mContext;
     private List<W> mItems;
 
-    private RecyclerView mRecyclerView;
+    private ListenerRelay<A, VH> mListenerRelay;
 
     @NonNull
     protected static <T extends ITreeItem<T>, W extends AbsTreeItemAdapter.WrappedItem<W, T>, REF extends ITreeItemAdapterRef<?, ?, T, W>>
@@ -50,7 +50,7 @@ public abstract class AbsTreeItemAdapter<
     }
 
     public <REF extends ITreeItemAdapterRef<A, ?, T, W>> AbsTreeItemAdapter(@NonNull Context context, @NonNull List<T> items, @NonNull REF ref) {
-        super(new ForwardingListener<A, VH>());
+        super();
         mContext = context;
         mItems = inflateWrappedList(new ArrayList<W>(), items, 0, null, ref);
     }
@@ -151,25 +151,18 @@ public abstract class AbsTreeItemAdapter<
         }
     }
 
-    @Nullable
-    public RecyclerView getAttachedRecyclerView() {
-        return mRecyclerView;
-    }
-
-    @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
-        mRecyclerView = recyclerView;
-    }
-
-    @Override
-    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
-        super.onDetachedFromRecyclerView(recyclerView);
-        mRecyclerView = null;
-    }
-
     public void setListenerRelay(@Nullable ListenerRelay<A, VH> listenerRelay) {
-        getForwardingListener().setListenerRelay(listenerRelay);
+        mListenerRelay = listenerRelay;
+    }
+
+    @NonNull
+    @Override
+    public ForwardingListener<A, VH> createForwardingListener() {
+        ForwardingListener<A, VH> forwardingListener = new ForwardingListener<>();
+        if (mListenerRelay != null) {
+            forwardingListener.setListenerRelay(mListenerRelay);
+        }
+        return forwardingListener;
     }
 
     public interface ITreeItemAdapterRef<
