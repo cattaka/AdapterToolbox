@@ -32,8 +32,8 @@ public class SingleViewAdapter extends CustomRecyclerAdapter<SingleViewAdapter, 
         RecyclerView.ViewHolder vh = new RecyclerView.ViewHolder(view) {
         };
 
-        view.setOnClickListener(getForwardingListener());
-        view.setOnLongClickListener(getForwardingListener());
+        view.setOnClickListener(getForwardingListener(parent));
+        view.setOnLongClickListener(getForwardingListener(parent));
 
         return vh;
     }

@@ -1,6 +1,5 @@
 package net.cattaka.android.adaptertoolbox.example;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -11,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 
+import net.cattaka.android.adaptertoolbox.adapter.listener.ForwardingListener;
 import net.cattaka.android.adaptertoolbox.classic.AdapterConverter;
 import net.cattaka.android.adaptertoolbox.classic.listener.ClassicForwardingListener;
 import net.cattaka.android.adaptertoolbox.classic.listener.ClassicListenerRelay;
@@ -58,9 +58,15 @@ public class SpinnerTreeItemAdapterExampleActivity extends AppCompatActivity imp
         { // set adapter
             List<MyTreeItem> items = ExampleDataGenerator.generateMyTreeItem(Arrays.asList(5, 3, 2), 0);
 
-            SpinnerMyTreeItemAdapter adapter = new SpinnerMyTreeItemAdapter(this, items);
-            mAdapterConverter = new AdapterConverterEx(this, adapter);
-            adapter.setForwardingListener(new ClassicForwardingListener<SpinnerMyTreeItemAdapter, SpinnerMyTreeItemAdapter.ViewHolder>(mAdapterConverter, mListenerRelay));
+            mAdapterConverter = new AdapterConverterEx();
+            SpinnerMyTreeItemAdapter adapter = new SpinnerMyTreeItemAdapter(this, items) {
+                @NonNull
+                @Override
+                public ForwardingListener<SpinnerMyTreeItemAdapter, ViewHolder> createForwardingListener() {
+                    return new ClassicForwardingListener<>(mAdapterConverter, mListenerRelay);
+                }
+            };
+            mAdapterConverter.setOriginal(adapter);
 
             // Issue: Spinner Doesn't Allow Heterogeneous ListAdapters in Lollipop.
             // https://code.google.com/p/android/issues/detail?id=79011
@@ -87,8 +93,8 @@ public class SpinnerTreeItemAdapterExampleActivity extends AppCompatActivity imp
     }
 
     private static class AdapterConverterEx extends AdapterConverter<SpinnerMyTreeItemAdapter, SpinnerMyTreeItemAdapter.ViewHolder, SpinnerMyTreeItemAdapter.WrappedItem> {
-        public AdapterConverterEx(@NonNull Context context, @NonNull SpinnerMyTreeItemAdapter orig) {
-            super(context, orig);
+        public AdapterConverterEx() {
+            super();
         }
 
         @Override

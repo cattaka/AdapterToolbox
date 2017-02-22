@@ -1,5 +1,6 @@
 package net.cattaka.android.adaptertoolbox.adapter;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 
@@ -20,11 +21,23 @@ public abstract class CustomRecyclerAdapter<
         ForwardingListener<A, VH>
         > {
 
+    private ListenerRelay<A, VH> mListenerRelay;
+
     public CustomRecyclerAdapter() {
-        super(new ForwardingListener<A, VH>());
+        super();
     }
 
     public void setListenerRelay(@Nullable ListenerRelay<A, VH> listenerRelay) {
-        getForwardingListener().setListenerRelay(listenerRelay);
+        mListenerRelay = listenerRelay;
+    }
+
+    @NonNull
+    @Override
+    public ForwardingListener<A, VH> createForwardingListener() {
+        ForwardingListener<A, VH> forwardingListener = new ForwardingListener<>();
+        if (mListenerRelay != null) {
+            forwardingListener.setListenerRelay(mListenerRelay);
+        }
+        return forwardingListener;
     }
 }
