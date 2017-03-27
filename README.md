@@ -3,22 +3,22 @@ AdapterToolbox
 This is utility classes for RecyclerView and classic AdapterView(such as ListView, Spinner).
 
 - ScrambleAdapter
- - This separate creating ViewHolder logic from RecyclerView.Adapter.
- - Once gave DataClass-ViewHolder relation, this will bind them automatically.
- - The relation of DataClass-ViewHolder are declared by ViewHolderFactory.
+  - This separate creating ViewHolder logic from RecyclerView.Adapter.
+  - Once gave DataClass-ViewHolder relation, this will bind them automatically.
+  - The relation of DataClass-ViewHolder are declared by ViewHolderFactory.
 - ViewHolderFactory
- - Describe the relation of DataClass-ViewHolder.
- - This has onCreateViewHolder() / onBindViewHolder() / isAssignable() / etc methods.
+  - Describe the relation of DataClass-ViewHolder.
+  - This has onCreateViewHolder() / onBindViewHolder() / isAssignable() / etc methods.
 - ListenerRelay
- - Empty implementation of frequently used listeners. This is used by ScrambleAdapter.
+  - Empty implementation of frequently used listeners. This is used by ScrambleAdapter.
 - CodeLabelAdapter
- - The adapter for Enum. But you can adopt this to other standard data classes.
+  - The adapter for Enum. But you can adopt this to other standard data classes.
 - ClassicScrambleAdapter
- - Classic version of ScrambleAdapter. It can go with classic AdapterView(such as ListView, Spinner).
+  - Classic version of ScrambleAdapter. It can go with classic AdapterView(such as ListView, Spinner).
 - AbsTreeItemAdapter
- - This provides foldable tree list.
+  - This provides foldable tree list.
 - AbsChoosableTreeItemAdapter
- - This supports single choice and multi choice mode.
+  - This supports single choice and multi choice mode.
 
 
 ## How to use
