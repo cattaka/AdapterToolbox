@@ -42,7 +42,7 @@ public class ClassicForwardingListener<A extends RecyclerView.Adapter<? extends 
         mAdapter = adapter;
     }
 
-    public ClassicListenerRelay getListenerRelay() {
+    public ClassicListenerRelay getClassicListenerRelay() {
         return mListenerRelay;
     }
 
