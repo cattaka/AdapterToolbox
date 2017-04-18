@@ -33,8 +33,16 @@ public class ForwardingListener<A extends RecyclerView.Adapter<? extends VH>, VH
     public ForwardingListener() {
     }
 
+    protected ListenerRelay<A, VH> getListenerRelay() {
+        return mListenerRelay;
+    }
+
     public void setListenerRelay(@Nullable ListenerRelay<A, VH> listenerRelay) {
         mListenerRelay = listenerRelay;
+    }
+
+    protected IProvider<A, VH> getProvider() {
+        return mProvider;
     }
 
     @Override
