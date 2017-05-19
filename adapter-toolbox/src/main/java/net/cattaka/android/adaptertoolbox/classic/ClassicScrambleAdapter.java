@@ -9,7 +9,6 @@ import android.view.View;
 import net.cattaka.android.adaptertoolbox.adapter.AbsScrambleAdapter;
 import net.cattaka.android.adaptertoolbox.adapter.ScrambleAdapter;
 import net.cattaka.android.adaptertoolbox.adapter.listener.ForwardingListener;
-import net.cattaka.android.adaptertoolbox.adapter.listener.ListenerRelay;
 import net.cattaka.android.adaptertoolbox.classic.listener.ClassicForwardingListener;
 import net.cattaka.android.adaptertoolbox.classic.listener.ClassicListenerRelay;
 
@@ -20,7 +19,6 @@ import java.util.List;
  * Created by takao on 2016/05/27.
  */
 public class ClassicScrambleAdapter<T> extends AdapterConverter<ScrambleAdapter<T>, RecyclerView.ViewHolder, T> {
-    ListenerRelay<ScrambleAdapter<?>, RecyclerView.ViewHolder> mListenerRelay = new ListenerRelay<>();
 
     public ClassicScrambleAdapter(
             @NonNull Context context,
