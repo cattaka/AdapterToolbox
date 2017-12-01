@@ -10,7 +10,7 @@ apply plugin: 'com.jfrog.bintray'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "26.0.0-rc2"
+    buildToolsVersion "26.0.2"
 
     defaultConfig {
         minSdkVersion 15
