@@ -5,7 +5,6 @@ import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
-import android.support.v4.animation.AnimatorCompatHelper;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -35,12 +34,12 @@ public class FlashColorItemAnimator extends DefaultItemAnimator {
     @Override
     public boolean animateChange(RecyclerView.ViewHolder oldHolder, RecyclerView.ViewHolder newHolder, int fromX, int fromY, int toX, int toY) {
         {   // resetAnimation
-            AnimatorCompatHelper.clearInterpolator(oldHolder.itemView);
+            oldHolder.itemView.clearAnimation();
             endAnimation(oldHolder);
         }
         if (newHolder != null) {
             // carry over translation values
-            AnimatorCompatHelper.clearInterpolator(newHolder.itemView);
+            newHolder.itemView.clearAnimation();
             endAnimation(newHolder);
 
             FlashColor flashColor = (FlashColor) newHolder.itemView.getTag(R.id.flash_color_on_change);
