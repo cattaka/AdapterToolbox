@@ -9,8 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+
 import net.cattaka.android.adaptertoolbox.adapter.ScrambleAdapter;
-import net.cattaka.android.adaptertoolbox.adapter.SingleViewAdapter;
+import net.cattaka.android.adaptertoolbox.adapter.SingleViewAdapter2;
 import net.cattaka.android.adaptertoolbox.adapter.listener.ListenerRelay;
 import net.cattaka.android.adaptertoolbox.example.adapter.SimpleNumberAdapter;
 import net.cattaka.android.adaptertoolbox.example.adapter.SimpleStringAdapter;
@@ -57,9 +58,9 @@ public class MultiAdapterExampleActivity extends AppCompatActivity {
         }
     };
 
-    ListenerRelay<SingleViewAdapter, RecyclerView.ViewHolder> mHeaderListenerRelay = new ListenerRelay<SingleViewAdapter, RecyclerView.ViewHolder>() {
+    ListenerRelay<SingleViewAdapter2, SingleViewAdapter2.ViewHolder> mHeaderListenerRelay = new ListenerRelay<SingleViewAdapter2, SingleViewAdapter2.ViewHolder>() {
         @Override
-        public void onClick(@NonNull RecyclerView recyclerView, @NonNull SingleViewAdapter adapter, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull View view) {
+        public void onClick(@NonNull RecyclerView recyclerView, @NonNull SingleViewAdapter2 adapter, @NonNull SingleViewAdapter2.ViewHolder viewHolder, @NonNull View view) {
             if (recyclerView.getId() == R.id.recycler) {
                 MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
                 if (la.mAdapter == mStringsHeaderAdapter) {
@@ -71,7 +72,7 @@ public class MultiAdapterExampleActivity extends AppCompatActivity {
         }
 
         @Override
-        public boolean onLongClick(@NonNull RecyclerView recyclerView, @NonNull SingleViewAdapter adapter, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull View view) {
+        public boolean onLongClick(@NonNull RecyclerView recyclerView, @NonNull SingleViewAdapter2 adapter, @NonNull SingleViewAdapter2.ViewHolder viewHolder, @NonNull View view) {
             if (recyclerView.getId() == R.id.recycler) {
                 MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
                 if (la.mAdapter == mStringsHeaderAdapter) {
@@ -116,9 +117,9 @@ public class MultiAdapterExampleActivity extends AppCompatActivity {
     CheckBox mNumberItemsCheck;
     RecyclerView mRecyclerView;
     MergeRecyclerAdapter<RecyclerView.Adapter> mMergeRecyclerAdapter;
-    SingleViewAdapter mStringsHeaderAdapter;
+    SingleViewAdapter2 mStringsHeaderAdapter;
     SimpleStringAdapter mStringsAdapter;
-    SingleViewAdapter mNumbersHeaderAdapter;
+    SingleViewAdapter2 mNumbersHeaderAdapter;
     SimpleNumberAdapter mNumbersAdapter;
 
     @Override
@@ -138,7 +139,7 @@ public class MultiAdapterExampleActivity extends AppCompatActivity {
         {   // prepare adapters
             mMergeRecyclerAdapter = new MergeRecyclerAdapter<>(this);
             {   // create strings header adapter
-                mStringsHeaderAdapter = new SingleViewAdapter(this, R.layout.view_header_string);
+                mStringsHeaderAdapter = new SingleViewAdapter2(this, R.layout.view_header_string);
                 mStringsHeaderAdapter.setListenerRelay(mHeaderListenerRelay);
                 mMergeRecyclerAdapter.addAdapter(mStringsHeaderAdapter);
             }
@@ -152,7 +153,7 @@ public class MultiAdapterExampleActivity extends AppCompatActivity {
                 mMergeRecyclerAdapter.addAdapter(mStringsAdapter);
             }
             {   // create numbers header adapter
-                mNumbersHeaderAdapter = new SingleViewAdapter(this, R.layout.view_header_number);
+                mNumbersHeaderAdapter = new SingleViewAdapter2(this, R.layout.view_header_number);
                 mNumbersHeaderAdapter.setListenerRelay(mHeaderListenerRelay);
                 mMergeRecyclerAdapter.addAdapter(mNumbersHeaderAdapter);
             }

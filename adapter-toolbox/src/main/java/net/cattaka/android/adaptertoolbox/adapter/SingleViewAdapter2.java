@@ -11,28 +11,22 @@ import android.view.ViewGroup;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by cattaka on 2015/07/30.
- *
- * @deprecated Replaced with {@link SingleViewAdapter2}
- */
-public class SingleViewAdapter extends CustomRecyclerAdapter<SingleViewAdapter, RecyclerView.ViewHolder, Object> {
+public class SingleViewAdapter2 extends CustomRecyclerAdapter<SingleViewAdapter2, SingleViewAdapter2.ViewHolder, Object> {
     private Context mContext;
     @LayoutRes
     private int mViewResId;
     private boolean mVisible = true;
     private Object mDummy = new Object();
 
-    public SingleViewAdapter(@NonNull Context context, @LayoutRes int viewResId) {
+    public SingleViewAdapter2(@NonNull Context context, @LayoutRes int viewResId) {
         mContext = context;
         mViewResId = viewResId;
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(mViewResId, parent, false);
-        RecyclerView.ViewHolder vh = new RecyclerView.ViewHolder(view) {
-        };
+        ViewHolder vh = createViewHolder(view, mViewResId);
 
         view.setOnClickListener(getForwardingListener(parent));
         view.setOnLongClickListener(getForwardingListener(parent));
@@ -40,8 +34,12 @@ public class SingleViewAdapter extends CustomRecyclerAdapter<SingleViewAdapter, 
         return vh;
     }
 
+    protected ViewHolder createViewHolder(@NonNull View view, @LayoutRes int viewResId) {
+        return new ViewHolder(view, viewResId);
+    }
+
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         // no-op
     }
 
@@ -75,5 +73,19 @@ public class SingleViewAdapter extends CustomRecyclerAdapter<SingleViewAdapter, 
     @Override
     public List<Object> getItems() {
         return Collections.singletonList(mDummy);
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private int mViewResId;
+
+        public ViewHolder(View itemView, @LayoutRes int viewResId) {
+            super(itemView);
+            mViewResId = viewResId;
+        }
+
+        @LayoutRes
+        public int getViewResId() {
+            return mViewResId;
+        }
     }
 }
