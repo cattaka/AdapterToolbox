@@ -9,7 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import net.cattaka.android.adaptertoolbox.adapter.ScrambleAdapter;
-import net.cattaka.android.adaptertoolbox.adapter.SingleViewAdapter;
+import net.cattaka.android.adaptertoolbox.adapter.SingleViewAdapter2;
 import net.cattaka.android.adaptertoolbox.adapter.listener.ListenerRelay;
 import net.cattaka.android.adaptertoolbox.example.adapter.SimpleStringAdapter;
 import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
@@ -49,9 +49,9 @@ public class RecyclerViewHeaderExampleActivity extends AppCompatActivity {
         }
     };
 
-    ListenerRelay<SingleViewAdapter, RecyclerView.ViewHolder> mHeaderListenerRelay = new ListenerRelay<SingleViewAdapter, RecyclerView.ViewHolder>() {
+    ListenerRelay<SingleViewAdapter2, SingleViewAdapter2.ViewHolder> mHeaderListenerRelay = new ListenerRelay<SingleViewAdapter2, SingleViewAdapter2.ViewHolder>() {
         @Override
-        public void onClick(@NonNull RecyclerView recyclerView, @NonNull SingleViewAdapter adapter, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull View view) {
+        public void onClick(@NonNull RecyclerView recyclerView, @NonNull SingleViewAdapter2 adapter, @NonNull SingleViewAdapter2.ViewHolder viewHolder, @NonNull View view) {
             if (recyclerView.getId() == R.id.recycler) {
                 MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
                 if (la.mAdapter == mHeaderAdapter) {
@@ -63,7 +63,7 @@ public class RecyclerViewHeaderExampleActivity extends AppCompatActivity {
         }
 
         @Override
-        public boolean onLongClick(@NonNull RecyclerView recyclerView, @NonNull SingleViewAdapter adapter, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull View view) {
+        public boolean onLongClick(@NonNull RecyclerView recyclerView, @NonNull SingleViewAdapter2 adapter, @NonNull SingleViewAdapter2.ViewHolder viewHolder, @NonNull View view) {
             if (recyclerView.getId() == R.id.recycler) {
                 MergeRecyclerAdapter.LocalAdapter la = mMergeRecyclerAdapter.getAdapterOffsetForItem(viewHolder.getAdapterPosition());
                 if (la.mAdapter == mHeaderAdapter) {
@@ -81,9 +81,9 @@ public class RecyclerViewHeaderExampleActivity extends AppCompatActivity {
 
     RecyclerView mRecyclerView;
     MergeRecyclerAdapter<RecyclerView.Adapter> mMergeRecyclerAdapter;
-    SingleViewAdapter mHeaderAdapter;
+    SingleViewAdapter2 mHeaderAdapter;
     SimpleStringAdapter mItemsAdapter;
-    SingleViewAdapter mFooterAdapter;
+    SingleViewAdapter2 mFooterAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +96,7 @@ public class RecyclerViewHeaderExampleActivity extends AppCompatActivity {
         {   // prepare adapters
             mMergeRecyclerAdapter = new MergeRecyclerAdapter<>(this);
             {   // create header adapter
-                mHeaderAdapter = new SingleViewAdapter(this, R.layout.view_header);
+                mHeaderAdapter = new SingleViewAdapter2(this, R.layout.view_header);
                 mHeaderAdapter.setListenerRelay(mHeaderListenerRelay);
                 mMergeRecyclerAdapter.addAdapter(mHeaderAdapter);
             }
@@ -110,7 +110,7 @@ public class RecyclerViewHeaderExampleActivity extends AppCompatActivity {
                 mMergeRecyclerAdapter.addAdapter(mItemsAdapter);
             }
             {   // create footer adapter
-                mFooterAdapter = new SingleViewAdapter(this, R.layout.view_footer);
+                mFooterAdapter = new SingleViewAdapter2(this, R.layout.view_footer);
                 mFooterAdapter.setListenerRelay(mHeaderListenerRelay);
                 mMergeRecyclerAdapter.addAdapter(mFooterAdapter);
             }

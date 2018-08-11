@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import net.cattaka.android.adaptertoolbox.adapter.SingleViewAdapter;
+import net.cattaka.android.adaptertoolbox.adapter.SingleViewAdapter2;
 import net.cattaka.android.adaptertoolbox.decoration.VerticalListDividerItemDecoration;
 import net.cattaka.android.adaptertoolbox.example.adapter.SimpleNumberAdapter;
 import net.cattaka.android.adaptertoolbox.example.adapter.SimpleStringAdapter;
@@ -25,9 +25,9 @@ public class DifferenceDividerExampleActivity extends AppCompatActivity {
 
     RecyclerView mRecyclerView;
     MergeRecyclerAdapter<RecyclerView.Adapter> mMergeRecyclerAdapter;
-    SingleViewAdapter mStringsHeaderAdapter;
+    SingleViewAdapter2 mStringsHeaderAdapter;
     SimpleStringAdapter mStringsAdapter;
-    SingleViewAdapter mNumbersHeaderAdapter;
+    SingleViewAdapter2 mNumbersHeaderAdapter;
     SimpleNumberAdapter mNumbersAdapter;
 
     @Override
@@ -41,7 +41,7 @@ public class DifferenceDividerExampleActivity extends AppCompatActivity {
         {   // prepare adapters
             mMergeRecyclerAdapter = new MergeRecyclerAdapter<>(this);
             {   // create strings header adapter
-                mStringsHeaderAdapter = new SingleViewAdapter(this, R.layout.view_header_string);
+                mStringsHeaderAdapter = new SingleViewAdapter2(this, R.layout.view_header_string);
                 mMergeRecyclerAdapter.addAdapter(mStringsHeaderAdapter);
             }
             {   // create strings adapter
@@ -54,7 +54,7 @@ public class DifferenceDividerExampleActivity extends AppCompatActivity {
                 mMergeRecyclerAdapter.addAdapter(mStringsAdapter);
             }
             {   // create numbers header adapter
-                mNumbersHeaderAdapter = new SingleViewAdapter(this, R.layout.view_header_number);
+                mNumbersHeaderAdapter = new SingleViewAdapter2(this, R.layout.view_header_number);
                 mMergeRecyclerAdapter.addAdapter(mNumbersHeaderAdapter);
             }
             {   // create numbers adapter
