@@ -162,6 +162,17 @@ public abstract class AbsScrambleAdapter<
         return mViewHolderFactory.size() - 1;
     }
 
+    @Nullable
+    public IViewHolderFactory<SA, VH, FL, ?> getViewHolderFactory(int itemViewType) {
+        return mViewHolderFactory.get(itemViewType);
+    }
+
+    @Nullable
+    public IViewHolderFactory<SA, VH, FL, ?> getViewHolderFactoryByPosition(int position) {
+        int viewType = getItemViewType(position);
+        return mViewHolderFactory.get(viewType);
+    }
+
     public abstract T getItemAt(int position);
 
     @Override
