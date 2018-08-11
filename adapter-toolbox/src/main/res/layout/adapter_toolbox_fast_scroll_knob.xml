@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<View xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="@dimen/adapter_toolbox_fast_scroll_knob_width_thin"
+      android:layout_height="@dimen/adapter_toolbox_fast_scroll_knob_min_height"
+      android:layout_gravity="end"
+      android:background="@color/adapter_toolbox_fast_scroll_view_color"
+      android:orientation="vertical" />

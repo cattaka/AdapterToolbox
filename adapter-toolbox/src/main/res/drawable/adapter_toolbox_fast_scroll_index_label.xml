@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners
+        android:bottomLeftRadius="@dimen/adapter_toolbox_fast_scroll_index_label_radius"
+        android:topLeftRadius="@dimen/adapter_toolbox_fast_scroll_index_label_radius"
+        android:topRightRadius="@dimen/adapter_toolbox_fast_scroll_index_label_radius" />
+    <solid android:color="@color/adapter_toolbox_fast_scroll_view_color" />
+</shape>
