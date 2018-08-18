@@ -1,5 +1,6 @@
 package net.cattaka.android.adaptertoolbox.example.spinner;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.Space;
@@ -85,7 +86,7 @@ public class SpinnerMyTreeItemAdapter extends AbsTreeItemAdapter<
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         WrappedItem wrappedItem = getItemAt(position);
         MyTreeItem item = wrappedItem.getItem();
 
