@@ -14,7 +14,7 @@
             type="net.cattaka.android.adaptertoolbox.example.adapter.factory.DataBindingMyInfoViewHolderFactory.ViewHolder"/>
     </data>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/element_spacing_normal">
@@ -88,5 +88,5 @@
             </TableRow>
 
         </TableLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </layout>

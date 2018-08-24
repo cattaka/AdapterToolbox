@@ -1,7 +1,7 @@
 package net.cattaka.android.adaptertoolbox.thirdparty;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -39,12 +39,12 @@ import java.util.Map;
  * these views are then put into an adapter themselves, even if the adapter only holds the
  * one view.
  * <p/>
- * RecyclerView Adapters must implement both the {@link android.support.v7.widget.RecyclerView.Adapter#onCreateViewHolder(android.view.ViewGroup, int)}
- * and {@link android.support.v7.widget.RecyclerView.Adapter#onBindViewHolder(android.support.v7.widget.RecyclerView.ViewHolder,
+ * RecyclerView Adapters must implement both the {@link RecyclerView.Adapter#onCreateViewHolder(android.view.ViewGroup, int)}
+ * and {@link RecyclerView.Adapter#onBindViewHolder( RecyclerView.ViewHolder,
  * int)} methods, as opposed to just the {@link android.widget.BaseAdapter#getView(int, android.view.View,
  * android.view.ViewGroup)} method in a ListView Adapter.
  * <p/>
- * Because the {@link android.support.v7.widget.RecyclerView.Adapter#onCreateViewHolder(android.view.ViewGroup, int)} method only provides us the ViewGroup and a View Type, we must keep a mapping of
+ * Because the {@link RecyclerView.Adapter#onCreateViewHolder(android.view.ViewGroup, int)} method only provides us the ViewGroup and a View Type, we must keep a mapping of
  * (unique) view types in this merge adapter to each sub adapter, so we know which adapters' onCreateViewHolder method to call.
  * <p/>
  * The {@link MergeRecyclerAdapter.LocalAdapter} class

@@ -1,8 +1,8 @@
 package net.cattaka.android.adaptertoolbox.example;
 
 import android.app.Activity;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.rule.ActivityTestRule;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.rule.ActivityTestRule;
 
 import net.cattaka.android.adaptertoolbox.example.adapter.ActivityEntryAdapter;
 import net.cattaka.android.adaptertoolbox.example.data.ActivityEntry;
@@ -10,11 +10,11 @@ import net.cattaka.android.adaptertoolbox.example.data.ActivityEntry;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
-import static android.support.test.espresso.contrib.RecyclerViewActions.scrollToPosition;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
+import static androidx.test.espresso.contrib.RecyclerViewActions.scrollToPosition;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static net.cattaka.android.adaptertoolbox.example.test.TestUtils.monitorActivity;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;

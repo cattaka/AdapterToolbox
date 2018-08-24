@@ -2,7 +2,7 @@ package net.cattaka.android.adaptertoolbox.example.view;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.support.v7.widget.AppCompatSpinner;
+import androidx.appcompat.widget.AppCompatSpinner;
 import android.util.AttributeSet;
 
 import net.cattaka.android.adaptertoolbox.utils.SpinnerUtils;

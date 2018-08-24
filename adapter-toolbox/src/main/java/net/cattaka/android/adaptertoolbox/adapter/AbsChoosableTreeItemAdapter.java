@@ -1,9 +1,9 @@
 package net.cattaka.android.adaptertoolbox.adapter;
 
 import android.content.Context;
-import android.support.annotation.IntDef;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.cattaka.android.adaptertoolbox.data.ITreeItem;
 
