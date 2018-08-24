@@ -1,9 +1,6 @@
 package net.cattaka.android.adaptertoolbox.example;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import net.cattaka.android.adaptertoolbox.adapter.ScrambleAdapter;
 import net.cattaka.android.adaptertoolbox.adapter.listener.ListenerRelay;
@@ -16,6 +13,10 @@ import net.cattaka.android.adaptertoolbox.thirdparty.MergeRecyclerAdapter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by cattaka on 16/05/15.
@@ -55,7 +56,7 @@ public class DataBindingManipulableListExampleActivity extends AppCompatActivity
             );
             mMergeRecyclerAdapter.addAdapter(mItemAdapter);
         }
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         mRecyclerView.setAdapter(mMergeRecyclerAdapter);
     }
 }

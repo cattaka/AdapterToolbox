@@ -85,7 +85,7 @@ public class ComplexStringExampleActivity extends AppCompatActivity {
                 items.add("item " + i);
             }
             ComplexStringAdapter adapter = new ComplexStringAdapter(this, items, mListenerRelay);
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
             mRecyclerView.setAdapter(adapter);
         }
     }
