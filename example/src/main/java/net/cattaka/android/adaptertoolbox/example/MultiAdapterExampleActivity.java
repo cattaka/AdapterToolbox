@@ -1,14 +1,11 @@
 package net.cattaka.android.adaptertoolbox.example;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import net.cattaka.android.adaptertoolbox.adapter.ScrambleAdapter;
 import net.cattaka.android.adaptertoolbox.adapter.SingleViewAdapter2;
@@ -20,6 +17,11 @@ import net.cattaka.android.adaptertoolbox.thirdparty.MergeRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by cattaka on 16/05/02.
@@ -166,7 +168,7 @@ public class MultiAdapterExampleActivity extends AppCompatActivity {
                 mMergeRecyclerAdapter.addAdapter(mNumbersAdapter);
             }
             {
-                mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
                 mRecyclerView.setAdapter(mMergeRecyclerAdapter);
             }
         }

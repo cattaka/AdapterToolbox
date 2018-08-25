@@ -1,11 +1,6 @@
 package net.cattaka.android.adaptertoolbox.example;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.view.KeyEvent;
 import android.view.View;
@@ -13,6 +8,8 @@ import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import net.cattaka.android.adaptertoolbox.adapter.ScrambleAdapter;
 import net.cattaka.android.adaptertoolbox.adapter.listener.ListenerRelay;
@@ -28,6 +25,11 @@ import net.cattaka.android.adaptertoolbox.thirdparty.MergeRecyclerAdapter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by cattaka on 16/05/15.
@@ -140,7 +142,7 @@ public class ManipulableListExampleActivity extends AppCompatActivity {
             );
             mMergeRecyclerAdapter.addAdapter(mItemAdapter);
         }
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         mRecyclerView.setAdapter(mMergeRecyclerAdapter);
     }
 }

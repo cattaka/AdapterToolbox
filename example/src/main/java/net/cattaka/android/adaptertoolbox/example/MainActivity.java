@@ -2,10 +2,6 @@ package net.cattaka.android.adaptertoolbox.example;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 import net.cattaka.android.adaptertoolbox.adapter.listener.ListenerRelay;
@@ -14,6 +10,11 @@ import net.cattaka.android.adaptertoolbox.example.data.ActivityEntry;
 
 import java.util.Arrays;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
     private static final List<ActivityEntry> ACTIVITY_ENTRIES = Arrays.asList(
@@ -85,6 +86,6 @@ public class MainActivity extends AppCompatActivity {
         adapter.setListenerRelay(mListenerRelay);
 
         mRecyclerView.setAdapter(adapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
     }
 }
