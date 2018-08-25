@@ -41,7 +41,7 @@ public class MultiChoosableTreeItemAdapterExampleActivity extends AppCompatActiv
             List<MyTreeItem> items = ExampleDataGenerator.generateMyTreeItem(Arrays.asList(5, 3, 2), 0);
             mAdapter = new ChoosableMyTreeItemAdapter(this, items);
             mAdapter.setChoiceMode(AbsChoosableTreeItemAdapter.CHOICE_MODE_MULTIPLE);
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
             mRecyclerView.setAdapter(mAdapter);
         }
     }

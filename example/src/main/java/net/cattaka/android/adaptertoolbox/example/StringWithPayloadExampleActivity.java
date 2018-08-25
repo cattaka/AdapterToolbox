@@ -51,7 +51,7 @@ public class StringWithPayloadExampleActivity extends AppCompatActivity {
                 items.add("item " + i);
             }
             mAdapter = new ScrambleAdapter<String>(this, items, mListenerRelay, new StringWithPayloadViewHolderFactory());
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
             mRecyclerView.setItemAnimator(new FlashColorItemAnimator());
             mRecyclerView.setAdapter(mAdapter);
         }

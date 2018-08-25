@@ -1,11 +1,9 @@
 package net.cattaka.android.adaptertoolbox.example;
 
 import android.os.Bundle;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import net.cattaka.android.adaptertoolbox.adapter.AbsChoosableTreeItemAdapter;
 import net.cattaka.android.adaptertoolbox.example.adapter.ChoosableMyTreeItemAdapter;
@@ -15,6 +13,10 @@ import net.cattaka.android.adaptertoolbox.example.utils.ExampleDataGenerator;
 
 import java.util.Arrays;
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by cattaka on 16/05/21.
@@ -40,7 +42,7 @@ public class SingleChoosableTreeItemAdapterExampleActivity extends AppCompatActi
             List<MyTreeItem> items = ExampleDataGenerator.generateMyTreeItem(Arrays.asList(5, 3, 2), 0);
             mAdapter = new ChoosableMyTreeItemAdapter(this, items);
             mAdapter.setChoiceMode(AbsChoosableTreeItemAdapter.CHOICE_MODE_SINGLE);
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
             mRecyclerView.setAdapter(mAdapter);
         }
     }

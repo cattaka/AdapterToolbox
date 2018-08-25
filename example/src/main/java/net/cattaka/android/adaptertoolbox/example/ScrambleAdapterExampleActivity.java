@@ -106,7 +106,7 @@ public class ScrambleAdapterExampleActivity extends AppCompatActivity {
                     new SimpleNumberViewHolderFactory(),
                     new CodeLableViewHolderFactory(getResources())
             );
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
             mRecyclerView.setAdapter(adapter);
         }
     }

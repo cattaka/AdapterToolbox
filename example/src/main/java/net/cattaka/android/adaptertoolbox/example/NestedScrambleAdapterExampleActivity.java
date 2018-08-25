@@ -79,7 +79,7 @@ public class NestedScrambleAdapterExampleActivity extends AppCompatActivity {
                     mListenerRelay,
                     new NestedScrambleInfoViewHolderFactory()
             );
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
             mRecyclerView.setAdapter(mAdapter);
         }
     }

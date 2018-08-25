@@ -58,7 +58,7 @@ public class SimpleStringExampleActivity extends AppCompatActivity {
                 items.add("item " + i);
             }
             SimpleStringAdapter adapter = new SimpleStringAdapter(this, items, mListenerRelay);
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
             mRecyclerView.setAdapter(adapter);
         }
     }

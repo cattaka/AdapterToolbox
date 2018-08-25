@@ -57,7 +57,7 @@ public class TreeItemAdapterExampleActivity extends AppCompatActivity {
             List<MyTreeItem> items = ExampleDataGenerator.generateMyTreeItem(Arrays.asList(5, 3, 2), 0);
             MyTreeItemAdapter adapter = new MyTreeItemAdapter(this, items);
             adapter.setListenerRelay(mListenerRelay);
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
             mRecyclerView.setAdapter(adapter);
         }
     }

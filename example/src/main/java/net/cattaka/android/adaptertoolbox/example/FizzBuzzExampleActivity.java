@@ -106,7 +106,7 @@ public class FizzBuzzExampleActivity extends AppCompatActivity implements Compou
                     mFizzViewHolderFactory,
                     new IntegerViewHolderFactory()
             );
-            mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL));
+            mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, RecyclerView.VERTICAL));
             mRecyclerView.setAdapter(mAdapter);
         }
     }

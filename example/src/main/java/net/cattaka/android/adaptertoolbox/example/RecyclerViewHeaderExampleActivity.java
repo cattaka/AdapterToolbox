@@ -115,7 +115,7 @@ public class RecyclerViewHeaderExampleActivity extends AppCompatActivity {
                 mMergeRecyclerAdapter.addAdapter(mFooterAdapter);
             }
             {
-                mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
                 mRecyclerView.setAdapter(mMergeRecyclerAdapter);
             }
         }
