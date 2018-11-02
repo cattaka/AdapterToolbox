@@ -1,8 +1,8 @@
 package net.cattaka.android.adaptertoolbox.example;
 
 import android.content.res.Resources;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.rule.ActivityTestRule;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.rule.ActivityTestRule;
 import android.view.View;
 import android.widget.ListView;
 
@@ -15,8 +15,8 @@ import net.cattaka.android.adaptertoolbox.example.test.TestUtils;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
 import static net.cattaka.android.adaptertoolbox.example.test.TestUtils.withIdInAdapterView;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;

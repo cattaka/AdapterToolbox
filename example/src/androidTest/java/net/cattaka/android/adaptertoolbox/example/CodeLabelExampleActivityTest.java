@@ -1,7 +1,7 @@
 package net.cattaka.android.adaptertoolbox.example;
 
 import android.content.res.Resources;
-import android.support.test.rule.ActivityTestRule;
+import androidx.test.rule.ActivityTestRule;
 import android.view.View;
 
 import net.cattaka.android.adaptertoolbox.example.data.OrdinalLabel;
@@ -10,10 +10,10 @@ import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static android.support.test.espresso.Espresso.onData;
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.Espresso.onData;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;

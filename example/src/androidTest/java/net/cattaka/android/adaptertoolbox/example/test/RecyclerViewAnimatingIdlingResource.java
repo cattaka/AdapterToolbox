@@ -1,7 +1,7 @@
 package net.cattaka.android.adaptertoolbox.example.test;
 
-import android.support.test.espresso.IdlingResource;
-import android.support.v7.widget.RecyclerView;
+import androidx.test.espresso.IdlingResource;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by cattaka on 16/06/05.

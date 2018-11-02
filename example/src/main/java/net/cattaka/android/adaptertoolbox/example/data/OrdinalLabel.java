@@ -1,7 +1,7 @@
 package net.cattaka.android.adaptertoolbox.example.data;
 
 import android.content.res.Resources;
-import android.support.annotation.StringRes;
+import androidx.annotation.StringRes;
 
 import net.cattaka.android.adaptertoolbox.data.ICodeLabel;
 import net.cattaka.android.adaptertoolbox.example.R;

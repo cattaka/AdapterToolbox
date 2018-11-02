@@ -1,6 +1,6 @@
 package net.cattaka.android.adaptertoolbox.utils;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 

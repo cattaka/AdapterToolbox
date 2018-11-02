@@ -1,10 +1,6 @@
 package net.cattaka.android.adaptertoolbox.example;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
 import net.cattaka.android.adaptertoolbox.adapter.SingleViewAdapter2;
 import net.cattaka.android.adaptertoolbox.decoration.VerticalListDividerItemDecoration;
@@ -16,6 +12,11 @@ import net.cattaka.android.adaptertoolbox.thirdparty.MergeRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by cattaka on 16/12/11.
@@ -66,7 +67,7 @@ public class DifferenceDividerExampleActivity extends AppCompatActivity {
                 mMergeRecyclerAdapter.addAdapter(mNumbersAdapter);
             }
             {
-                mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
                 mRecyclerView.setAdapter(mMergeRecyclerAdapter);
             }
         }

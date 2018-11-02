@@ -1,8 +1,8 @@
 package net.cattaka.android.adaptertoolbox.adapter;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.cattaka.android.adaptertoolbox.adapter.listener.ForwardingListener;
 import net.cattaka.android.adaptertoolbox.adapter.listener.ListenerRelay;

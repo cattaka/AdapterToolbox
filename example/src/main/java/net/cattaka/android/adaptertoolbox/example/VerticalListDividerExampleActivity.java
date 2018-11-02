@@ -1,9 +1,9 @@
 package net.cattaka.android.adaptertoolbox.example;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.cattaka.android.adaptertoolbox.decoration.VerticalListDividerItemDecoration;
 import net.cattaka.android.adaptertoolbox.example.adapter.SimpleStringAdapter;
@@ -32,7 +32,7 @@ public class VerticalListDividerExampleActivity extends AppCompatActivity {
                 items.add("item " + i);
             }
             SimpleStringAdapter adapter = new SimpleStringAdapter(this, items, null);
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
             mRecyclerView.setAdapter(adapter);
             mRecyclerView.addItemDecoration(new VerticalListDividerItemDecoration(this, false, R.drawable.vertical_list_divider_rgb));
         }

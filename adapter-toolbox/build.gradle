@@ -2,19 +2,19 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 
 group = 'net.cattaka'
-version = '0.6.0'
+version = '0.7.0-beta01'
 
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 28
     buildToolsVersion '28.0.2'
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 25
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
     }
@@ -132,13 +132,13 @@ artifacts {
 //}
 
 dependencies {
-    provided fileTree(dir: 'libs', include: ['*.jar'])
-    provided 'com.android.support:recyclerview-v7:25.1.0'
+    compileOnly fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly 'androidx.recyclerview:recyclerview:1.0.0-beta01'
 
-    androidTestProvided('com.android.support.test.espresso:espresso-core:2.2.1') {
+    androidTestCompileOnly('androidx.test.espresso:espresso-core:3.1.0-alpha4') {
         exclude module: 'support-annotations'
     }
-    androidTestProvided('com.android.support.test.espresso:espresso-contrib:2.2.1') {
+    androidTestCompileOnly('androidx.test.espresso:espresso-contrib:3.1.0-alpha4') {
         exclude group: 'com.android.support', module: 'appcompat'
         exclude group: 'com.android.support', module: 'support-v4'
         exclude group: 'com.android.support', module: 'design'

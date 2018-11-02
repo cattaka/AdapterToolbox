@@ -1,6 +1,6 @@
 package net.cattaka.android.adaptertoolbox.example;
 
-import android.support.test.rule.ActivityTestRule;
+import androidx.test.rule.ActivityTestRule;
 
 import net.cattaka.android.adaptertoolbox.example.test.RecyclerViewAnimatingIdlingResource;
 
@@ -8,10 +8,10 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.swipeDown;
-import static android.support.test.espresso.action.ViewActions.swipeUp;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.swipeDown;
+import static androidx.test.espresso.action.ViewActions.swipeUp;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static net.cattaka.android.adaptertoolbox.example.test.TestUtils.waitForIdlingResource;
 
 /**

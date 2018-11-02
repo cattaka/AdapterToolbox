@@ -1,6 +1,6 @@
 package net.cattaka.android.adaptertoolbox.example.data;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.cattaka.android.adaptertoolbox.adapter.ScrambleAdapter;
 import net.cattaka.android.adaptertoolbox.adapter.listener.ListenerRelay;

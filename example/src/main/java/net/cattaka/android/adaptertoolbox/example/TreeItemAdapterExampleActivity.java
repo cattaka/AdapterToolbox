@@ -1,11 +1,11 @@
 package net.cattaka.android.adaptertoolbox.example;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 import net.cattaka.android.adaptertoolbox.adapter.listener.ListenerRelay;
@@ -57,7 +57,7 @@ public class TreeItemAdapterExampleActivity extends AppCompatActivity {
             List<MyTreeItem> items = ExampleDataGenerator.generateMyTreeItem(Arrays.asList(5, 3, 2), 0);
             MyTreeItemAdapter adapter = new MyTreeItemAdapter(this, items);
             adapter.setListenerRelay(mListenerRelay);
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
             mRecyclerView.setAdapter(adapter);
         }
     }
