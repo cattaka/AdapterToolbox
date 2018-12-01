@@ -3,7 +3,7 @@ package net.cattaka.android.adaptertoolbox.example;
 import android.support.test.rule.ActivityTestRule;
 import android.view.View;
 
-import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
+import net.cattaka.android.adaptertoolbox.example.test.MockSnackbarLogic;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -32,7 +32,7 @@ public class FizzBuzzExampleActivityTest {
     public void click_FizzBuzz() {
         FizzBuzzExampleActivity activity = mActivityTestRule.launchActivity(null);
 
-        activity.mSnackbarLogic = spy(new SnackbarLogic());
+        activity.mSnackbarLogic = spy(new MockSnackbarLogic());
 
         {   // Click Integer
             int target = 2;
@@ -72,7 +72,7 @@ public class FizzBuzzExampleActivityTest {
     public void click_Fizz() {
         FizzBuzzExampleActivity activity = mActivityTestRule.launchActivity(null);
 
-        activity.mSnackbarLogic = spy(new SnackbarLogic());
+        activity.mSnackbarLogic = spy(new MockSnackbarLogic());
 
         // Disable buzz
         onView(withId(R.id.check_buzz)).perform(click());
@@ -115,7 +115,7 @@ public class FizzBuzzExampleActivityTest {
     public void click_Buzz() {
         FizzBuzzExampleActivity activity = mActivityTestRule.launchActivity(null);
 
-        activity.mSnackbarLogic = spy(new SnackbarLogic());
+        activity.mSnackbarLogic = spy(new MockSnackbarLogic());
 
         // Disable fizz
         onView(withId(R.id.check_fizz)).perform(click());
@@ -158,7 +158,7 @@ public class FizzBuzzExampleActivityTest {
     public void click_Integer() {
         FizzBuzzExampleActivity activity = mActivityTestRule.launchActivity(null);
 
-        activity.mSnackbarLogic = spy(new SnackbarLogic());
+        activity.mSnackbarLogic = spy(new MockSnackbarLogic());
 
         // Disable fizz buzz
         onView(withId(R.id.check_fizz)).perform(click());

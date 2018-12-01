@@ -3,7 +3,7 @@ package net.cattaka.android.adaptertoolbox.example;
 import android.support.test.rule.ActivityTestRule;
 import android.view.View;
 
-import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
+import net.cattaka.android.adaptertoolbox.example.test.MockSnackbarLogic;
 import net.cattaka.android.adaptertoolbox.example.test.TestUtils;
 import net.cattaka.android.adaptertoolbox.thirdparty.MergeRecyclerAdapter;
 
@@ -35,7 +35,7 @@ public class RecyclerViewHeaderExampleActivityTest {
         RecyclerViewHeaderExampleActivity activity = mActivityTestRule.launchActivity(null);
         MergeRecyclerAdapter mergeRecyclerAdapter = activity.mMergeRecyclerAdapter;
 
-        activity.mSnackbarLogic = spy(new SnackbarLogic());
+        activity.mSnackbarLogic = spy(new MockSnackbarLogic());
 
         {
             int globalPosition = TestUtils.calcPositionOffset(mergeRecyclerAdapter, activity.mHeaderAdapter);

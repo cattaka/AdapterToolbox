@@ -4,7 +4,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.view.View;
 
 import net.cattaka.android.adaptertoolbox.classic.ClassicScrambleAdapter;
-import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
+import net.cattaka.android.adaptertoolbox.example.test.MockSnackbarLogic;
 import net.cattaka.android.adaptertoolbox.example.test.TestUtils.Entry;
 
 import org.junit.Before;
@@ -38,7 +38,7 @@ public class SpinnerScrambleAdapterExampleActivityTest {
     public void before() {
         mActivity = mActivityTestRule.launchActivity(null);
         mAdapter = (ClassicScrambleAdapter<Object>) mActivity.mSpinner.getAdapter();
-        mActivity.mSnackbarLogic = spy(new SnackbarLogic());
+        mActivity.mSnackbarLogic = spy(new MockSnackbarLogic());
     }
 
     @Test

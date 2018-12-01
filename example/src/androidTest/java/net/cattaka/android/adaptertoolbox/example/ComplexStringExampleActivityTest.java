@@ -4,7 +4,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.view.View;
 
 import net.cattaka.android.adaptertoolbox.adapter.ScrambleAdapter;
-import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
+import net.cattaka.android.adaptertoolbox.example.test.MockSnackbarLogic;
 import net.cattaka.android.adaptertoolbox.example.test.TestUtils;
 
 import org.junit.Rule;
@@ -34,7 +34,7 @@ public class ComplexStringExampleActivityTest {
         ComplexStringExampleActivity activity = mActivityTestRule.launchActivity(null);
         ScrambleAdapter<String> adapter = (ScrambleAdapter<String>) activity.mRecyclerView.getAdapter();
 
-        activity.mSnackbarLogic = spy(new SnackbarLogic());
+        activity.mSnackbarLogic = spy(new MockSnackbarLogic());
 
         for (int i = 0; i < 10; i++) {
             TestUtils.Entry<String> item = TestUtils.find(adapter.getItems(), String.class, i);

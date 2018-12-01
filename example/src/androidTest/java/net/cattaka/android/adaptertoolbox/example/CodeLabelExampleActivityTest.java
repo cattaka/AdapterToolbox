@@ -5,7 +5,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.view.View;
 
 import net.cattaka.android.adaptertoolbox.example.data.OrdinalLabel;
-import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
+import net.cattaka.android.adaptertoolbox.example.test.MockSnackbarLogic;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -31,7 +31,7 @@ public class CodeLabelExampleActivityTest {
     @Test
     public void clickSpinner() {
         CodeLabelExampleActivity activity = mActivityTestRule.launchActivity(null);
-        activity.mSnackbarLogic = spy(new SnackbarLogic());
+        activity.mSnackbarLogic = spy(new MockSnackbarLogic());
 
         for (OrdinalLabel item : OrdinalLabel.values()) {
             onView(withId(R.id.spinner)).perform(click());

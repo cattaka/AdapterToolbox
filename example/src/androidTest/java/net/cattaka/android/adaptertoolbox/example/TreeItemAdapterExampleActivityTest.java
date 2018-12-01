@@ -5,7 +5,7 @@ import android.view.View;
 
 import net.cattaka.android.adaptertoolbox.example.adapter.MyTreeItemAdapter;
 import net.cattaka.android.adaptertoolbox.example.data.MyTreeItem;
-import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
+import net.cattaka.android.adaptertoolbox.example.test.MockSnackbarLogic;
 import net.cattaka.android.adaptertoolbox.example.test.RecyclerViewAnimatingIdlingResource;
 import net.cattaka.android.adaptertoolbox.example.test.TestUtils;
 
@@ -54,7 +54,7 @@ public class TreeItemAdapterExampleActivityTest {
         TreeItemAdapterExampleActivity activity = mActivityTestRule.getActivity();
         MyTreeItemAdapter adapter = (MyTreeItemAdapter) activity.mRecyclerView.getAdapter();
 
-        activity.mSnackbarLogic = spy(new SnackbarLogic());
+        activity.mSnackbarLogic = spy(new MockSnackbarLogic());
 
         for (int i = 0; i < adapter.getItemCount(); i++) {
             TestUtils.Entry<MyTreeItemAdapter.WrappedItem> entry = find(adapter.getItems(), MyTreeItemAdapter.WrappedItem.class, i);
@@ -81,7 +81,7 @@ public class TreeItemAdapterExampleActivityTest {
         TreeItemAdapterExampleActivity activity = mActivityTestRule.getActivity();
         MyTreeItemAdapter adapter = (MyTreeItemAdapter) activity.mRecyclerView.getAdapter();
 
-        activity.mSnackbarLogic = spy(new SnackbarLogic());
+        activity.mSnackbarLogic = spy(new MockSnackbarLogic());
 
         for (int i = 0; i < adapter.getItemCount(); i++) {
             reset(activity.mSnackbarLogic);

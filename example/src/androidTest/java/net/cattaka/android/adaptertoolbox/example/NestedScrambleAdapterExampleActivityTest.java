@@ -8,7 +8,7 @@ import android.view.View;
 import net.cattaka.android.adaptertoolbox.adapter.ScrambleAdapter;
 import net.cattaka.android.adaptertoolbox.example.data.NestedScrambleInfo;
 import net.cattaka.android.adaptertoolbox.example.data.OrdinalLabel;
-import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
+import net.cattaka.android.adaptertoolbox.example.test.MockSnackbarLogic;
 import net.cattaka.android.adaptertoolbox.example.test.TestUtils.Entry;
 
 import org.junit.Before;
@@ -44,7 +44,7 @@ public class NestedScrambleAdapterExampleActivityTest {
     public void before() {
         mActivity = mActivityTestRule.launchActivity(null);
         mAdapter = mActivity.mAdapter;
-        mActivity.mSnackbarLogic = spy(new SnackbarLogic());
+        mActivity.mSnackbarLogic = spy(new MockSnackbarLogic());
     }
 
     @Test

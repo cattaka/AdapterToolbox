@@ -4,7 +4,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.view.View;
 
 import net.cattaka.android.adaptertoolbox.adapter.ScrambleAdapter;
-import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
+import net.cattaka.android.adaptertoolbox.example.test.MockSnackbarLogic;
 import net.cattaka.android.adaptertoolbox.example.test.RecyclerViewAnimatingIdlingResource;
 import net.cattaka.android.adaptertoolbox.example.test.TestUtils;
 
@@ -43,7 +43,7 @@ public class SimpleStringExampleActivityTest {
     public void before() {
         mActivity = mActivityTestRule.launchActivity(null);
         mAdapter = (ScrambleAdapter<Object>) mActivity.mRecyclerView.getAdapter();
-        mActivity.mSnackbarLogic = spy(new SnackbarLogic());
+        mActivity.mSnackbarLogic = spy(new MockSnackbarLogic());
         mRecyclerViewAnimatingIdlingResource = new RecyclerViewAnimatingIdlingResource(mActivity.mRecyclerView);
     }
 
