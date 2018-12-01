@@ -6,7 +6,6 @@ import android.support.test.espresso.UiController;
 import android.support.test.espresso.ViewAction;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.espresso.util.HumanReadables;
-import android.support.v4.widget.NestedScrollView;
 import android.util.Log;
 import android.view.View;
 import android.widget.HorizontalScrollView;
@@ -39,7 +38,9 @@ import static org.hamcrest.Matchers.anyOf;
  */
 
 /**
- * Created by cattaka on 2016/04/28.
+ * This supports NestedScrollView.
+ *
+ * @deprecated Now, NestedScrollView is officially supported.
  */
 public class ScrollToExAction implements ViewAction {
     private static final String TAG = ScrollToExAction.class.getSimpleName();
@@ -48,8 +49,7 @@ public class ScrollToExAction implements ViewAction {
     @Override
     public Matcher<View> getConstraints() {
         return allOf(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE), isDescendantOfA(anyOf(
-                isAssignableFrom(ScrollView.class), isAssignableFrom(HorizontalScrollView.class),
-                isAssignableFrom(NestedScrollView.class)
+                isAssignableFrom(ScrollView.class), isAssignableFrom(HorizontalScrollView.class)
         )));
     }
 
