@@ -7,7 +7,7 @@ import net.cattaka.android.adaptertoolbox.adapter.ScrambleAdapter;
 import net.cattaka.android.adaptertoolbox.example.data.MyInfo;
 import net.cattaka.android.adaptertoolbox.example.data.OrdinalLabel;
 import net.cattaka.android.adaptertoolbox.example.data.TextInfo;
-import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
+import net.cattaka.android.adaptertoolbox.example.test.MockSnackbarLogic;
 import net.cattaka.android.adaptertoolbox.example.test.TestUtils;
 import net.cattaka.android.adaptertoolbox.thirdparty.MergeRecyclerAdapter;
 
@@ -44,7 +44,7 @@ public class ManipulableListExampleActivityTest {
         ScrambleAdapter headerAdapter = (ScrambleAdapter) mergeRecyclerAdapter.getSubAdapter(0);
         ScrambleAdapter adapter = (ScrambleAdapter) mergeRecyclerAdapter.getSubAdapter(1);
 
-        activity.mSnackbarLogic = spy(new SnackbarLogic());
+        activity.mSnackbarLogic = spy(new MockSnackbarLogic());
 
         {   // Edit MyInfo
             int position = 1;
@@ -88,7 +88,7 @@ public class ManipulableListExampleActivityTest {
         ScrambleAdapter headerAdapter = (ScrambleAdapter) mergeRecyclerAdapter.getSubAdapter(0);
         ScrambleAdapter adapter = (ScrambleAdapter) mergeRecyclerAdapter.getSubAdapter(1);
 
-        activity.mSnackbarLogic = spy(new SnackbarLogic());
+        activity.mSnackbarLogic = spy(new MockSnackbarLogic());
 
         {   // Edit TextInfo
             int position = 2;

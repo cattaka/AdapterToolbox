@@ -9,7 +9,7 @@ import android.widget.ListView;
 import net.cattaka.android.adaptertoolbox.adapter.ScrambleAdapter;
 import net.cattaka.android.adaptertoolbox.classic.ClassicScrambleAdapter;
 import net.cattaka.android.adaptertoolbox.data.ICodeLabel;
-import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
+import net.cattaka.android.adaptertoolbox.example.test.MockSnackbarLogic;
 import net.cattaka.android.adaptertoolbox.example.test.TestUtils;
 
 import org.junit.Rule;
@@ -37,7 +37,7 @@ public class ClassicScrambleAdapterExampleActivityTest {
         ClassicScrambleAdapter<Object> csAdapter = (ClassicScrambleAdapter<Object>) activity.mListView.getAdapter();
         ScrambleAdapter<Object> adapter = csAdapter.getOrig();
 
-        activity.mSnackbarLogic = spy(new SnackbarLogic());
+        activity.mSnackbarLogic = spy(new MockSnackbarLogic());
 
         {
             TestUtils.Entry<Number> entry = TestUtils.find(adapter.getItems(), Number.class, 2);

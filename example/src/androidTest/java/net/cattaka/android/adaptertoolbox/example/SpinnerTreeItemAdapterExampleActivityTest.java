@@ -4,9 +4,9 @@ import android.support.test.rule.ActivityTestRule;
 import android.view.View;
 
 import net.cattaka.android.adaptertoolbox.classic.AdapterConverter;
-import net.cattaka.android.adaptertoolbox.example.logic.SnackbarLogic;
 import net.cattaka.android.adaptertoolbox.example.spinner.SpinnerMyTreeItemAdapter;
 import net.cattaka.android.adaptertoolbox.example.spinner.SpinnerMyTreeItemAdapter.WrappedItem;
+import net.cattaka.android.adaptertoolbox.example.test.MockSnackbarLogic;
 import net.cattaka.android.adaptertoolbox.example.test.TestUtils;
 import net.cattaka.android.adaptertoolbox.example.test.TestUtils.Entry;
 
@@ -43,7 +43,7 @@ public class SpinnerTreeItemAdapterExampleActivityTest {
         mActivity = mActivityTestRule.launchActivity(null);
         mAdapterConverter = (AdapterConverter<SpinnerMyTreeItemAdapter, SpinnerMyTreeItemAdapter.ViewHolder, WrappedItem>) mActivity.mSpinner.getAdapter();
         mAdapter = mAdapterConverter.getOrig();
-        mActivity.mSnackbarLogic = spy(new SnackbarLogic());
+        mActivity.mSnackbarLogic = spy(new MockSnackbarLogic());
     }
 
     @Test
