@@ -3,6 +3,7 @@ package net.cattaka.android.adaptertoolbox.example;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +17,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private static final List<ActivityEntry> ACTIVITY_ENTRIES = Arrays.asList(
+    @VisibleForTesting
+    public static final List<ActivityEntry> ACTIVITY_ENTRIES = Arrays.asList(
             new ActivityEntry(R.string.activity_entry_payload, null,
                     new ActivityEntry(R.string.activity_entry_payload_as_string, StringWithPayloadExampleActivity.class)
             ),
