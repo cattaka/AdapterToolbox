@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 
-import net.cattaka.android.adaptertoolbox.example.adapter.ActivityEntryAdapter;
 import net.cattaka.android.adaptertoolbox.example.data.ActivityEntry;
 
 import org.junit.Rule;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -29,15 +31,14 @@ public class MainActivityTest {
 
     @Test
     public void clickAll() {
-        MainActivity activity = mActivityTestRule.launchActivity(null);
-
-        ActivityEntryAdapter adapter = (ActivityEntryAdapter) activity.mRecyclerView.getAdapter();
-        for (int i = 0; i < adapter.getItemCount(); i++) {
-            ActivityEntryAdapter.WrappedItem witem = adapter.getItemAt(i);
-            ActivityEntry item = witem.item;
+        mActivityTestRule.launchActivity(null);
+        List<ActivityEntry> dataPoinsts = pullDataPoints(new ArrayList<ActivityEntry>(), MainActivity.ACTIVITY_ENTRIES);
+        for (int i = 0; i < dataPoinsts.size(); i++) {
+            ActivityEntry item = dataPoinsts.get(i);
             if (item.getClazz() == null) {
                 continue;
             }
+            mActivityTestRule.getActivity();
             final int position = i;
             Activity nextActivity = monitorActivity(item.getClazz(), 5000, new Runnable() {
                 @Override
@@ -50,5 +51,15 @@ public class MainActivityTest {
             nextActivity.finish();
             InstrumentationRegistry.getInstrumentation().waitForIdleSync();
         }
+    }
+
+    private List<ActivityEntry> pullDataPoints(List<ActivityEntry> dest, List<ActivityEntry> entries) {
+        for (ActivityEntry entry : entries) {
+            dest.add(entry);
+            if (entry.getChildren() != null) {
+                pullDataPoints(dest, entry.getChildren());
+            }
+        }
+        return dest;
     }
 }
